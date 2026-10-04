@@ -19,6 +19,9 @@
           <ul>
             <li><a href="<?php echo home_url(); ?>">🏠 Accueil</a></li>
             <li><a href="<?php echo home_url('/radio'); ?>">📡 Écouter en direct</a></li>
+            <li><a href="<?php echo home_url('/jeux'); ?>">🎮 Espace Jeux</a></li>
+            <li><a href="<?php echo home_url('/activites'); ?>">⚡ Activités</a></li>
+            <li><a href="<?php echo home_url('/compte'); ?>">👤 Espace Joueur</a></li>
             <li><a href="<?php echo home_url('/podcasts'); ?>">🎙 Podcasts</a></li>
             <li><a href="<?php echo home_url('/blog'); ?>">📰 Blog</a></li>
             <li><a href="<?php echo home_url('/contact'); ?>">✉ Contact</a></li>

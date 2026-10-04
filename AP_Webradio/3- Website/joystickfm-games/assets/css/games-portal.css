@@ -1,0 +1,550 @@
+/* ==============================================================================
+   JoyStick FM Games — games-portal.css
+   Design Rétro-Arcade, Néo-Synthwave & Cyberpunk
+   Compatible avec les variables de joystickfm-theme
+   ============================================================================== */
+
+:root {
+    --jfm-bleu-neon: #00f5ff;
+    --jfm-rose-neon: #ff007f;
+    --jfm-violet-neon: #9d00ff;
+    --jfm-vert-neon: #00ff66;
+    --jfm-jaune-neon: #ffea00;
+    --jfm-fond-sombre: #0a0a14;
+    --jfm-fond-card: rgba(18, 18, 36, 0.85);
+    --jfm-border: rgba(0, 245, 255, 0.25);
+    --jfm-font-pixel: 'Press Start 2P', monospace, sans-serif;
+    --jfm-font-tech: 'Share Tech Mono', monospace, sans-serif;
+}
+
+.jfm-portal-wrap {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 1.5rem;
+    font-family: var(--font-base, 'Inter', sans-serif);
+    color: #e0e5ff;
+}
+
+/* En-tête */
+.jfm-portal-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.jfm-badge-tag {
+    display: inline-block;
+    font-family: var(--jfm-font-tech);
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    color: var(--jfm-bleu-neon);
+    background: rgba(0, 245, 255, 0.1);
+    border: 1px solid var(--jfm-border);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+}
+
+.jfm-portal-title {
+    font-family: var(--font-pixel, var(--jfm-font-pixel));
+    font-size: 1.8rem;
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.6), 0 0 20px rgba(157, 0, 255, 0.4);
+    margin: 0.5rem 0 1rem;
+    line-height: 1.4;
+}
+
+.jfm-portal-desc {
+    font-size: 1.05rem;
+    color: #a0a8cf;
+    max-width: 650px;
+    margin: 0 auto 1.5rem;
+    line-height: 1.6;
+}
+
+/* Bandeau joueur connecté / visiteur */
+.jfm-player-strip {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.2rem;
+    background: rgba(0, 245, 255, 0.06);
+    border: 1px solid rgba(0, 245, 255, 0.3);
+    padding: 0.6rem 1.4rem;
+    border-radius: 30px;
+    font-size: 0.9rem;
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.1);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.jfm-guest-warning {
+    background: rgba(255, 234, 0, 0.08);
+    border: 1px solid rgba(255, 234, 0, 0.35);
+    color: #ffea70;
+    padding: 0.8rem 1.2rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: 750px;
+    margin: 0 auto;
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+}
+
+/* Grille des jeux */
+.jfm-games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.jfm-game-card {
+    background: var(--jfm-fond-card);
+    border: 2px solid var(--jfm-border);
+    border-radius: 14px;
+    padding: 2rem 1.8rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    backdrop-filter: blur(10px);
+}
+
+.jfm-game-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--jfm-bleu-neon);
+    box-shadow: 0 12px 30px rgba(0, 245, 255, 0.2);
+}
+
+.jfm-card-tcg:hover {
+    border-color: var(--jfm-violet-neon);
+    box-shadow: 0 12px 30px rgba(157, 0, 255, 0.25);
+}
+
+.jfm-game-badge {
+    position: absolute;
+    top: 1rem;
+    right: 1.2rem;
+    font-family: var(--jfm-font-tech);
+    font-size: 0.72rem;
+    font-weight: bold;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    letter-spacing: 0.1em;
+}
+
+.jfm-badge-live {
+    background: rgba(0, 255, 102, 0.15);
+    color: var(--jfm-vert-neon);
+    border: 1px solid var(--jfm-vert-neon);
+}
+
+.jfm-badge-soon {
+    background: rgba(255, 0, 127, 0.15);
+    color: var(--jfm-rose-neon);
+    border: 1px solid var(--jfm-rose-neon);
+}
+
+.jfm-game-icon {
+    font-size: 3rem;
+    margin-bottom: 0.8rem;
+}
+
+.jfm-game-name {
+    font-family: var(--font-pixel, var(--jfm-font-pixel));
+    font-size: 1.25rem;
+    color: #fff;
+    margin: 0.2rem 0 0.8rem;
+}
+
+.jfm-game-pitch {
+    font-size: 0.95rem;
+    color: #abb3db;
+    line-height: 1.5;
+    margin-bottom: 1.2rem;
+}
+
+.jfm-game-features {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.8rem;
+    font-size: 0.88rem;
+    color: #ccd2f0;
+}
+
+.jfm-game-features li {
+    padding: 0.35rem 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+}
+
+.jfm-game-action {
+    margin-top: auto;
+}
+
+/* Boutons */
+.jfm-btn-play {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 0.9rem 1.2rem;
+    background: linear-gradient(135deg, #00f5ff 0%, #0088ff 100%);
+    color: #050510;
+    font-family: var(--font-pixel, var(--jfm-font-pixel));
+    font-size: 0.85rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 245, 255, 0.3);
+}
+
+.jfm-btn-play:hover {
+    transform: scale(1.02);
+    box-shadow: 0 6px 20px rgba(0, 245, 255, 0.5);
+    color: #000;
+}
+
+.jfm-btn-locked {
+    background: linear-gradient(135deg, #ffea00 0%, #ff8800 100%);
+    color: #000;
+    box-shadow: 0 4px 15px rgba(255, 234, 0, 0.3);
+}
+
+.jfm-btn-disabled {
+    background: rgba(255, 255, 255, 0.1);
+    color: #777c9e;
+    box-shadow: none;
+    cursor: not-allowed;
+}
+
+.jfm-btn-danger {
+    background: rgba(255, 0, 127, 0.15);
+    color: var(--jfm-rose-neon);
+    border: 1px solid var(--jfm-rose-neon);
+    padding: 0.8rem 1.2rem;
+    font-family: var(--jfm-font-tech);
+    font-size: 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.jfm-btn-danger:hover {
+    background: var(--jfm-rose-neon);
+    color: #fff;
+}
+
+.jfm-mini-btn, .jfm-btn-neon-small {
+    background: rgba(0, 245, 255, 0.15);
+    color: var(--jfm-bleu-neon);
+    border: 1px solid var(--jfm-bleu-neon);
+    padding: 0.35rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-family: var(--jfm-font-tech);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.jfm-mini-btn:hover, .jfm-btn-neon-small:hover {
+    background: var(--jfm-bleu-neon);
+    color: #000;
+}
+
+/* Grille Activités */
+.jfm-activities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+}
+
+.jfm-activity-item {
+    background: var(--jfm-fond-card);
+    border: 1px solid var(--jfm-border);
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: transform 0.2s;
+}
+
+.jfm-activity-item:hover {
+    transform: translateY(-4px);
+    border-color: var(--jfm-bleu-neon);
+}
+
+.jfm-act-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.6rem;
+}
+
+.jfm-activity-item h3 {
+    font-size: 1.15rem;
+    color: #fff;
+    margin: 0 0 0.5rem;
+}
+
+.jfm-activity-item p {
+    font-size: 0.9rem;
+    color: #a0a8cf;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.jfm-link-neon {
+    color: var(--jfm-bleu-neon);
+    text-decoration: none;
+    font-family: var(--jfm-font-tech);
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.jfm-badge-subtle {
+    font-size: 0.78rem;
+    font-family: var(--jfm-font-tech);
+    color: var(--jfm-jaune-neon);
+    background: rgba(255, 234, 0, 0.1);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+/* Espace Compte & Authentification */
+.jfm-auth-container {
+    max-width: 520px;
+    margin: 0 auto;
+    background: var(--jfm-fond-card);
+    border: 2px solid var(--jfm-border);
+    border-radius: 14px;
+    padding: 2rem;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+.jfm-auth-tabs {
+    display: flex;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 1.8rem;
+    gap: 0.5rem;
+}
+
+.jfm-tab-btn {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 0.8rem 0.5rem;
+    color: #8890ba;
+    font-family: var(--jfm-font-tech);
+    font-size: 0.95rem;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.jfm-tab-btn.active {
+    color: var(--jfm-bleu-neon);
+    border-bottom-color: var(--jfm-bleu-neon);
+    font-weight: bold;
+}
+
+.jfm-auth-form {
+    display: none;
+}
+
+.jfm-auth-form.active {
+    display: block;
+}
+
+.jfm-form-field {
+    margin-bottom: 1.3rem;
+}
+
+.jfm-form-field label {
+    display: block;
+    font-size: 0.88rem;
+    color: #cfd5f5;
+    margin-bottom: 0.4rem;
+}
+
+.jfm-form-field input[type="text"],
+.jfm-form-field input[type="password"] {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: rgba(5, 5, 15, 0.7);
+    border: 1.5px solid rgba(0, 245, 255, 0.3);
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.jfm-form-field input:focus {
+    border-color: var(--jfm-bleu-neon);
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.4);
+}
+
+.jfm-form-field small {
+    display: block;
+    font-size: 0.78rem;
+    color: #8088b0;
+    margin-top: 0.3rem;
+}
+
+.jfm-form-field-checkbox {
+    margin-bottom: 1.2rem;
+    font-size: 0.88rem;
+    color: #a8b0d4;
+}
+
+.jfm-bonus-announcement {
+    background: rgba(0, 255, 102, 0.08);
+    border: 1px dashed rgba(0, 255, 102, 0.4);
+    color: #80ffaa;
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    margin-bottom: 1.2rem;
+}
+
+.jfm-form-msg {
+    margin-bottom: 1rem;
+    font-size: 0.88rem;
+    display: none;
+}
+
+.jfm-form-msg.error {
+    display: block;
+    color: #ff4466;
+    background: rgba(255, 68, 102, 0.1);
+    padding: 0.6rem;
+    border-radius: 4px;
+    border-left: 3px solid #ff4466;
+}
+
+.jfm-form-msg.success {
+    display: block;
+    color: #00ff88;
+    background: rgba(0, 255, 136, 0.1);
+    padding: 0.6rem;
+    border-radius: 4px;
+    border-left: 3px solid #00ff88;
+}
+
+/* Modale de code de secours */
+.jfm-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 9999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.jfm-modal-content {
+    background: #111126;
+    border: 2px solid var(--jfm-jaune-neon);
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 480px;
+    text-align: center;
+    box-shadow: 0 0 30px rgba(255, 234, 0, 0.3);
+}
+
+.jfm-recovery-box {
+    font-family: var(--jfm-font-tech);
+    font-size: 1.35rem;
+    font-weight: bold;
+    color: var(--jfm-jaune-neon);
+    background: rgba(0, 0, 0, 0.6);
+    border: 1.5px dashed var(--jfm-jaune-neon);
+    padding: 1rem;
+    border-radius: 6px;
+    margin: 1.2rem 0 1.5rem;
+    user-select: all;
+    letter-spacing: 0.1em;
+}
+
+/* Profil Joueur */
+.jfm-account-card {
+    max-width: 650px;
+    margin: 0 auto;
+    background: var(--jfm-fond-card);
+    border: 2px solid var(--jfm-border);
+    border-radius: 14px;
+    padding: 2.2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.jfm-account-header {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.jfm-avatar-circle {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #00f5ff 0%, #9d00ff 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.4);
+}
+
+.jfm-account-name {
+    font-family: var(--font-pixel, var(--jfm-font-pixel));
+    font-size: 1.3rem;
+    color: #fff;
+    margin: 0.3rem 0;
+}
+
+.jfm-account-meta {
+    font-size: 0.85rem;
+    color: #8b92b8;
+    margin: 0;
+}
+
+.jfm-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.jfm-stat-box {
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.jfm-stat-val {
+    display: block;
+    font-size: 1.35rem;
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 0.3rem;
+}
+
+.jfm-stat-lbl {
+    font-size: 0.78rem;
+    color: #8f96be;
+}
+
+.jfm-account-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}

@@ -52,21 +52,32 @@ endif; ?>
       </a>
       <nav role="navigation" aria-label="Navigation principale">
         <ul id="nav-menu">
-          <li><a href="<?php echo home_url('/'); ?>"         <?php if (is_front_page())
-  echo 'class="active"'; ?>>🏠 Accueil</a></li>
-          <li><a href="<?php echo home_url('/radio'); ?>"    <?php if (is_page('radio'))
-  echo 'class="active"'; ?>>📡 Direct</a></li>
-          <li><a href="<?php echo home_url('/podcasts'); ?>" <?php if (is_page('podcasts'))
-  echo 'class="active"'; ?>>🎙 Podcasts</a></li>
-          <li><a href="<?php echo home_url('/blog'); ?>"     <?php if (is_page('blog'))
-  echo 'class="active"'; ?>>📰 Blog</a></li>
-          <li><a href="<?php echo home_url('/contact'); ?>"  <?php if (is_page('contact'))
-  echo 'class="active"'; ?>>✉ Contact</a></li>
+          <li><a href="<?php echo home_url('/'); ?>"         <?php if (is_front_page()) echo 'class="active"'; ?>>🏠 Accueil</a></li>
+          <li><a href="<?php echo home_url('/radio'); ?>"    <?php if (is_page('radio')) echo 'class="active"'; ?>>📡 Direct</a></li>
+          <li><a href="<?php echo home_url('/jeux'); ?>"     <?php if (is_page('jeux')) echo 'class="active"'; ?>>🎮 Jeux</a></li>
+          <li><a href="<?php echo home_url('/activites'); ?>"<?php if (is_page('activites')) echo 'class="active"'; ?>>⚡ Activités</a></li>
+          <li><a href="<?php echo home_url('/podcasts'); ?>" <?php if (is_page('podcasts')) echo 'class="active"'; ?>>🎙 Podcasts</a></li>
+          <li><a href="<?php echo home_url('/blog'); ?>"     <?php if (is_page('blog')) echo 'class="active"'; ?>>📰 Blog</a></li>
+          <li><a href="<?php echo home_url('/contact'); ?>"  <?php if (is_page('contact')) echo 'class="active"'; ?>>✉ Contact</a></li>
         </ul>
       </nav>
-      <a href="<?php echo home_url('/radio'); ?>" class="live-badge" aria-label="Écouter en direct">
-        <span class="dot" aria-hidden="true"></span>LIVE
-      </a>
+      <div style="display:flex;align-items:center;gap:0.75rem;">
+        <?php 
+        $current_player = function_exists('jfm_games_get_current_player') ? jfm_games_get_current_player() : null;
+        if ($current_player): 
+        ?>
+          <a href="<?php echo home_url('/compte'); ?>" class="jfm-header-account-btn" aria-label="Espace Joueur" title="Joueur connecté">
+            👤 <?php echo esc_html($current_player->username_display); ?> <span class="jfm-header-coins">🪙 <?php echo (int)$current_player->joycoins; ?></span>
+          </a>
+        <?php else: ?>
+          <a href="<?php echo home_url('/compte'); ?>" class="jfm-header-account-btn jfm-header-guest" aria-label="Connexion Joueur">
+            👤 Connexion
+          </a>
+        <?php endif; ?>
+        <a href="<?php echo home_url('/radio'); ?>" class="live-badge" aria-label="Écouter en direct">
+          <span class="dot" aria-hidden="true"></span>LIVE
+        </a>
+      </div>
       <button class="burger" id="burger-btn" aria-label="Ouvrir le menu" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>

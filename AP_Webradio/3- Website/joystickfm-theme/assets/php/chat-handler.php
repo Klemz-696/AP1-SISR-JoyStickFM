@@ -76,12 +76,30 @@ function jfm_chat_post()
     }
     set_transient($transient_key, $count + 1, JFM_CHAT_RATE_WINDOW);
 
-    // ── Sanitisation stricte des entrées ──
-    $username = sanitize_text_field(wp_unslash($_POST['username'] ?? ''));
-    $username = mb_substr(trim($username), 0, JFM_CHAT_USERNAME_MAX);
-    // Suppression de caractères dangereux
-    $username = preg_replace('/[<>"\';&\\\\\/]/', '', $username);
-    if (empty($username)) $username = 'Anonyme';
+    // ── Détermination serveur de l'identité joueur (anti-usurpation U6) ──
+    if (function_exists('jfm_games_get_current_player')) {
+        $player = jfm_games_get_current_player();
+        if ($player && !empty($player->username_display)) {
+            // Joueur authentifié : identité certifiée par sa session
+            $username = sanitize_text_field((string)$player->username_display);
+        } else {
+            // Invité : filtrage et préfixe explicite
+            $raw_user = sanitize_text_field(wp_unslash($_POST['username'] ?? ''));
+            $raw_user = mb_substr(trim($raw_user), 0, JFM_CHAT_USERNAME_MAX);
+            $raw_user = preg_replace('/[<>"\';&\\\\\/]/', '', $raw_user);
+            if (empty($raw_user) || strtolower($raw_user) === 'anonyme' || strtolower($raw_user) === 'invite') {
+                $username = 'Invité';
+            } else {
+                $clean = preg_replace('/^Invité(\s*·\s*)?/u', '', $raw_user);
+                $username = 'Invité · ' . ($clean ?: 'Anonyme');
+            }
+        }
+    } else {
+        $username = sanitize_text_field(wp_unslash($_POST['username'] ?? ''));
+        $username = mb_substr(trim($username), 0, JFM_CHAT_USERNAME_MAX);
+        $username = preg_replace('/[<>"\';&\\\\\/]/', '', $username);
+        if (empty($username)) $username = 'Anonyme';
+    }
 
     $message = sanitize_textarea_field(wp_unslash($_POST['message'] ?? ''));
     $message = mb_substr(trim($message), 0, JFM_CHAT_MAX_LEN);

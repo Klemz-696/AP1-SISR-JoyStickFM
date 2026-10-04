@@ -88,16 +88,37 @@ jQuery(document).ready(function ($) {
     }
 
     /* -----------------------------------------
-       INITIALISATION
+       INITIALISATION PSEUDO (JOUEUR / INVITÉ)
     ----------------------------------------- */
-    try {
-        var savedPseudo = localStorage.getItem('jfm_chat_pseudo');
-        if (savedPseudo && usernameEl) usernameEl.value = savedPseudo;
-    } catch (e) { }
+    function syncChatIdentity() {
+        if (!usernameEl) return;
+        if (window.JFM_GAMES && typeof window.JFM_GAMES.isLoggedIn === 'function' && window.JFM_GAMES.isLoggedIn()) {
+            var player = window.JFM_GAMES.getPlayer();
+            if (player && player.username) {
+                usernameEl.value = player.username;
+                usernameEl.readOnly = true;
+                usernameEl.title = 'Identité certifiée JoyStick FM (joueur connecté)';
+                usernameEl.style.color = 'var(--bleu-neon, #00f5ff)';
+                usernameEl.style.fontWeight = 'bold';
+            }
+        } else {
+            usernameEl.readOnly = false;
+            usernameEl.placeholder = 'Pseudo (Invité)';
+            usernameEl.title = 'Vous discutez en tant qu\'invité';
+            try {
+                var savedPseudo = localStorage.getItem('jfm_chat_pseudo');
+                if (savedPseudo && !usernameEl.value) usernameEl.value = savedPseudo;
+            } catch (e) { }
+        }
+    }
+
+    syncChatIdentity();
 
     if (usernameEl) {
         usernameEl.addEventListener('blur', function () {
-            try { localStorage.setItem('jfm_chat_pseudo', usernameEl.value); } catch (e) { }
+            if (!usernameEl.readOnly) {
+                try { localStorage.setItem('jfm_chat_pseudo', usernameEl.value); } catch (e) { }
+            }
         });
     }
 

@@ -263,6 +263,15 @@ function createOverlay() {
 }
 
 function openGameOverlay() {
+  // Condition formelle : Connexion obligatoire pour jouer (Cahier des charges U5)
+  if (window.JFM_GAMES && typeof window.JFM_GAMES.isLoggedIn === 'function' && !window.JFM_GAMES.isLoggedIn()) {
+    if (confirm("🎮 JoyStick FM — Connexion Requise !\n\nVous devez être connecté à un compte joueur pour lancer la catapulte arcade et enregistrer vos scores.\n\nVoulez-vous vous connecter ou créer un compte maintenant ?")) {
+      const accountUrl = (window.JFM_GAMES_CONFIG && window.JFM_GAMES_CONFIG.account_url) ? window.JFM_GAMES_CONFIG.account_url : '/compte';
+      window.location.href = accountUrl + '?redirect_to=' + encodeURIComponent(window.location.href);
+    }
+    return;
+  }
+
   createOverlay();
   lbNamePending = false;
   const overlay = document.getElementById('jfm-game-overlay');
