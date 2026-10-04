@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Bilan & Fiche de Recette — Univers de Jeu JoyStick FM</title>
+  <style>
+    :root {
+      --bg: #06070d;
+      --card-bg: #0f121d;
+      --border: #1e2538;
+      --neon-cyan: #00f5ff;
+      --neon-pink: #ff0055;
+      --neon-green: #39ff14;
+      --neon-gold: #ffea00;
+      --text: #f1f5f9;
+      --text-dim: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 2.5rem 1.5rem;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 40px rgba(0, 245, 255, 0.08);
+    }
+    .header {
+      border-bottom: 2px solid var(--border);
+      padding-bottom: 1.5rem;
+      margin-bottom: 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .badge {
+      display: inline-block;
+      padding: 0.35rem 0.85rem;
+      background: rgba(57, 255, 20, 0.15);
+      border: 1px solid var(--neon-green);
+      color: var(--neon-green);
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: bold;
+    }
+    h1 {
+      font-size: 1.8rem;
+      color: var(--neon-cyan);
+      margin-top: 0.4rem;
+    }
+    h2 {
+      font-size: 1.3rem;
+      color: #fff;
+      margin: 1.8rem 0 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      border-left: 4px solid var(--neon-cyan);
+      padding-left: 0.75rem;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.2rem 0;
+    }
+    th, td {
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--border);
+      text-align: left;
+      font-size: 0.92rem;
+    }
+    th {
+      background: rgba(0, 245, 255, 0.08);
+      color: var(--neon-cyan);
+    }
+    tr:nth-child(even) {
+      background: rgba(255, 255, 255, 0.02);
+    }
+    .tag-valide {
+      color: var(--neon-green);
+      font-weight: bold;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.2rem;
+      margin: 1.5rem 0;
+    }
+    .feature-card {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.2rem;
+    }
+    .feature-card h3 {
+      font-size: 1.05rem;
+      color: var(--neon-gold);
+      margin-bottom: 0.5rem;
+    }
+    .footer-notes {
+      margin-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1.2rem;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <span class="badge">MISSION 2 — ATELIER PROFESSIONNEL 1</span>
+        <h1>🎮 Bilan Technique : Univers de Jeu JoyStick FM</h1>
+        <p style="color:var(--text-dim);font-size:0.9rem;margin-top:0.3rem;">Cartes TCG 40 Rétro, Catapulte Arcade, Authentification & Cockpit Plein Écran</p>
+      </div>
+      <div style="text-align:right;">
+        <span style="font-size:0.85rem;color:var(--text-dim);">Étudiant 04 (Clément) & Étudiant 10 (Mathys)</span><br>
+        <span style="font-size:0.95rem;font-weight:bold;color:var(--neon-green);">Statut : 100% Validé en Production</span>
+      </div>
+    </div>
+
+    <h2>1. Synthèse des Fonctionnalités Déployées</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <h3>💥 Booster 3D & Animation</h3>
+        <p>Positionné au centre de l'écran, cliquable directement ou via gros bouton. Animation de tremblement progressif, déchirure et flash lumineux intense.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🃏 Pioche 3D Carte par Carte</h3>
+        <p>Présentation face cachée avec dos JoyStick TCG 1986. Rotation 3D 180°, effets visuels néon et auras de rareté (commune, rare, épique, légendaire).</p>
+      </div>
+      <div class="feature-card">
+        <h3>⏳ Suspense & Tri Algorithmique</h3>
+        <p>Tri croissant automatique des cartes par rareté côté serveur et client. Les cartes Légendaires apparaissent toujours en dernière position pour préserver le suspense.</p>
+      </div>
+      <div class="feature-card">
+        <h3>⚡ Enchaînement & Décompte</h3>
+        <p>Bouton d'enchaînement direct vers le prochain booster sans repasser par le classeur. Décompte dynamique jusqu'au prochain booster gratuit.</p>
+      </div>
+      <div class="feature-card">
+        <h3>🚀 Template Standalone 100vh</h3>
+        <p>Modèle <code>page-jeux.php</code> sans header ni footer WebRadio, cockpit de jeu immersif avec liens d'accès dans un nouvel onglet <code>target="_blank"</code>.</p>
+      </div>
+      <div class="feature-card">
+        <h3>👤 Profil & Sécurité Compte</h3>
+        <p>Studio Avatar (photo personnalisée ou carte), boutons de déconnexion et de réinitialisation d'avatar stylisés, suppression de compte irréversible en base MariaDB.</p>
+      </div>
+    </div>
+
+    <h2>2. Tableau de Recette & Vérifications</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Composant</th>
+          <th>Test Réalisé</th>
+          <th>Résultat Attendu</th>
+          <th>État</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Booster Centré</strong></td>
+          <td>Clic sur le booster 3D au milieu de l'écran</td>
+          <td>Déclenchement du tremblement et de l'ouverture</td>
+          <td><span class="tag-valide">VALIDÉ ✅</span></td>
+        </tr>
+        <tr>
+          <td><strong>Pioche Pas-à-Pas</strong></td>
+          <td>Retournement individuel des 5 cartes</td>
+          <td>Rotation 3D, auras néon et carte rare/légendaire en dernier</td>
+          <td><span class="tag-valide">VALIDÉ ✅</span></td>
+        </tr>
+        <tr>
+          <td><strong>Tout Révéler</strong></td>
+          <td>Clic sur <code>⚡ TOUT RÉVÉLER D'UN COUP</code></td>
+          <td>Affichage immédiat de la grille récapitulative</td>
+          <td><span class="tag-valide">VALIDÉ ✅</span></td>
+        </tr>
+        <tr>
+          <td><strong>Enchaînement</strong></td>
+          <td>Clic sur <code>📦 OUVRIR LE PROCHAIN BOOSTER</code></td>
+          <td>Ouverture du booster suivant sans rechargement de page</td>
+          <td><span class="tag-valide">VALIDÉ ✅</span></td>
+        </tr>
+        <tr>
+          <td><strong>Suppression Compte</strong></td>
+          <td>Clic sur <code>🗑 Supprimer mon compte</code></td>
+          <td>Modale de confirmation et purge SQL en cascade</td>
+          <td><span class="tag-valide">VALIDÉ ✅</span></td>
+        </tr>
+        <tr>
+          <td><strong>Template Dédié</strong></td>
+          <td>Ouverture de <code>http://10.100.0.51/jeux/</code></td>
+          <td>Affichage plein écran 100vh isolé du site radio</td>
+          <td><span class="tag-valide">VALIDÉ ✅</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="footer-notes">
+      <span>Projet BTS SIO SISR — Lycée Sidoine Apollinaire (2026)</span>
+      <span>Hébergement : Debian 12 (10.100.0.51) | Base MariaDB : joystickfm_db</span>
+    </div>
+  </div>
+</body>
+</html>
