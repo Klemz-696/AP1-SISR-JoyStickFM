@@ -1,28 +1,31 @@
 /* ==============================================================================
    JoyStick FM Games — games-portal.css
    Design Rétro-Arcade, Néo-Synthwave & Cyberpunk
-   Compatible avec les variables de joystickfm-theme
+   Harmonisé avec les variables typographiques et le style de JoyStick FM
    ============================================================================== */
 
 :root {
-    --jfm-bleu-neon: #00f5ff;
-    --jfm-rose-neon: #ff007f;
-    --jfm-violet-neon: #9d00ff;
-    --jfm-vert-neon: #00ff66;
-    --jfm-jaune-neon: #ffea00;
-    --jfm-fond-sombre: #0a0a14;
-    --jfm-fond-card: rgba(18, 18, 36, 0.85);
-    --jfm-border: rgba(0, 245, 255, 0.25);
-    --jfm-font-pixel: 'Press Start 2P', monospace, sans-serif;
-    --jfm-font-tech: 'Share Tech Mono', monospace, sans-serif;
+    --jfm-bleu-neon:    var(--bleu-neon, #00f5ff);
+    --jfm-rose-neon:    var(--rose-neon, #ff2d78);
+    --jfm-violet-neon:  var(--violet, #b44fff);
+    --jfm-vert-neon:    var(--vert-neon, #39ff14);
+    --jfm-jaune-neon:   #ffea00;
+    --jfm-fond-sombre:  var(--noir, #0a0a0f);
+    --jfm-fond-card:    var(--noir-card, rgba(18, 18, 26, 0.85));
+    --jfm-border:       rgba(0, 245, 255, 0.25);
+
+    /* Typographie unifiée avec le thème principal JoyStick FM */
+    --jfm-font-title:   var(--font-tech, 'Orbitron', sans-serif);
+    --jfm-font-retro:   var(--font-pixel, 'VT323', monospace);
+    --jfm-font-body:    var(--font-mono, 'Share Tech Mono', monospace);
 }
 
 .jfm-portal-wrap {
     max-width: 1100px;
     margin: 2rem auto;
     padding: 1.5rem;
-    font-family: var(--font-base, 'Inter', sans-serif);
-    color: #e0e5ff;
+    font-family: var(--jfm-font-body);
+    color: var(--texte, #c8c8d4);
 }
 
 /* En-tête */
@@ -33,30 +36,35 @@
 
 .jfm-badge-tag {
     display: inline-block;
-    font-family: var(--jfm-font-tech);
-    font-size: 0.75rem;
+    font-family: var(--jfm-font-title);
+    font-size: 0.72rem;
+    font-weight: 700;
     letter-spacing: 0.15em;
     color: var(--jfm-bleu-neon);
     background: rgba(0, 245, 255, 0.1);
     border: 1px solid var(--jfm-border);
-    padding: 0.3rem 0.8rem;
+    padding: 0.35rem 0.9rem;
     border-radius: 20px;
     margin-bottom: 0.8rem;
     text-transform: uppercase;
 }
 
 .jfm-portal-title {
-    font-family: var(--font-pixel, var(--jfm-font-pixel));
-    font-size: 1.8rem;
+    font-family: var(--jfm-font-title);
+    font-size: clamp(1.8rem, 4vw, 2.6rem);
+    font-weight: 900;
     color: #ffffff;
-    text-shadow: 0 0 10px rgba(0, 245, 255, 0.6), 0 0 20px rgba(157, 0, 255, 0.4);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    text-shadow: 0 0 15px rgba(0, 245, 255, 0.5), 0 0 30px rgba(180, 79, 255, 0.3);
     margin: 0.5rem 0 1rem;
-    line-height: 1.4;
+    line-height: 1.25;
 }
 
 .jfm-portal-desc {
+    font-family: var(--jfm-font-body);
     font-size: 1.05rem;
-    color: #a0a8cf;
+    color: var(--texte-dim, #8b92b8);
     max-width: 650px;
     margin: 0 auto 1.5rem;
     line-height: 1.6;
@@ -71,7 +79,8 @@
     border: 1px solid rgba(0, 245, 255, 0.3);
     padding: 0.6rem 1.4rem;
     border-radius: 30px;
-    font-size: 0.9rem;
+    font-size: 0.92rem;
+    font-family: var(--jfm-font-body);
     box-shadow: 0 0 15px rgba(0, 245, 255, 0.1);
     flex-wrap: wrap;
     justify-content: center;
@@ -89,7 +98,8 @@
     gap: 1rem;
     max-width: 750px;
     margin: 0 auto;
-    font-size: 0.9rem;
+    font-size: 0.92rem;
+    font-family: var(--jfm-font-body);
     flex-wrap: wrap;
 }
 
@@ -103,14 +113,16 @@
 
 .jfm-game-card {
     background: var(--jfm-fond-card);
-    border: 2px solid var(--jfm-border);
+    border: 1.5px solid var(--jfm-border);
     border-radius: 14px;
-    padding: 2rem 1.8rem;
+    padding: 2.2rem 1.8rem;
     position: relative;
     display: flex;
     flex-direction: column;
     transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
 }
 
 .jfm-game-card:hover {
@@ -121,29 +133,30 @@
 
 .jfm-card-tcg:hover {
     border-color: var(--jfm-violet-neon);
-    box-shadow: 0 12px 30px rgba(157, 0, 255, 0.25);
+    box-shadow: 0 12px 30px rgba(180, 79, 255, 0.25);
 }
 
 .jfm-game-badge {
     position: absolute;
     top: 1rem;
     right: 1.2rem;
-    font-family: var(--jfm-font-tech);
-    font-size: 0.72rem;
-    font-weight: bold;
-    padding: 0.25rem 0.6rem;
+    font-family: var(--jfm-font-title);
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 0.3rem 0.65rem;
     border-radius: 4px;
     letter-spacing: 0.1em;
+    text-transform: uppercase;
 }
 
 .jfm-badge-live {
-    background: rgba(0, 255, 102, 0.15);
+    background: rgba(57, 255, 20, 0.15);
     color: var(--jfm-vert-neon);
     border: 1px solid var(--jfm-vert-neon);
 }
 
 .jfm-badge-soon {
-    background: rgba(255, 0, 127, 0.15);
+    background: rgba(255, 45, 120, 0.15);
     color: var(--jfm-rose-neon);
     border: 1px solid var(--jfm-rose-neon);
 }
@@ -154,16 +167,20 @@
 }
 
 .jfm-game-name {
-    font-family: var(--font-pixel, var(--jfm-font-pixel));
-    font-size: 1.25rem;
+    font-family: var(--jfm-font-title);
+    font-size: 1.35rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
     color: #fff;
     margin: 0.2rem 0 0.8rem;
+    text-transform: uppercase;
 }
 
 .jfm-game-pitch {
+    font-family: var(--jfm-font-body);
     font-size: 0.95rem;
-    color: #abb3db;
-    line-height: 1.5;
+    color: var(--texte, #c8c8d4);
+    line-height: 1.6;
     margin-bottom: 1.2rem;
 }
 
@@ -171,12 +188,13 @@
     list-style: none;
     padding: 0;
     margin: 0 0 1.8rem;
-    font-size: 0.88rem;
+    font-family: var(--jfm-font-body);
+    font-size: 0.9rem;
     color: #ccd2f0;
 }
 
 .jfm-game-features li {
-    padding: 0.35rem 0;
+    padding: 0.4rem 0;
     border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
 }
 
@@ -186,25 +204,30 @@
 
 /* Boutons */
 .jfm-btn-play {
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
     width: 100%;
     text-align: center;
-    padding: 0.9rem 1.2rem;
-    background: linear-gradient(135deg, #00f5ff 0%, #0088ff 100%);
+    padding: 0.85rem 1.4rem;
+    background: linear-gradient(135deg, var(--jfm-bleu-neon) 0%, #0088ff 100%);
     color: #050510;
-    font-family: var(--font-pixel, var(--jfm-font-pixel));
-    font-size: 0.85rem;
-    font-weight: bold;
+    font-family: var(--jfm-font-title);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     text-decoration: none;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease;
     box-shadow: 0 4px 15px rgba(0, 245, 255, 0.3);
 }
 
 .jfm-btn-play:hover {
-    transform: scale(1.02);
+    transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(0, 245, 255, 0.5);
     color: #000;
 }
@@ -216,19 +239,23 @@
 }
 
 .jfm-btn-disabled {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.1);
     color: #777c9e;
     box-shadow: none;
     cursor: not-allowed;
 }
 
 .jfm-btn-danger {
-    background: rgba(255, 0, 127, 0.15);
+    background: rgba(255, 45, 120, 0.15);
     color: var(--jfm-rose-neon);
     border: 1px solid var(--jfm-rose-neon);
-    padding: 0.8rem 1.2rem;
-    font-family: var(--jfm-font-tech);
-    font-size: 0.9rem;
+    padding: 0.8rem 1.4rem;
+    font-family: var(--jfm-font-title);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.2s;
@@ -237,24 +264,32 @@
 .jfm-btn-danger:hover {
     background: var(--jfm-rose-neon);
     color: #fff;
+    box-shadow: 0 0 15px rgba(255, 45, 120, 0.4);
 }
 
 .jfm-mini-btn, .jfm-btn-neon-small {
-    background: rgba(0, 245, 255, 0.15);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background: rgba(0, 245, 255, 0.12);
     color: var(--jfm-bleu-neon);
     border: 1px solid var(--jfm-bleu-neon);
-    padding: 0.35rem 0.8rem;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    font-family: var(--jfm-font-tech);
+    padding: 0.4rem 0.85rem;
+    border-radius: 6px;
+    font-size: 0.75rem;
+    font-family: var(--jfm-font-title);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     text-decoration: none;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: all 0.2s ease;
 }
 
 .jfm-mini-btn:hover, .jfm-btn-neon-small:hover {
     background: var(--jfm-bleu-neon);
     color: #000;
+    box-shadow: 0 0 12px rgba(0, 245, 255, 0.35);
 }
 
 /* Grille Activités */
@@ -267,14 +302,16 @@
 .jfm-activity-item {
     background: var(--jfm-fond-card);
     border: 1px solid var(--jfm-border);
-    border-radius: 10px;
-    padding: 1.5rem;
-    transition: transform 0.2s;
+    border-radius: 12px;
+    padding: 1.6rem;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+    backdrop-filter: blur(10px);
 }
 
 .jfm-activity-item:hover {
     transform: translateY(-4px);
     border-color: var(--jfm-bleu-neon);
+    box-shadow: 0 8px 25px rgba(0, 245, 255, 0.15);
 }
 
 .jfm-act-icon {
@@ -283,33 +320,47 @@
 }
 
 .jfm-activity-item h3 {
+    font-family: var(--jfm-font-title);
     font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
     color: #fff;
     margin: 0 0 0.5rem;
 }
 
 .jfm-activity-item p {
-    font-size: 0.9rem;
-    color: #a0a8cf;
-    line-height: 1.5;
+    font-family: var(--jfm-font-body);
+    font-size: 0.92rem;
+    color: var(--texte-dim, #8b92b8);
+    line-height: 1.6;
     margin-bottom: 1rem;
 }
 
 .jfm-link-neon {
     color: var(--jfm-bleu-neon);
     text-decoration: none;
-    font-family: var(--jfm-font-tech);
-    font-size: 0.9rem;
-    font-weight: bold;
+    font-family: var(--jfm-font-title);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+}
+.jfm-link-neon:hover {
+    color: #fff;
+    text-shadow: 0 0 10px var(--jfm-bleu-neon);
 }
 
 .jfm-badge-subtle {
-    font-size: 0.78rem;
-    font-family: var(--jfm-font-tech);
+    font-size: 0.72rem;
+    font-family: var(--jfm-font-title);
+    font-weight: 700;
+    letter-spacing: 0.08em;
     color: var(--jfm-jaune-neon);
     background: rgba(255, 234, 0, 0.1);
-    padding: 0.2rem 0.5rem;
+    padding: 0.25rem 0.6rem;
     border-radius: 4px;
+    border: 1px solid rgba(255, 234, 0, 0.25);
 }
 
 /* Espace Compte & Authentification */
@@ -317,11 +368,12 @@
     max-width: 520px;
     margin: 0 auto;
     background: var(--jfm-fond-card);
-    border: 2px solid var(--jfm-border);
+    border: 1.5px solid var(--jfm-border);
     border-radius: 14px;
-    padding: 2rem;
-    backdrop-filter: blur(12px);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    padding: 2.2rem;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
 }
 
 .jfm-auth-tabs {
@@ -337,8 +389,11 @@
     border: none;
     padding: 0.8rem 0.5rem;
     color: #8890ba;
-    font-family: var(--jfm-font-tech);
-    font-size: 0.95rem;
+    font-family: var(--jfm-font-title);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     cursor: pointer;
     border-bottom: 3px solid transparent;
     transition: all 0.2s;
@@ -347,7 +402,8 @@
 .jfm-tab-btn.active {
     color: var(--jfm-bleu-neon);
     border-bottom-color: var(--jfm-bleu-neon);
-    font-weight: bold;
+    font-weight: 900;
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.4);
 }
 
 .jfm-auth-form {
@@ -364,55 +420,63 @@
 
 .jfm-form-field label {
     display: block;
-    font-size: 0.88rem;
+    font-family: var(--jfm-font-title);
+    font-size: 0.76rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
     color: #cfd5f5;
-    margin-bottom: 0.4rem;
+    margin-bottom: 0.45rem;
 }
 
 .jfm-form-field input[type="text"],
 .jfm-form-field input[type="password"] {
     width: 100%;
-    padding: 0.8rem 1rem;
-    background: rgba(5, 5, 15, 0.7);
+    padding: 0.85rem 1rem;
+    background: rgba(5, 5, 15, 0.75);
     border: 1.5px solid rgba(0, 245, 255, 0.3);
     border-radius: 6px;
     color: #fff;
-    font-size: 1rem;
-    font-family: inherit;
+    font-size: 0.95rem;
+    font-family: var(--jfm-font-body);
     outline: none;
     transition: border-color 0.2s, box-shadow 0.2s;
 }
 
 .jfm-form-field input:focus {
     border-color: var(--jfm-bleu-neon);
-    box-shadow: 0 0 10px rgba(0, 245, 255, 0.4);
+    box-shadow: 0 0 12px rgba(0, 245, 255, 0.35);
 }
 
 .jfm-form-field small {
     display: block;
-    font-size: 0.78rem;
-    color: #8088b0;
-    margin-top: 0.3rem;
+    font-family: var(--jfm-font-body);
+    font-size: 0.8rem;
+    color: var(--texte-dim, #8088b0);
+    margin-top: 0.35rem;
 }
 
 .jfm-form-field-checkbox {
     margin-bottom: 1.2rem;
+    font-family: var(--jfm-font-body);
     font-size: 0.88rem;
     color: #a8b0d4;
 }
 
 .jfm-bonus-announcement {
-    background: rgba(0, 255, 102, 0.08);
-    border: 1px dashed rgba(0, 255, 102, 0.4);
+    background: rgba(57, 255, 20, 0.08);
+    border: 1px dashed rgba(57, 255, 20, 0.4);
     color: #80ffaa;
-    padding: 0.75rem;
+    padding: 0.75rem 1rem;
     border-radius: 6px;
-    font-size: 0.85rem;
+    font-family: var(--jfm-font-body);
+    font-size: 0.88rem;
     margin-bottom: 1.2rem;
 }
 
 .jfm-form-msg {
     margin-bottom: 1rem;
+    font-family: var(--jfm-font-body);
     font-size: 0.88rem;
     display: none;
 }
@@ -421,7 +485,7 @@
     display: block;
     color: #ff4466;
     background: rgba(255, 68, 102, 0.1);
-    padding: 0.6rem;
+    padding: 0.65rem 0.9rem;
     border-radius: 4px;
     border-left: 3px solid #ff4466;
 }
@@ -430,7 +494,7 @@
     display: block;
     color: #00ff88;
     background: rgba(0, 255, 136, 0.1);
-    padding: 0.6rem;
+    padding: 0.65rem 0.9rem;
     border-radius: 4px;
     border-left: 3px solid #00ff88;
 }
@@ -439,7 +503,8 @@
 .jfm-modal {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.85);
+    background: rgba(0, 0, 0, 0.88);
+    backdrop-filter: blur(8px);
     z-index: 9999999;
     display: flex;
     align-items: center;
@@ -451,24 +516,24 @@
     background: #111126;
     border: 2px solid var(--jfm-jaune-neon);
     border-radius: 12px;
-    padding: 2rem;
+    padding: 2.2rem;
     max-width: 480px;
     text-align: center;
-    box-shadow: 0 0 30px rgba(255, 234, 0, 0.3);
+    box-shadow: 0 0 35px rgba(255, 234, 0, 0.35);
 }
 
 .jfm-recovery-box {
-    font-family: var(--jfm-font-tech);
+    font-family: var(--jfm-font-body);
     font-size: 1.35rem;
     font-weight: bold;
     color: var(--jfm-jaune-neon);
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.65);
     border: 1.5px dashed var(--jfm-jaune-neon);
     padding: 1rem;
     border-radius: 6px;
     margin: 1.2rem 0 1.5rem;
     user-select: all;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
 }
 
 /* Profil Joueur */
@@ -476,16 +541,17 @@
     max-width: 650px;
     margin: 0 auto;
     background: var(--jfm-fond-card);
-    border: 2px solid var(--jfm-border);
+    border: 1.5px solid var(--jfm-border);
     border-radius: 14px;
-    padding: 2.2rem;
+    padding: 2.4rem;
+    backdrop-filter: blur(12px);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
 }
 
 .jfm-account-header {
     display: flex;
     align-items: center;
-    gap: 1.2rem;
+    gap: 1.4rem;
     margin-bottom: 2rem;
 }
 
@@ -498,17 +564,21 @@
     align-items: center;
     justify-content: center;
     font-size: 2rem;
-    box-shadow: 0 0 15px rgba(0, 245, 255, 0.4);
+    box-shadow: 0 0 18px rgba(0, 245, 255, 0.45);
+    flex-shrink: 0;
 }
 
 .jfm-account-name {
-    font-family: var(--font-pixel, var(--jfm-font-pixel));
-    font-size: 1.3rem;
+    font-family: var(--jfm-font-title);
+    font-size: 1.4rem;
+    font-weight: 900;
     color: #fff;
     margin: 0.3rem 0;
+    letter-spacing: 0.05em;
 }
 
 .jfm-account-meta {
+    font-family: var(--jfm-font-body);
     font-size: 0.85rem;
     color: #8b92b8;
     margin: 0;
@@ -531,14 +601,19 @@
 
 .jfm-stat-val {
     display: block;
+    font-family: var(--jfm-font-title);
     font-size: 1.35rem;
-    font-weight: bold;
+    font-weight: 900;
     color: #fff;
     margin-bottom: 0.3rem;
 }
 
 .jfm-stat-lbl {
-    font-size: 0.78rem;
+    font-family: var(--jfm-font-title);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: #8f96be;
 }
 

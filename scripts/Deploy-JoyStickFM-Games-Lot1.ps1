@@ -47,6 +47,7 @@ scp -o StrictHostKeyChecking=no "$LocalThemeDir\header.php" "$TargetUser@$Target
 scp -o StrictHostKeyChecking=no "$LocalThemeDir\footer.php" "$TargetUser@$TargetHost`:$RemoteThemeDir/footer.php"
 scp -o StrictHostKeyChecking=no "$LocalThemeDir\page.php" "$TargetUser@$TargetHost`:$RemoteThemeDir/page.php"
 scp -o StrictHostKeyChecking=no "$LocalThemeDir\assets\css\style.css" "$TargetUser@$TargetHost`:$RemoteThemeDir/assets/css/style.css"
+scp -o StrictHostKeyChecking=no "$LocalThemeDir\assets\css\responsive.css" "$TargetUser@$TargetHost`:$RemoteThemeDir/assets/css/responsive.css"
 scp -o StrictHostKeyChecking=no "$LocalThemeDir\assets\js\chat.js" "$TargetUser@$TargetHost`:$RemoteThemeDir/assets/js/chat.js"
 scp -o StrictHostKeyChecking=no "$LocalThemeDir\assets\js\joystick-launch-game.js" "$TargetUser@$TargetHost`:$RemoteThemeDir/assets/js/joystick-launch-game.js"
 scp -o StrictHostKeyChecking=no "$LocalThemeDir\assets\php\chat-handler.php" "$TargetUser@$TargetHost`:$RemoteThemeDir/assets/php/chat-handler.php"

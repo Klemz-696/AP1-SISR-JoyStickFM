@@ -234,9 +234,11 @@ body > header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
-  max-width: 1200px;
+  padding: 0 1.5rem;
+  height: 68px;
+  max-width: 1300px;
   margin: 0 auto;
+  gap: 1rem;
 }
 
 /* Logo */
@@ -245,58 +247,85 @@ body > header {
   align-items: center;
   gap: 0.75rem;
   text-decoration: none;
+  flex-shrink: 0;
 }
 .logo-icon {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   background: linear-gradient(135deg, var(--bleu-neon), var(--violet));
   border-radius: var(--radius);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
+  font-size: 1.3rem;
   box-shadow: var(--glow-bleu);
   animation: logoPulse 3s ease-in-out infinite;
+  flex-shrink: 0;
 }
 .logo-text {
   font-family: var(--font-tech);
-  font-size: 1.4rem;
+  font-size: 1.35rem;
   font-weight: 900;
   color: var(--blanc);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
 }
 .logo-text span { color: var(--bleu-neon); text-shadow: var(--glow-bleu); }
+
+/* Navigation */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+}
 
 /* Nav links */
 nav ul {
   display: flex;
   list-style: none;
-  gap: 0.25rem;
+  gap: 0.2rem;
   align-items: center;
+  margin: 0;
+  padding: 0;
+  flex-wrap: nowrap;
+}
+nav ul li {
+  flex-shrink: 0;
 }
 nav ul li a {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 1rem;
+  gap: 0.35rem;
+  padding: 0.42rem 0.65rem;
   border-radius: var(--radius);
   font-family: var(--font-tech);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
+  font-size: 0.74rem;
+  letter-spacing: 0.05em;
   color: var(--texte);
   border: 1px solid transparent;
   transition: all var(--transition);
+  white-space: nowrap;
 }
 nav ul li a:hover,
 nav ul li a.active {
   color: var(--bleu-neon);
-  border-color: var(--bleu-neon);
-  background: rgba(0,245,255,0.07);
+  border-color: rgba(0, 245, 255, 0.4);
+  background: rgba(0, 245, 255, 0.08);
   text-shadow: var(--glow-bleu);
-  box-shadow: 0 0 10px rgba(0,245,255,0.1);
+  box-shadow: 0 0 12px rgba(0, 245, 255, 0.15);
 }
 
-/* Live badge in nav */
+/* Header actions wrapper */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+}
+
+/* Live badge */
 .live-badge {
   display: inline-flex;
   align-items: center;
@@ -304,7 +333,7 @@ nav ul li a.active {
   background: var(--rose-neon);
   color: var(--blanc);
   font-family: var(--font-tech);
-  font-size: 0.65rem;
+  font-size: 0.68rem;
   font-weight: 700;
   padding: 0.35rem 0.75rem;
   border-radius: 20px;
@@ -313,6 +342,8 @@ nav ul li a.active {
   animation: livePulse 1.5s ease-in-out infinite;
   cursor: pointer;
   text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 .live-badge .dot {
   width: 6px; height: 6px;
@@ -325,32 +356,58 @@ nav ul li a.active {
 .jfm-header-account-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  background: rgba(0, 245, 255, 0.1);
+  gap: 0.45rem;
+  background: rgba(0, 245, 255, 0.08);
   color: var(--bleu-neon);
   border: 1px solid rgba(0, 245, 255, 0.35);
   font-family: var(--font-tech);
   font-size: 0.72rem;
   font-weight: 700;
-  padding: 0.35rem 0.75rem;
+  padding: 0.35rem 0.8rem;
   border-radius: 20px;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 .jfm-header-account-btn:hover {
-  background: var(--bleu-neon);
-  color: #000;
-  box-shadow: 0 0 12px rgba(0, 245, 255, 0.4);
+  background: rgba(0, 245, 255, 0.2);
+  border-color: var(--bleu-neon);
+  color: var(--blanc);
+  box-shadow: 0 0 14px rgba(0, 245, 255, 0.4);
+}
+.jfm-header-account-btn .jfm-account-name {
+  max-width: 95px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: inline-block;
+  vertical-align: middle;
 }
 .jfm-header-coins {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  background: rgba(255, 234, 0, 0.12);
+  border: 1px solid rgba(255, 234, 0, 0.3);
+  padding: 0.1rem 0.45rem;
+  border-radius: 12px;
   color: var(--jaune-neon, #ffea00);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
   font-weight: bold;
 }
 .jfm-header-guest {
   border-color: rgba(255, 255, 255, 0.2);
   color: var(--texte-dim, #888);
+  background: rgba(255, 255, 255, 0.04);
+}
+.jfm-header-guest:hover {
+  border-color: var(--bleu-neon);
+  color: var(--bleu-neon);
+  background: rgba(0, 245, 255, 0.1);
+  box-shadow: 0 0 10px rgba(0, 245, 255, 0.25);
 }
 
 /* ── Statut EN DIRECT — dot clignotant ── */
@@ -376,15 +433,18 @@ nav ul li a.active {
 .burger {
   display: none;
   flex-direction: column;
+  justify-content: center;
   gap: 5px;
   cursor: pointer;
-  padding: 0.5rem;
+  padding: 0.4rem;
   background: none;
   border: none;
+  flex-shrink: 0;
 }
 .burger span {
   display: block;
-  width: 26px; height: 2px;
+  width: 24px;
+  height: 2px;
   background: var(--bleu-neon);
   border-radius: 2px;
   transition: all var(--transition);
