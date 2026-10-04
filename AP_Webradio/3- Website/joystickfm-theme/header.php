@@ -57,7 +57,7 @@ endif; ?>
         <ul id="nav-menu">
           <li><a href="<?php echo home_url('/'); ?>"         <?php if (is_front_page()) echo 'class="active"'; ?>>🏠 Accueil</a></li>
           <li><a href="<?php echo home_url('/radio'); ?>"    <?php if (is_page('radio')) echo 'class="active"'; ?>>📡 Direct</a></li>
-          <li><a href="<?php echo home_url('/jeux'); ?>"     <?php if (is_page('jeux')) echo 'class="active"'; ?>>🎮 Jeux</a></li>
+          <li><a href="<?php echo home_url('/jeux'); ?>" target="_blank" rel="noopener noreferrer" <?php if (is_page('jeux')) echo 'class="active"'; ?>>🎮 Jeux ↗</a></li>
           <li><a href="<?php echo home_url('/activites'); ?>"<?php if (is_page('activites')) echo 'class="active"'; ?>>⚡ Activités</a></li>
           <li><a href="<?php echo home_url('/podcasts'); ?>" <?php if (is_page('podcasts')) echo 'class="active"'; ?>>🎙 Podcasts</a></li>
           <li><a href="<?php echo home_url('/blog'); ?>"     <?php if (is_page('blog')) echo 'class="active"'; ?>>📰 Blog</a></li>

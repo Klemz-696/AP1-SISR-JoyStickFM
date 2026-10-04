@@ -269,6 +269,20 @@ class JFM_Games_TCG {
             ];
         }
 
+        // Tri des cartes par rareté croissante pour garantir le suspense (Légendaires et Rares en dernier !)
+        $rarity_order = ['common' => 1, 'rare' => 2, 'epic' => 3, 'legendary' => 4];
+        usort($response_cards, function($a, $b) use ($rarity_order) {
+            $ra = $rarity_order[$a['rarity']] ?? 1;
+            $rb = $rarity_order[$b['rarity']] ?? 1;
+            if ($ra !== $rb) {
+                return $ra - $rb;
+            }
+            if ($a['is_holo'] !== $b['is_holo']) {
+                return ($a['is_holo'] ? 1 : 0) - ($b['is_holo'] ? 1 : 0);
+            }
+            return $a['power'] - $b['power'];
+        });
+
         // Récupération des soldes à jour
         $fresh_player = $wpdb->get_row($wpdb->prepare("SELECT free_boosters_available, joycoins, xp FROM {$table_players} WHERE id = %d", $player->id));
 

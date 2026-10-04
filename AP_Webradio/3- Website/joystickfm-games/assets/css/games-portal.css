@@ -2166,5 +2166,391 @@ body.page-id-12 .footer-site {
     }
 }
 
+/* ══════════════════════════════════════════════════════════
+   BOOSTER CENTRÉ & ANIMATION D'OUVERTURE
+══════════════════════════════════════════════════════════ */
+.jfm-booster-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 56vh;
+    gap: 2.2rem;
+    padding: 2rem 1rem;
+    text-align: center;
+}
+.jfm-booster-clickable {
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+}
+.jfm-booster-clickable:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 20px 50px rgba(0, 245, 255, 0.4), 0 0 30px rgba(180, 79, 255, 0.5);
+}
+.jfm-bp-tap-hint {
+    position: absolute;
+    bottom: -26px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(6, 7, 13, 0.9);
+    border: 1px solid var(--jfm-bleu-neon);
+    color: var(--jfm-bleu-neon);
+    font-family: var(--jfm-font-title);
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    padding: 0.25rem 0.8rem;
+    border-radius: 12px;
+    white-space: nowrap;
+    box-shadow: 0 0 12px rgba(0, 245, 255, 0.4);
+    animation: tapPulse 1.8s ease-in-out infinite;
+    pointer-events: none;
+}
+@keyframes tapPulse {
+    0%, 100% { opacity: 0.85; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 1; transform: translateX(-50%) translateY(-3px); box-shadow: 0 0 18px rgba(0, 245, 255, 0.8); }
+}
+/* Animation d'ouverture violente du booster pack */
+.jfm-booster-pack-3d.jfm-booster-tearing {
+    animation: boosterShake 0.45s ease-in-out infinite alternate !important;
+    box-shadow: 0 0 60px rgba(255, 234, 0, 0.9), 0 0 100px rgba(0, 245, 255, 0.8) !important;
+}
+@keyframes boosterShake {
+    0% { transform: translate(-3px, 2px) rotate(-2deg) scale(1.05); }
+    50% { transform: translate(3px, -2px) rotate(2deg) scale(1.08); }
+    100% { transform: translate(-2px, -3px) rotate(-1deg) scale(1.1); }
+}
+
+/* ══════════════════════════════════════════════════════════
+   MODALE CINÉMA & PIOCHE CARTE PAR CARTE (3D FLIP)
+══════════════════════════════════════════════════════════ */
+.jfm-modal-cinema {
+    background: rgba(4, 5, 10, 0.93) !important;
+    backdrop-filter: blur(12px) !important;
+}
+.jfm-modal-cinema .jfm-tcg-reveal-box {
+    max-width: 660px;
+    width: 95%;
+    padding: 1.8rem 1.4rem;
+    background: rgba(14, 17, 30, 0.96);
+    border: 1px solid rgba(0, 245, 255, 0.35);
+    border-radius: 20px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.9), 0 0 40px rgba(0, 245, 255, 0.2);
+    transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+.jfm-glow-gold {
+    box-shadow: 0 0 60px rgba(255, 234, 0, 0.7), 0 0 120px rgba(255, 150, 0, 0.4) !important;
+    border-color: #ffea00 !important;
+}
+.jfm-glow-purple {
+    box-shadow: 0 0 50px rgba(180, 79, 255, 0.7), 0 0 100px rgba(180, 79, 255, 0.4) !important;
+    border-color: #b44fff !important;
+}
+.jfm-glow-cyan {
+    box-shadow: 0 0 40px rgba(0, 245, 255, 0.6) !important;
+    border-color: #00f5ff !important;
+}
+
+.jfm-reveal-topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.4rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+.jfm-reveal-status {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+.jfm-reveal-title {
+    font-family: var(--jfm-font-title);
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0.05em;
+}
+.jfm-reveal-counter {
+    background: rgba(0, 245, 255, 0.12);
+    border: 1px solid rgba(0, 245, 255, 0.4);
+    color: var(--jfm-bleu-neon);
+    font-family: var(--jfm-font-title);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 12px;
+}
+.jfm-btn-speed-reveal {
+    background: rgba(255, 234, 0, 0.1);
+    border: 1px solid rgba(255, 234, 0, 0.4);
+    color: #ffea00;
+    font-family: var(--jfm-font-title);
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 0.35rem 0.75rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.jfm-btn-speed-reveal:hover {
+    background: #ffea00;
+    color: #000;
+    box-shadow: 0 0 15px rgba(255, 234, 0, 0.5);
+}
+
+/* Scène Carte Unique 3D avec Flip */
+.jfm-single-card-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    gap: 1.4rem;
+}
+.jfm-card-flip-wrap {
+    width: 240px;
+    height: 350px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+.jfm-card-flipper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 16px;
+}
+.jfm-card-flipper.is-flipped {
+    transform: rotateY(180deg);
+}
+.jfm-card-face {
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.7);
+}
+/* Dos de carte cybernétique */
+.jfm-card-face-back {
+    background: radial-gradient(circle at center, #1b203a 0%, #080912 100%);
+    border: 3px solid #2a335a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2rem;
+    box-shadow: 0 0 25px rgba(0, 245, 255, 0.2);
+    transition: border-color 0.3s;
+}
+.jfm-card-face-back:hover {
+    border-color: var(--jfm-bleu-neon);
+}
+.jfm-cb-border {
+    border: 2px dashed rgba(0, 245, 255, 0.4);
+    border-radius: 12px;
+    width: 100%;
+    height: 85%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.jfm-cb-inner {
+    text-align: center;
+}
+.jfm-cb-logo {
+    font-size: 2.8rem;
+    display: block;
+    margin-bottom: 0.4rem;
+}
+.jfm-cb-text {
+    font-family: var(--jfm-font-title);
+    font-size: 0.95rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 0.08em;
+    display: block;
+}
+.jfm-cb-sub {
+    font-family: var(--jfm-font-retro);
+    font-size: 0.62rem;
+    color: var(--jfm-bleu-neon);
+    letter-spacing: 0.12em;
+    display: block;
+    margin-top: 0.2rem;
+}
+.jfm-cb-hint {
+    font-family: var(--jfm-font-title);
+    font-size: 0.62rem;
+    color: var(--texte-dim);
+    margin-top: 0.6rem;
+    letter-spacing: 0.06em;
+}
+/* Recto de la carte active */
+.jfm-card-face-front {
+    transform: rotateY(180deg);
+    background: #111425;
+    border: 3px solid var(--jfm-bleu-neon);
+    padding: 0.9rem;
+    display: flex;
+    flex-direction: column;
+}
+.tcg-single-card-frame {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.tcg-single-card-frame .tcg-card-art {
+    height: 125px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    position: relative;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+}
+.tcg-single-card-frame .tcg-card-title {
+    font-family: var(--jfm-font-title);
+    font-size: 0.95rem;
+    color: #fff;
+    margin: 0.5rem 0 0.25rem 0;
+}
+.tcg-single-card-frame .tcg-card-desc {
+    font-size: 0.72rem;
+    color: #cbd5e1;
+    line-height: 1.35;
+    margin: 0;
+}
+.tcg-single-card-frame .tcg-card-lore {
+    font-size: 0.65rem;
+    font-style: italic;
+    color: var(--jfm-bleu-neon);
+    margin: 0.35rem 0 0 0;
+}
+
+/* ══════════════════════════════════════════════════════════
+   BOUTONS D'ENCHAÎNEMENT DIRECT & STYLES CYBERPUNK
+══════════════════════════════════════════════════════════ */
+.jfm-btn-big-chain {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: linear-gradient(135deg, #00f5ff 0%, #b44fff 100%);
+    color: #06070d;
+    font-family: var(--jfm-font-title);
+    font-size: 0.92rem;
+    font-weight: 900;
+    padding: 0.8rem 1.5rem;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 0 25px rgba(0, 245, 255, 0.5);
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    letter-spacing: 0.04em;
+}
+.jfm-btn-big-chain:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 0 35px rgba(0, 245, 255, 0.8);
+}
+
+.jfm-btn-danger-cyber {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: rgba(255, 0, 85, 0.12);
+    border: 1px solid rgba(255, 0, 85, 0.5);
+    color: #ff3366;
+    font-family: var(--jfm-font-title);
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+}
+.jfm-btn-danger-cyber:hover {
+    background: rgba(255, 0, 85, 0.3);
+    border-color: #ff0055;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
+}
+
+.jfm-btn-reset-avatar {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(0, 245, 255, 0.08);
+    border: 1px solid rgba(0, 245, 255, 0.35);
+    color: var(--jfm-bleu-neon);
+    font-family: var(--jfm-font-title);
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.jfm-btn-reset-avatar:hover {
+    background: rgba(0, 245, 255, 0.2);
+    border-color: var(--jfm-bleu-neon);
+    box-shadow: 0 0 12px rgba(0, 245, 255, 0.3);
+}
+
+.jfm-btn-delete-account {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    background: transparent;
+    border: 1px solid rgba(255, 68, 102, 0.3);
+    color: #ff6688;
+    font-family: var(--jfm-font-title);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.45rem 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.jfm-btn-delete-account:hover {
+    border-color: #ff0055;
+    color: #ff0055;
+    background: rgba(255, 0, 85, 0.1);
+}
+
+.jfm-btn-play-standalone {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    background: linear-gradient(135deg, #00f5ff 0%, #b44fff 100%);
+    color: #06070d;
+    font-family: var(--jfm-font-title);
+    font-size: 0.92rem;
+    font-weight: 900;
+    padding: 0.85rem 1.6rem;
+    border-radius: 10px;
+    text-decoration: none;
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.4);
+    transition: all 0.2s;
+    letter-spacing: 0.05em;
+}
+.jfm-btn-play-standalone:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 30px rgba(0, 245, 255, 0.7);
+}
+
+
 
 

@@ -33,6 +33,8 @@
         initForms();
         initLogout();
         initTCG();
+        initAccountManagement();
+        loadArcadeBestDistance();
     });
 
     // ── Gestion des onglets (Connexion / Inscription / Récupération) ──
@@ -183,29 +185,33 @@
         }
     }
 
-    // ── Déconnexion ──
+    // ── Déconnexion (sur toutes les vues : compte, hub, header) ──
     function initLogout() {
-        const btnLogout = document.getElementById('jfm-btn-logout');
-        if (!btnLogout) return;
+        const logoutBtns = document.querySelectorAll('#jfm-btn-logout, #jfm-btn-hub-logout, .jfm-btn-logout-trigger');
+        if (!logoutBtns.length) return;
 
-        btnLogout.addEventListener('click', function () {
-            if (!confirm('Voulez-vous vraiment vous déconnecter de votre compte joueur ?')) return;
+        logoutBtns.forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (!confirm('Voulez-vous vraiment vous déconnecter de votre compte joueur ?')) return;
 
-            btnLogout.disabled = true;
-            btnLogout.textContent = 'Déconnexion...';
+                btn.disabled = true;
+                btn.textContent = 'Déconnexion...';
 
-            const formData = new FormData();
-            formData.append('action', 'jfm_logout');
+                const formData = new FormData();
+                formData.append('action', 'jfm_logout');
 
-            fetch(config.ajax_url || '/wp-admin/admin-ajax.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(() => {
-                window.location.reload();
-            })
-            .catch(() => {
-                window.location.reload();
+                fetch(config.ajax_url || '/wp-admin/admin-ajax.php', {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    body: formData
+                })
+                .then(() => {
+                    window.location.reload();
+                })
+                .catch(() => {
+                    window.location.reload();
+                });
             });
         });
     }
@@ -410,23 +416,67 @@
         });
     }
 
-    // ── Actions de Booster ──
+    // ── Actions de Booster & Pioche ──
     function initBoosterActions() {
+        // Clic sur le gros bouton d'ouverture
         const openBoosterBtn = document.getElementById('jfm-btn-open-booster');
         if (openBoosterBtn) {
             openBoosterBtn.addEventListener('click', handleOpenBooster);
         }
 
+        // Clic direct sur le booster 3D flottant au centre de l'écran
+        const boosterVisual = document.getElementById('jfm-booster-visual');
+        if (boosterVisual) {
+            boosterVisual.addEventListener('click', handleOpenBooster);
+        }
+
+        // Réclamer le booster gratuit
         const claimFreeBtn = document.getElementById('jfm-btn-claim-free');
         if (claimFreeBtn) {
             claimFreeBtn.addEventListener('click', handleClaimFreeBooster);
         }
 
+        // Acheter un booster
         const buyBoosterBtn = document.getElementById('jfm-btn-buy-booster');
         if (buyBoosterBtn) {
             buyBoosterBtn.addEventListener('click', handleBuyBooster);
         }
 
+        // Flip 3D de la carte (sur le conteneur ou le bouton)
+        const cardFlipWrap = document.getElementById('jfm-card-flip-wrap');
+        if (cardFlipWrap) {
+            cardFlipWrap.addEventListener('click', flipCurrentCard);
+        }
+        const flipBtn = document.getElementById('jfm-btn-flip-card');
+        if (flipBtn) {
+            flipBtn.addEventListener('click', flipCurrentCard);
+        }
+
+        // Carte suivante
+        const nextCardBtn = document.getElementById('jfm-btn-next-card');
+        if (nextCardBtn) {
+            nextCardBtn.addEventListener('click', nextCard);
+        }
+
+        // Tout révéler d'un coup
+        const revealAllBtn = document.getElementById('jfm-btn-reveal-all');
+        if (revealAllBtn) {
+            revealAllBtn.addEventListener('click', showRecapStage);
+        }
+
+        // Enchaîner avec le booster suivant sans fermer la modale
+        const chainNextBtn = document.getElementById('jfm-btn-chain-next-booster');
+        if (chainNextBtn) {
+            chainNextBtn.addEventListener('click', handleChainNextBooster);
+        }
+
+        // Acheter et enchaîner
+        const chainBuyBtn = document.getElementById('jfm-btn-chain-buy-booster');
+        if (chainBuyBtn) {
+            chainBuyBtn.addEventListener('click', handleChainBuyBooster);
+        }
+
+        // Ranger dans le classeur
         const closeRevealBtn = document.getElementById('jfm-tcg-btn-close-reveal');
         if (closeRevealBtn) {
             closeRevealBtn.addEventListener('click', function () {
@@ -637,10 +687,18 @@
         grid.innerHTML = html;
     }
 
-    // ── Ouverture de booster ──
+    let currentRevealedCards = [];
+    let currentRevealIndex = 0;
+    let lastAvailableBoosters = 0;
+    let lastJoyCoins = 0;
+
+    // ── Ouverture de booster & Cérémonie de Pioche Carte par Carte ──
     function handleOpenBooster() {
         const btn = document.getElementById('jfm-btn-open-booster');
+        const boosterVisual = document.getElementById('jfm-booster-visual');
+
         if (btn) btn.disabled = true;
+        if (boosterVisual) boosterVisual.classList.add('jfm-booster-tearing');
 
         const formData = new FormData();
         formData.append('action', 'jfm_tcg_open_booster');
@@ -654,9 +712,25 @@
         .then(res => res.json())
         .then(data => {
             if (btn) btn.disabled = false;
+            setTimeout(() => {
+                if (boosterVisual) boosterVisual.classList.remove('jfm-booster-tearing');
+            }, 400);
 
             if (data.success && data.data && data.data.cards) {
-                showBoosterReveal(data.data.cards);
+                lastAvailableBoosters = data.data.available_boosters !== undefined ? data.data.available_boosters : 0;
+                lastJoyCoins = data.data.joycoins !== undefined ? data.data.joycoins : 0;
+
+                // Tri strict par rareté croissante pour le suspense (Légendaire en dernier !)
+                const rarityRank = { common: 1, rare: 2, epic: 3, legendary: 4 };
+                const sortedCards = (data.data.cards || []).slice().sort((a, b) => {
+                    const ra = rarityRank[a.rarity] || 1;
+                    const rb = rarityRank[b.rarity] || 1;
+                    if (ra !== rb) return ra - rb;
+                    if (a.is_holo !== b.is_holo) return (a.is_holo ? 1 : 0) - (b.is_holo ? 1 : 0);
+                    return a.power - b.power;
+                });
+
+                startCardByCardReveal(sortedCards);
                 updateTCGStats(data.data);
             } else {
                 alert(data.data?.message || 'Erreur lors de l\'ouverture du booster.');
@@ -664,47 +738,230 @@
         })
         .catch(() => {
             if (btn) btn.disabled = false;
+            if (boosterVisual) boosterVisual.classList.remove('jfm-booster-tearing');
             alert('Erreur réseau. Veuillez réessayer.');
         });
     }
 
-    // Affichage des 5 cartes révélées
-    function showBoosterReveal(cards) {
+    // Lancement de la cérémonie carte par carte
+    function startCardByCardReveal(cards) {
+        currentRevealedCards = cards;
+        currentRevealIndex = 0;
+
         const modal = document.getElementById('jfm-tcg-reveal-modal');
-        const container = document.getElementById('jfm-tcg-revealed-cards');
-        if (!modal || !container) return;
+        const singleStage = document.getElementById('jfm-single-card-stage');
+        const recapStage = document.getElementById('jfm-recap-stage');
 
-        let html = '';
-        cards.forEach((c, idx) => {
-            let rarityClass = 'rarity-' + c.rarity;
-            let holoClass = c.is_holo ? 'jfm-card-holo' : '';
+        if (singleStage) singleStage.style.display = 'flex';
+        if (recapStage) recapStage.style.display = 'none';
 
-            html += `
-                <div class="jfm-tcg-card ${rarityClass} ${holoClass} is-owned jfm-card-animate" style="animation-delay:${idx * 0.15}s;">
-                    <div class="jfm-tcg-card-frame">
-                        <div class="tcg-card-top">
-                            <span class="tcg-rarity-badge ${rarityClass}">${c.rarity.toUpperCase()}</span>
-                            <span class="tcg-power-badge">⚡ ${c.power}</span>
-                        </div>
-                        <div class="tcg-card-art" style="background:${c.bg_gradient};">
-                            <span class="tcg-card-icon">${c.icon}</span>
-                            ${c.is_holo ? '<span class="tcg-holo-sparkle">✨ HOLO</span>' : ''}
-                        </div>
-                        <div class="tcg-card-info">
-                            <h4 class="tcg-card-title">${escapeHtml(c.name)}</h4>
-                            <p class="tcg-card-desc">${escapeHtml(c.description)}</p>
-                        </div>
-                        <div class="tcg-card-footer">
-                            <span class="tcg-category-tag">${c.category.toUpperCase()}</span>
-                            <span class="tcg-new-badge">NOUVEAU !</span>
-                        </div>
+        showSingleCard(0);
+
+        if (modal) modal.style.display = 'flex';
+    }
+
+    // Affichage de la carte active au centre de l'écran
+    function showSingleCard(index) {
+        if (index >= currentRevealedCards.length) {
+            showRecapStage();
+            return;
+        }
+
+        currentRevealIndex = index;
+        const c = currentRevealedCards[index];
+
+        const idxEl = document.getElementById('jfm-reveal-card-index');
+        if (idxEl) idxEl.textContent = index + 1;
+
+        const flipper = document.getElementById('jfm-card-flipper');
+        if (flipper) flipper.classList.remove('is-flipped');
+
+        const frontEl = document.getElementById('jfm-card-face-front');
+        if (frontEl) {
+            const rarityClass = 'rarity-' + c.rarity;
+            const holoClass = c.is_holo ? 'jfm-card-holo' : '';
+
+            frontEl.className = `jfm-card-face jfm-card-face-front ${rarityClass} ${holoClass}`;
+            frontEl.innerHTML = `
+                <div class="tcg-single-card-frame">
+                    <div class="tcg-card-top">
+                        <span class="tcg-rarity-badge ${rarityClass}">${c.rarity.toUpperCase()}</span>
+                        <span class="tcg-power-badge">⚡ ${c.power}</span>
+                    </div>
+                    <div class="tcg-card-art" style="background:${c.bg_gradient};">
+                        <span class="tcg-card-icon">${c.icon}</span>
+                        ${c.is_holo ? '<span class="tcg-holo-sparkle">✨ VARIATION HOLO</span>' : ''}
+                    </div>
+                    <div class="tcg-card-info">
+                        <h4 class="tcg-card-title">${escapeHtml(c.name)}</h4>
+                        <p class="tcg-card-desc">${escapeHtml(c.description)}</p>
+                        ${c.lore ? `<p class="tcg-card-lore">« ${escapeHtml(c.lore)} »</p>` : ''}
+                    </div>
+                    <div class="tcg-card-footer">
+                        <span class="tcg-category-tag">${c.category.toUpperCase()}</span>
+                        <span class="tcg-new-badge">CARTE ${index + 1}/5</span>
                     </div>
                 </div>
             `;
-        });
+        }
 
-        container.innerHTML = html;
-        modal.style.display = 'flex';
+        const flipBtn = document.getElementById('jfm-btn-flip-card');
+        const nextBtn = document.getElementById('jfm-btn-next-card');
+
+        if (flipBtn) flipBtn.style.display = 'inline-flex';
+        if (nextBtn) nextBtn.style.display = 'none';
+    }
+
+    // Retournement 3D de la carte active
+    function flipCurrentCard() {
+        const flipper = document.getElementById('jfm-card-flipper');
+        if (!flipper || flipper.classList.contains('is-flipped')) return;
+
+        flipper.classList.add('is-flipped');
+
+        const c = currentRevealedCards[currentRevealIndex];
+        if (c) {
+            triggerCardCelebration(c.rarity, c.is_holo);
+        }
+
+        const flipBtn = document.getElementById('jfm-btn-flip-card');
+        const nextBtn = document.getElementById('jfm-btn-next-card');
+
+        if (flipBtn) flipBtn.style.display = 'none';
+        if (nextBtn) {
+            if (currentRevealIndex < currentRevealedCards.length - 1) {
+                nextBtn.innerHTML = `CARTE SUIVANTE (${currentRevealIndex + 2}/5) »`;
+            } else {
+                nextBtn.innerHTML = `✨ VOIR LE RÉCAPITULATIF DU BOOSTER »`;
+            }
+            nextBtn.style.display = 'inline-flex';
+        }
+    }
+
+    // Effet d'aura et d'impact visuel selon la rareté
+    function triggerCardCelebration(rarity, isHolo) {
+        const box = document.querySelector('.jfm-tcg-reveal-box');
+        if (!box) return;
+
+        box.classList.remove('jfm-glow-gold', 'jfm-glow-purple', 'jfm-glow-cyan');
+
+        if (rarity === 'legendary') {
+            box.classList.add('jfm-glow-gold');
+            setTimeout(() => box.classList.remove('jfm-glow-gold'), 1200);
+        } else if (rarity === 'epic') {
+            box.classList.add('jfm-glow-purple');
+            setTimeout(() => box.classList.remove('jfm-glow-purple'), 1000);
+        } else if (isHolo || rarity === 'rare') {
+            box.classList.add('jfm-glow-cyan');
+            setTimeout(() => box.classList.remove('jfm-glow-cyan'), 800);
+        }
+    }
+
+    // Carte suivante dans la pioche
+    function nextCard() {
+        if (currentRevealIndex < currentRevealedCards.length - 1) {
+            showSingleCard(currentRevealIndex + 1);
+        } else {
+            showRecapStage();
+        }
+    }
+
+    // Affichage de l'éventail récapitulatif & enchaînement
+    function showRecapStage() {
+        const singleStage = document.getElementById('jfm-single-card-stage');
+        const recapStage = document.getElementById('jfm-recap-stage');
+        const container = document.getElementById('jfm-tcg-revealed-cards');
+        const modal = document.getElementById('jfm-tcg-reveal-modal');
+
+        if (singleStage) singleStage.style.display = 'none';
+        if (recapStage) recapStage.style.display = 'block';
+        if (modal) modal.style.display = 'flex';
+
+        if (container && currentRevealedCards.length) {
+            let html = '';
+            currentRevealedCards.forEach((c, idx) => {
+                let rarityClass = 'rarity-' + c.rarity;
+                let holoClass = c.is_holo ? 'jfm-card-holo' : '';
+
+                html += `
+                    <div class="jfm-tcg-card ${rarityClass} ${holoClass} is-owned jfm-card-animate" style="animation-delay:${idx * 0.1}s;">
+                        <div class="jfm-tcg-card-frame">
+                            <div class="tcg-card-top">
+                                <span class="tcg-rarity-badge ${rarityClass}">${c.rarity.toUpperCase()}</span>
+                                <span class="tcg-power-badge">⚡ ${c.power}</span>
+                            </div>
+                            <div class="tcg-card-art" style="background:${c.bg_gradient};">
+                                <span class="tcg-card-icon">${c.icon}</span>
+                                ${c.is_holo ? '<span class="tcg-holo-sparkle">✨ HOLO</span>' : ''}
+                            </div>
+                            <div class="tcg-card-info">
+                                <h4 class="tcg-card-title">${escapeHtml(c.name)}</h4>
+                                <p class="tcg-card-desc">${escapeHtml(c.description)}</p>
+                            </div>
+                            <div class="tcg-card-footer">
+                                <span class="tcg-category-tag">${c.category.toUpperCase()}</span>
+                                <span class="tcg-new-badge">OBTENUE !</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        // Configuration des boutons d'enchaînement direct
+        const chainNextBtn = document.getElementById('jfm-btn-chain-next-booster');
+        const chainBuyBtn = document.getElementById('jfm-btn-chain-buy-booster');
+        const chainLeftBadge = document.getElementById('jfm-chain-boosters-left');
+
+        if (lastAvailableBoosters > 0) {
+            if (chainLeftBadge) chainLeftBadge.textContent = lastAvailableBoosters;
+            if (chainNextBtn) chainNextBtn.style.display = 'inline-flex';
+            if (chainBuyBtn) chainBuyBtn.style.display = 'none';
+        } else if (lastJoyCoins >= 50) {
+            if (chainNextBtn) chainNextBtn.style.display = 'none';
+            if (chainBuyBtn) chainBuyBtn.style.display = 'inline-flex';
+        } else {
+            if (chainNextBtn) chainNextBtn.style.display = 'none';
+            if (chainBuyBtn) chainBuyBtn.style.display = 'none';
+        }
+    }
+
+    // Enchaîner directement l'ouverture du booster suivant
+    function handleChainNextBooster() {
+        handleOpenBooster();
+    }
+
+    // Acheter et enchaîner directement
+    function handleChainBuyBooster() {
+        const btn = document.getElementById('jfm-btn-chain-buy-booster');
+        if (btn) btn.disabled = true;
+
+        const formData = new FormData();
+        formData.append('action', 'jfm_tcg_buy_booster');
+        formData.append('security', config.tcg_nonce || '');
+
+        fetch(config.ajax_url || '/wp-admin/admin-ajax.php', {
+            method: 'POST',
+            credentials: 'same-origin',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (btn) btn.disabled = false;
+            if (data.success) {
+                lastAvailableBoosters = data.data.available_boosters;
+                lastJoyCoins = data.data.joycoins;
+                updateTCGStats(data.data);
+                handleOpenBooster();
+            } else {
+                alert(data.data?.message || 'Erreur lors de l\'achat du booster.');
+            }
+        })
+        .catch(() => {
+            if (btn) btn.disabled = false;
+            alert('Erreur réseau.');
+        });
     }
 
     // Réclamer booster gratuit
@@ -1095,5 +1352,109 @@
             .replace(/"/g, '&quot;')
             .replace(/'/g, '&#039;');
     }
+
+    // ── Gestion Avancée du Compte (Suppression, Avatar Reset, Records) ──
+    function initAccountManagement() {
+        // Bouton de réinitialisation d'avatar par défaut
+        const resetAvatarBtn = document.getElementById('jfm-btn-reset-avatar');
+        if (resetAvatarBtn) {
+            resetAvatarBtn.addEventListener('click', function () {
+                if (!confirm('Rétablir la photo de profil par défaut ?')) return;
+
+                sendAvatarUpdate('', function () {
+                    updateAllAvatarVisuals('');
+                    alert('Photo de profil par défaut rétablie avec succès.');
+                }, function (err) {
+                    alert('Erreur : ' + err);
+                });
+            });
+        }
+
+        // Boutons ouvrant la modale de suppression de compte
+        const deleteBtns = document.querySelectorAll('#jfm-btn-delete-account, #jfm-btn-delete-account-hub, #jfm-btn-delete-account-page');
+        const deleteModal = document.getElementById('jfm-delete-modal');
+        const cancelDeleteBtn = document.getElementById('jfm-btn-cancel-delete');
+        const confirmDeleteBtn = document.getElementById('jfm-btn-confirm-delete');
+
+        if (deleteBtns.length && deleteModal) {
+            deleteBtns.forEach(btn => {
+                btn.addEventListener('click', function () {
+                    deleteModal.style.display = 'flex';
+                });
+            });
+
+            if (cancelDeleteBtn) {
+                cancelDeleteBtn.addEventListener('click', function () {
+                    deleteModal.style.display = 'none';
+                });
+            }
+
+            if (confirmDeleteBtn) {
+                confirmDeleteBtn.addEventListener('click', function () {
+                    confirmDeleteBtn.disabled = true;
+                    confirmDeleteBtn.textContent = 'Suppression en cours...';
+
+                    const formData = new FormData();
+                    formData.append('action', 'jfm_delete_account');
+                    formData.append('jfm_nonce', config.nonce || '');
+                    formData.append('security', config.tcg_nonce || '');
+
+                    fetch(config.ajax_url || '/wp-admin/admin-ajax.php', {
+                        method: 'POST',
+                        credentials: 'same-origin',
+                        body: formData
+                    })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert(data.data?.message || 'Votre compte a été supprimé.');
+                            window.location.href = data.data?.redirect || '/';
+                        } else {
+                            confirmDeleteBtn.disabled = false;
+                            confirmDeleteBtn.textContent = '🗑 Confirmer la suppression';
+                            alert(data.data?.message || 'Erreur lors de la suppression.');
+                        }
+                    })
+                    .catch(() => {
+                        confirmDeleteBtn.disabled = false;
+                        confirmDeleteBtn.textContent = '🗑 Confirmer la suppression';
+                        alert('Erreur réseau lors de la suppression du compte.');
+                    });
+                });
+            }
+        }
+    }
+
+    // ── Chargement du meilleur score Catapulte Arcade depuis localStorage ──
+    function loadArcadeBestDistance() {
+        const distEl = document.getElementById('jfm-acc-best-dist');
+        if (!distEl) return;
+
+        try {
+            const raw = localStorage.getItem('jfm_leaderboard_v4');
+            if (raw) {
+                const parsed = JSON.parse(raw);
+                const bestList = parsed.best?.Monthly || parsed.best?.AllTime || [];
+                const currentName = config.player?.username?.toLowerCase() || '';
+
+                let maxDist = 0;
+                bestList.forEach(entry => {
+                    if (entry.name && entry.name.toLowerCase() === currentName) {
+                        if (entry.score > maxDist) maxDist = entry.score;
+                    }
+                });
+
+                if (maxDist > 0) {
+                    distEl.innerHTML = `🏆 <strong>${Math.round(maxDist).toLocaleString('fr-FR')} m</strong>`;
+                    return;
+                }
+            }
+        } catch (e) {
+            // Ignorer si localStorage indisponible
+        }
+
+        distEl.innerHTML = `🎯 <em>Aucun vol enregistré</em>`;
+    }
 })();
+
 

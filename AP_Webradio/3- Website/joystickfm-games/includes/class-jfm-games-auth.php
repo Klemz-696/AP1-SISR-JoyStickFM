@@ -395,6 +395,53 @@ class JFM_Games_Auth {
         ], ['player_id' => (int)$player_id, 'revoked_at' => null], ['%s'], ['%d']);
     }
 
+    /**
+     * Supprime définitivement le compte d'un joueur et toutes ses données associées
+     *
+     * @param int $player_id
+     * @return bool True si réussi
+     */
+    public static function delete_account($player_id) {
+        global $wpdb;
+        $player_id = (int)$player_id;
+        if ($player_id <= 0) {
+            return false;
+        }
+
+        $prefix = $wpdb->prefix;
+        $wpdb->query('START TRANSACTION');
+        try {
+            // Suppression des sessions
+            $wpdb->delete("{$prefix}jfm_player_sessions", ['player_id' => $player_id], ['%d']);
+
+            // Suppression de l'inventaire TCG
+            $wpdb->delete("{$prefix}jfm_tcg_inventory", ['player_id' => $player_id], ['%d']);
+
+            // Suppression des échanges s'il y en a
+            if ($wpdb->get_var("SHOW TABLES LIKE '{$prefix}jfm_tcg_trades'")) {
+                $wpdb->query($wpdb->prepare("DELETE FROM {$prefix}jfm_tcg_trades WHERE sender_id = %d OR receiver_id = %d", $player_id, $player_id));
+            }
+
+            // Journal d'audit admin
+            if ($wpdb->get_var("SHOW TABLES LIKE '{$prefix}jfm_player_admin_log'")) {
+                $wpdb->delete("{$prefix}jfm_player_admin_log", ['player_id' => $player_id], ['%d']);
+            }
+
+            // Suppression finale du joueur
+            $wpdb->delete("{$prefix}jfm_players", ['id' => $player_id], ['%d']);
+
+            $wpdb->query('COMMIT');
+        } catch (Exception $e) {
+            $wpdb->query('ROLLBACK');
+            return false;
+        }
+
+        self::clear_cookie();
+        self::$current_player = null;
+        self::$player_checked = true;
+        return true;
+    }
+
     private static function set_cookie($token, $expires_time) {
         $secure = JFM_Games_Utils::is_ssl_secure();
         

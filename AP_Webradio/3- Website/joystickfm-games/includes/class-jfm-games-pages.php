@@ -22,7 +22,7 @@ class JFM_Games_Pages {
         add_shortcode('jfm_account_portal', [__CLASS__, 'render_account_portal']);
 
         // Endpoints AJAX pour les actions joueurs
-        $ajax_actions = ['jfm_register', 'jfm_login', 'jfm_logout', 'jfm_recover', 'jfm_player_status', 'jfm_update_avatar'];
+        $ajax_actions = ['jfm_register', 'jfm_login', 'jfm_logout', 'jfm_recover', 'jfm_player_status', 'jfm_update_avatar', 'jfm_delete_account'];
         foreach ($ajax_actions as $action) {
             add_action("wp_ajax_{$action}", [__CLASS__, "handle_{$action}"]);
             add_action("wp_ajax_nopriv_{$action}", [__CLASS__, "handle_{$action}"]);
@@ -198,10 +198,10 @@ class JFM_Games_Pages {
                             <?php endif; ?>
                         </div>
 
-                        <!-- Scène Centrale du Booster Pack 3D -->
+                        <!-- Scène Centrale du Booster Pack 3D (Au centre de l'écran & cliquable) -->
                         <div class="jfm-booster-stage">
                             <div class="jfm-booster-pack-wrapper">
-                                <div class="jfm-booster-pack-3d" id="jfm-booster-visual">
+                                <div class="jfm-booster-pack-3d jfm-booster-clickable" id="jfm-booster-visual" role="button" tabindex="0" title="Cliquer sur le booster pour l'ouvrir !">
                                     <div class="jfm-bp-shimmer"></div>
                                     <div class="jfm-bp-content">
                                         <div class="jfm-bp-top">
@@ -217,6 +217,9 @@ class JFM_Games_Pages {
                                             <span>✨ RARE GARANTIE</span>
                                             <span>10% HOLO</span>
                                         </div>
+                                    </div>
+                                    <div class="jfm-bp-tap-hint">
+                                        <span>👆 CLIQUER POUR OUVRIR</span>
                                     </div>
                                 </div>
                             </div>
@@ -241,7 +244,7 @@ class JFM_Games_Pages {
                                 <div class="jfm-booster-action-buttons">
                                     <?php if ($is_logged): ?>
                                         <button type="button" id="jfm-btn-open-booster" class="jfm-btn-big-booster">
-                                            <span class="jfm-btn-icon">⚡</span> OUVRIR UN BOOSTER (5 CARTES)
+                                            <span class="jfm-btn-icon">💥</span> OUVRIR LE BOOSTER (5 CARTES)
                                         </button>
 
                                         <div class="jfm-tcg-sub-actions">
@@ -422,9 +425,9 @@ class JFM_Games_Pages {
                                             </button>
                                         </div>
 
-                                        <div style="margin-top:1rem;text-align:center;">
-                                            <button type="button" class="jfm-btn-link-dim" id="jfm-btn-reset-avatar">
-                                                ✕ Réinitialiser l'avatar par défaut
+                                        <div style="margin-top:1.2rem;text-align:center;">
+                                            <button type="button" class="jfm-btn-reset-avatar" id="jfm-btn-reset-avatar">
+                                                <span>↺</span> Rétablir la photo de profil par défaut
                                             </button>
                                         </div>
                                     </div>
@@ -457,12 +460,15 @@ class JFM_Games_Pages {
                                         </div>
                                     </div>
 
-                                    <div class="jfm-profile-extra-links" style="margin-top:2rem;display:flex;flex-direction:column;gap:0.75rem;">
+                                    <div class="jfm-profile-extra-links" style="margin-top:2rem;display:flex;flex-direction:column;gap:0.85rem;">
                                         <a href="<?php echo home_url('/compte'); ?>" class="jfm-btn-play" style="text-align:center;text-decoration:none;font-size:0.85rem;padding:0.75rem;">
-                                            ⚙ Gérer mon compte complet & code de secours
+                                            ⚙ Espace Compte, Records & Codes de secours
                                         </a>
-                                        <button type="button" class="jfm-btn-logout-small" id="jfm-btn-hub-logout">
-                                            Déconnexion du jeu
+                                        <button type="button" class="jfm-btn-danger-cyber" id="jfm-btn-hub-logout">
+                                            <span>🚪</span> Déconnexion de JoyStick FM
+                                        </button>
+                                        <button type="button" class="jfm-btn-delete-account" id="jfm-btn-delete-account-hub">
+                                            <span>🗑</span> Supprimer définitivement mon compte
                                         </button>
                                     </div>
                                 </div>
@@ -478,16 +484,71 @@ class JFM_Games_Pages {
                 </section>
             </main>
 
-            <!-- ── MODALE 1 : RÉVÉLATION DU CONTENU DU BOOSTER ── -->
-            <div id="jfm-tcg-reveal-modal" class="jfm-modal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="reveal-title">
+            <!-- ── MODALE 1 : CÉRÉMONIE DE PIOCHE CARTE PAR CARTE ET RÉCAPITULATIF DU BOOSTER ── -->
+            <div id="jfm-tcg-reveal-modal" class="jfm-modal jfm-modal-cinema" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="reveal-title">
                 <div class="jfm-modal-content jfm-tcg-reveal-box">
-                    <h2 id="reveal-title" style="font-family:var(--jfm-font-title);color:#fff;margin-bottom:0.4rem;font-size:1.5rem;">🎉 CONTENU DU BOOSTER !</h2>
-                    <p style="color:var(--texte-dim);font-size:0.88rem;margin-bottom:1.5rem;">5 cartes ajoutées à votre collection permanente.</p>
-                    <div id="jfm-tcg-revealed-cards" class="jfm-revealed-cards-grid"></div>
-                    <div style="margin-top:2rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
-                        <button type="button" id="jfm-tcg-btn-close-reveal" class="jfm-btn-play" style="max-width:260px;">
-                            📖 Ranger dans le classeur
+                    <!-- Barre supérieure de la cérémonie de pioche -->
+                    <div class="jfm-reveal-topbar">
+                        <div class="jfm-reveal-status">
+                            <span class="jfm-reveal-icon">📦</span>
+                            <span class="jfm-reveal-title" id="reveal-title">DÉBALLAGE DU BOOSTER</span>
+                            <span class="jfm-reveal-counter" id="jfm-reveal-counter-badge">CARTE <strong id="jfm-reveal-card-index">1</strong> / 5</span>
+                        </div>
+                        <button type="button" id="jfm-btn-reveal-all" class="jfm-btn-speed-reveal" title="Révéler toutes les cartes immédiatement">
+                            ⚡ TOUT RÉVÉLER D'UN COUP
                         </button>
+                    </div>
+
+                    <!-- STAGE 1 : PIOCHE CARTE PAR CARTE (Carte 3D au centre avec Flip) -->
+                    <div id="jfm-single-card-stage" class="jfm-single-card-stage">
+                        <div class="jfm-card-flip-wrap" id="jfm-card-flip-wrap">
+                            <div class="jfm-card-flipper" id="jfm-card-flipper">
+                                <!-- Face A : Dos de carte JoyStick TCG rétro cybernétique -->
+                                <div class="jfm-card-face jfm-card-face-back" id="jfm-card-face-back">
+                                    <div class="jfm-cb-border">
+                                        <div class="jfm-cb-inner">
+                                            <span class="jfm-cb-logo">🎮</span>
+                                            <span class="jfm-cb-text">JOYSTICK TCG</span>
+                                            <span class="jfm-cb-sub">EDITION 1986</span>
+                                        </div>
+                                    </div>
+                                    <div class="jfm-cb-hint">👆 CLIQUEZ POUR RETOURNER</div>
+                                </div>
+                                <!-- Face B : Recto de la carte révélée (injecté par JS) -->
+                                <div class="jfm-card-face jfm-card-face-front" id="jfm-card-face-front"></div>
+                            </div>
+                        </div>
+
+                        <!-- Contrôles sous la carte en cours de pioche -->
+                        <div class="jfm-single-card-actions">
+                            <button type="button" id="jfm-btn-flip-card" class="jfm-btn-play" style="min-width:240px;">
+                                👆 RETOURNER LA CARTE
+                            </button>
+                            <button type="button" id="jfm-btn-next-card" class="jfm-btn-play" style="min-width:240px;display:none;">
+                                CARTE SUIVANTE (2/5) »
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- STAGE 2 : RÉCAPITULATIF COMPLET DES 5 CARTES & ENCHAÎNEMENT -->
+                    <div id="jfm-recap-stage" class="jfm-recap-stage" style="display:none;">
+                        <div class="jfm-recap-header">
+                            <h3 style="font-family:var(--jfm-font-title);color:#fff;margin-bottom:0.3rem;font-size:1.4rem;">🎉 VOS 5 NOUVELLES CARTES !</h3>
+                            <p style="color:var(--texte-dim);font-size:0.85rem;margin-bottom:1rem;">Toutes les cartes ont été ajoutées à votre collection permanente.</p>
+                        </div>
+                        <div id="jfm-tcg-revealed-cards" class="jfm-revealed-cards-grid"></div>
+
+                        <div class="jfm-recap-actions" style="margin-top:1.8rem;display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;align-items:center;">
+                            <button type="button" id="jfm-btn-chain-next-booster" class="jfm-btn-big-chain">
+                                <span class="jfm-btn-icon">📦</span> OUVRIR LE PROCHAIN BOOSTER (<span id="jfm-chain-boosters-left">0</span> restant) »
+                            </button>
+                            <button type="button" id="jfm-btn-chain-buy-booster" class="jfm-btn-big-chain" style="display:none;background:linear-gradient(135deg,#ffea00,#ff007f);color:#06070d;">
+                                <span class="jfm-btn-icon">🛒</span> ACHETER & ENCHAÎNER (50 🪙) »
+                            </button>
+                            <button type="button" id="jfm-tcg-btn-close-reveal" class="jfm-btn-link-dim">
+                                📖 Ranger dans le classeur
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -569,9 +630,14 @@ class JFM_Games_Pages {
 
                 <div class="jfm-activity-item">
                     <div class="jfm-act-icon">🎮</div>
-                    <h3>Salle des Jeux Arcade</h3>
-                    <p>Défiez la physique avec le jeu de Catapulte et préparez-vous à collectionner les cartes virtuelles dans le futur JoyStick TCG.</p>
-                    <a href="<?php echo home_url('/jeux'); ?>" class="jfm-link-neon">Entrer dans les Jeux →</a>
+                    <div style="display:flex;align-items:center;gap:0.5rem;justify-content:center;margin-bottom:0.5rem;">
+                        <h3 style="margin:0;">Salle des Jeux & JoyStick TCG</h3>
+                        <span class="jfm-tab-pill-prog" style="font-size:0.68rem;padding:0.15rem 0.4rem;background:rgba(0,245,255,0.15);color:#00f5ff;border:1px solid rgba(0,245,255,0.3);border-radius:10px;">ONGLET DÉDIÉ ↗</span>
+                    </div>
+                    <p>Ouvrez des boosters rétro, collectionnez les 40 cartes JoyStick TCG et défiez la Catapulte Arcade dans un univers de jeu dédié en plein écran.</p>
+                    <a href="<?php echo home_url('/jeux'); ?>" target="_blank" rel="noopener noreferrer" class="jfm-link-neon" style="font-weight:bold;">
+                        🚀 Entrer dans le Jeu (Nouvel Onglet ↗)
+                    </a>
                 </div>
 
                 <div class="jfm-activity-item">
@@ -600,6 +666,30 @@ class JFM_Games_Pages {
         $player = JFM_Games_Auth::get_current_player();
         $redirect_to = sanitize_url($_GET['redirect_to'] ?? home_url('/jeux'));
 
+        global $wpdb;
+        $total_catalog = 40;
+        $owned_unique = 0;
+        $tcg_pct = 0;
+        $card_avatar_icon = '🃏';
+        $card_avatar_bg = 'linear-gradient(135deg, #00f5ff, #b44fff)';
+
+        if ($player) {
+            $cat_count = (int)$wpdb->get_var("SELECT count(*) FROM {$wpdb->prefix}jfm_tcg_cards");
+            if ($cat_count > 0) $total_catalog = $cat_count;
+            $owned_unique = (int)$wpdb->get_var($wpdb->prepare("SELECT count(DISTINCT card_id) FROM {$wpdb->prefix}jfm_tcg_inventory WHERE player_id = %d", $player->id));
+            $tcg_pct = round(($owned_unique / $total_catalog) * 100);
+
+            $p_avatar = !empty($player->avatar_url) ? $player->avatar_url : '';
+            if (!empty($p_avatar) && strpos($p_avatar, 'card:') === 0) {
+                $card_id = (int)substr($p_avatar, 5);
+                $card_row = $wpdb->get_row($wpdb->prepare("SELECT icon, bg_gradient FROM {$wpdb->prefix}jfm_tcg_cards WHERE id = %d", $card_id));
+                if ($card_row) {
+                    if (!empty($card_row->icon)) $card_avatar_icon = $card_row->icon;
+                    if (!empty($card_row->bg_gradient)) $card_avatar_bg = $card_row->bg_gradient;
+                }
+            }
+        }
+
         ob_start();
         ?>
         <div class="jfm-portal-wrap jfm-account-wrap">
@@ -607,7 +697,17 @@ class JFM_Games_Pages {
                 <!-- PROFIL DU JOUEUR CONNECTÉ -->
                 <div class="jfm-account-card">
                     <div class="jfm-account-header">
-                        <div class="jfm-avatar-circle">🎮</div>
+                        <div class="jfm-avatar-circle" style="overflow:hidden;display:flex;align-items:center;justify-content:center;">
+                            <?php if (!empty($player->avatar_url) && strpos($player->avatar_url, 'data:image/') === 0): ?>
+                                <img src="<?php echo esc_attr($player->avatar_url); ?>" alt="Avatar" class="jfm-acc-avatar-img" style="width:100%;height:100%;object-fit:cover;border-radius:50%;" />
+                            <?php elseif (!empty($player->avatar_url) && strpos($player->avatar_url, 'card:') === 0): ?>
+                                <div class="jfm-acc-avatar-card" style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:<?php echo esc_attr($card_avatar_bg); ?>;font-size:1.8rem;border-radius:50%;">
+                                    <?php echo esc_html($card_avatar_icon); ?>
+                                </div>
+                            <?php else: ?>
+                                <span style="font-size:1.8rem;">👤</span>
+                            <?php endif; ?>
+                        </div>
                         <div>
                             <span class="jfm-badge-tag">COMPTE CERTIFIÉ</span>
                             <h2 class="jfm-account-name"><?php echo esc_html($player->username_display); ?></h2>
@@ -628,11 +728,47 @@ class JFM_Games_Pages {
                             <span class="jfm-stat-val">📦 <?php echo (int)$player->free_boosters_available; ?></span>
                             <span class="jfm-stat-lbl">Boosters Disponibles</span>
                         </div>
+                        <div class="jfm-stat-box">
+                            <span class="jfm-stat-val">🃏 <?php echo $owned_unique; ?> / <?php echo $total_catalog; ?></span>
+                            <span class="jfm-stat-lbl">Collection TCG (<?php echo $tcg_pct; ?>%)</span>
+                        </div>
+                        <div class="jfm-stat-box" style="grid-column: 1 / -1; display:flex; align-items:center; justify-content:space-between; padding:0.9rem 1.4rem;">
+                            <div style="text-align:left;">
+                                <span class="jfm-stat-lbl" style="margin:0 0 0.2rem 0;">🎯 Record Catapulte Arcade</span>
+                                <span class="jfm-stat-val" id="jfm-acc-best-dist" style="font-size:1.15rem;color:#00f5ff;">Chargement du record...</span>
+                            </div>
+                            <a href="<?php echo home_url('/jeux#arcade'); ?>" target="_blank" rel="noopener noreferrer" class="jfm-mini-btn" style="text-decoration:none;">
+                                Défier le record ↗
+                            </a>
+                        </div>
                     </div>
 
                     <div class="jfm-account-actions">
-                        <a href="<?php echo esc_url($redirect_to); ?>" class="jfm-btn-play">▶ RETOURNER AUX JEUX</a>
-                        <button type="button" class="jfm-btn-danger" id="jfm-btn-logout">Déconnexion</button>
+                        <a href="<?php echo home_url('/jeux'); ?>" target="_blank" rel="noopener noreferrer" class="jfm-btn-play" style="text-decoration:none;">
+                            🚀 LANCER L'UNIVERS DE JEU PLEIN ÉCRAN ↗
+                        </a>
+                        <button type="button" class="jfm-btn-danger-cyber" id="jfm-btn-logout">
+                            <span>🚪</span> Déconnexion
+                        </button>
+                        <button type="button" class="jfm-btn-delete-account" id="jfm-btn-delete-account">
+                            <span>🗑</span> Supprimer mon compte
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Modale de Confirmation de Suppression de Compte -->
+                <div id="jfm-delete-modal" class="jfm-modal" style="display:none;" role="dialog" aria-modal="true" aria-labelledby="del-modal-title">
+                    <div class="jfm-modal-content jfm-delete-box" style="max-width:480px;text-align:center;padding:2rem;">
+                        <h3 id="del-modal-title" style="color:#ff0055;font-family:var(--jfm-font-title);margin-bottom:0.8rem;font-size:1.3rem;">⚠️ SUPPRIMER MON COMPTE</h3>
+                        <p style="color:#f1f5f9;font-size:0.92rem;line-height:1.6;margin-bottom:1.2rem;">
+                            Cette action est <strong>irréversible</strong>. Votre pseudo, votre solde de JoyCoins, votre collection de 40 cartes et vos records seront définitivement supprimés.
+                        </p>
+                        <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem;">
+                            <button type="button" class="jfm-mini-btn" id="jfm-btn-cancel-delete">Annuler</button>
+                            <button type="button" class="jfm-btn-danger-cyber" id="jfm-btn-confirm-delete" style="background:rgba(255,0,85,0.25);border-color:#ff0055;color:#ff4466;">
+                                🗑 Confirmer la suppression
+                            </button>
+                        </div>
                     </div>
                 </div>
             <?php else: ?>
@@ -849,6 +985,31 @@ class JFM_Games_Pages {
         wp_send_json_success([
             'message'    => 'Avatar mis à jour avec succès !',
             'avatar_url' => $res
+        ]);
+    }
+
+    /**
+     * Traitement AJAX : Suppression définitive du compte joueur
+     */
+    public static function handle_jfm_delete_account() {
+        $nonce = $_POST['jfm_nonce'] ?? $_POST['security'] ?? '';
+        if (!wp_verify_nonce($nonce, 'jfm_auth_nonce') && !wp_verify_nonce($nonce, 'jfm_tcg_nonce')) {
+            wp_send_json_error(['message' => 'Jeton de sécurité invalide.'], 403);
+        }
+
+        $player = JFM_Games_Auth::get_current_player();
+        if (!$player) {
+            wp_send_json_error(['message' => 'Aucune session active à supprimer.'], 401);
+        }
+
+        $ok = JFM_Games_Auth::delete_account($player->id);
+        if (!$ok) {
+            wp_send_json_error(['message' => 'Erreur lors de la suppression de votre compte.'], 500);
+        }
+
+        wp_send_json_success([
+            'message'  => 'Votre compte a été définitivement supprimé.',
+            'redirect' => home_url('/')
         ]);
     }
 }

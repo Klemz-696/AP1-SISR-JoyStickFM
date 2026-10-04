@@ -19,7 +19,7 @@
           <ul>
             <li><a href="<?php echo home_url(); ?>">🏠 Accueil</a></li>
             <li><a href="<?php echo home_url('/radio'); ?>">📡 Écouter en direct</a></li>
-            <li><a href="<?php echo home_url('/jeux'); ?>">🎮 Espace Jeux</a></li>
+            <li><a href="<?php echo home_url('/jeux'); ?>" target="_blank" rel="noopener noreferrer">🎮 Espace Jeux ↗</a></li>
             <li><a href="<?php echo home_url('/activites'); ?>">⚡ Activités</a></li>
             <li><a href="<?php echo home_url('/compte'); ?>">👤 Espace Joueur</a></li>
             <li><a href="<?php echo home_url('/podcasts'); ?>">🎙 Podcasts</a></li>
@@ -184,7 +184,7 @@
       </span>
       <span class="mb-nav-label">Direct</span>
     </a>
-    <a href="<?php echo home_url('/jeux/'); ?>" class="mb-nav-item <?php if (is_page('jeux')) echo 'active'; ?>" aria-label="Jeux Arcade & TCG">
+    <a href="<?php echo home_url('/jeux/'); ?>" class="mb-nav-item <?php if (is_page('jeux')) echo 'active'; ?>" aria-label="Jeux Arcade & TCG" target="_blank" rel="noopener noreferrer">
       <span class="mb-nav-icon" aria-hidden="true">🎮</span>
       <span class="mb-nav-label">Jeux</span>
     </a>
