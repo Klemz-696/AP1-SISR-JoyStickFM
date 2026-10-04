@@ -19,11 +19,11 @@ Write-Host " 🚀 JOYSTICK FM - DÉPLOIEMENT DU LOT 1 (COMPTES & JEUX)" -Foregro
 Write-Host "==========================================================" -ForegroundColor Cyan
 
 # 1. Test de connectivité
-Write-Host "`n[1/5] Test de connectivité vers $TargetHost:22..." -ForegroundColor Yellow
+Write-Host "`n[1/5] Test de connectivité vers ${TargetHost}:22..." -ForegroundColor Yellow
 $tcpTest = Test-NetConnection -ComputerName $TargetHost -Port 22 -WarningAction SilentlyContinue
 
 if (-not $tcpTest.TcpTestSucceeded) {
-    Write-Host "❌ Connexion SSH impossible vers $TargetHost:22 !" -ForegroundColor Red
+    Write-Host "❌ Connexion SSH impossible vers ${TargetHost}:22 !" -ForegroundColor Red
     Write-Host "   -> Vérifiez l'état du tunnel VPN WireGuard (WG-Tunnel-VPN-AP1)." -ForegroundColor DarkYellow
     Write-Host "   -> Si vous êtes hors du lab physique, vérifiez que le routeur de sous-réseau (posteclement / 192.168.101.37) est allumé et connecté." -ForegroundColor DarkYellow
     exit 1
@@ -35,8 +35,7 @@ $LocalPluginDir = Join-Path $PSScriptRoot "..\AP_Webradio\3- Website\joystickfm-
 $RemotePluginDir = "$RemoteWpPath/wp-content/plugins/joystickfm-games"
 
 Write-Host "`n[2/5] Déploiement du plugin 'joystickfm-games' vers $RemotePluginDir..." -ForegroundColor Yellow
-ssh -o StrictHostKeyChecking=no "$TargetUser@$TargetHost" "mkdir -p '$RemotePluginDir'"
-scp -r -o StrictHostKeyChecking=no "$LocalPluginDir\*" "$TargetUser@$TargetHost`:$RemotePluginDir/"
+scp -r -o StrictHostKeyChecking=no "$LocalPluginDir" "${TargetUser}@${TargetHost}:${RemoteWpPath}/wp-content/plugins/"
 Write-Host "✅ Fichiers du plugin transférés avec succès." -ForegroundColor Green
 
 # 3. Synchronisation des fichiers du thème mis à jour
