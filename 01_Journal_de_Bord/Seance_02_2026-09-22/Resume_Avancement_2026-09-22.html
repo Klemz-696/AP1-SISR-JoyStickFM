@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Synthèse d'Avancement - Séance 02 - AP 1 - BTS SIO SISR</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 10mm 12mm 10mm 12mm;
+            @bottom-right {
+                content: "Page " counter(page) " / " counter(pages);
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 7.5pt;
+                color: #64748b;
+            }
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            color: #1e293b;
+            background-color: #ffffff;
+            font-size: 8.5pt;
+            line-height: 1.38;
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        .avoid-break {
+            page-break-inside: avoid;
+        }
+
+        /* Header Card */
+        .header-card {
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 10px 14px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 4px;
+            margin-bottom: 6px;
+        }
+
+        .school-title {
+            font-size: 9.5pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #38bdf8;
+        }
+
+        .badge-academic {
+            background-color: rgba(56, 189, 248, 0.2);
+            color: #e0f2fe;
+            border: 1px solid #38bdf8;
+            padding: 2px 7px;
+            border-radius: 10px;
+            font-size: 7pt;
+            font-weight: 600;
+        }
+
+        .doc-title {
+            font-size: 14pt;
+            font-weight: 800;
+            margin-bottom: 2px;
+            letter-spacing: -0.3px;
+        }
+
+        .doc-subtitle {
+            font-size: 8.5pt;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 7.5pt;
+        }
+
+        .meta-item strong {
+            display: block;
+            color: #94a3b8;
+            font-size: 6.5pt;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .meta-item span {
+            color: #f8fafc;
+            font-weight: 600;
+        }
+
+        /* Headings */
+        h2 {
+            font-size: 10pt;
+            font-weight: 700;
+            color: #0f172a;
+            border-left: 3px solid #0284c7;
+            padding-left: 6px;
+            margin-top: 9px;
+            margin-bottom: 5px;
+        }
+
+        p {
+            margin-bottom: 5px;
+            text-align: justify;
+        }
+
+        /* Callout Box */
+        .callout {
+            background-color: #f8fafc;
+            border-left: 3px solid #0284c7;
+            border-radius: 0 4px 4px 0;
+            padding: 6px 8px;
+            margin-bottom: 7px;
+            font-size: 8pt;
+        }
+
+        .callout strong {
+            color: #0369a1;
+        }
+
+        .callout-success {
+            background-color: #f0fdf4;
+            border-left: 3px solid #16a34a;
+        }
+        .callout-success strong {
+            color: #15803d;
+        }
+
+        /* Grids & Cards */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 7px;
+        }
+
+        .card {
+            border: 1px solid #e2e8f0;
+            border-radius: 5px;
+            padding: 7px 9px;
+            background-color: #ffffff;
+        }
+
+        .card-header {
+            font-weight: 700;
+            font-size: 8pt;
+            color: #1e3a8a;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 3px;
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 8px;
+            font-size: 7.8pt;
+        }
+
+        th {
+            background-color: #0f172a;
+            color: #ffffff;
+            font-weight: 600;
+            text-align: left;
+            padding: 4px 6px;
+            border: 1px solid #0f172a;
+            font-size: 7pt;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 3.5px 6px;
+            border: 1px solid #cbd5e1;
+            vertical-align: middle;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f8fafc;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 6.5pt;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge-done { background-color: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+        .badge-progress { background-color: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+        .badge-pending { background-color: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+
+    </style>
+</head>
+<body>
+
+    <!-- BANDEAU D'EN-TÊTE -->
+    <div class="header-card">
+        <div class="header-top">
+            <span class="school-title">Lycée Sidoine Apollinaire — BTS SIO SISR</span>
+            <span class="badge-academic">Atelier Professionnalisant AP 1 • Suivi de Projet</span>
+        </div>
+        <div class="doc-title">Compte-Rendu d'Avancement — Séance 02</div>
+        <div class="doc-subtitle">Déploiement du socle Proxmox VE, validation du partage SMB inter-VLANs & cadrage opérationnel</div>
+        <div class="meta-grid">
+            <div class="meta-item">
+                <strong>Étudiant 04 (Lead Réseau)</strong>
+                <span>Clément SAUZÈDE</span>
+            </div>
+            <div class="meta-item">
+                <strong>Étudiant 10 (Admin Système)</strong>
+                <span>Mathys DUTHILLEUL</span>
+            </div>
+            <div class="meta-item">
+                <strong>Date de la Séance</strong>
+                <span>22 Septembre 2026</span>
+            </div>
+            <div class="meta-item">
+                <strong>Statut des Objectifs</strong>
+                <span>Socle M1 Opérationnel (Routage & SMB Validés)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 1. ÉTAT DES LIEUX DE L'INFRASTRUCTURE PROXMOX VE -->
+    <h2>1. État des Lieux de l'Infrastructure Proxmox VE</h2>
+    <div class="callout callout-success">
+        <strong>Validation du jalon technique majeur :</strong>
+        Le socle de virtualisation Proxmox VE accueille désormais les 4 premières machines virtuelles fondamentales du projet. Le routage inter-VLANs entre le LAN (VLAN 200) et la DMZ Interne (VLAN 300) est <strong>pleinement opérationnel</strong> à travers le pare-feu central OPNsense.
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>VMID</th>
+                <th>Nom de la VM</th>
+                <th>Système d'Exploitation</th>
+                <th>Emplacement Réseau</th>
+                <th>Adresse IP</th>
+                <th>Rôle Métier & Statut Opérationnel</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>11008</strong></td>
+                <td><code>OPNsense-projet</code></td>
+                <td>OPNsense 24.x (FreeBSD)</td>
+                <td>Routeur Frontal Multi-Zones</td>
+                <td><code>192.168.101.41</code> (WAN)<br><code>192.168.200.254</code> (LAN)<br><code>10.30.0.254</code> (DMZ Int)</td>
+                <td><span class="badge badge-done">Opérationnel</span> Assure le routage inter-VLANs et la distribution DHCP.</td>
+            </tr>
+            <tr>
+                <td><strong>11010</strong></td>
+                <td><code>SRV-FILES-projet</code></td>
+                <td>Windows Server 2022</td>
+                <td>DMZ Interne (VLAN 300)</td>
+                <td><code>10.30.0.20</code></td>
+                <td><span class="badge badge-done">Opérationnel</span> Rôle FS-FileServer actif, partages <code>\\10.30.0.20\Sauvegardes</code> créés.</td>
+            </tr>
+            <tr>
+                <td><strong>11009</strong></td>
+                <td><code>Poste-Mathys-projet</code></td>
+                <td>Windows 11 Client</td>
+                <td>LAN Entreprise (VLAN 200)</td>
+                <td><code>192.168.200.10</code></td>
+                <td><span class="badge badge-done">Validé</span> Connecté au LAN, accès SMB vérifié vers <code>SRV-FILES</code>.</td>
+            </tr>
+            <tr>
+                <td><strong>11011</strong></td>
+                <td><code>Poste-Clement-projet</code></td>
+                <td>Windows 11 Client</td>
+                <td>LAN Entreprise (VLAN 200)</td>
+                <td><code>192.168.200.4</code></td>
+                <td><span class="badge badge-progress">En cours</span> Raccordement réseau statique et validation du script Robocopy.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 2. ORGANISATION ET DÉCOUPLAGE DES TÂCHES -->
+    <h2>2. Organisation & Découplage des Travaux du Binôme</h2>
+    <p>Afin de fluidifier le travail, d'exploiter les points forts de chacun et d'éviter tout blocage séquentiel, une organisation découplée a été formalisée à travers des feuilles de route dédiées :</p>
+    
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-header">
+                <span>Clément SAUZÈDE (Lead Réseau & JoyStick FM)</span>
+                <span class="badge" style="background-color: #dbeafe; color: #1e40af;">Chantier Solo & Cœur</span>
+            </div>
+            <ul style="margin-left: 14px; font-size: 7.5pt;">
+                <li>Durcissement pare-feu OPNsense (Packet Scrubbing, blocage ICMP).</li>
+                <li>Mise en œuvre du Traffic Shaper QoS (2 Mb/s, priorité interactive).</li>
+                <li>Migration V2V de JoyStick FM (conversion VMDK VMware vers Proxmox).</li>
+                <li>Déploiement des piles Docker (Immich & Minecraft).</li>
+                <li>Configuration de la PKI et du serveur VPN Nomade IPsec.</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <span>Mathys DUTHILLEUL (Admin Systèmes & Recette)</span>
+                <span class="badge" style="background-color: #dcfce7; color: #15803d;">Chantier Système & Recette</span>
+            </div>
+            <ul style="margin-left: 14px; font-size: 7.5pt;">
+                <li>Déploiement et maintien de <code>SRV-FILES</code> (droits NTFS fins).</li>
+                <li>Configuration et tests du poste client employé <code>Poste-Mathys</code>.</li>
+                <li>Coordination avec le binôme partenaire B2B (Fiche de liaison).</li>
+                <li>Déploiement de la VM Honeypot LAMP leurre (<code>10.100.0.99</code>).</li>
+                <li>Campagne de tests de recette et archivage des captures E5.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- SAUT DE PAGE EXACT POUR LA PAGE 2 -->
+    <div class="page-break"></div>
+
+    <!-- 3. ACTIONS TECHNIQUES RÉALISÉES LORS DE LA SÉANCE 2 -->
+    <h2>3. Réalisations Techniques de la Séance 2 (22/09/2026)</h2>
+    <div class="callout">
+        <strong>Synthèse des travaux accomplis :</strong>
+        Cette deuxième séance a permis de consolider l'interconnexion réseau interne, d'auditer le cloisonnement SMB et de structurer la suite du déploiement opérationnel.
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Action Réalisée</th>
+                <th>Acteur Référent</th>
+                <th>Résultat & Preuve Associée</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Validation de la communication LAN ➔ DMZ Interne</td>
+                <td>Mathys DUTHILLEUL</td>
+                <td><span class="badge badge-done">Validé</span> Ping réussi et navigation SMB fonctionnelle vers <code>10.30.0.20</code>.</td>
+            </tr>
+            <tr>
+                <td>Cloisonnement des dossiers personnels employés sur <code>SRV-FILES</code></td>
+                <td>Mathys DUTHILLEUL</td>
+                <td><span class="badge badge-done">Validé</span> Droits NTFS stricts : l'employé 10 accède à son dossier et est rejeté sur l'employé 04.</td>
+            </tr>
+            <tr>
+                <td>Rédaction de la Feuille de Route Intégrale Maîtresse</td>
+                <td>Clément SAUZÈDE</td>
+                <td><span class="badge badge-done">Validé</span> Document <code>11_FEUILLE_DE_ROUTE_INTEGRALE_ET_DEPLOIEMENT.md</code>.</td>
+            </tr>
+            <tr>
+                <td>Création des Guides d'Action Découplés (Clément & Mathys)</td>
+                <td>Clément SAUZÈDE</td>
+                <td><span class="badge badge-done">Validé</span> Fichiers opérationnels <code>GUIDE_ACTION_CLEMENT_ETU04.md</code> et <code>...MATHYS_ETU10.md</code>.</td>
+            </tr>
+            <tr>
+                <td>Préparation du lot de disques VMDK JoyStick FM</td>
+                <td>Clément SAUZÈDE</td>
+                <td><span class="badge badge-done">Validé</span> 3 images VMware prêtes pour l'injection <code>qm importdisk</code> sous Proxmox.</td>
+            </tr>
+            <tr>
+                <td>Paramétrage du poste client Clément (VM 11011 en <code>.4</code>)</td>
+                <td>Clément SAUZÈDE</td>
+                <td><span class="badge badge-progress">En cours</span> Fixation de l'IP statique <code>192.168.200.4</code> et test du script Robocopy.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 4. MATRICE DE SYNCHRONISATION CROISÉE ET OBJECTIFS SÉANCE 3 -->
+    <h2>4. Planning Opérationnel & Objectifs Prioritaires (Séance 03)</h2>
+    <p>Pour la prochaine séance, les chantiers s'exécuteront en parallèle selon la matrice de synchronisation suivante :</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Période</th>
+                <th>Chantier Clément SAUZÈDE (Autonome)</th>
+                <th>Chantier Mathys DUTHILLEUL (Autonome)</th>
+                <th>Point de Contrôle / Recette</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Phase 1</strong></td>
+                <td>Migration V2V JoyStick FM sous Proxmox (Icecast, Web, Mixxx)</td>
+                <td>Prise de contact partenaire B2B : Remplissage Fiche de Liaison</td>
+                <td>Écoute du flux audio depuis le WAN et le poste client</td>
+            </tr>
+            <tr>
+                <td><strong>Phase 2</strong></td>
+                <td>Configuration NAT WAN OPNsense (Ports 8000 et 80) & Shaper</td>
+                <td>Déploiement sous Proxmox de la VM Honeypot Debian (<code>.99</code>)</td>
+                <td>Test de furtivité Nmap sur le WAN (ports fermés / masqués)</td>
+            </tr>
+            <tr>
+                <td><strong>Phase 3</strong></td>
+                <td>Déploiement Docker Immich (<code>.21</code>) & création album partagé</td>
+                <td>Installation d'Apache leurre et configuration script alerte mail</td>
+                <td>Accès à l'album photo public sans authentification</td>
+            </tr>
+            <tr>
+                <td><strong>Phase 4</strong></td>
+                <td>Génération PKI et configuration du serveur VPN Nomade IKEv2</td>
+                <td>Import du certificat client nomade <code>.p12</code> sur son poste</td>
+                <td>Attribution de l'IP virtuelle nomade <code>10.200.100.10</code></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div style="margin-top: 15px; border-top: 1px solid #e2e8f0; padding-top: 8px; font-size: 7.5pt; color: #64748b; text-align: center;">
+        Compte-rendu officiel d'avancement — Atelier Professionnalisant AP 1 — BTS SIO SISR — Lycée Sidoine Apollinaire (Clermont-Ferrand).
+    </div>
+
+</body>
+</html>

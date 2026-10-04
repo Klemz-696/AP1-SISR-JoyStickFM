@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Plan d'Adressage Complet - AP 1 - BTS SIO SISR</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 14mm 14mm 16mm 14mm;
+            @bottom-right {
+                content: "Page " counter(page) " / " counter(pages);
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 8pt;
+                color: #64748b;
+            }
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            color: #1e293b;
+            background-color: #ffffff;
+            font-size: 9.5pt;
+            line-height: 1.45;
+        }
+
+        /* Page Breaks */
+        .page-break {
+            page-break-before: always;
+        }
+
+        .avoid-break {
+            page-break-inside: avoid;
+        }
+
+        /* Header & Banner */
+        .header-card {
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: #ffffff;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 8px;
+            margin-bottom: 10px;
+        }
+
+        .school-title {
+            font-size: 11pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #38bdf8;
+        }
+
+        .badge-academic {
+            background-color: rgba(56, 189, 248, 0.2);
+            color: #e0f2fe;
+            border: 1px solid #38bdf8;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 8pt;
+            font-weight: 600;
+        }
+
+        .doc-title {
+            font-size: 17pt;
+            font-weight: 800;
+            margin-bottom: 4px;
+            letter-spacing: -0.3px;
+        }
+
+        .doc-subtitle {
+            font-size: 10pt;
+            color: #cbd5e1;
+            margin-bottom: 12px;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-size: 8.5pt;
+        }
+
+        .meta-item strong {
+            display: block;
+            color: #94a3b8;
+            font-size: 7.5pt;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .meta-item span {
+            color: #f8fafc;
+            font-weight: 600;
+        }
+
+        /* Section Headings */
+        h2 {
+            font-size: 12pt;
+            font-weight: 700;
+            color: #0f172a;
+            border-left: 4px solid #0284c7;
+            padding-left: 8px;
+            margin-top: 14px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        h3 {
+            font-size: 10.5pt;
+            font-weight: 600;
+            color: #1e3a8a;
+            margin-top: 10px;
+            margin-bottom: 6px;
+        }
+
+        p {
+            margin-bottom: 8px;
+            text-align: justify;
+        }
+
+        /* Callout Box */
+        .callout {
+            background-color: #f8fafc;
+            border-left: 3px solid #0284c7;
+            border-radius: 0 6px 6px 0;
+            padding: 8px 12px;
+            margin-bottom: 12px;
+            font-size: 9pt;
+        }
+
+        .callout strong {
+            color: #0369a1;
+        }
+
+        /* Badges */
+        .badge {
+            display: inline-block;
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 7.5pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .badge-wan { background-color: #fee2e2; color: #991b1b; border: 1px solid #f87171; }
+        .badge-lan { background-color: #dbeafe; color: #1e40af; border: 1px solid #60a5fa; }
+        .badge-dmz-int { background-color: #dcfce7; color: #166534; border: 1px solid #4ade80; }
+        .badge-dmz-ext { background-color: #fef3c7; color: #92400e; border: 1px solid #fcd34d; }
+        .badge-vpn { background-color: #f3e8ff; color: #6b21a8; border: 1px solid #c084fc; }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 12px;
+            font-size: 8.5pt;
+        }
+
+        th {
+            background-color: #0f172a;
+            color: #ffffff;
+            font-weight: 600;
+            text-align: left;
+            padding: 6px 8px;
+            border: 1px solid #0f172a;
+            font-size: 8pt;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        td {
+            padding: 5px 8px;
+            border: 1px solid #cbd5e1;
+            vertical-align: middle;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f8fafc;
+        }
+
+        .ip-cell {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-weight: 700;
+            color: #0369a1;
+        }
+
+        .ip-bold {
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-weight: 800;
+            color: #0f172a;
+            background-color: #e0f2fe;
+            padding: 1px 4px;
+            border-radius: 3px;
+        }
+
+        /* Topology Schema Container */
+        .schema-container {
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            background-color: #ffffff;
+            padding: 10px;
+            margin-bottom: 14px;
+            text-align: center;
+        }
+
+        .footer-note {
+            margin-top: 12px;
+            font-size: 7.5pt;
+            color: #64748b;
+            text-align: center;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ENTETE ET BANDEAU ACADEMIQUE -->
+    <div class="header-card">
+        <div class="header-top">
+            <span class="school-title">Lycée Sidoine Apollinaire — BTS SIO SISR</span>
+            <span class="badge-academic">Atelier Professionnalisant AP 1 • Livrable N°1</span>
+        </div>
+        <div class="doc-title">Plan d'Adressage Réseau Complet & Topologie</div>
+        <div class="doc-subtitle">Conception de l'architecture, segmentation par VLANs et matrice des équipements</div>
+        <div class="meta-grid">
+            <div class="meta-item">
+                <strong>Étudiant 04 (Lead Réseau)</strong>
+                <span>Clément SAUZÈDE</span>
+            </div>
+            <div class="meta-item">
+                <strong>Étudiant 10 (Admin Système)</strong>
+                <span>Mathys DUTHILLEUL</span>
+            </div>
+            <div class="meta-item">
+                <strong>Pare-feu & VPN</strong>
+                <span>OPNsense • IPsec IKEv2</span>
+            </div>
+            <div class="meta-item">
+                <strong>Statut & Date</strong>
+                <span>Version 1.0 Validée • 2025-2026</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 1 : CONTEXTE ET REGLES METIERS -->
+    <h2>1. Contexte d'Infrastructure & Règles Métier</h2>
+    <div class="callout">
+        <strong>Conformité au cahier des charges officiel AP1 :</strong>
+        L'infrastructure est déployée sur la plateforme de virtualisation <strong>Proxmox VE</strong> du lycée. Elle interconnecte un routeur/pare-feu central unique <strong>OPNsense</strong> distribuant 4 zones réseau distinctes hermétiquement cloisonnées.
+    </div>
+
+    <p>Le plan d'adressage a été conçu en respectant scrupuleusement les exigences formelles du sujet :</p>
+    <ul style="margin-left: 20px; margin-bottom: 10px; font-size: 9pt;">
+        <li><strong>Adresse « Publique » Fixe :</strong> Le WAN d'OPNsense est raccordé au VLAN partagé de la classe avec l'adresse fixe sanctuarisée <strong>192.168.101.41</strong> (captée initialement via DHCP puis fixée).</li>
+        <li><strong>Règle d'or des postes clients internes :</strong> Sur les réseaux internes, le dernier octet de l'adresse IP correspond obligatoirement au numéro d'étudiant :
+            <ul>
+                <li>Poste de travail de <strong>Clément SAUZÈDE (Étu 04)</strong> ➔ Adresse se terminant par <strong>.4</strong></li>
+                <li>Poste de travail de <strong>Mathys DUTHILLEUL (Étu 10)</strong> ➔ Adresse se terminant par <strong>.10</strong></li>
+            </ul>
+        </li>
+        <li><strong>Convention de Passerelle :</strong> L'interface pare-feu OPNsense est configurée sur l'IP <strong>.254</strong> dans chacun des sous-réseaux.</li>
+        <li><strong>Segmentation par VLANs :</strong> Attribution explicite demandée : <strong>VLAN 100</strong> (DMZ Externe), <strong>VLAN 200</strong> (LAN), <strong>VLAN 300</strong> (DMZ Interne).</li>
+    </ul>
+
+    <!-- SECTION 2 : TOPOLOGIE RESEAU VECTORIELLE -->
+    <h2>2. Schéma Synoptique de la Topologie Réseau</h2>
+    <div class="schema-container">
+        <svg viewBox="0 0 780 280" width="100%" height="260" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+                <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+                    <feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/>
+                </filter>
+            </defs>
+
+            <!-- WAN Cloud -->
+            <rect x="290" y="8" width="200" height="42" rx="8" fill="#fef2f2" stroke="#ef4444" stroke-width="1.5" filter="url(#shadow)"/>
+            <text x="390" y="26" text-anchor="middle" font-size="9.5" font-weight="bold" fill="#991b1b">WAN PARTAGÉ LYCÉE (Internet Simulé)</text>
+            <text x="390" y="40" text-anchor="middle" font-size="8.5" font-family="monospace" fill="#b91c1c">192.168.101.0/24 (Passerelle .254)</text>
+
+            <!-- Lien WAN -> OPNsense -->
+            <line x1="390" y1="50" x2="390" y2="80" stroke="#ef4444" stroke-width="2"/>
+            <text x="400" y="68" font-size="8" font-family="monospace" font-weight="bold" fill="#0f172a">vtnet0: 192.168.101.41</text>
+
+            <!-- OPNsense Box -->
+            <rect x="260" y="80" width="260" height="52" rx="8" fill="#0f172a" stroke="#0284c7" stroke-width="2" filter="url(#shadow)"/>
+            <text x="390" y="102" text-anchor="middle" font-size="12" font-weight="bold" fill="#ffffff">PARE-FEU ROUTEUR OPNSENSE</text>
+            <text x="390" y="120" text-anchor="middle" font-size="8.5" fill="#38bdf8">VPN IPsec IKEv2 • Traffic Shaper 2 Mb/s • Packet Scrubbing</text>
+
+            <!-- Lignes vers les 3 zones -->
+            <!-- Vers LAN (Gauche) -->
+            <path d="M 300 132 L 300 160 L 130 160 L 130 180" fill="none" stroke="#2563eb" stroke-width="2"/>
+            <text x="210" y="155" text-anchor="middle" font-size="7.5" font-family="monospace" fill="#1e40af">vtnet1 (.254)</text>
+
+            <!-- Vers DMZ Int (Centre) -->
+            <line x1="390" y1="132" x2="390" y2="180" stroke="#16a34a" stroke-width="2"/>
+            <text x="400" y="160" font-size="7.5" font-family="monospace" fill="#15803d">vtnet2 (.254)</text>
+
+            <!-- Vers DMZ Ext (Droite) -->
+            <path d="M 480 132 L 480 160 L 650 160 L 650 180" fill="none" stroke="#d97706" stroke-width="2"/>
+            <text x="570" y="155" text-anchor="middle" font-size="7.5" font-family="monospace" fill="#b45309">vtnet3 (.254)</text>
+
+            <!-- ZONE 1 : LAN (VLAN 200) -->
+            <rect x="15" y="180" width="230" height="92" rx="6" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5" filter="url(#shadow)"/>
+            <rect x="25" y="186" width="90" height="15" rx="3" fill="#2563eb"/>
+            <text x="70" y="197" text-anchor="middle" font-size="8" font-weight="bold" fill="#ffffff">LAN (VLAN 200)</text>
+            <text x="120" y="197" font-size="8" font-family="monospace" font-weight="bold" fill="#1e40af">192.168.200.0/24</text>
+            
+            <rect x="25" y="208" width="100" height="34" rx="4" fill="#ffffff" stroke="#bfdbfe"/>
+            <text x="75" y="222" text-anchor="middle" font-size="7.5" font-weight="bold" fill="#1e293b">Poste Clément</text>
+            <text x="75" y="235" text-anchor="middle" font-size="7.5" font-family="monospace" font-weight="bold" fill="#2563eb">192.168.200.4</text>
+
+            <rect x="135" y="208" width="100" height="34" rx="4" fill="#ffffff" stroke="#bfdbfe"/>
+            <text x="185" y="222" text-anchor="middle" font-size="7.5" font-weight="bold" fill="#1e293b">Poste Mathys</text>
+            <text x="185" y="235" text-anchor="middle" font-size="7.5" font-family="monospace" font-weight="bold" fill="#2563eb">192.168.200.10</text>
+            <text x="130" y="262" text-anchor="middle" font-size="7" fill="#64748b">Bureautique, Administration & Client VPN Nomade</text>
+
+            <!-- ZONE 2 : DMZ INTERNE (VLAN 300) -->
+            <rect x="260" y="180" width="260" height="92" rx="6" fill="#f0fdf4" stroke="#22c55e" stroke-width="1.5" filter="url(#shadow)"/>
+            <rect x="270" y="186" width="105" height="15" rx="3" fill="#16a34a"/>
+            <text x="322" y="197" text-anchor="middle" font-size="8" font-weight="bold" fill="#ffffff">DMZ INT (VLAN 300)</text>
+            <text x="382" y="197" font-size="8" font-family="monospace" font-weight="bold" fill="#15803d">10.30.0.0/24</text>
+
+            <rect x="268" y="208" width="76" height="34" rx="4" fill="#ffffff" stroke="#bbf7d0"/>
+            <text x="306" y="221" text-anchor="middle" font-size="7" font-weight="bold" fill="#1e293b">SRV-FILES</text>
+            <text x="306" y="234" text-anchor="middle" font-size="7" font-family="monospace" fill="#16a34a">10.30.0.20</text>
+
+            <rect x="352" y="208" width="76" height="34" rx="4" fill="#ffffff" stroke="#bbf7d0"/>
+            <text x="390" y="221" text-anchor="middle" font-size="7" font-weight="bold" fill="#1e293b">SRV-IMMICH</text>
+            <text x="390" y="234" text-anchor="middle" font-size="7" font-family="monospace" fill="#16a34a">10.30.0.21</text>
+
+            <rect x="436" y="208" width="76" height="34" rx="4" fill="#ffffff" stroke="#bbf7d0"/>
+            <text x="474" y="221" text-anchor="middle" font-size="7" font-weight="bold" fill="#1e293b">SRV-MC</text>
+            <text x="474" y="234" text-anchor="middle" font-size="7" font-family="monospace" fill="#16a34a">10.30.0.22</text>
+            <text x="390" y="262" text-anchor="middle" font-size="7" fill="#64748b">Services Internes Sensibles (SMB, WinRM, Docker, Minecraft)</text>
+
+            <!-- ZONE 3 : DMZ EXTERNE (VLAN 100) -->
+            <rect x="535" y="180" width="230" height="92" rx="6" fill="#fffbeb" stroke="#f59e0b" stroke-width="1.5" filter="url(#shadow)"/>
+            <rect x="545" y="186" width="105" height="15" rx="3" fill="#d97706"/>
+            <text x="597" y="197" text-anchor="middle" font-size="8" font-weight="bold" fill="#ffffff">DMZ EXT (VLAN 100)</text>
+            <text x="657" y="197" font-size="8" font-family="monospace" font-weight="bold" fill="#b45309">10.100.0.0/24</text>
+
+            <rect x="543" y="208" width="105" height="34" rx="4" fill="#ffffff" stroke="#fde68a"/>
+            <text x="595" y="221" text-anchor="middle" font-size="6.8" font-weight="bold" fill="#1e293b">JoyStick FM (3 VM)</text>
+            <text x="595" y="234" text-anchor="middle" font-size="6.5" font-family="monospace" fill="#d97706">10.100.0.50 à .52</text>
+
+            <rect x="655" y="208" width="100" height="34" rx="4" fill="#ffffff" stroke="#fde68a"/>
+            <text x="705" y="221" text-anchor="middle" font-size="7" font-weight="bold" fill="#1e293b">Honeypot LAMP</text>
+            <text x="705" y="234" text-anchor="middle" font-size="7" font-family="monospace" fill="#d97706">10.100.0.99</text>
+            <text x="650" y="262" text-anchor="middle" font-size="7" fill="#64748b">Services Publics (Web 80, Icecast 8000 & Leurre)</text>
+        </svg>
+    </div>
+
+    <!-- SAUT DE PAGE POUR LES TABLEAUX DETAILLES -->
+    <div class="page-break"></div>
+
+    <!-- SECTION 3 : TABLEAU D'ADRESSAGE DES SOUS-RESEAUX -->
+    <h2>3. Synthèse des Sous-Réseaux & Affectation des VLANs</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Zone / Périmètre</th>
+                <th>VLAN</th>
+                <th>Interface</th>
+                <th>Adresse Réseau</th>
+                <th>Masque CIDR</th>
+                <th>Passerelle OPNsense</th>
+                <th>Plage d'Adresses Utiles</th>
+                <th>Broadcast</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="badge badge-wan">WAN Lycée</span></td>
+                <td>Partagé</td>
+                <td><code>vtnet0</code></td>
+                <td class="ip-cell">192.168.101.0</td>
+                <td>255.255.255.0 (/24)</td>
+                <td class="ip-bold">192.168.101.254</td>
+                <td>192.168.101.1 - 192.168.101.253</td>
+                <td class="ip-cell">192.168.101.255</td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-lan">Réseau Local (LAN)</span></td>
+                <td><strong>200</strong></td>
+                <td><code>vtnet1</code></td>
+                <td class="ip-cell">192.168.200.0</td>
+                <td>255.255.255.0 (/24)</td>
+                <td class="ip-bold">192.168.200.254</td>
+                <td>192.168.200.1 - 192.168.200.253</td>
+                <td class="ip-cell">192.168.200.255</td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-dmz-int">DMZ Interne</span></td>
+                <td><strong>300</strong></td>
+                <td><code>vtnet2</code></td>
+                <td class="ip-cell">10.30.0.0</td>
+                <td>255.255.255.0 (/24)</td>
+                <td class="ip-bold">10.30.0.254</td>
+                <td>10.30.0.1 - 10.30.0.253</td>
+                <td class="ip-cell">10.30.0.255</td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-dmz-ext">DMZ Externe</span></td>
+                <td><strong>100</strong></td>
+                <td><code>vtnet3</code></td>
+                <td class="ip-cell">10.100.0.0</td>
+                <td>255.255.255.0 (/24)</td>
+                <td class="ip-bold">10.100.0.254</td>
+                <td>10.100.0.1 - 10.100.0.253</td>
+                <td class="ip-cell">10.100.0.255</td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-vpn">Pool VPN Nomade</span></td>
+                <td>Virtuel</td>
+                <td><code>ipsec0</code></td>
+                <td class="ip-cell">10.200.100.0</td>
+                <td>255.255.255.0 (/24)</td>
+                <td class="ip-bold">10.200.100.254</td>
+                <td>10.200.100.1 - 10.200.100.253</td>
+                <td class="ip-cell">10.200.100.255</td>
+            </tr>
+            <tr>
+                <td><span class="badge badge-vpn">Tunnel Intersite B2B</span></td>
+                <td>Virtuel</td>
+                <td><code>enc0</code></td>
+                <td class="ip-cell">10.4.200.0</td>
+                <td>255.255.255.252 (/30)</td>
+                <td class="ip-bold">10.4.200.1</td>
+                <td>10.4.200.1 - 10.4.200.2</td>
+                <td class="ip-cell">10.4.200.3</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- SECTION 4 : INVENTAIRE EXHAUSTIF DES MACHINES -->
+    <h2>4. Inventaire des Équipements & Affectation Fixe des Postes / Serveurs</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Équipement / VM</th>
+                <th>Zone (VLAN)</th>
+                <th>Système d'Exploitation</th>
+                <th>Adresse IP Fixe</th>
+                <th>Rôle Métier & Services Hébergés</th>
+                <th>Ports Écoutés</th>
+                <th>Référent</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>OPNsense-AP1</strong></td>
+                <td><span class="badge badge-wan">WAN</span></td>
+                <td>OPNsense 24.x (FreeBSD)</td>
+                <td class="ip-bold">192.168.101.41</td>
+                <td>Routeur frontal, Pare-feu, Passerelle VPN & Shaper QoS</td>
+                <td>UDP 500, 4500 (IPsec) / TCP 80 (Web), TCP 8000 (Icecast)</td>
+                <td>Clément (04)</td>
+            </tr>
+            <tr>
+                <td><strong>CLT-SAUZEDE</strong></td>
+                <td><span class="badge badge-lan">LAN (200)</span></td>
+                <td>Windows 11 / Linux</td>
+                <td class="ip-bold">192.168.200.4</td>
+                <td>Poste employé de travail & Administration (Règle .4)</td>
+                <td>Trafic sortant uniquement</td>
+                <td>Clément (04)</td>
+            </tr>
+            <tr>
+                <td><strong>CLT-DUTHILLEUL</strong></td>
+                <td><span class="badge badge-lan">LAN (200)</span></td>
+                <td>Windows 11 / Linux</td>
+                <td class="ip-bold">192.168.200.10</td>
+                <td>Poste employé de travail & Administration (Règle .10)</td>
+                <td>Trafic sortant uniquement</td>
+                <td>Mathys (10)</td>
+            </tr>
+            <tr>
+                <td><strong>SRV-FILES</strong></td>
+                <td><span class="badge badge-dmz-int">DMZ INT (300)</span></td>
+                <td>Windows Server 2022</td>
+                <td class="ip-cell">10.30.0.20</td>
+                <td>Partage de fichiers SMB, Sauvegardes & WinRM</td>
+                <td>TCP 445 (SMB), 5985/5986 (PowerShell Remoting)</td>
+                <td>Mathys (10)</td>
+            </tr>
+            <tr>
+                <td><strong>SRV-IMMICH</strong></td>
+                <td><span class="badge badge-dmz-int">DMZ INT (300)</span></td>
+                <td>Debian 12 / Docker</td>
+                <td class="ip-cell">10.30.0.21</td>
+                <td>Serveur d'hébergement photo Immich (Postgres/Redis)</td>
+                <td>TCP 2283 (HTTP WebGUI Immich)</td>
+                <td>Mathys (10)</td>
+            </tr>
+            <tr>
+                <td><strong>SRV-MINECRAFT</strong></td>
+                <td><span class="badge badge-dmz-int">DMZ INT (300)</span></td>
+                <td>Debian 12 / Docker</td>
+                <td class="ip-cell">10.30.0.22</td>
+                <td>Serveur de jeu Minecraft (Mission 2 - PaperMC)</td>
+                <td>TCP 25565 (Protocole Minecraft)</td>
+                <td>Mathys (10)</td>
+            </tr>
+            <!-- POLE WEBRADIO JOYSTICK FM (3 VM migrees en DMZ Externe) -->
+            <tr>
+                <td><strong>Debian_Icecast2</strong></td>
+                <td><span class="badge badge-dmz-ext">DMZ EXT (100)</span></td>
+                <td>Debian 12 (Icecast 2.4)</td>
+                <td class="ip-cell">10.100.0.50</td>
+                <td>Serveur de streaming audio JoyStick FM (Point de montage /joystick-fm)</td>
+                <td>TCP 8000 (Icecast HTTP Streaming)</td>
+                <td>Clément (04)</td>
+            </tr>
+            <tr>
+                <td><strong>Debian_Web</strong></td>
+                <td><span class="badge badge-dmz-ext">DMZ EXT (100)</span></td>
+                <td>Debian 12 (Apache / WP)</td>
+                <td class="ip-cell">10.100.0.51</td>
+                <td>Portail Web WordPress JoyStick FM & Reverse Proxy audio (/radio-stream.mp3)</td>
+                <td>TCP 80 (HTTP Web & Proxy)</td>
+                <td>Clément (04)</td>
+            </tr>
+            <tr>
+                <td><strong>Debian_Mixxx</strong></td>
+                <td><span class="badge badge-dmz-ext">DMZ EXT (100)</span></td>
+                <td>Debian 12 (Mixxx / XFCE)</td>
+                <td class="ip-cell">10.100.0.52</td>
+                <td>Régie DJ automatisée (Auto-DJ) alimentant le flux Icecast en continu</td>
+                <td>Source Icecast MP3 128 kbps</td>
+                <td>Clément (04)</td>
+            </tr>
+            <tr>
+                <td><em style="color: #64748b;">OPNSense_Joystick-FM</em></td>
+                <td><span class="badge badge-dmz-ext" style="opacity: 0.6;">Décommissionné</span></td>
+                <td>FreeBSD (Ancien FW)</td>
+                <td class="ip-cell" style="color: #94a3b8;">Ex-10.100.0.53</td>
+                <td>Ancien pare-feu Webradio — <strong>Absorbé et unifié sur OPNsense-AP1</strong></td>
+                <td>Règles WAN/NAT centralisées</td>
+                <td>Clément (04)</td>
+            </tr>
+            <tr>
+                <td><strong>SRV-HONEYPOT</strong></td>
+                <td><span class="badge badge-dmz-ext">DMZ EXT (100)</span></td>
+                <td>Debian 12 (LAMP)</td>
+                <td class="ip-cell">10.100.0.99</td>
+                <td>Pot de miel leurre (Mission 3 Bonus - Zéro page web)</td>
+                <td>TCP 80, 443 (Redirection silencieuse d'attaques)</td>
+                <td>Clément (04)</td>
+            </tr>
+            <tr>
+                <td><strong>CLI-NOMADE-04</strong></td>
+                <td><span class="badge badge-vpn">VPN Nomade</span></td>
+                <td>Client distant Windows</td>
+                <td class="ip-bold">10.200.100.4</td>
+                <td>IP virtuelle attribuée au poste nomade de Clément (.4)</td>
+                <td>Tunnel chiffré IPsec IKEv2</td>
+                <td>Clément (04)</td>
+            </tr>
+            <tr>
+                <td><strong>CLI-NOMADE-10</strong></td>
+                <td><span class="badge badge-vpn">VPN Nomade</span></td>
+                <td>Client distant Windows</td>
+                <td class="ip-bold">10.200.100.10</td>
+                <td>IP virtuelle attribuée au poste nomade de Mathys (.10)</td>
+                <td>Tunnel chiffré IPsec IKEv2</td>
+                <td>Mathys (10)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- SECTION 5 : JUSTIFICATION TECHNIQUE ET VALIDATION -->
+    <div class="avoid-break">
+        <h2>5. Justification de la Méthode d'Attribution WAN & Sécurité</h2>
+        <div class="callout">
+            <strong>Procédure de capture et sanctuarisation de l'IP WAN :</strong>
+            Sur le commutateur de la classe, l'interface WAN d'OPNsense a tout d'abord été initialisée en <strong>mode client DHCP</strong> afin de relever un bail disponible sans risque de collision avec les autres binômes. L'adresse <strong>192.168.101.41 /24</strong> (avec passerelle <code>192.168.101.254</code>) a été allouée. Cette configuration a été <strong>immédiatement figée en mode IP Statique</strong> dans OPNsense. Cela garantit la permanence de l'adresse publique simulée, indispensable pour la pérennité du serveur VPN IPsec IKEv2 et du tunnel intersite de la Mission 2.
+        </div>
+
+        <div class="footer-note">
+            Document officiel réalisé dans le cadre de l'épreuve E5 du BTS SIO SISR — Lycée Sidoine Apollinaire (Clermont-Ferrand) — 2025/2026.
+        </div>
+    </div>
+
+</body>
+</html>
+

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Synthèse d'Avancement - Séance 03 - AP 1 - BTS SIO SISR</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 10mm 12mm 10mm 12mm;
+            @bottom-right {
+                content: "Page " counter(page) " / " counter(pages);
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 7.5pt;
+                color: #64748b;
+            }
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            color: #1e293b;
+            background-color: #ffffff;
+            font-size: 8.5pt;
+            line-height: 1.38;
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        .avoid-break {
+            page-break-inside: avoid;
+        }
+
+        /* Header Card */
+        .header-card {
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 10px 14px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 4px;
+            margin-bottom: 6px;
+        }
+
+        .school-title {
+            font-size: 9.5pt;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: #93c5fd;
+        }
+
+        .session-badge {
+            background-color: #3b82f6;
+            color: #ffffff;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 7.5pt;
+            font-weight: 600;
+        }
+
+        .header-main h1 {
+            font-size: 13.5pt;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 3px;
+        }
+
+        .header-subtitle {
+            font-size: 8pt;
+            color: #cbd5e1;
+            margin-bottom: 6px;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 7.5pt;
+        }
+
+        .meta-item strong {
+            color: #bfdbfe;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 9.5pt;
+            font-weight: 700;
+            color: #0f172a;
+            border-bottom: 1.5px solid #0284c7;
+            padding-bottom: 2px;
+            margin-top: 10px;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .section-title .badge {
+            font-size: 7pt;
+            padding: 1px 6px;
+            border-radius: 3px;
+            background-color: #e0f2fe;
+            color: #0369a1;
+            font-weight: 600;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 7.5pt;
+            margin-bottom: 8px;
+        }
+
+        th, td {
+            border: 1px solid #cbd5e1;
+            padding: 4px 6px;
+            text-align: left;
+            vertical-align: middle;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            color: #334155;
+            font-weight: 700;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f8fafc;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 1.5px 6px;
+            border-radius: 3px;
+            font-weight: 700;
+            font-size: 6.8pt;
+            text-transform: uppercase;
+        }
+
+        .status-ok { background-color: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+        .status-prog { background-color: #fef3c7; color: #b45309; border: 1px solid #fcd34d; }
+        .status-wait { background-color: #e2e8f0; color: #475569; border: 1px solid #cbd5e1; }
+
+        /* Content Boxes */
+        .callout {
+            border-left: 3px solid #0284c7;
+            background-color: #f0f9ff;
+            padding: 6px 10px;
+            margin-bottom: 8px;
+            border-radius: 0 4px 4px 0;
+            font-size: 7.8pt;
+        }
+
+        .callout-title {
+            font-weight: 700;
+            color: #0369a1;
+            margin-bottom: 2px;
+        }
+
+        .code-box {
+            background-color: #1e293b;
+            color: #f8fafc;
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 7.2pt;
+            line-height: 1.3;
+            margin-bottom: 6px;
+            overflow-x: auto;
+        }
+
+        .code-keyword { color: #38bdf8; }
+        .code-param { color: #a5f3fc; }
+        .code-comment { color: #94a3b8; font-style: italic; }
+
+        .two-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        ul {
+            margin-left: 14px;
+            margin-bottom: 6px;
+        }
+
+        li {
+            margin-bottom: 2px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Card -->
+    <div class="header-card">
+        <div class="header-top">
+            <span class="school-title">BTS SIO SISR — Lycée Sidoine Apollinaire</span>
+            <span class="session-badge">Séance 03 • 28 Septembre 2026</span>
+        </div>
+        <div class="header-main">
+            <h1>Atelier Professionnalisant AP 1 : Journal d'Avancement</h1>
+            <div class="header-subtitle">Mission 1 Validée (Sauvegarde & QoS) • Mise à niveau OPNsense 23.1 & Transition WireGuard • Serveur Minecraft</div>
+        </div>
+        <div class="meta-grid">
+            <div class="meta-item"><strong>Binôme :</strong> Étu 04 (Clément) & Étu 10 (Mathys)</div>
+            <div class="meta-item"><strong>Hyperviseur :</strong> Proxmox VE (Cluster pve02)</div>
+            <div class="meta-item"><strong>Pare-feu :</strong> OPNsense (23.1 upgrade en cours)</div>
+            <div class="meta-item"><strong>IP WAN :</strong> 192.168.101.41 /24 (Fixe)</div>
+        </div>
+    </div>
+
+    <!-- Section 1 : Faits Marquants & Réalisations Clés -->
+    <div class="section-title">
+        <span>1. Faits Marquants & Jalons Clés de la Séance 3</span>
+        <span class="badge">Validation Majeure</span>
+    </div>
+
+    <div class="callout">
+        <div class="callout-title">🏆 Jalon Majeur : Exigence de Sauvegarde Automatique Quotidienne 100% Validée & Fonctionnelle</div>
+        La sauvegarde incrémentale automatique des documents de l'employé vers le serveur de fichiers <code>SRV-FILES</code> (<code>10.30.0.20</code>) a été déployée, testée et prouvée en direct sur le poste Linux Mint (<code>posteclement</code> / VM 11011). Grâce au montage CIFS avec fichier d'authentification protégé (<code>chmod 600</code>), le mot de passe n'apparaît jamais en clair, garantissant une sécurité totale.
+    </div>
+
+    <div class="two-cols">
+        <div class="avoid-break">
+            <div style="font-weight: 700; color: #0f172a; margin-bottom: 4px;">📂 Sauvegarde Sécurisée Linux Mint (Validée)</div>
+            <div class="code-box">
+<span class="code-comment"># 1. Montage silencieux sans mot de passe</span>
+sudo mount -t cifs //10.30.0.20/Partage /mnt/partage_sauvegarde \
+  -o credentials=/etc/smbcredentials-clement,uid=1000,gid=1000
+
+<span class="code-comment"># 2. Synchronisation rsync incrémentale</span>
+rsync -avz ~/Documents/ /mnt/partage_sauvegarde/Sauvegardes_Clement/
+
+<span class="code-comment"># Preuve constatée sur le Samba :</span>
+ls -la /mnt/partage_sauvegarde/Sauvegardes_Clement/
+<span class="code-param">-rwxr-xr-x 1 posteclement posteclement 44 sept. 28 17:30 Rapport_AP1.txt</span>
+            </div>
+            <p style="font-size: 7.2pt; color: #475569;">
+                ✔ Script <code>scripts/backup-documents.sh</code> opérationnel avec vérification TCP 445 et rotation sur 7 jours. Déclenchement planifié à 18h00 via <code>crontab</code>.
+            </p>
+        </div>
+
+        <div class="avoid-break">
+            <div style="font-weight: 700; color: #0f172a; margin-bottom: 4px;">⚡ Mise à niveau OPNsense (23.1) & WireGuard</div>
+            <div class="code-box">
+<span class="code-comment"># Console OPNsense / Firmware Updates</span>
+Number of packages to be upgraded: 76
+Number of packages to be installed: 10
+<span class="code-keyword">[1/86] Fetching unbound-1.17.1_2.pkg... done</span>
+<span class="code-keyword">[8/86] Fetching opnsense-update-23.1.11... done</span>
+<span class="code-keyword">[10/86] Fetching openssl-1.1.1u,1.pkg... done</span>
+
+<span class="code-comment"># Action post-téléchargement :</span>
+Reboot pare-feu + CPU Proxmox en type "host"
+Installation du plugin moderne : <span class="code-param">os-wireguard</span>
+            </div>
+            <p style="font-size: 7.2pt; color: #475569;">
+                ✔ Choix d'architecture validé pour l'épreuve E5 : WireGuard offre une surface d'attaque réduite (4k LOC vs 100k+), chiffrement ChaCha20 et roaming natif sans overhead X.509.
+            </p>
+        </div>
+    </div>
+
+    <!-- Section 2 : Tableau d'avancement comparatif -->
+    <div class="section-title">
+        <span>2. État d'Avancement Réel des Exigences du Cahier des Charges</span>
+        <span class="badge">Matrice Recette E5</span>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 14%;">Module</th>
+                <th style="width: 48%;">Description de l'Exigence & Réalisation Technique</th>
+                <th style="width: 18%;">Responsable</th>
+                <th style="width: 20%;">Statut Réel</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Sauvegarde M1</strong></td>
+                <td>Sauvegarde quotidienne automatique des documents vers SRV-FILES (10.30.0.20) sans intervention.</td>
+                <td>Clément (Étu 04)</td>
+                <td><span class="status-badge status-ok">100% Validé ✅</span></td>
+            </tr>
+            <tr>
+                <td><strong>Furtivité M1</strong></td>
+                <td>Blocage ping ICMP WAN, normalisation IP Random-id (anti-Nmap) et fermeture des ports non VPN.</td>
+                <td>Clément (Étu 04)</td>
+                <td><span class="status-badge status-ok">100% Validé ✅</span></td>
+            </tr>
+            <tr>
+                <td><strong>QoS M1</strong></td>
+                <td>Traffic Shaper dummynet : Pipe 2 Mb/s WAN, priorisation administration (100) vs Web (20).</td>
+                <td>Clément (Étu 04)</td>
+                <td><span class="status-badge status-ok">100% Validé ✅</span></td>
+            </tr>
+            <tr>
+                <td><strong>Fichiers SMB M1</strong></td>
+                <td>Serveur de fichiers Samba Debian (SRV-FILES 10.30.0.20), partages réseau opérationnels.</td>
+                <td>Mathys (Étu 10)</td>
+                <td><span class="status-badge status-ok">100% Validé ✅</span></td>
+            </tr>
+            <tr>
+                <td><strong>Immich M2</strong></td>
+                <td>Serveur photo auto-hébergé sous Docker (:2283) accessible depuis les postes clients.</td>
+                <td>Mathys (Étu 10)</td>
+                <td><span class="status-badge status-ok">100% Validé ✅</span></td>
+            </tr>
+            <tr>
+                <td><strong>Minecraft M2</strong></td>
+                <td>Serveur de jeu Minecraft (SRV-MC 10.30.0.22:25565), joueur nomade via VPN.</td>
+                <td>Mathys (Étu 10)</td>
+                <td><span class="status-badge status-prog">En cours 🔄</span></td>
+            </tr>
+            <tr>
+                <td><strong>VPN Nomade M1</strong></td>
+                <td>Mise à niveau OPNsense 23.1 en direct pour déploiement du plugin <code>os-wireguard</code>.</td>
+                <td>Clément (Étu 04)</td>
+                <td><span class="status-badge status-prog">Finalisation 🔄</span></td>
+            </tr>
+            <tr>
+                <td><strong>Honeypot M3</strong></td>
+                <td>Déploiement serveur leurre LAMP (10.100.0.99) en DMZ Externe avec détection d'intrusions.</td>
+                <td>Clément (Étu 04)</td>
+                <td><span class="status-badge status-prog">Préparation ⏳</span></td>
+            </tr>
+            <tr>
+                <td><strong>WebRadio M2</strong></td>
+                <td>Bascule V2V JoyStick FM (Icecast 10.100.0.50) sans coupure audible du flux de streaming.</td>
+                <td>Clément (Étu 04)</td>
+                <td><span class="status-badge status-wait">Attente VMDK ⏸️</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Section 3 : Actions Prioritaires Séance Suivante -->
+    <div class="section-title">
+        <span>3. Plan d'Action Opérationnel pour la Prochaine Étape</span>
+        <span class="badge">Objectif 100% M1/M2/M3</span>
+    </div>
+
+    <div class="two-cols">
+        <div class="avoid-break" style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 10px;">
+            <div style="font-weight: 700; color: #0369a1; margin-bottom: 4px;">👨‍💻 Clément (Étudiant 04) :</div>
+            <ul>
+                <li><strong>Reboot OPNsense & CPU host :</strong> Redémarrer le pare-feu mis à niveau et basculer le processeur en type <code>host</code> sous Proxmox.</li>
+                <li><strong>Installation WireGuard :</strong> Activer le plugin <code>os-wireguard</code>, configurer l'instance serveur (UDP 51820) et le profil nomade client.</li>
+                <li><strong>Déploiement Honeypot LAMP (Mission 3) :</strong> Installer Apache sur la VM 10.100.0.99 et configurer la redirection NAT furtive WAN.</li>
+            </ul>
+        </div>
+
+        <div class="avoid-break" style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 10px;">
+            <div style="font-weight: 700; color: #0369a1; margin-bottom: 4px;">👨‍💻 Mathys (Étudiant 10) :</div>
+            <ul>
+                <li><strong>Finalisation Serveur Minecraft :</strong> Valider le conteneur PaperMC sur <code>10.30.0.22:25565</code> et tester la connexion joueur.</li>
+                <li><strong>Coordination Intersite Partenaire :</strong> Échanger les fiches de liaison réseau (IP WAN, sous-réseau, PSK) pour le tunnel B2B.</li>
+                <li><strong>Validation Dossier Recette :</strong> Effectuer la recette croisée des accès SMB et Immich depuis son poste.</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

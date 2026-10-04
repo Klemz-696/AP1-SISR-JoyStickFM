@@ -1,0 +1,219 @@
+/* ============================================================
+   JOYSTICK FM — Easter Egg XP Bar  v2.0
+   Barre d'XP style Minecraft authentique
+   ============================================================ */
+
+/*
+
+/* ── Fonte pixel pour les chiffres ── */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+/* ── Conteneur global ── */
+.egg-xp-container {
+  margin: 1.75rem 0 1.25rem;
+  padding: 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* ── En-tête : icône + libellé ── */
+.egg-xp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.egg-xp-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.6rem;
+  color: #a0a0a0;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+/* Compteur "X / 10" — style nombre Minecraft vert */
+.egg-xp-counter {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.65rem;
+  line-height: 1;
+  color: #7dca00;
+  text-shadow:
+    1px  1px 0 #2a4400,
+    -1px -1px 0 #2a4400,
+    1px -1px 0 #2a4400,
+    -1px  1px 0 #2a4400;
+}
+
+/* ── Piste de la barre — exactement comme Minecraft ──
+   Structure : bord extérieur gris foncé, fond noir, barre verte
+   La barre Minecraft originale fait 5px de hauteur en HD
+   On monte à 12px pour rester lisible sur desktop               */
+.egg-xp-track {
+  position: relative;
+  width: 100%;
+  height: 12px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+
+  /* Fond noir Minecraft + bordures épaissies pixel-art */
+  background: #191919;
+  box-shadow:
+    /* Bord extérieur gris (1 px de chaque côté) */
+    0 0 0 2px #373737,
+    /* Ombre portée sous la barre (Minecraft a une ombre grise) */
+    0 2px 0 2px #000,
+    /* Ombre intérieure (enfoncement) */
+    inset 0 0 0 1px #000;
+
+  overflow: hidden;
+  cursor: default;
+}
+
+/* ── Barre de remplissage verte (Experience Bar) ── */
+.egg-xp-fill {
+  position: relative;
+  height: 100%;
+  width: 0%;
+
+  /* Dégradé vertical Minecraft :
+     - top 1/3   : vert clair #7dca00
+     - milieu     : vert moyen #57cc00
+     - bas 1/3   : vert foncé  #3a8a00   */
+  background: linear-gradient(
+    to bottom,
+    #8ee800 0%,
+    #7dca00 25%,
+    #57cc00 50%,
+    #3a8a00 75%,
+    #2a6400 100%
+  );
+
+  /* Transition fluide mais rapide */
+  transition: width 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Lueur verte douce */
+  box-shadow:
+    0 0 4px rgba(125, 202, 0, 0.6),
+    0 0 10px rgba(87, 204, 0, 0.25);
+
+  image-rendering: pixelated;
+}
+
+/* Ligne claire en haut (reflet Minecraft) */
+.egg-xp-fill::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* Ligne sombre en bas (ombre interne Minecraft) */
+.egg-xp-fill::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* ── Flash vert quand on gagne de l'XP ── */
+@keyframes xpGain {
+  0%   { filter: brightness(1); }
+  20%  { filter: brightness(2.5) saturate(1.4); box-shadow: 0 0 12px rgba(125,202,0,.9), 0 0 30px rgba(87,204,0,.4); }
+  60%  { filter: brightness(1.5); }
+  100% { filter: brightness(1); }
+}
+
+.egg-xp-fill.xp-flash {
+  animation: xpGain 0.55s ease forwards;
+}
+
+/* ── Barre "vide" : texture quadrillée pixel-art Minecraft ──
+   Sur le fond noir, on simule les petits carrés sombres          */
+.egg-xp-track::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  background-size: 4px 4px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* La barre passe par-dessus la texture */
+.egg-xp-fill { z-index: 2; }
+
+/* ── Sous la barre : ombre portée style Minecraft ──
+   (un rectangle gris-vert sombre décalé de 2px vers le bas)     */
+.egg-xp-wrap {
+  position: relative;
+  padding-bottom: 3px; /* espace pour l'ombre portée */
+}
+
+.egg-xp-wrap::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 2px; right: 2px;
+  height: 12px;
+  background: #1a3000;
+  z-index: -1;
+  box-shadow: 0 0 0 2px #0d1a00;
+}
+
+/* ── Pied de barre : "0 / 10 easter eggs" ── */
+.egg-xp-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 5px;
+  gap: 0.5rem;
+}
+
+.egg-xp-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  color: #7dca00;
+  text-shadow:
+    1px  1px 0 #1e3300,
+    0    0   4px rgba(125,202,0,.4);
+  letter-spacing: 0.05em;
+  line-height: 1;
+}
+
+/* ── Icône œuf pulsante quand on n'a pas encore tout trouvé ── */
+.egg-xp-icon {
+  font-size: 0.9rem;
+  display: inline-block;
+  animation: eggPulse 2.5s ease-in-out infinite;
+}
+@keyframes eggPulse {
+  0%, 100% { transform: scale(1);    opacity: .7; }
+  50%       { transform: scale(1.15); opacity: 1;  }
+}
+
+/* ── Version compacte mobile ── */
+@media (max-width: 480px) {
+  .egg-xp-track { height: 9px; }
+  .egg-xp-title { font-size: 0.5rem; }
+  .egg-xp-counter { font-size: 0.55rem; }
+  .egg-xp-label { font-size: 0.48rem; }
+  .egg-xp-icon { font-size: .75rem; }
+}
+
+@keyframes rainbow-flicker {
+  0% { background-color: var(--rose-neon); box-shadow: 0 0 15px var(--rose-neon); }
+  33% { background-color: var(--bleu-neon); box-shadow: 0 0 15px var(--bleu-neon); }
+  66% { background-color: var(--vert-neon); box-shadow: 0 0 15px var(--vert-neon); }
+  100% { background-color: var(--rose-neon); box-shadow: 0 0 15px var(--rose-neon); }
+}
+
+.egg-xp-fill.max-level {
+  animation: rainbow-flicker 0.8s infinite linear !important;
+  width: 100% !important;
+}

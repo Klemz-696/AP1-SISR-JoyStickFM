@@ -1,0 +1,40 @@
+# ==============================================================================
+# .gitignore — Projet AP 1 BTS SIO SISR (Sauzède Clément & Mathys Duthilleul)
+# ==============================================================================
+
+# --- Sécurité & Secrets sensibles (NE JAMAIS COMMITER) ---
+*.conf
+*.key
+*.pem
+*.ppk
+*.env
+clement-wireguard.conf
+credentials*
+*.p12
+
+# --- Binaires lourds (> 10 Mo) ---
+*.jar
+*.iso
+*.qcow2
+*.vmdk
+*.ova
+*.img
+paper-*.jar
+server.jar
+
+# --- Logiciels tiers décompressés (JMeter complet, etc.) ---
+AP_Webradio/2- Tests/5- Apache-Jmeter-5.6.3/
+AP_Webradio/2- Tests/*.lnk
+
+# --- Fichiers d'export temporaires & Données perso brutes ---
+*.csv
+sauzede.clement*
+
+# --- Caches IDE & OS ---
+.claude/
+desktop.ini
+Thumbs.db
+ehthumbs.db
+.DS_Store
+*.tmp
+*.log

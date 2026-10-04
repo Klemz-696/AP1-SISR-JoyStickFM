@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Livrable Officiel - Domaine 3 : Services, Stockage & Sauvegardes - AP 1</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 10mm 12mm 10mm 12mm;
+            @bottom-right {
+                content: "Page " counter(page) " / " counter(pages);
+                font-family: 'Segoe UI', sans-serif;
+                font-size: 7.5pt;
+                color: #64748b;
+            }
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            color: #1e293b; background-color: #ffffff; font-size: 8.5pt; line-height: 1.38;
+        }
+        .page-break { page-break-before: always; }
+        .avoid-break { page-break-inside: avoid; }
+        .header-card {
+            border: 1px solid #cbd5e1; border-radius: 6px; padding: 10px 14px;
+            background: linear-gradient(135deg, #0f172a 0%, #065f46 50%, #1e3a8a 100%);
+            color: #ffffff; margin-bottom: 10px;
+        }
+        .header-top {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding-bottom: 4px; margin-bottom: 6px;
+        }
+        .school-title { font-size: 9.5pt; font-weight: 700; letter-spacing: 0.5px; color: #34d399; text-transform: uppercase; }
+        .doc-badge { font-size: 8pt; font-weight: 600; background: rgba(52, 211, 153, 0.2); border: 1px solid #34d399; padding: 2px 8px; border-radius: 4px; color: #d1fae5; }
+        .main-title { font-size: 13pt; font-weight: 800; line-height: 1.2; margin-bottom: 4px; }
+        .subtitle { font-size: 8.5pt; color: #cbd5e1; }
+        .meta-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+            margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255, 255, 255, 0.15); font-size: 7.5pt;
+        }
+        .meta-item strong { color: #a7f3d0; display: block; font-size: 7pt; text-transform: uppercase; }
+        .section-title {
+            font-size: 9.5pt; font-weight: 700; color: #0f172a; border-bottom: 2px solid #059669;
+            padding-bottom: 3px; margin: 10px 0 6px 0; display: flex; justify-content: space-between; align-items: center;
+        }
+        .badge { font-size: 7pt; font-weight: 600; padding: 1px 6px; border-radius: 3px; background: #d1fae5; color: #065f46; }
+        .two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px; }
+        .card { border: 1px solid #e2e8f0; border-radius: 5px; padding: 8px 10px; background: #f8fafc; }
+        .card-title { font-size: 8.5pt; font-weight: 700; color: #065f46; margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
+        table { width: 100%; border-collapse: collapse; font-size: 7.5pt; margin-bottom: 8px; }
+        th { background-color: #0f172a; color: #ffffff; font-weight: 600; text-align: left; padding: 4px 6px; border: 1px solid #cbd5e1; }
+        td { padding: 4px 6px; border: 1px solid #e2e8f0; vertical-align: middle; }
+        tr:nth-child(even) { background-color: #f8fafc; }
+        .code-box {
+            background: #0f172a; color: #e2e8f0; border-radius: 4px; padding: 6px 8px;
+            font-family: 'Consolas', monospace; font-size: 6.8pt; line-height: 1.3; margin: 4px 0; border: 1px solid #334155; white-space: pre-wrap;
+        }
+        .code-comment { color: #64748b; }
+        .code-keyword { color: #34d399; font-weight: bold; }
+        .code-param   { color: #38bdf8; }
+        ul { padding-left: 14px; margin-bottom: 4px; }
+        li { margin-bottom: 2px; font-size: 7.8pt; }
+    </style>
+</head>
+<body>
+
+    <div class="header-card">
+        <div class="header-top">
+            <span class="school-title">Lycée Sidoine Apollinaire • BTS SIO SISR (2e Année)</span>
+            <span class="doc-badge">LIVRABLE OFFICIEL — DOMAINE 3</span>
+        </div>
+        <div class="main-title">Services d'Entreprise, Stockage & Sauvegardes Automatisées</div>
+        <div class="subtitle">Serveur de fichiers SMB, automatisation rsync/Robocopy sécurisée et auto-hébergement Immich sous Docker</div>
+        <div class="meta-grid">
+            <div class="meta-item"><strong>Projet & Épreuve</strong>AP 1 — Épreuve E5</div>
+            <div class="meta-item"><strong>Responsable Réseau</strong>Clément SAUZÈDE (04)</div>
+            <div class="meta-item"><strong>Binôme Systèmes</strong>Mathys DUTHILLEUL (10)</div>
+            <div class="meta-item"><strong>Statut Domaine</strong>100% Validé & Conforme ✅</div>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <span>1. Serveur de Fichiers & Partage Réseau Sécurisé (SRV-FILES)</span>
+        <span class="badge">DMZ Interne (10.30.0.20)</span>
+    </div>
+
+    <div class="two-cols">
+        <div class="card avoid-break">
+            <div class="card-title">📁 1.1. Architecture du Partage Samba / SMB</div>
+            <p style="font-size: 7.8pt; margin-bottom: 4px;">
+                Hébergé en DMZ Interne sur la VM <code>SRV-FILES</code> (IP statique <code>10.30.0.20</code>), le service SMB fournit un espace collaboratif sécurisé pour les utilisateurs de l'entreprise :
+            </p>
+            <ul>
+                <li><strong>Arborescence :</strong> Dossiers dédiés <code>/Partage/DocumentsEmploye</code> et <code>/Partage/Sauvegardes_Clement</code>.</li>
+                <li><strong>Contrôle d'accès :</strong> Authentification par identifiants locaux avec permissions strictes (lecture/écriture pour l'employé, aucun accès anonyme).</li>
+                <li><strong>Administration sans interface graphique :</strong> Gestion distante assurée par SSH et PowerShell Remoting (WinRM ports 5985/5986).</li>
+            </ul>
+        </div>
+
+        <div class="card avoid-break">
+            <div class="card-title">🔐 1.2. Fichier de Credentials Sécurisé (/etc/smbcredentials-clement)</div>
+            <div class="code-box">
+<span class="code-comment"># Fichier protégé en lecture seule par root (chmod 600) :</span>
+username=<span class="code-keyword">posteclement</span>
+password=<span class="code-param">MotDePasseComplexeSISR2026!</span>
+domain=WORKGROUP
+
+<span class="code-comment"># Commande de montage automatique sans prompt :</span>
+sudo mount -t cifs //10.30.0.20/Partage /mnt/partage_sauvegarde \
+  -o credentials=/etc/smbcredentials-clement,uid=1000,gid=1000
+            </div>
+            <p style="font-size: 7.2pt; color: #475569;">
+                ✔ Évite l'exposition de mots de passe en clair dans les scripts ou dans <code>/etc/fstab</code>.
+            </p>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <span>2. Procédure de Sauvegarde Quotidienne Automatisée (M1-AUTO-01)</span>
+        <span class="badge">Validation 100% Fonctionnelle</span>
+    </div>
+
+    <div class="two-cols">
+        <div class="card avoid-break">
+            <div class="card-title">📜 2.1. Script Bash de Sauvegarde (backup-documents.sh)</div>
+            <p style="font-size: 7.8pt; margin-bottom: 4px;">
+                Le script de sauvegarde déployé sur le poste client exécute les opérations suivantes :
+            </p>
+            <ol style="padding-left: 14px; font-size: 7.6pt; line-height: 1.4;">
+                <li>Vérification préalable de la joignabilité réseau du serveur (test TCP port 445 via Netcat).</li>
+                <li>Montage dynamique du partage SMB via le fichier de credentials sécurisé.</li>
+                <li>Synchronisation incrémentale <code>rsync -avz --delete</code> des documents de l'utilisateur.</li>
+                <li>Génération de journaux d'audit horodatés et rotation automatique sur 7 jours.</li>
+                <li>Démontage propre du partage CIFS en fin de traitement.</li>
+            </ol>
+        </div>
+
+        <div class="card avoid-break">
+            <div class="card-title">⚡ 2.2. Preuve Concrète de Réplication Validée</div>
+            <div class="code-box">
+<span class="code-comment"># Preuve constatée sur le serveur distant (Séance du 28/09/2026) :</span>
+$ ls -la /mnt/partage_sauvegarde/Sauvegardes_Clement/
+total 12
+drwxr-xr-x 2 posteclement posteclement 4096 sept. 28 17:30 .
+drwxr-xr-x 3 root         root         4096 sept. 28 17:28 ..
+<span class="code-keyword">-rwxr-xr-x 1 posteclement posteclement   44 sept. 28 17:30 Rapport_AP1.txt</span>
+
+<span class="code-comment"># Planification Crontab active :</span>
+<span class="code-param">0 18 * * 1-5 /usr/local/bin/backup-documents.sh &gt;&gt; /var/log/backup.log 2&gt;&amp;1</span>
+            </div>
+            <p style="font-size: 7.2pt; color: #475569;">
+                ✔ Sauvegarde incrémentale opérationnelle, sans aucune intervention de l'utilisateur.
+            </p>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="section-title">
+        <span>3. Plateforme Photo Immich sous Docker Compose (M1 & M2)</span>
+        <span class="badge">Micro-services Conteneurisés</span>
+    </div>
+
+    <div class="two-cols">
+        <div class="card avoid-break">
+            <div class="card-title">🐳 3.1. Justification Pédagogique de Docker en SISR</div>
+            <ul>
+                <li><strong>Complexité applicative :</strong> Immich est composé de 4 briques interconnectées (serveur Node.js, base PostgreSQL avec extension vectorielle <code>pgvector</code>, cache mémoire Redis et moteur d'IA/Machine Learning).</li>
+                <li><strong>Déploiement IaC (Infrastructure as Code) :** L'ensemble de la pile est formalisée dans un fichier <code>docker-compose.yml</code> reproductible instantanément.</li>
+                <li><strong>Isolation des ressources :</strong> Consommation RAM maîtrisée sur Proxmox VE et étanchéité face aux paquets du système hôte Debian.</li>
+            </ul>
+        </div>
+
+        <div class="card avoid-break">
+            <div class="card-title">📋 3.2. Architecture du docker-compose.yml (/opt/immich/)</div>
+            <div class="code-box">
+<span class="code-comment"># Extrait d'architecture de production :</span>
+services:
+  <span class="code-keyword">immich-server:</span>
+    image: ghcr.io/immich-app/immich-server:release
+    ports: [<span class="code-param">"2283:2283"</span>]
+    depends_on: [database, redis]
+  <span class="code-keyword">immich-machine-learning:</span>
+    image: ghcr.io/immich-app/immich-machine-learning:release
+  <span class="code-keyword">redis:</span>
+    image: docker.io/redis:6.2-alpine
+  <span class="code-keyword">database:</span>
+    image: docker.io/tensorchord/pgvecto-rs:pg14-v0.2.0
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <span>4. Gestion du Partage d'Album Intersite (Mission 2)</span>
+        <span class="badge">Partage Public & Contrôle d'Accès</span>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 25%;">Élément de Configuration</th>
+                <th style="width: 45%;">Valeur Appliquée sur Immich</th>
+                <th style="width: 30%;">Contrôle Pare-feu Associé</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Album Partagé</strong></td>
+                <td>Album dédié créé : <code>Partenariat_Commercial_B2B</code></td>
+                <td>Consultable uniquement via le port TCP 2283.</td>
+            </tr>
+            <tr>
+                <td><strong>Lien Public de Consultation</strong></td>
+                <td><code>http://10.30.0.21:2283/share/ALBUM_PARTENAIRE_KEY</code></td>
+                <td>Généré avec droit de visualisation seule (lecture seule).</td>
+            </tr>
+            <tr>
+                <td><strong>Filtrage de Source Intersite</strong></td>
+                <td>Seules les requêtes issues du LAN Partenaire (<code>192.168.100.0/24</code>) sont acceptées.</td>
+                <td>Règle PASS chirurgicale sur l'interface IPsec d'OPNsense.</td>
+            </tr>
+            <tr>
+                <td><strong>Blocage d'Accès Hors-Périmètre</strong></td>
+                <td>Tout autre sous-dossier ou fonction d'administration d'Immich est hermétique.</td>
+                <td>Règle BLOCK par défaut pour tout port non-web.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="card avoid-break" style="margin-top: 8px;">
+        <div style="font-weight: 700; color: #0f172a; margin-bottom: 2px;">📌 Conclusion & Bilan de Validation (Domaine 3) :</div>
+        <p style="font-size: 7.5pt; color: #334155;">
+            Les services d'entreprise de la DMZ Interne répondent à 100% des exigences de disponibilité et de sécurité du cahier des charges. La sauvegarde incrémentale automatisée a été auditée et prouvée par les fichiers répliqués sur le partage SMB. La galerie photo Immich fournit le service d'hébergement interne et le mécanisme de partage B2B requis pour la Mission 2.
+        </p>
+    </div>
+
+</body>
+</html>

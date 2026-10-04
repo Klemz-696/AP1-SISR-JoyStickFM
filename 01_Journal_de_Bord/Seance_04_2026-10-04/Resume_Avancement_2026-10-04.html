@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Synthèse d'Avancement - Séance 04 - AP 1 - BTS SIO SISR</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 10mm 12mm 10mm 12mm;
+            @bottom-right {
+                content: "Page " counter(page) " / " counter(pages);
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 7.5pt;
+                color: #64748b;
+            }
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            color: #1e293b;
+            background-color: #ffffff;
+            font-size: 8.5pt;
+            line-height: 1.38;
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        .avoid-break {
+            page-break-inside: avoid;
+        }
+
+        /* Header Card */
+        .header-card {
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 10px 14px;
+            background: linear-gradient(135deg, #0f172a 0%, #312e81 50%, #1e3a8a 100%);
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 4px;
+            margin-bottom: 6px;
+        }
+
+        .school-title {
+            font-size: 9.5pt;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #38bdf8;
+            text-transform: uppercase;
+        }
+
+        .doc-date {
+            font-size: 8.5pt;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .main-title {
+            font-size: 13pt;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 4px;
+        }
+
+        .subtitle {
+            font-size: 8.5pt;
+            color: #cbd5e1;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: 7.5pt;
+        }
+
+        .meta-item strong {
+            color: #93c5fd;
+            display: block;
+            font-size: 7pt;
+            text-transform: uppercase;
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-size: 9.5pt;
+            font-weight: 700;
+            color: #0f172a;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 3px;
+            margin: 10px 0 6px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .badge {
+            font-size: 7pt;
+            font-weight: 600;
+            padding: 1px 6px;
+            border-radius: 3px;
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        /* Grid Layouts */
+        .two-cols {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 8px;
+        }
+
+        .three-cols {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        /* Cards */
+        .card {
+            border: 1px solid #e2e8f0;
+            border-radius: 5px;
+            padding: 8px 10px;
+            background: #f8fafc;
+        }
+
+        .card-title {
+            font-size: 8.5pt;
+            font-weight: 700;
+            color: #1e3a8a;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 7.5pt;
+            margin-bottom: 8px;
+        }
+
+        th {
+            background-color: #0f172a;
+            color: #ffffff;
+            font-weight: 600;
+            text-align: left;
+            padding: 4px 6px;
+            border: 1px solid #cbd5e1;
+        }
+
+        td {
+            padding: 4px 6px;
+            border: 1px solid #e2e8f0;
+            vertical-align: middle;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+
+        /* Status Pills */
+        .status-badge {
+            display: inline-block;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 7pt;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .status-ok {
+            background: #dcfce7;
+            color: #15803d;
+            border: 1px solid #86efac;
+        }
+
+        .status-prog {
+            background: #fef9c3;
+            color: #a16207;
+            border: 1px solid #fde047;
+        }
+
+        /* Code / Terminal */
+        .code-box {
+            background: #0f172a;
+            color: #e2e8f0;
+            border-radius: 4px;
+            padding: 6px 8px;
+            font-family: 'Consolas', 'Courier New', monospace;
+            font-size: 6.8pt;
+            line-height: 1.3;
+            margin: 4px 0;
+            border: 1px solid #334155;
+            white-space: pre-wrap;
+        }
+
+        .code-comment { color: #64748b; }
+        .code-keyword { color: #38bdf8; font-weight: bold; }
+        .code-param   { color: #4ade80; }
+        .code-val     { color: #f472b6; }
+
+        ul {
+            padding-left: 14px;
+            margin-bottom: 4px;
+        }
+
+        li {
+            margin-bottom: 2px;
+            font-size: 7.8pt;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <div class="header-card">
+        <div class="header-top">
+            <span class="school-title">Lycée Sidoine Apollinaire • BTS SIO SISR (2e Année)</span>
+            <span class="doc-date">Dimanche 04 Octobre 2026</span>
+        </div>
+        <div class="main-title">Journal d'Avancement — Séance 04 : Template VM & Déploiement WebRadio</div>
+        <div class="subtitle">Création de la Golden Image Debian 12, Automatisation Complète & Validation de la WebRadio JoyStick FM en DMZ Externe (VLAN 100)</div>
+        <div class="meta-grid">
+            <div class="meta-item">
+                <strong>Projet & Épreuve</strong>
+                AP 1 — Épreuve E5 (SISR)
+            </div>
+            <div class="meta-item">
+                <strong>Étudiant 04 (Lead)</strong>
+                Clément SAUZÈDE
+            </div>
+            <div class="meta-item">
+                <strong>Étudiant 10 (Binôme)</strong>
+                Mathys DUTHILLEUL
+            </div>
+            <div class="meta-item">
+                <strong>Infrastructure</strong>
+                Proxmox VE & OPNsense 23.1
+            </div>
+        </div>
+    </div>
+
+    <!-- Section 1 : Faits Marquants & Arbitrages Clés -->
+    <div class="section-title">
+        <span>1. Arbitrages d'Ingénierie & Synthèse des Réalisations de la Séance</span>
+        <span class="badge">Séance 04 : M1 & M2 Finalisées</span>
+    </div>
+
+    <div class="two-cols">
+        <div class="card avoid-break">
+            <div class="card-title">🏆 1.1. Modèle Golden Template Debian 12 Proxmox</div>
+            <p style="font-size: 7.8pt; margin-bottom: 4px;">
+                Face aux limitations de droits <code>root</code> sur le stockage partagé de Proxmox VE (rendant impossible l'exécution directe de <code>qm importdisk</code> pour convertir les vieux VMDK vSphere), nous avons conçu une démarche d'industrialisation professionnelle :
+            </p>
+            <ul>
+                <li><strong>Golden Image minimale :</strong> Installation Debian 12 Bookworm Netinst sans interface graphique inutile (consommation RAM &lt; 80 Mo).</li>
+                <li><strong>Script de standardisation :</strong> <code>prepare_template.sh</code> intégrant <code>qemu-guest-agent</code>, élévation <code>sudo</code> sans mot de passe, et purge de <code>/etc/machine-id</code> + clés SSH d'hôte pour garantir l'unicité de chaque clone.</li>
+                <li><strong>Clonage & Injection SSH :</strong> Clés SSH ED25519 déployées pour une administration transparente sans mot de passe depuis le poste d'administration.</li>
+            </ul>
+        </div>
+
+        <div class="card avoid-break">
+            <div class="card-title">📻 1.2. WebRadio JoyStick FM Opérationnelle (VLAN 100)</div>
+            <p style="font-size: 7.8pt; margin-bottom: 4px;">
+                Déploiement modulaire et sécurisé de 3 machines virtuelles dédiées en DMZ Externe, orchestrées par scripts d'automatisation Bash :
+            </p>
+            <ul>
+                <li><strong>Debian-Icecast2 (10.100.0.50:8000) :</strong> Serveur Icecast 2.4.4, point de montage <code>/joystick-fm</code> (dimensionné pour 250 auditeurs simultanés, MP3 128 kbps).</li>
+                <li><strong>Debian-Mixxx Auto-DJ (10.100.0.52) :</strong> Régie automatisée via service systemd <code>joystick-streamer</code> et FFmpeg, diffusant en boucle aléatoire les <strong>11 titres et jingles officiels</strong> de JoyStick FM.</li>
+                <li><strong>Debian-Web (10.100.0.51:80) :</strong> Pile LAMP (Apache 2.4, MariaDB 10.11, PHP 8.2) + WordPress 6.x + thème sur-mesure <code>joystickfm-theme</code>.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Section 2 : Preuves Techniques de Validation Opérationnelle -->
+    <div class="section-title">
+        <span>2. Preuves d'Exécution & Vérification en Conditions Réelles</span>
+        <span class="badge">Tests & Métriques Directes</span>
+    </div>
+
+    <div class="three-cols">
+        <div class="avoid-break">
+            <div style="font-weight: 700; color: #0f172a; margin-bottom: 3px; font-size: 7.5pt;">📡 Icecast 2 & Streamer (10.100.0.50 & .52)</div>
+            <div class="code-box">
+<span class="code-comment"># Journalctl daemon joystick-streamer :</span>
+<span class="code-keyword">systemd[1]: Started joystick-streamer.service</span>
+stream_playlist_loop.sh: <span class="code-param">[AUTO-DJ] 11 titres trouvés.</span>
+stream_playlist_loop.sh: <span class="code-param">Diffusion vers icecast://10.100.0.50:8000/joystick-fm</span>
+
+<span class="code-comment"># Statut Icecast en direct (status-json.xsl) :</span>
+"server_name": <span class="code-val">"JoyStick FM - Radio Lycée Sidoine Apollinaire"</span>
+"genre": <span class="code-val">"Electro / Gaming / Hits"</span>, "bitrate": <span class="code-param">128</span>
+"stream_start": <span class="code-keyword">"Sun, 04 Oct 2026 17:27:12 +0200"</span>
+            </div>
+            <p style="font-size: 7pt; color: #475569;">
+                ✔ Diffusion continue 24/7 sans interruption.
+            </p>
+        </div>
+
+        <div class="avoid-break">
+            <div style="font-weight: 700; color: #0f172a; margin-bottom: 3px; font-size: 7.5pt;">🌐 Apache Reverse-Proxy & Audio (10.100.0.51)</div>
+            <div class="code-box">
+<span class="code-comment"># Test du Reverse-Proxy audio Apache :</span>
+$ curl -s -m 2 http://10.100.0.51/radio-stream.mp3
+<span class="code-keyword">Flux binaire audio reçu : 91 000 octets / 2s</span>
+
+<span class="code-comment"># Récupération état via icecast-proxy.php :</span>
+$ curl -s http://10.100.0.51/.../icecast-proxy.php
+{
+  <span class="code-param">"online": true</span>, <span class="code-param">"listeners": 0</span>,
+  <span class="code-param">"mount": "/joystick-fm"</span>, <span class="code-param">"bitrate": 128</span>
+}
+            </div>
+            <p style="font-size: 7pt; color: #475569;">
+                ✔ Port 8000 masqué à l'utilisateur : flux relayé via Apache.
+            </p>
+        </div>
+
+        <div class="avoid-break">
+            <div style="font-weight: 700; color: #0f172a; margin-bottom: 3px; font-size: 7.5pt;">📑 WordPress & Permaliens Réécrits (10.100.0.51)</div>
+            <div class="code-box">
+<span class="code-comment"># Résolution des pages WP (HTTP 200 OK) :</span>
+HTTP/1.1 <span class="code-keyword">200 OK</span>  http://10.100.0.51/
+HTTP/1.1 <span class="code-keyword">200 OK</span>  http://10.100.0.51/radio/
+HTTP/1.1 <span class="code-keyword">200 OK</span>  http://10.100.0.51/podcasts/
+HTTP/1.1 <span class="code-keyword">200 OK</span>  http://10.100.0.51/blog/
+HTTP/1.1 <span class="code-keyword">200 OK</span>  http://10.100.0.51/contact/
+
+<span class="code-comment"># Table Live Chat créée dans MariaDB :</span>
+Tables_in_joystickfm_db: <span class="code-param">wp_jfm_chat_messages</span>
+            </div>
+            <p style="font-size: 7pt; color: #475569;">
+                ✔ Configuration <code>AllowOverride All</code> et <code>.htaccess</code> validée.
+            </p>
+        </div>
+    </div>
+
+    <!-- Page Break pour Page 2 -->
+    <div class="page-break"></div>
+
+    <!-- Section 3 : Tableau d'avancement comparatif -->
+    <div class="section-title">
+        <span>3. Matrice de Recette E5 & État d'Avancement Réel des Exigences</span>
+        <span class="badge">Mise à jour Séance 04</span>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 14%;">Module</th>
+                <th style="width: 50%;">Description de l'Exigence & Réalisation Technique</th>
+                <th style="width: 18%;">Responsable</th>
+                <th style="width: 18%;">Statut Réel</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Sauvegarde M1</strong></td>
+                <td>Sauvegarde quotidienne automatique vers SRV-FILES (10.30.0.20) avec identifiants CIFS sécurisés.</td>
+                <td>Clément (Étu 04)</td>
+                <td><span class="status-badge status-ok">100% Validé ✅</span></td>
+            </tr>
+            <tr>
+                <td><strong>Furtivité M1</strong></td>
+                <td>Scrubbing IP Random-id (anti-Nmap), blocage ICMP WAN et fermeture des ports non nécessaires.</td>
+                <td>Clément (Étu 04)</td>
+                <td><span class="status-badge status-ok">100% Validé ✅</span></td>
+            </tr>
+            <tr>
+                <td><strong>QoS M1</strong></td>
+                <td>Traffic Shaper dummynet : Pipe 2 Mb/s WAN, priorisation administration (100) vs standard (20).</td>
+                <td>Clément (Étu 04)</td>
+                <td><span class="status-badge status-ok">100% Validé ✅</span></td>
+            </tr>
+            <tr>
+                <td><strong>Fichiers SMB M1</strong></td>
+                <td>Serveur de fichiers Samba Debian (SRV-FILES 10.30.0.20), partages réseau et droits opérationnels.</td>
+                <td>Mathys (Étu 10)</td>
+                <td><span class="status-badge status-ok">100% Validé ✅</span></td>
+            </tr>
+            <tr>
+                <td><strong>VPN Nomade M1</strong></td>
+                <td>Tunnel WireGuard opérationnel (10.200.100.0/24), handshake validé avec le client nomade (10.200.100.2).</td>
+                <td>Clément (Étu 04)</td>
+                <td><span class="status-badge status-ok">100% Validé ✅</span></td>
+            </tr>
+            <tr>
+                <td><strong>Immich M2</strong></td>
+                <td>Serveur d'hébergement photo Docker (:2283) accessible depuis les postes clients du réseau.</td>
+                <td>Mathys (Étu 10)</td>
+                <td><span class="status-badge status-ok">100% Validé ✅</span></td>
+            </tr>
+            <tr>
+                <td><strong>Minecraft M2</strong></td>
+                <td>Serveur Minecraft PaperMC (10.30.0.22:25565), joueur nomade Klemz_696 connecté via WireGuard.</td>
+                <td>Mathys (Étu 10)</td>
+                <td><span class="status-badge status-ok">100% Validé ✅</span></td>
+            </tr>
+            <tr>
+                <td><strong>WebRadio M2</strong></td>
+                <td>Déploiement complet JoyStick FM en DMZ Externe (3 VMs : Icecast 10.100.0.50, Web 10.100.0.51, Mixxx 10.100.0.52).</td>
+                <td>Clément (Étu 04)</td>
+                <td><span class="status-badge status-ok">100% Validé ✅</span></td>
+            </tr>
+            <tr>
+                <td><strong>Honeypot M3</strong></td>
+                <td>Serveur leurre LAMP (10.100.0.99), détection en temps réel et cloisonnement anti-rebond Zero-Trust validé.</td>
+                <td>Clément (Étu 04)</td>
+                <td><span class="status-badge status-ok">100% Validé ✅</span></td>
+            </tr>
+            <tr>
+                <td><strong>VPN Intersite M2</strong></td>
+                <td>Tunnel IPsec B2B avec l'entreprise partenaire et filtrage chirurgical restreint à l'album Immich.</td>
+                <td>Binôme 04 & 10</td>
+                <td><span class="status-badge status-prog">À Venir 🔄</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Section 4 : Schéma de Flux de la WebRadio JoyStick FM -->
+    <div class="section-title">
+        <span>4. Architecture & Chaîne de Diffusion Audio JoyStick FM (DMZ Externe)</span>
+        <span class="badge">VLAN 100 DMZ</span>
+    </div>
+
+    <div class="card avoid-break" style="margin-bottom: 8px;">
+        <div style="font-family: 'Consolas', monospace; font-size: 7.2pt; line-height: 1.4; color: #1e3a8a;">
+            [Debian-Mixxx Streamer] (10.100.0.52) ──(FFmpeg MP3 128k)──&gt; [Debian-Icecast2] (10.100.0.50:8000/joystick-fm)<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;▲ (ProxyPass Interne)<br>
+            [Auditeur Web / Jury E5] ──(HTTP :80)──&gt; [Debian-Web] (10.100.0.51:80/radio-stream.mp3) ─┘<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;│<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─► Thème WordPress gaming, Live Chat MariaDB &amp; Easter Eggs
+        </div>
+        <p style="font-size: 7.2pt; color: #475569; margin-top: 4px;">
+            <strong>Sécurité :</strong> Les auditeurs et utilisateurs web ne communiquent qu'avec le port 80 de <code>Debian-Web</code>. Le serveur Icecast n'est accessible que depuis le réseau interne ou le reverse proxy, évitant l'exposition directe du port 8000.
+        </p>
+    </div>
+
+    <!-- Section 5 : Plan d'Action pour la Prochaine Séance -->
+    <div class="section-title">
+        <span>5. Prochaines Étapes : Interconnexion B2B & Recette Finale</span>
+        <span class="badge">Objectif 100% Global</span>
+    </div>
+
+    <div class="two-cols">
+        <div class="avoid-break" style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 10px;">
+            <div style="font-weight: 700; color: #0369a1; margin-bottom: 4px;">👨‍💻 Clément (Étudiant 04) :</div>
+            <ul>
+                <li><strong>Configuration IPsec B2B Intersite :</strong> Négocier et établir le tunnel IPsec IKEv2 avec le pare-feu du binôme partenaire désigné.</li>
+                <li><strong>Règles de filtrage chirurgical :</strong> Restreindre l'accès du partenaire au seul port HTTP d'Immich (partage d'album photo), bloquer et journaliser tout autre flux.</li>
+                <li><strong>Supervision Uptime Kuma :</strong> Déployer les sondes HTTP et TCP pour la surveillance de la WebRadio et des services clés.</li>
+            </ul>
+        </div>
+
+        <div class="avoid-break" style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 4px; padding: 6px 10px;">
+            <div style="font-weight: 700; color: #0369a1; margin-bottom: 4px;">👨‍💻 Mathys (Étudiant 10) :</div>
+            <ul>
+                <li><strong>Échange technique avec le partenaire :</strong> Valider la fiche d'interconnexion (IPs WAN, sous-réseaux locaux, clé pré-partagée PSK).</li>
+                <li><strong>Génération du lien de partage Immich :</strong> Créer l'album photo public dédié au partenaire commercial et vérifier sa consultation.</li>
+                <li><strong>Finalisation du Dossier de Recette E5 :</strong> Remplir les procès-verbaux de recette croisée et archiver les preuves d'audit.</li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

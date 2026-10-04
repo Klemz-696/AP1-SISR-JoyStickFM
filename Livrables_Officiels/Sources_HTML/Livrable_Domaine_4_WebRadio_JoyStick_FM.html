@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Livrable Officiel - Domaine 4 : WebRadio JoyStick FM - AP 1</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 10mm 12mm 10mm 12mm;
+            @bottom-right {
+                content: "Page " counter(page) " / " counter(pages);
+                font-family: 'Segoe UI', sans-serif;
+                font-size: 7.5pt;
+                color: #64748b;
+            }
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            color: #1e293b; background-color: #ffffff; font-size: 8.5pt; line-height: 1.38;
+        }
+        .page-break { page-break-before: always; }
+        .avoid-break { page-break-inside: avoid; }
+        .header-card {
+            border: 1px solid #cbd5e1; border-radius: 6px; padding: 10px 14px;
+            background: linear-gradient(135deg, #0f172a 0%, #4c1d95 50%, #1e3a8a 100%);
+            color: #ffffff; margin-bottom: 10px;
+        }
+        .header-top {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding-bottom: 4px; margin-bottom: 6px;
+        }
+        .school-title { font-size: 9.5pt; font-weight: 700; letter-spacing: 0.5px; color: #a78bfa; text-transform: uppercase; }
+        .doc-badge { font-size: 8pt; font-weight: 600; background: rgba(167, 139, 250, 0.2); border: 1px solid #a78bfa; padding: 2px 8px; border-radius: 4px; color: #ede9fe; }
+        .main-title { font-size: 13pt; font-weight: 800; line-height: 1.2; margin-bottom: 4px; }
+        .subtitle { font-size: 8.5pt; color: #cbd5e1; }
+        .meta-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+            margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255, 255, 255, 0.15); font-size: 7.5pt;
+        }
+        .meta-item strong { color: #ddd6fe; display: block; font-size: 7pt; text-transform: uppercase; }
+        .section-title {
+            font-size: 9.5pt; font-weight: 700; color: #0f172a; border-bottom: 2px solid #7c3aed;
+            padding-bottom: 3px; margin: 10px 0 6px 0; display: flex; justify-content: space-between; align-items: center;
+        }
+        .badge { font-size: 7pt; font-weight: 600; padding: 1px 6px; border-radius: 3px; background: #ede9fe; color: #5b21b6; }
+        .two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px; }
+        .card { border: 1px solid #e2e8f0; border-radius: 5px; padding: 8px 10px; background: #f8fafc; }
+        .card-title { font-size: 8.5pt; font-weight: 700; color: #5b21b6; margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
+        table { width: 100%; border-collapse: collapse; font-size: 7.5pt; margin-bottom: 8px; }
+        th { background-color: #0f172a; color: #ffffff; font-weight: 600; text-align: left; padding: 4px 6px; border: 1px solid #cbd5e1; }
+        td { padding: 4px 6px; border: 1px solid #e2e8f0; vertical-align: middle; }
+        tr:nth-child(even) { background-color: #f8fafc; }
+        .code-box {
+            background: #0f172a; color: #e2e8f0; border-radius: 4px; padding: 6px 8px;
+            font-family: 'Consolas', monospace; font-size: 6.8pt; line-height: 1.3; margin: 4px 0; border: 1px solid #334155; white-space: pre-wrap;
+        }
+        .code-comment { color: #64748b; }
+        .code-keyword { color: #a78bfa; font-weight: bold; }
+        .code-param   { color: #38bdf8; }
+        .code-val     { color: #f472b6; }
+        ul { padding-left: 14px; margin-bottom: 4px; }
+        li { margin-bottom: 2px; font-size: 7.8pt; }
+    </style>
+</head>
+<body>
+
+    <div class="header-card">
+        <div class="header-top">
+            <span class="school-title">Lycée Sidoine Apollinaire • BTS SIO SISR (2e Année)</span>
+            <span class="doc-badge">LIVRABLE OFFICIEL — DOMAINE 4</span>
+        </div>
+        <div class="main-title">WebRadio JoyStick FM & Haute Disponibilité Multimédia</div>
+        <div class="subtitle">Déploiement modulaire en DMZ Externe (VLAN 100), serveur Icecast 2, Auto-DJ 11 titres et CMS WordPress avec Reverse-Proxy</div>
+        <div class="meta-grid">
+            <div class="meta-item"><strong>Projet & Épreuve</strong>AP 1 — Épreuve E5</div>
+            <div class="meta-item"><strong>Concepteur WebRadio</strong>Clément SAUZÈDE (04)</div>
+            <div class="meta-item"><strong>Binôme Systèmes</strong>Mathys DUTHILLEUL (10)</div>
+            <div class="meta-item"><strong>Statut Domaine</strong>100% Opérationnel en Direct ✅</div>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <span>1. Architecture Modulaire en DMZ Externe (VLAN 100)</span>
+        <span class="badge">Découplage des Rôles</span>
+    </div>
+
+    <p style="font-size: 7.8pt; margin-bottom: 6px;">
+        Issue du projet personnel primé de Clément SAUZÈDE, l'infrastructure WebRadio <strong>JoyStick FM</strong> a été industrialisée et migrée dans le VLAN 100 (DMZ Externe). Elle se compose de 3 machines virtuelles dédiées et spécialisées :
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 22%;">Machine Virtuelle</th>
+                <th style="width: 15%;">IP / Port</th>
+                <th style="width: 28%;">Composants Logiciels</th>
+                <th style="width: 35%;">Rôle & Fonction dans la Diffusion</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Debian-Icecast2</strong></td>
+                <td><code>10.100.0.50:8000</code></td>
+                <td>Icecast 2.4.4 sur Debian 12</td>
+                <td>Serveur de diffusion streaming HTTP. Point de montage <code>/joystick-fm</code> (tampon 64k, 250 auditeurs simultanés).</td>
+            </tr>
+            <tr>
+                <td><strong>Debian-Mixxx (Auto-DJ)</strong></td>
+                <td><code>10.100.0.52</code></td>
+                <td>FFmpeg, daemon <code>joystick-streamer</code></td>
+                <td>Régie automatisée 24/7. Diffusion continue aléatoire (Shuffle) sur les <strong>11 titres musicaux et jingles officiels</strong>.</td>
+            </tr>
+            <tr>
+                <td><strong>Debian-Web</strong></td>
+                <td><code>10.100.0.51:80</code></td>
+                <td>Apache 2.4, MariaDB 10.11, PHP 8.2, WP 6.x</td>
+                <td>Portail auditeurs, thème rétro <code>joystickfm-theme</code>, Reverse-Proxy audio <code>/radio-stream.mp3</code>, Live Chat.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="section-title">
+        <span>2. Chaîne de Diffusion & Sécurisation par Reverse-Proxy Audio</span>
+        <span class="badge">Sécurité des Auditeurs</span>
+    </div>
+
+    <div class="two-cols">
+        <div class="card avoid-break">
+            <div class="card-title">🛡️ 2.1. Masquage du Port 8000 via Apache</div>
+            <p style="font-size: 7.8pt; margin-bottom: 4px;">
+                Dans un souci de sécurité et d'ergonomie, les auditeurs web ne se connectent jamais directement au port 8000 d'Icecast :
+            </p>
+            <ul>
+                <li><strong>Directive ProxyPass :</strong> Apache intercepte les requêtes sur <code>/radio-stream.mp3</code> et les relaie en interne vers <code>http://10.100.0.50:8000/joystick-fm</code> avec <code>flushpackets=on</code>.</li>
+                <li><strong>Contournement CORS natif :</strong> Le navigateur télécharge le flux audio depuis la même origine (port 80), évitant tout blocage cross-origin sur mobile et Safari.</li>
+                <li><strong>API d'état en direct :</strong> <code>icecast-proxy.php</code> interroge Icecast toutes les 5 secondes et renvoie le statut JSON (titre, artiste, auditeurs) au player frontend.</li>
+            </ul>
+        </div>
+
+        <div class="card avoid-break">
+            <div class="card-title">📜 2.2. Configuration Apache VirtualHost (/etc/apache2/sites-available/000-default.conf)</div>
+            <div class="code-box">
+&lt;VirtualHost *:80&gt;
+    DocumentRoot /var/www/html
+    &lt;Directory /var/www/html&gt;
+        Options -Indexes +FollowSymLinks
+        <span class="code-keyword">AllowOverride All</span>
+        Require all granted
+    &lt;/Directory&gt;
+
+    <span class="code-comment"># Reverse-Proxy Audio transparent vers Icecast DMZ :</span>
+    <span class="code-keyword">ProxyPass "/radio-stream.mp3" \
+        "http://10.100.0.50:8000/joystick-fm" flushpackets=on disablereuse=on</span>
+    <span class="code-keyword">ProxyPassReverse "/radio-stream.mp3" \
+        "http://10.100.0.50:8000/joystick-fm"</span>
+
+    Header set Access-Control-Allow-Origin "*"
+&lt;/VirtualHost&gt;
+            </div>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="section-title">
+        <span>3. Portail Web JoyStick FM, Thème Rétro & Fonctionnalités Interactives</span>
+        <span class="badge">Expérience Utilisateur</span>
+    </div>
+
+    <div class="two-cols">
+        <div class="card avoid-break">
+            <div class="card-title">🎮 3.1. Structure du Thème joystickfm-theme</div>
+            <ul>
+                <li><strong>Design Rétro-Gaming :</strong> Palette dark mode violet néon/cyan, typographies Press Start 2P et Share Tech Mono.</li>
+                <li><strong>Pages officielles en HTTP 200 OK :</strong> <code>/radio/</code> (grille et lecteur), <code>/podcasts/</code> (épisodes audio), <code>/blog/</code> (articles), <code>/contact/</code> (formulaire validé), <code>/mentions-legales/</code>.</li>
+                <li><strong>Player Audio Flottant :</strong> Lecteur sticky HTML5 avec barre de progression XP, gestion du volume tactile iOS et persistance de lecture inter-pages.</li>
+                <li><strong>Live Chat MariaDB :</strong> Chat instantané connecté à la table <code>wp_jfm_chat_messages</code> avec support de pseudos et avatars.</li>
+                <li><strong>Easter Eggs & DVD Bouncer :** 18 secrets intégrés (Konami Code ↑↑↓↓←→←→BA, Rickroll, honk FNAF, DVD Bouncer rebondissant en fond d'écran).</li>
+            </ul>
+        </div>
+
+        <div class="card avoid-break">
+            <div class="card-title">⚡ 3.2. Preuves Techniques de Bon Fonctionnement en Production</div>
+            <div class="code-box">
+<span class="code-comment"># 1. Vérification du flux Icecast en direct :</span>
+$ curl -s http://10.100.0.50:8000/status-json.xsl
+{
+  "server_name": <span class="code-val">"JoyStick FM - La Radio du Lycee Sidoine Apollinaire"</span>,
+  "genre": <span class="code-val">"Electro / Gaming / Hits"</span>,
+  "listenurl": <span class="code-param">"http://10.100.0.50:8000/joystick-fm"</span>
+}
+
+<span class="code-comment"># 2. Test du proxy métadonnées frontend :</span>
+$ curl -s http://10.100.0.51/.../icecast-proxy.php
+{<span class="code-keyword">"online": true</span>, "server_name": "JoyStick FM", <span class="code-param">"bitrate": 128</span>}
+
+<span class="code-comment"># 3. Test du Reverse-Proxy audio :</span>
+$ curl -s -m 2 http://10.100.0.51/radio-stream.mp3 -o test.mp3
+<span class="code-param">91 000 octets audio reçus en 2 secondes (Flux 128k continu)</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <span>4. Playlist Réelle en Diffusion Permanente (11 Titres & Jingles)</span>
+        <span class="badge">Programmation Musicale</span>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 35%;">Fichier Audio MP3</th>
+                <th style="width: 30%;">Artiste — Titre</th>
+                <th style="width: 35%;">Rôle dans la Programmation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>Arcade Bastion - VLAN 2077.mp3</code></td>
+                <td>Arcade Bastion — VLAN 2077</td>
+                <td>Titre phare Synthwave / Cyberpunk (Diffusion rotation)</td>
+            </tr>
+            <tr>
+                <td><code>Pixel Drift - Neon Override.mp3</code></td>
+                <td>Pixel Drift — Neon Override</td>
+                <td>Musique Gaming rythmée (Diffusion rotation)</td>
+            </tr>
+            <tr>
+                <td><code>SavePoint Beats - Sauvegarde Nocturne.mp3</code></td>
+                <td>SavePoint Beats — Sauvegarde Nocturne</td>
+                <td>Ambiance Lo-Fi / Détente (Diffusion rotation)</td>
+            </tr>
+            <tr>
+                <td><code>Zéro Ping - Glitch dans la Matrice.mp3</code></td>
+                <td>Zéro Ping — Glitch dans la Matrice</td>
+                <td>Électro Chiptune 8-bit (Diffusion rotation)</td>
+            </tr>
+            <tr>
+                <td><code>drill.mp3</code> / <code>rap.mp3</code> / <code>rock.mp3</code></td>
+                <td>JoyStick FM SoundTeam</td>
+                <td>Hits et transitions thématiques gaming</td>
+            </tr>
+            <tr>
+                <td><code>intro-radio.mp3</code></td>
+                <td>JoyStick FM Radio Jingle</td>
+                <td>Jingle d'annonce et d'habillage antenne</td>
+            </tr>
+            <tr>
+                <td><code>ia-vs-joueurs-radio.mp3</code> / <code>ikea-radio.mp3</code></td>
+                <td>Chroniques JoyStick FM</td>
+                <td>Débats et chroniques humoristiques geek</td>
+            </tr>
+            <tr>
+                <td><code>minecraft.mp3</code></td>
+                <td>Podcast JoyStick FM</td>
+                <td>Où Steve range-t-il ses 64 blocs de pierre ?</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="card avoid-break" style="margin-top: 8px;">
+        <div style="font-weight: 700; color: #0f172a; margin-bottom: 2px;">📌 Conclusion & Bilan de Validation (Domaine 4) :</div>
+        <p style="font-size: 7.5pt; color: #334155;">
+            La migration et l'intégration de la WebRadio JoyStick FM en DMZ Externe sont un succès complet. Les 3 serveurs fonctionnent de concert pour assurer une diffusion audio 24/7 ininterrompue, sécurisée derrière le reverse-proxy Apache et magnifiée par le portail web interactif WordPress. <strong>Les exigences de la Mission 2 sont satisfaites à 100%.</strong>
+        </p>
+    </div>
+
+</body>
+</html>

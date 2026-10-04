@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Livrable Officiel - Domaine 1 : Réseau, Furtivité & Sécurité OPNsense - AP 1</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 10mm 12mm 10mm 12mm;
+            @bottom-right {
+                content: "Page " counter(page) " / " counter(pages);
+                font-family: 'Segoe UI', sans-serif;
+                font-size: 7.5pt;
+                color: #64748b;
+            }
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            color: #1e293b; background-color: #ffffff; font-size: 8.5pt; line-height: 1.38;
+        }
+        .page-break { page-break-before: always; }
+        .avoid-break { page-break-inside: avoid; }
+        .header-card {
+            border: 1px solid #cbd5e1; border-radius: 6px; padding: 10px 14px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: #ffffff; margin-bottom: 10px;
+        }
+        .header-top {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding-bottom: 4px; margin-bottom: 6px;
+        }
+        .school-title { font-size: 9.5pt; font-weight: 700; letter-spacing: 0.5px; color: #38bdf8; text-transform: uppercase; }
+        .doc-badge { font-size: 8pt; font-weight: 600; background: rgba(56, 189, 248, 0.2); border: 1px solid #38bdf8; padding: 2px 8px; border-radius: 4px; color: #e0f2fe; }
+        .main-title { font-size: 13pt; font-weight: 800; line-height: 1.2; margin-bottom: 4px; }
+        .subtitle { font-size: 8.5pt; color: #cbd5e1; }
+        .meta-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+            margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255, 255, 255, 0.15); font-size: 7.5pt;
+        }
+        .meta-item strong { color: #93c5fd; display: block; font-size: 7pt; text-transform: uppercase; }
+        .section-title {
+            font-size: 9.5pt; font-weight: 700; color: #0f172a; border-bottom: 2px solid #3b82f6;
+            padding-bottom: 3px; margin: 10px 0 6px 0; display: flex; justify-content: space-between; align-items: center;
+        }
+        .badge { font-size: 7pt; font-weight: 600; padding: 1px 6px; border-radius: 3px; background: #dbeafe; color: #1e40af; }
+        .two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px; }
+        .card { border: 1px solid #e2e8f0; border-radius: 5px; padding: 8px 10px; background: #f8fafc; }
+        .card-title { font-size: 8.5pt; font-weight: 700; color: #1e3a8a; margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
+        table { width: 100%; border-collapse: collapse; font-size: 7.5pt; margin-bottom: 8px; }
+        th { background-color: #0f172a; color: #ffffff; font-weight: 600; text-align: left; padding: 4px 6px; border: 1px solid #cbd5e1; }
+        td { padding: 4px 6px; border: 1px solid #e2e8f0; vertical-align: middle; }
+        tr:nth-child(even) { background-color: #f8fafc; }
+        .status-badge { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 7pt; font-weight: 700; }
+        .status-ok { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+        .code-box {
+            background: #0f172a; color: #e2e8f0; border-radius: 4px; padding: 6px 8px;
+            font-family: 'Consolas', monospace; font-size: 6.8pt; line-height: 1.3; margin: 4px 0; border: 1px solid #334155; white-space: pre-wrap;
+        }
+        .code-comment { color: #64748b; }
+        .code-keyword { color: #38bdf8; font-weight: bold; }
+        .code-param   { color: #4ade80; }
+        ul { padding-left: 14px; margin-bottom: 4px; }
+        li { margin-bottom: 2px; font-size: 7.8pt; }
+    </style>
+</head>
+<body>
+
+    <div class="header-card">
+        <div class="header-top">
+            <span class="school-title">Lycée Sidoine Apollinaire • BTS SIO SISR (2e Année)</span>
+            <span class="doc-badge">LIVRABLE OFFICIEL — DOMAINE 1</span>
+        </div>
+        <div class="main-title">Architecture Réseau, Furtivité OPNsense & Sécurité Périmétrique</div>
+        <div class="subtitle">Conception de la topologie 4 zones, plan d'adressage IP, durcissement pare-feu et Traffic Shaping QoS</div>
+        <div class="meta-grid">
+            <div class="meta-item"><strong>Projet & Épreuve</strong>AP 1 — Épreuve E5</div>
+            <div class="meta-item"><strong>Responsable Réseau</strong>Clément SAUZÈDE (04)</div>
+            <div class="meta-item"><strong>Binôme Systèmes</strong>Mathys DUTHILLEUL (10)</div>
+            <div class="meta-item"><strong>Statut Domaine</strong>100% Validé & Conforme ✅</div>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <span>1. Architecture Topologique & Plan d'Adressage Segmenté</span>
+        <span class="badge">Norme & Règle d'Identifiants</span>
+    </div>
+
+    <p style="font-size: 7.8pt; margin-bottom: 6px;">
+        L'infrastructure repose sur un modèle d'entreprise étanche à 4 zones, isolé par ponts logiciels Proxmox VE (<code>vmbr0</code> à <code>vmbr3</code>) et administré par un pare-feu central unique OPNsense 23.1. Les adresses d'hôtes respectent la convention stricte de l'atelier : <code>.4</code> pour l'Étudiant 04 et <code>.10</code> pour l'Étudiant 10.
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 18%;">Zone Réseau</th>
+                <th style="width: 14%;">Interface</th>
+                <th style="width: 18%;">Sous-Réseau</th>
+                <th style="width: 14%;">Passerelle</th>
+                <th style="width: 36%;">Rôles Hébergés & Adresses IP Statiques</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>WAN (Partagé Lycée)</strong></td>
+                <td><code>vtnet0</code> (vmbr0)</td>
+                <td><code>192.168.101.0/24</code></td>
+                <td><code>192.168.101.254</code></td>
+                <td>IP Fixe Pare-feu : <code>192.168.101.37</code> (Point d'accès VPN et NAT)</td>
+            </tr>
+            <tr>
+                <td><strong>LAN Interne (VLAN 200)</strong></td>
+                <td><code>vtnet1</code> (vmbr1)</td>
+                <td><code>192.168.200.0/24</code></td>
+                <td><code>192.168.200.254</code></td>
+                <td>Poste Admin Étu 04 (<code>192.168.200.4</code>) • Poste Client Étu 10 (<code>192.168.200.10</code>)</td>
+            </tr>
+            <tr>
+                <td><strong>DMZ Interne (VLAN 300)</strong></td>
+                <td><code>vtnet2</code> (vmbr2)</td>
+                <td><code>10.30.0.0/24</code></td>
+                <td><code>10.30.0.254</code></td>
+                <td>SRV-FILES SMB (<code>10.30.0.20</code>) • Immich Docker (<code>.21:2283</code>) • Minecraft (<code>.22:25565</code>)</td>
+            </tr>
+            <tr>
+                <td><strong>DMZ Externe (VLAN 100)</strong></td>
+                <td><code>vtnet3</code> (vmbr3)</td>
+                <td><code>10.100.0.0/24</code></td>
+                <td><code>10.100.0.254</code></td>
+                <td>Icecast 2 (<code>10.100.0.50:8000</code>) • Web WP (<code>10.100.0.51:80</code>) • Mixxx (<code>10.100.0.52</code>) • Honeypot (<code>.99</code>)</td>
+            </tr>
+            <tr>
+                <td><strong>VPN Nomade (WireGuard)</strong></td>
+                <td><code>wg0</code> (Tunnel)</td>
+                <td><code>10.200.100.0/24</code></td>
+                <td><code>10.200.100.1</code></td>
+                <td>Client Nomade Clément : <code>10.200.100.2/32</code> (ChaCha20-Poly1305, Port UDP 51820)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="section-title">
+        <span>2. Durcissement Pare-feu & Furtivité WAN (Anti-Nmap)</span>
+        <span class="badge">Sécurité Périmétrique</span>
+    </div>
+
+    <div class="two-cols">
+        <div class="card avoid-break">
+            <div class="card-title">🛡️ 2.1. Furtivité Totale & Scrubbing Normalization</div>
+            <ul>
+                <li><strong>Normalisation IP (Scrubbing) :</strong> L'option <code>Random-id</code> est activée dans OPNsense. Elle réécrit le champ IP Identification des paquets sortants, neutralisant les empreintes d'OS (OS Fingerprinting Nmap).</li>
+                <li><strong>Suppression du Ping ICMP WAN :** Règle de blocage explicite sur le WAN interdisant les paquets <code>echo-request</code>. Résultat : 100% de perte de paquets, la machine apparaît inexistante sur le WAN.</li>
+                <li><strong>Opacité des ports :** Seul le port VPN WireGuard (UDP 51820) est autorisé en entrée WAN. Tous les autres ports réagissent en <code>drop</code> silencieux (mode furtif).</li>
+            </ul>
+        </div>
+
+        <div class="card avoid-break">
+            <div class="card-title">⚡ 2.2. Preuves de Recette Furtivité Nmap</div>
+            <div class="code-box">
+<span class="code-comment"># 1. Audit Ping ICMP depuis machine externe WAN :</span>
+$ ping 192.168.101.37
+Envoi d'une requête Ping...
+<span class="code-keyword">Délai d'attente dépassé (100% perte de paquets).</span>
+
+<span class="code-comment"># 2. Audit Nmap furtivité OS :</span>
+$ nmap -Pn -O 192.168.101.37
+<span class="code-param">Warning: OSScan results may be unreliable.</span>
+<span class="code-keyword">OS detection failed: Too many fingerprint matches.</span>
+All 1000 scanned ports on 192.168.101.37 are filtered.
+            </div>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="section-title">
+        <span>3. Gestion de la Qualité de Service (Traffic Shaper QoS)</span>
+        <span class="badge">Plafond 2 Mb/s & Priorités</span>
+    </div>
+
+    <div class="two-cols">
+        <div class="card avoid-break">
+            <div class="card-title">🎛️ 3.1. Mécanisme dummynet OPNsense</div>
+            <p style="font-size: 7.8pt; margin-bottom: 4px;">
+                Conformément à la consigne de Mission 1, la bande passante globale allouée au trafic nomade/WAN est bridée à <strong>2 Mbit/s</strong> tout en préservant la fluidité des accès d'administration :
+            </p>
+            <ul>
+                <li><strong>Pipes (Tuyaux de débit) :</strong> <code>Pipe_WAN_Total</code> bridé à <strong>2048 Kbit/s</strong> (2 Mb/s) avec tampon de file 100 slots.</li>
+                <li><strong>Queue Prioritaire (Admin/ICMP) :</strong> Poids fixé à <strong>100</strong> (priorité maximale accordée aux flux SSH 22, WinRM 5985/5986 et WireGuard).</li>
+                <li><strong>Queue Standard (Web & HTTP) :</strong> Poids fixé à <strong>20</strong> avec bande passante garantie de <strong>1024 Kbit/s</strong> (1 Mb/s garanti).</li>
+                <li><strong>Queue Intersite (Mission 2) :</strong> Poids intermédiaire de <strong>60</strong> pour le flux Immich inter-entreprises.</li>
+            </ul>
+        </div>
+
+        <div class="card avoid-break">
+            <div class="card-title">📊 3.2. Preuve de Bridage sous Iperf3</div>
+            <div class="code-box">
+<span class="code-comment"># Test Iperf3 à travers le pare-feu OPNsense :</span>
+$ iperf3 -c 10.30.0.20 -p 5201 -t 10
+[ ID] Interval           Transfer     Bitrate
+[  5]   0.00-1.00   sec   240 KBytes  <span class="code-param">1.97 Mbits/sec</span>
+[  5]   1.00-2.00   sec   244 KBytes  <span class="code-param">2.00 Mbits/sec</span>
+[  5]   2.00-3.00   sec   243 KBytes  <span class="code-param">1.99 Mbits/sec</span>
+[  5]  ...
+[  5]   0.00-10.00  sec  2.38 MBytes  <span class="code-keyword">2.00 Mbits/sec (sender)</span>
+            </div>
+            <p style="font-size: 7.2pt; color: #475569;">
+                ✔ Le débit moyen ne dépasse jamais le plafond contractuel de 2 Mb/s.
+            </p>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <span>4. Matrice de Filtrage Inter-VLANs & Cloisonnement Zero-Trust</span>
+        <span class="badge">Règles Pare-feu</span>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 15%;">Interface</th>
+                <th style="width: 25%;">Source & Destination</th>
+                <th style="width: 15%;">Protocole / Port</th>
+                <th style="width: 12%;">Action</th>
+                <th style="width: 33%;">Justification & Enjeu de Sécurité</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>LAN (vtnet1)</code></td>
+                <td><code>LAN net</code> ➔ <code>DMZ_INT net</code></td>
+                <td>TCP 445 (SMB), 5985/5986 (WinRM)</td>
+                <td><span class="status-badge status-ok">PASS</span></td>
+                <td>Accès légitime des postes employés aux fichiers et à la gestion.</td>
+            </tr>
+            <tr>
+                <td><code>LAN (vtnet1)</code></td>
+                <td><code>LAN net</code> ➔ <code>DMZ_EXT net</code></td>
+                <td>TCP 80 (HTTP), 8000 (Icecast)</td>
+                <td><span class="status-badge status-ok">PASS</span></td>
+                <td>Écoute interne de la WebRadio JoyStick FM et consultation du portail.</td>
+            </tr>
+            <tr>
+                <td><code>DMZ_EXT (vtnet3)</code></td>
+                <td><code>DMZ_EXT net</code> ➔ <code>LAN net</code></td>
+                <td>ALL Traffic</td>
+                <td><span class="status-badge" style="background:#fee2e2;color:#991b1b;border:1px solid #fca5a5;">BLOCK & LOG</span></td>
+                <td><strong>Anti-Rebond :</strong> Empêche une machine DMZ compromise d'attaquer le LAN.</td>
+            </tr>
+            <tr>
+                <td><code>DMZ_EXT (vtnet3)</code></td>
+                <td><code>DMZ_EXT net</code> ➔ <code>DMZ_INT net</code></td>
+                <td>ALL Traffic</td>
+                <td><span class="status-badge" style="background:#fee2e2;color:#991b1b;border:1px solid #fca5a5;">BLOCK & LOG</span></td>
+                <td><strong>Anti-Rebond :</strong> Empêche le Honeypot ou la WebRadio de joindre les serveurs internes.</td>
+            </tr>
+            <tr>
+                <td><code>WireGuard (wg0)</code></td>
+                <td><code>10.200.100.2</code> ➔ <code>10.30.0.20</code></td>
+                <td>TCP 445, 5985, 22</td>
+                <td><span class="status-badge status-ok">PASS</span></td>
+                <td>Accès nomade sécurisé de l'employé vers son partage et WinRM.</td>
+            </tr>
+            <tr>
+                <td><code>WireGuard (wg0)</code></td>
+                <td><code>10.200.100.2</code> ➔ <code>10.30.0.22</code></td>
+                <td>TCP 25565 (Minecraft)</td>
+                <td><span class="status-badge status-ok">PASS</span></td>
+                <td>Connexion joueur nomade sécurisée vers le serveur de jeu.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="card avoid-break" style="margin-top: 8px;">
+        <div style="font-weight: 700; color: #0f172a; margin-bottom: 2px;">📌 Conclusion & Bilan de Validation (Domaine 1) :</div>
+        <p style="font-size: 7.5pt; color: #334155;">
+            L'architecture réseau et la sécurité périmétrique ont été auditées avec succès. Le pare-feu OPNsense garantit une étanchéité totale entre les sous-réseaux, un bridage strict à 2 Mb/s respecté par les flux nomades, et une furtivité absolue face aux outils d'analyse réseau (Nmap, Ping). <strong>Conformité 100% avec les exigences de la Mission 1 et du référentiel E5.</strong>
+        </p>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Synthèse d'Avancement - Séance 01 - AP 1 - BTS SIO SISR</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 10mm 12mm 10mm 12mm;
+            @bottom-right {
+                content: "Page " counter(page) " / " counter(pages);
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                font-size: 7.5pt;
+                color: #64748b;
+            }
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            color: #1e293b;
+            background-color: #ffffff;
+            font-size: 8.5pt;
+            line-height: 1.38;
+        }
+
+        .page-break {
+            page-break-before: always;
+        }
+
+        .avoid-break {
+            page-break-inside: avoid;
+        }
+
+        /* Header Card */
+        .header-card {
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            padding: 10px 14px;
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            padding-bottom: 4px;
+            margin-bottom: 6px;
+        }
+
+        .school-title {
+            font-size: 9.5pt;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #38bdf8;
+        }
+
+        .badge-academic {
+            background-color: rgba(56, 189, 248, 0.2);
+            color: #e0f2fe;
+            border: 1px solid #38bdf8;
+            padding: 2px 7px;
+            border-radius: 10px;
+            font-size: 7pt;
+            font-weight: 600;
+        }
+
+        .doc-title {
+            font-size: 14pt;
+            font-weight: 800;
+            margin-bottom: 2px;
+            letter-spacing: -0.3px;
+        }
+
+        .doc-subtitle {
+            font-size: 8.5pt;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 6px 10px;
+            border-radius: 4px;
+            font-size: 7.5pt;
+        }
+
+        .meta-item strong {
+            display: block;
+            color: #94a3b8;
+            font-size: 6.5pt;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .meta-item span {
+            color: #f8fafc;
+            font-weight: 600;
+        }
+
+        /* Headings */
+        h2 {
+            font-size: 10pt;
+            font-weight: 700;
+            color: #0f172a;
+            border-left: 3px solid #0284c7;
+            padding-left: 6px;
+            margin-top: 9px;
+            margin-bottom: 5px;
+        }
+
+        p {
+            margin-bottom: 5px;
+            text-align: justify;
+        }
+
+        /* Callout Box */
+        .callout {
+            background-color: #f8fafc;
+            border-left: 3px solid #0284c7;
+            border-radius: 0 4px 4px 0;
+            padding: 6px 8px;
+            margin-bottom: 7px;
+            font-size: 8pt;
+        }
+
+        .callout strong {
+            color: #0369a1;
+        }
+
+        .callout-success {
+            background-color: #f0fdf4;
+            border-left: 3px solid #16a34a;
+        }
+        .callout-success strong {
+            color: #15803d;
+        }
+
+        /* Grids & Cards */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 7px;
+        }
+
+        .card {
+            border: 1px solid #e2e8f0;
+            border-radius: 5px;
+            padding: 7px 9px;
+            background-color: #ffffff;
+        }
+
+        .card-header {
+            font-weight: 700;
+            font-size: 8pt;
+            color: #1e3a8a;
+            border-bottom: 1px solid #f1f5f9;
+            padding-bottom: 3px;
+            margin-bottom: 4px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 8px;
+            font-size: 7.8pt;
+        }
+
+        th {
+            background-color: #0f172a;
+            color: #ffffff;
+            font-weight: 600;
+            text-align: left;
+            padding: 4px 6px;
+            border: 1px solid #0f172a;
+            font-size: 7pt;
+            text-transform: uppercase;
+        }
+
+        td {
+            padding: 3.5px 6px;
+            border: 1px solid #cbd5e1;
+            vertical-align: middle;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #f8fafc;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-size: 6.5pt;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge-done { background-color: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+
+    </style>
+</head>
+<body>
+
+    <!-- BANDEAU D'EN-TÊTE -->
+    <div class="header-card">
+        <div class="header-top">
+            <span class="school-title">Lycée Sidoine Apollinaire — BTS SIO SISR</span>
+            <span class="badge-academic">Atelier Professionnalisant AP 1 • Suivi de Projet</span>
+        </div>
+        <div class="doc-title">Compte-Rendu d'Avancement — Séance 01</div>
+        <div class="doc-subtitle">Cadrage de projet, gouvernance d'équipe, choix d'architecture & livraison du Plan d'Adressage</div>
+        <div class="meta-grid">
+            <div class="meta-item">
+                <strong>Étudiant 04 (Lead Réseau)</strong>
+                <span>Clément SAUZÈDE</span>
+            </div>
+            <div class="meta-item">
+                <strong>Étudiant 10 (Admin Système)</strong>
+                <span>Mathys DUTHILLEUL</span>
+            </div>
+            <div class="meta-item">
+                <strong>Date de la Séance</strong>
+                <span>08 Septembre 2026</span>
+            </div>
+            <div class="meta-item">
+                <strong>Statut des Objectifs</strong>
+                <span>100% Validés (Livrable 1 Rendu)</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 1. CONSTITUTION DE L'ÉQUIPE ET REPARTITION DES ROLES -->
+    <h2>1. Constitution de l'Équipe & Gouvernance du Binôme</h2>
+    <p>Dans le cadre de l'Atelier Professionnalisant AP 1, l'équipe a été formée et organisée pour optimiser l'efficience technique et valoriser les compétences de l'épreuve E5 du BTS SIO SISR :</p>
+    
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-header">
+                <span>Clément SAUZÈDE (Étudiant 04)</span>
+                <span class="badge" style="background-color: #dbeafe; color: #1e40af;">Lead Réseau, Sécurité & WebRadio</span>
+            </div>
+            <ul style="margin-left: 14px; font-size: 7.5pt;">
+                <li>Architecture globale & Plan d'adressage IP des 4 zones.</li>
+                <li>Sécurisation avancée OPNsense (anti-Nmap, blocage ICMP).</li>
+                <li>Mise en œuvre du serveur VPN IPsec IKEv2 et de la PKI.</li>
+                <li>Configuration du Traffic Shaper QoS (Pipes/Queues 2 Mb/s).</li>
+                <li>Migration V2V de la WebRadio JoyStick FM (projet d'origine).</li>
+            </ul>
+        </div>
+        <div class="card">
+            <div class="card-header">
+                <span>Mathys DUTHILLEUL (Étudiant 10)</span>
+                <span class="badge" style="background-color: #dcfce7; color: #15803d;">Admin Systèmes & Services Internes</span>
+            </div>
+            <ul style="margin-left: 14px; font-size: 7.5pt;">
+                <li>Déploiement initial de la VM OPNsense sur Proxmox VE.</li>
+                <li>Attribution des interfaces physiques et capture du bail WAN.</li>
+                <li>Installation de la VM Windows Server 2022 (partage SMB & WinRM).</li>
+                <li>Déploiement des conteneurs Docker (Immich & Minecraft).</li>
+                <li>Configuration du poste client employé & recettes croisées.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 2. ANALYSE ET CADRAGE DU CAHIER DES CHARGES -->
+    <h2>2. Analyse du Cahier des Charges & Définition des Missions</h2>
+    <div class="callout">
+        <strong>Synthèse des 3 missions de l'atelier professionnalisant :</strong>
+        L'objectif global est de bâtir un système d'information complet, sécurisé et cloisonné, capable d'offrir des services locaux, un accès nomade chiffré, et une interconnexion partenaire B2B Zero-Trust.
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Mission</th>
+                <th>Intitulé & Enjeux Principaux</th>
+                <th>Livrables Attendus</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Mission 1</strong></td>
+                <td><strong>VPN Nomade, Sécurité & QoS :</strong> Accès externe chiffré IPsec IKEv2 pour l'employé vers SMB et Immich. Sauvegarde automatique quotidienne. Opacité totale du pare-feu sur le WAN (anti-Nmap). Shaper QoS 2 Mb/s.</td>
+                <td>Plan d'adressage complet, Export config XML OPNsense, Dossier de recette M1.</td>
+            </tr>
+            <tr>
+                <td><strong>Mission 2</strong></td>
+                <td><strong>Interconnexion Intersite (Extranet B2B) :</strong> Tunnel IPsec site-à-site avec un binôme partenaire pour partager uniquement un album photo Immich. Migration sans coupure de la WebRadio (Icecast) en DMZ externe. Serveur Minecraft.</td>
+                <td>Fiche de coordination partenaire, Règles pare-feu documentées, Mesures QoS globale.</td>
+            </tr>
+            <tr>
+                <td><strong>Mission 3</strong></td>
+                <td><strong>Honeypot LAMP (Bonus) :</strong> Leurre web en DMZ externe redirigeant les attaques avec alerting automatique par e-mail et bannissement dynamique d'IP.</td>
+                <td>Dossier de recette M3 avec preuves de redirection et mails d'alerte.</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 3. DECISIONS ARCHITECTURALES ET CHOIX TECHNIQUES -->
+    <h2>3. Décisions Architecturales & Choix Techniques Validés</h2>
+    <ul style="margin-left: 18px; font-size: 7.8pt;">
+        <li><strong>Plateforme de Virtualisation :</strong> <strong>Proxmox VE</strong> (Lycée Sidoine Apollinaire). Ponts virtuels Linux (<code>vmbr0</code> à <code>vmbr3</code>) pour isoler les 4 zones.</li>
+        <li><strong>Routage & Pare-feu :</strong> <strong>OPNsense</strong> (FreeBSD). Solution retenue pour son filtrage stateful, son shaper (ipfw dummynet) et sa journalisation.</li>
+        <li><strong>Technologie VPN :</strong> <strong>IPsec IKEv2</strong>. Préféré à OpenVPN pour son intégration native dans Windows 11 (aucun client tiers) et sa robustesse.</li>
+        <li><strong>Serveur de fichiers & Administration :</strong> <strong>Windows Server 2022</strong> (Partage SMB avec droits NTFS fins et console PowerShell Remoting / WinRM).</li>
+        <li><strong>Conteneurisation d'Immich & Minecraft :</strong> <strong>Docker & Docker Compose</strong> sur Debian 12 (rapidité de déploiement, IaC et isolation).</li>
+        <li><strong>Intégration du Pôle WebRadio existant :</strong> Migration inter-hyperviseurs (V2V) des VM <strong>VMware vSphere vers Proxmox VE</strong> (Icecast, Web, Mixxx) en DMZ Externe avec bascule sans interruption audio et absorption du pare-feu sur OPNsense.</li>
+    </ul>
+
+    <!-- SAUT DE PAGE EXACT POUR LA PAGE 2 -->
+    <div class="page-break"></div>
+
+    <!-- 4. PLAN D'ADRESSAGE ET SEGMENTATION VLAN -->
+    <h2>4. Segmentation Réseau & Plan d'Adressage Validé</h2>
+    <p>La segmentation a été calquée sur les contraintes académiques et les numéros d'étudiants (<strong>04</strong> et <strong>10</strong>) :</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Zone Réseau</th>
+                <th>VLAN ID</th>
+                <th>Sous-Réseau CIDR</th>
+                <th>Passerelle OPNsense</th>
+                <th>Équipements & Règle du Dernier Octet</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>WAN Lycée</strong></td>
+                <td>Partagé</td>
+                <td><code>192.168.101.0/24</code></td>
+                <td><code>192.168.101.254</code></td>
+                <td>OPNsense WAN fixé sur <strong>192.168.101.41</strong> (Passerelle amont lycée)</td>
+            </tr>
+            <tr>
+                <td><strong>LAN Bureautique</strong></td>
+                <td><strong>VLAN 200</strong></td>
+                <td><code>192.168.200.0/24</code></td>
+                <td><code>192.168.200.254</code></td>
+                <td>Poste Clément : <strong>.4</strong> • Poste Mathys : <strong>.10</strong> • DHCP : <code>.50-.99</code></td>
+            </tr>
+            <tr>
+                <td><strong>DMZ Interne</strong></td>
+                <td><strong>VLAN 300</strong></td>
+                <td><code>10.30.0.0/24</code></td>
+                <td><code>10.30.0.254</code></td>
+                <td>SRV-FILES (Win) : <code>.20</code> • SRV-IMMICH : <code>.21</code> • SRV-MC : <code>.22</code></td>
+            </tr>
+            <tr>
+                <td><strong>DMZ Externe</strong></td>
+                <td><strong>VLAN 100</strong></td>
+                <td><code>10.100.0.0/24</code></td>
+                <td><code>10.100.0.254</code></td>
+                <td>JoyStick FM : Icecast <code>.50</code>, Web <code>.51</code>, Mixxx <code>.52</code> (FW absorbé) • Honeypot : <code>.99</code></td>
+            </tr>
+            <tr>
+                <td><strong>VPN Nomade IPsec</strong></td>
+                <td>Virtuel</td>
+                <td><code>10.200.100.0/24</code></td>
+                <td><code>10.200.100.254</code></td>
+                <td>Client Clément Nomade : <strong>.4</strong> • Client Mathys Nomade : <strong>.10</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 5. ACTIONS TECHNIQUES REALISEES AUJOURD'HUI -->
+    <h2>5. Réalisations Techniques de la Séance (08/09/2026)</h2>
+    <div class="callout callout-success">
+        <strong>Objectifs atteints au cours de la séance :</strong>
+        L'infrastructure est cadrée, les fichiers de suivi sont structurés et le premier livrable officiel demandé par le professeur a été finalisé et compilé au format PDF.
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Action Réalisée</th>
+                <th>Acteur Référent</th>
+                <th>Statut & Livrable Associé</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Création de la VM OPNsense sur Proxmox VE</td>
+                <td>Mathys DUTHILLEUL</td>
+                <td><span class="badge badge-done">Terminé</span> VM provisionnée & interfaces assignées</td>
+            </tr>
+            <tr>
+                <td>Relevé du bail DHCP WAN du lycée & fixation statique</td>
+                <td>Mathys DUTHILLEUL</td>
+                <td><span class="badge badge-done">Terminé</span> IP WAN <code>192.168.101.41</code> sanctuarisée</td>
+            </tr>
+            <tr>
+                <td>Résolution de la collaboration Proxmox (accès direct WebGUI/SSH)</td>
+                <td>Clément SAUZÈDE</td>
+                <td><span class="badge badge-done">Terminé</span> Procédure <code>09_COLLABORATION_ET_ACCES_PROXMOX.md</code></td>
+            </tr>
+            <tr>
+                <td>Développement du script de sauvegarde automatisée Robocopy</td>
+                <td>Clément SAUZÈDE</td>
+                <td><span class="badge badge-done">Terminé</span> Script <code>scripts/Backup-Documents.ps1</code> opérationnel</td>
+            </tr>
+            <tr>
+                <td>Conception & Génération du <strong>Livrable Officiel N°1 (Plan d'Adressage)</strong></td>
+                <td>Binôme 04 & 10</td>
+                <td><span class="badge badge-done">Validé</span> Fichier PDF généré avec topologie SVG</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- 6. FEUILLE DE ROUTE POUR LA PROCHAINE SEANCE -->
+    <h2>6. Feuille de Route pour la Prochaine Séance</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Priorité</th>
+                <th>Tâche Planifiée</th>
+                <th>Responsable</th>
+                <th>Méthode / Référence Technique</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Prio 1</strong></td>
+                <td>Finalisation du WebGUI OPNsense & Furtivité WAN</td>
+                <td>Clément (04)</td>
+                <td>Scrubbing / Normalisation TCP & Règle Drop ICMP (anti-Nmap)</td>
+            </tr>
+            <tr>
+                <td><strong>Prio 1</strong></td>
+                <td>Installation de la VM Windows Server 2022 (DMZ Int)</td>
+                <td>Mathys (10)</td>
+                <td>Rôle Serveur de fichiers SMB, création des partages et WinRM</td>
+            </tr>
+            <tr>
+                <td><strong>Prio 2</strong></td>
+                <td>Configuration du serveur VPN IPsec IKEv2 & PKI</td>
+                <td>Clément (04)</td>
+                <td>Création de la CA interne, certificats et pool <code>10.200.100.0/24</code></td>
+            </tr>
+            <tr>
+                <td><strong>Prio 2</strong></td>
+                <td>Déploiement de la pile Docker Immich sur Debian 12</td>
+                <td>Clément (04)</td>
+                <td>Lancement du <code>docker-compose.yml</code> sur <code>10.30.0.21:2283</code></td>
+            </tr>
+            <tr>
+                <td><strong>Prio 3</strong></td>
+                <td>Configuration du Traffic Shaper (QoS 2 Mb/s)</td>
+                <td>Clément (04)</td>
+                <td>Pipes & Queues OPNsense (priorité SSH/ICMP, garantie 1 Mb/s HTTP)</td>
+            </tr>
+            <tr>
+                <td><strong>Prio 3</strong></td>
+                <td>Raccordement des VM WebRadio JoyStick FM en DMZ Externe</td>
+                <td>Clément (04)</td>
+                <td>Migration V2V, assignation sur le VLAN 100 et test de bascule Icecast sans coupure</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div style="margin-top: 15px; border-top: 1px solid #e2e8f0; padding-top: 8px; font-size: 7.5pt; color: #64748b; text-align: center;">
+        Compte-rendu officiel d'avancement — Atelier Professionnalisant AP 1 — BTS SIO SISR — Lycée Sidoine Apollinaire (Clermont-Ferrand).
+    </div>
+
+</body>
+</html>
+

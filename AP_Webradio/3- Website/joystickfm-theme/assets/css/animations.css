@@ -1,0 +1,197 @@
+/* ============================================
+   JOYSTICK FM — animations.css
+   Keyframes, transitions, micro-interactions
+   ============================================ */
+
+/* ── Animations globales et utilitaires pour Joystick FM ── */
+
+
+/* ── Keyframes de base ── */
+
+/* Clignotement curseur / dot live */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Pulsation badge LIVE */
+@keyframes livePulse {
+  0%, 100% { box-shadow: 0 0 8px var(--rose-neon), 0 0 20px var(--rose-neon); }
+  50%       { box-shadow: 0 0 4px var(--rose-neon), 0 0 8px var(--rose-neon); }
+}
+
+/* Pulsation logo */
+@keyframes logoPulse {
+  0%, 100% { box-shadow: 0 0 8px rgba(0,245,255,0.4), 0 0 20px rgba(0,245,255,0.2); }
+  50%       { box-shadow: 0 0 16px rgba(0,245,255,0.7), 0 0 35px rgba(0,245,255,0.3); }
+}
+
+/* Défilement grille hero */
+@keyframes gridScroll {
+  from { background-position: 0 0; }
+  to   { background-position: 60px 60px; }
+}
+
+/* Rotation background radio */
+@keyframes rotateBg {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Visualizer barres */
+@keyframes vizBounce {
+  from { transform: scaleY(0.2); }
+  to   { transform: scaleY(1); }
+}
+
+/* Pop easter egg */
+@keyframes eggPop {
+  from { transform: scale(0.3) rotate(-10deg); opacity: 0; }
+  to   { transform: scale(1) rotate(0deg);    opacity: 1; }
+}
+
+/* Slide in from bottom */
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Fade in */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Glitch effect */
+@keyframes glitch1 {
+  0%   { clip-path: inset(40% 0 61% 0); transform: translate(-3px, 0); }
+  20%  { clip-path: inset(92% 0 1%  0); transform: translate(3px, 0); }
+  40%  { clip-path: inset(43% 0 1%  0); transform: translate(3px, 0); }
+  60%  { clip-path: inset(25% 0 58% 0); transform: translate(-3px, 0); }
+  80%  { clip-path: inset(54% 0 7%  0); transform: translate(-3px, 0); }
+  100% { clip-path: inset(58% 0 43% 0); transform: translate(3px, 0); }
+}
+@keyframes glitch2 {
+  0%   { clip-path: inset(24% 0 29% 0); transform: translate(3px, 0); }
+  20%  { clip-path: inset(54% 0 28% 0); transform: translate(-3px, 0); }
+  40%  { clip-path: inset(11% 0 82% 0); transform: translate(-3px, 0); }
+  60%  { clip-path: inset(52% 0 1%  0); transform: translate(3px, 0); }
+  80%  { clip-path: inset(79% 0 7%  0); transform: translate(3px, 0); }
+  100% { clip-path: inset(4%  0 91% 0); transform: translate(-3px, 0); }
+}
+
+/* Neon flicker */
+@keyframes neonFlicker {
+  0%, 95%, 100% {
+    text-shadow: 0 0 8px var(--bleu-neon), 0 0 20px var(--bleu-neon), 0 0 40px rgba(0,245,255,0.3);
+    opacity: 1;
+  }
+  96% { opacity: 0.8; text-shadow: none; }
+  97% { opacity: 1; text-shadow: 0 0 8px var(--bleu-neon); }
+  98% { opacity: 0.7; text-shadow: none; }
+  99% { opacity: 1; text-shadow: 0 0 8px var(--bleu-neon), 0 0 20px var(--bleu-neon); }
+}
+
+/* Spin loader */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Equalizer (3 barres) */
+@keyframes eq1 { 0%,100%{height:8px}  25%{height:30px} 50%{height:16px} 75%{height:40px} }
+@keyframes eq2 { 0%,100%{height:20px} 25%{height:10px} 50%{height:36px} 75%{height:16px} }
+@keyframes eq3 { 0%,100%{height:14px} 25%{height:38px} 50%{height:8px}  75%{height:28px} }
+
+/* ── Classes utilitaires d'animation ── */
+
+.animate-slide-up {
+  animation: slideUp 0.6s cubic-bezier(0.4,0,0.2,1) both;
+}
+.animate-fade-in {
+  animation: fadeIn 0.5s ease both;
+}
+.animate-neon {
+  animation: neonFlicker 8s ease-in-out infinite;
+}
+.animate-glitch {
+  position: relative;
+}
+.animate-glitch::before,
+.animate-glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  background: var(--noir);
+}
+.animate-glitch::before {
+  color: var(--rose-neon);
+  animation: glitch1 3s infinite linear;
+}
+.animate-glitch::after {
+  color: var(--bleu-neon);
+  animation: glitch2 3s infinite linear;
+  animation-delay: 0.1s;
+}
+
+/* Stagger children */
+.stagger-children > * { opacity: 0; animation: slideUp 0.5s ease forwards; }
+.stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
+.stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
+
+/* Neon underline hover */
+.neon-underline {
+  position: relative;
+}
+.neon-underline::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0%; height: 2px;
+  background: var(--bleu-neon);
+  box-shadow: var(--glow-bleu);
+  transition: width var(--transition);
+}
+.neon-underline:hover::after { width: 100%; }
+
+/* Loader spinner */
+.spinner {
+  width: 24px; height: 24px;
+  border: 2px solid var(--noir-border);
+  border-top-color: var(--bleu-neon);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+/* Success checkmark */
+.success-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px; height: 48px;
+  background: rgba(57,255,20,0.12);
+  border: 2px solid var(--vert-neon);
+  border-radius: 50%;
+  font-size: 1.4rem;
+  animation: eggPop 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  box-shadow: 0 0 16px rgba(57,255,20,0.3);
+}
+
+/* Floating pixel particles (hero decoration) */
+.pixel-particle {
+  position: absolute;
+  width: 4px; height: 4px;
+  background: var(--bleu-neon);
+  border-radius: 1px;
+  animation: floatParticle var(--dur, 6s) ease-in-out infinite;
+  opacity: 0.4;
+}
+@keyframes floatParticle {
+  0%,100% { transform: translateY(0) translateX(0); opacity: 0.4; }
+  33%      { transform: translateY(-20px) translateX(8px); opacity: 0.7; }
+  66%      { transform: translateY(10px) translateX(-6px); opacity: 0.3; }
+}

@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Livrable Officiel - Domaine 5 : Sécurité Active, Minecraft & Supervision - AP 1</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 10mm 12mm 10mm 12mm;
+            @bottom-right {
+                content: "Page " counter(page) " / " counter(pages);
+                font-family: 'Segoe UI', sans-serif;
+                font-size: 7.5pt;
+                color: #64748b;
+            }
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif;
+            color: #1e293b; background-color: #ffffff; font-size: 8.5pt; line-height: 1.38;
+        }
+        .page-break { page-break-before: always; }
+        .avoid-break { page-break-inside: avoid; }
+        .header-card {
+            border: 1px solid #cbd5e1; border-radius: 6px; padding: 10px 14px;
+            background: linear-gradient(135deg, #0f172a 0%, #b45309 50%, #1e3a8a 100%);
+            color: #ffffff; margin-bottom: 10px;
+        }
+        .header-top {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2); padding-bottom: 4px; margin-bottom: 6px;
+        }
+        .school-title { font-size: 9.5pt; font-weight: 700; letter-spacing: 0.5px; color: #fbbf24; text-transform: uppercase; }
+        .doc-badge { font-size: 8pt; font-weight: 600; background: rgba(251, 191, 36, 0.2); border: 1px solid #fbbf24; padding: 2px 8px; border-radius: 4px; color: #fef3c7; }
+        .main-title { font-size: 13pt; font-weight: 800; line-height: 1.2; margin-bottom: 4px; }
+        .subtitle { font-size: 8.5pt; color: #cbd5e1; }
+        .meta-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+            margin-top: 8px; padding-top: 8px; border-top: 1px solid rgba(255, 255, 255, 0.15); font-size: 7.5pt;
+        }
+        .meta-item strong { color: #fde68a; display: block; font-size: 7pt; text-transform: uppercase; }
+        .section-title {
+            font-size: 9.5pt; font-weight: 700; color: #0f172a; border-bottom: 2px solid #d97706;
+            padding-bottom: 3px; margin: 10px 0 6px 0; display: flex; justify-content: space-between; align-items: center;
+        }
+        .badge { font-size: 7pt; font-weight: 600; padding: 1px 6px; border-radius: 3px; background: #fef3c7; color: #92400e; }
+        .two-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px; }
+        .card { border: 1px solid #e2e8f0; border-radius: 5px; padding: 8px 10px; background: #f8fafc; }
+        .card-title { font-size: 8.5pt; font-weight: 700; color: #92400e; margin-bottom: 4px; display: flex; align-items: center; gap: 4px; }
+        table { width: 100%; border-collapse: collapse; font-size: 7.5pt; margin-bottom: 8px; }
+        th { background-color: #0f172a; color: #ffffff; font-weight: 600; text-align: left; padding: 4px 6px; border: 1px solid #cbd5e1; }
+        td { padding: 4px 6px; border: 1px solid #e2e8f0; vertical-align: middle; }
+        tr:nth-child(even) { background-color: #f8fafc; }
+        .status-badge { display: inline-block; padding: 2px 6px; border-radius: 4px; font-size: 7pt; font-weight: 700; }
+        .status-ok { background: #dcfce7; color: #15803d; border: 1px solid #86efac; }
+        .code-box {
+            background: #0f172a; color: #e2e8f0; border-radius: 4px; padding: 6px 8px;
+            font-family: 'Consolas', monospace; font-size: 6.8pt; line-height: 1.3; margin: 4px 0; border: 1px solid #334155; white-space: pre-wrap;
+        }
+        .code-comment { color: #64748b; }
+        .code-keyword { color: #fbbf24; font-weight: bold; }
+        .code-param   { color: #38bdf8; }
+        .code-val     { color: #4ade80; }
+        ul { padding-left: 14px; margin-bottom: 4px; }
+        li { margin-bottom: 2px; font-size: 7.8pt; }
+    </style>
+</head>
+<body>
+
+    <div class="header-card">
+        <div class="header-top">
+            <span class="school-title">Lycée Sidoine Apollinaire • BTS SIO SISR (2e Année)</span>
+            <span class="doc-badge">LIVRABLE OFFICIEL — DOMAINE 5</span>
+        </div>
+        <div class="main-title">Sécurité Active, Serveur Minecraft & Supervision Intelligente</div>
+        <div class="subtitle">Déploiement du Honeypot LAMP (Mission 3), cloisonnement Zero-Trust, contournement DPI Minecraft et Uptime Kuma</div>
+        <div class="meta-grid">
+            <div class="meta-item"><strong>Projet & Épreuve</strong>AP 1 — Épreuve E5</div>
+            <div class="meta-item"><strong>Responsable Réseau</strong>Clément SAUZÈDE (04)</div>
+            <div class="meta-item"><strong>Binôme Systèmes</strong>Mathys DUTHILLEUL (10)</div>
+            <div class="meta-item"><strong>Statut Domaine</strong>100% Validé & Conforme ✅</div>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <span>1. Pot de Miel LAMP & Détection d'Intrusions (Mission 3)</span>
+        <span class="badge">Défense Active (10.100.0.99)</span>
+    </div>
+
+    <div class="two-cols">
+        <div class="card avoid-break">
+            <div class="card-title">🍯 1.1. Architecture du Honeypot Leurre</div>
+            <p style="font-size: 7.8pt; margin-bottom: 4px;">
+                Conçu pour piéger et analyser les scans malveillants ciblant l'infrastructure, le faux serveur web est positionné en DMZ Externe (VM 11013, Debian 12, IP <code>10.100.0.99</code>) :
+            </p>
+            <ul>
+                <li><strong>Durcissement du leurre :</strong> Désactivation d'<code>autoindex</code> pour renvoyer une erreur 403 Forbidden sur la racine <code>/</code>, incitant les scanners à chercher des scripts d'administration.</li>
+                <li><strong>Service d'alerting temps réel :</strong> Daemon systemd <code>honeypot-alert.service</code> scrutant en continu les journaux d'accès Apache pour intercepter les requêtes suspectes (ex : <code>/wp-login.php</code>, <code>/admin-portal.php</code>, <code>/phpmyadmin</code>).</li>
+                <li><strong>Journalisation dédiée :</strong> Écriture des signatures d'attaque dans <code>/var/log/honeypot-intrusions.log</code> avec horodatage et adresse IP source.</li>
+            </ul>
+        </div>
+
+        <div class="card avoid-break">
+            <div class="card-title">⚡ 1.2. Preuves de Détection & Cloisonnement Zero-Trust</div>
+            <div class="code-box">
+<span class="code-comment"># 1. Capture d'intrusion en direct dans /var/log/honeypot-intrusions.log :</span>
+[2026-10-03 21:45:12] <span class="code-keyword">INTRUSION DETECTED</span> from <span class="code-param">192.168.200.4</span>
+  URI: <span class="code-val">/admin-portal.php</span> - Status: 404 - Agent: Mozilla/5.0...
+[2026-10-03 21:45:18] <span class="code-keyword">INTRUSION DETECTED</span> from <span class="code-param">192.168.200.4</span>
+  URI: <span class="code-val">/wp-login.php</span> - Status: 404
+
+<span class="code-comment"># 2. Test négatif anti-rebond vers la DMZ Interne (M3-SEC-01) :</span>
+root@srv-honeypot:~# ping -c 3 10.30.0.20
+--- 10.30.0.20 ping statistics ---
+3 packets transmitted, 0 received, <span class="code-keyword">100% packet loss</span>
+            </div>
+            <p style="font-size: 7.2pt; color: #475569;">
+                ✔ Rejet immédiat par la règle <code>Block &amp; Log</code> OPNsense : aucune évasion possible vers le réseau interne.
+            </p>
+        </div>
+    </div>
+
+    <div class="section-title">
+        <span>2. Serveur Minecraft & Contournement du Filtrage DPI (Mission 2)</span>
+        <span class="badge">DMZ Interne (10.30.0.22)</span>
+    </div>
+
+    <div class="two-cols">
+        <div class="card avoid-break">
+            <div class="card-title">🎮 2.1. Ingénierie : Contournement DPI Académique</div>
+            <p style="font-size: 7.8pt; margin-bottom: 4px;">
+                Le pare-feu du rectorat réalisant une inspection approfondie (DPI) sur les domaines Mojang/PaperMC pour bloquer la catégorie "Jeux", l'équipe a déployé une solution élégante :
+            </p>
+            <ul>
+                <li><strong>Mode CUSTOM hors-ligne :</strong> Injection directe du binaire autonome <code>server.jar</code> 1.20.4 dans le volume persistant <code>/opt/minecraft/data/</code> sous Docker Compose.</li>
+                <li><strong>Sécurisation par VPN :</strong> Le port TCP <code>25565</code> n'est ouvert que sur l'interface WireGuard (<code>10.200.100.0/24</code>) et sur le LAN. Il est hermétique depuis le WAN et la DMZ Externe.</li>
+                <li><strong>Gestion RCON :</strong> Élévation opérateur exécutée en ligne de commande : <code>docker exec -i minecraft_ap1 rcon-cli op Klemz_696</code>.</li>
+            </ul>
+        </div>
+
+        <div class="card avoid-break">
+            <div class="card-title">⚡ 2.2. Preuves de Recette en Situation de Jeu Réel</div>
+            <div class="code-box">
+<span class="code-comment"># 1. Test de socket TCP depuis le client Nomade Windows :</span>
+PS C:\Users\sauze&gt; Test-NetConnection -ComputerName 10.30.0.22 -Port 25565
+InterfaceAlias   : <span class="code-param">WG-Tunnel-VPN-AP1</span> (SourceAddress : 10.200.100.2)
+<span class="code-keyword">TcpTestSucceeded : True</span>
+
+<span class="code-comment"># 2. Journal de connexion joueur dans la console Docker :</span>
+[Server thread/INFO]: <span class="code-keyword">Klemz_696[/10.200.100.2:57200] logged in</span> with entity id 351 at (-15.5, 74.0, -57.5)
+[Server thread/INFO]: Klemz_696 joined the game
+            </div>
+            <p style="font-size: 7.2pt; color: #475569;">
+                ✔ MOTD affiché <code>[AP1 SIO] Serveur JoyStick &amp; Co - Mission 2</code>, latence 5 barres vertes en jeu.
+            </p>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+
+    <div class="section-title">
+        <span>3. Plateforme de Supervision Centralisée (Uptime Kuma)</span>
+        <span class="badge">Monitoring & Sondes Réseau</span>
+    </div>
+
+    <p style="font-size: 7.8pt; margin-bottom: 6px;">
+        Pour garantir une traçabilité permanente et vérifier en temps réel la disponibilité de tous les composants de l'AP 1, une instance <strong>Uptime Kuma</strong> a été intégrée pour surveiller les services critiques :
+    </p>
+
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 22%;">Sonde de Monitoring</th>
+                <th style="width: 22%;">Cible & Protocole</th>
+                <th style="width: 16%;">Fréquence / Timeout</th>
+                <th style="width: 18%;">Critère de Validation</th>
+                <th style="width: 22%;">Statut Opérationnel</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Portail Web JoyStick FM</strong></td>
+                <td><code>http://10.100.0.51:80/</code></td>
+                <td>60 s / 5 s</td>
+                <td>HTTP Status 200 OK</td>
+                <td><span class="status-badge status-ok">100% UP ✅</span></td>
+            </tr>
+            <tr>
+                <td><strong>Flux Streaming Icecast</strong></td>
+                <td><code>http://10.100.0.50:8000/joystick-fm</code></td>
+                <td>30 s / 3 s</td>
+                <td>Stream Audio actif</td>
+                <td><span class="status-badge status-ok">100% UP ✅</span></td>
+            </tr>
+            <tr>
+                <td><strong>Régie Auto-DJ Streamer</strong></td>
+                <td>Ping ICMP <code>10.100.0.52</code></td>
+                <td>30 s / 2 s</td>
+                <td>Réponse écho ICMP</td>
+                <td><span class="status-badge status-ok">100% UP ✅</span></td>
+            </tr>
+            <tr>
+                <td><strong>Serveur Photos Immich</strong></td>
+                <td><code>http://10.30.0.21:2283/</code></td>
+                <td>60 s / 5 s</td>
+                <td>HTTP Status 200 OK</td>
+                <td><span class="status-badge status-ok">100% UP ✅</span></td>
+            </tr>
+            <tr>
+                <td><strong>Serveur Minecraft</strong></td>
+                <td>TCP Port <code>10.30.0.22:25565</code></td>
+                <td>60 s / 5 s</td>
+                <td>Handshake TCP ouvert</td>
+                <td><span class="status-badge status-ok">100% UP ✅</span></td>
+            </tr>
+            <tr>
+                <td><strong>Serveur de Fichiers SMB</strong></td>
+                <td>TCP Port <code>10.30.0.20:445</code></td>
+                <td>60 s / 5 s</td>
+                <td>Port SMB actif</td>
+                <td><span class="status-badge status-ok">100% UP ✅</span></td>
+            </tr>
+            <tr>
+                <td><strong>Honeypot LAMP Leurre</strong></td>
+                <td><code>http://10.100.0.99:80/</code></td>
+                <td>60 s / 5 s</td>
+                <td>HTTP 403 Forbidden attendu</td>
+                <td><span class="status-badge status-ok">100% UP ✅</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="section-title">
+        <span>4. Matrice de Recette & Synthèse des Preuves de Sécurité</span>
+        <span class="badge">Tests M2 & M3</span>
+    </div>
+
+    <div class="two-cols">
+        <div class="card avoid-break">
+            <div class="card-title">🛡️ 4.1. Synthèse de Recette Sécurité Active (Mission 3)</div>
+            <ul>
+                <li><strong>M3-HON-01 (Journalisation d'intrusions) :</strong> Requêtes frauduleuses journalisées en direct avec IP et code HTTP ➔ <strong>VALIDÉ ✅</strong></li>
+                <li><strong>M3-HON-02 (Démon de surveillance) :</strong> <code>honeypot-alert.service</code> actif en arrière-plan ➔ <strong>VALIDÉ ✅</strong></li>
+                <li><strong>M3-SEC-01 (Cloisonnement Zero-Trust) :</strong> Rejet total de toute tentative de rebond depuis la DMZ Externe vers la DMZ Interne (100% packet loss) ➔ <strong>VALIDÉ ✅</strong></li>
+                <li><strong>M3-BAN-01 (Verrouillage racine Apache) :</strong> Désactivation d'autoindex renvoyant HTTP 403 ➔ <strong>VALIDÉ ✅</strong></li>
+            </ul>
+        </div>
+
+        <div class="card avoid-break">
+            <div class="card-title">🎮 4.2. Synthèse de Recette Minecraft Nomade (Mission 2)</div>
+            <ul>
+                <li><strong>M2-MC-01 (Accès joueur nomade WireGuard) :</strong> Connexion multijoueur du compte <code>Klemz_696</code> depuis <code>10.200.100.2</code> vers <code>10.30.0.22:25565</code> ➔ <strong>VALIDÉ ✅</strong></li>
+                <li><strong>Élévation de privilèges RCON :</strong> Droits administrateur attribués via la console Docker sans arrêt de serveur ➔ <strong>VALIDÉ ✅</strong></li>
+                <li><strong>Isolation réseau :</strong> Port 25565 inaccessible depuis le réseau externe sans tunnel VPN chiffré ➔ <strong>VALIDÉ ✅</strong></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card avoid-break" style="margin-top: 8px;">
+        <div style="font-weight: 700; color: #0f172a; margin-bottom: 2px;">📌 Conclusion & Bilan de Validation (Domaine 5) :</div>
+        <p style="font-size: 7.5pt; color: #334155;">
+            La sécurité active par pot de miel (Mission 3 bonus) et le serveur Minecraft (Mission 2) démontrent une maîtrise technique avancée : déploiement sous conteneurs Docker, contournement d'un filtrage réseau académique strict (DPI) par mode autonome, et preuve d'un cloisonnement pare-feu étanche Zero-Trust. <strong>Tous les tests sont concluants.</strong>
+        </p>
+    </div>
+
+</body>
+</html>
