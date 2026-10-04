@@ -26,6 +26,10 @@ chmod -R 755 "${PLUGIN_DIR}"
 echo "[3/6] Activation du plugin joystickfm-games..."
 wp plugin activate joystickfm-games --path="${WP_PATH}" --allow-root
 
+# 3b. Exécution des migrations BDD (Lot 1 & Lot 2 TCG)
+echo "[3b/6] Exécution des migrations de base de données (Lot 1 & Lot 2 TCG)..."
+wp eval "JFM_Games_Migrator::migrate();" --path="${WP_PATH}" --allow-root
+
 # 4. Régénération des permaliens
 echo "[4/6] Rafraîchissement des règles de réécriture..."
 wp rewrite flush --path="${WP_PATH}" --allow-root

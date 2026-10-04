@@ -62,7 +62,7 @@ Get-Content $RemoteScript -Raw | ssh -o StrictHostKeyChecking=no "$TargetUser@$T
 Write-Host "`n[5/5] Test des routes HTTP..." -ForegroundColor Yellow
 $Routes = @("/jeux/", "/activites/", "/compte/")
 foreach ($route in $Routes) {
-    $code = ssh -o StrictHostKeyChecking=no "$TargetUser@$TargetHost" "curl -s -o /dev/null -w '%{http_code}' 'http://localhost$route'"
+    $code = ssh -n -o StrictHostKeyChecking=no "$TargetUser@$TargetHost" "curl -s -o /dev/null -w '%{http_code}' 'http://localhost$route'"
     if ($code -eq "200") {
         Write-Host "  -> Route $route : HTTP $code OK" -ForegroundColor Green
     } else {

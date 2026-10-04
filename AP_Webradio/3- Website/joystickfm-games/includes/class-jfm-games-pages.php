@@ -96,52 +96,159 @@ class JFM_Games_Pages {
                 <?php endif; ?>
             </div>
 
-            <div class="jfm-games-grid">
-                <!-- JEU 1 : CATAPULTE ARCADE -->
-                <div class="jfm-game-card">
-                    <div class="jfm-game-badge jfm-badge-live">DISPONIBLE</div>
-                    <div class="jfm-game-icon">🎯</div>
-                    <h2 class="jfm-game-name">CATAPULTE ARCADE</h2>
-                    <p class="jfm-game-pitch">
-                        Projetez votre héros le plus loin possible dans les airs à l'aide du trébuchet rétro ! Récupérez des bonus en vol et battez les records de la radio.
-                    </p>
-                    <ul class="jfm-game-features">
-                        <li>🎮 Physique aérienne dynamique & piqué</li>
-                        <li>🏆 Classement des meilleurs tirs</li>
-                        <li>⭐ 100% jouable PC (ZQSD) & Tactile</li>
-                    </ul>
-                    <div class="jfm-game-action">
-                        <?php if ($is_logged): ?>
-                            <button type="button" class="jfm-btn-play" onclick="if(window.JFM_GAME && window.JFM_GAME.openGameOverlay){ window.JFM_GAME.openGameOverlay(); } else { alert('Erreur chargement moteur jeu.'); }">
-                                ▶ LANCER LA PARTIE
-                            </button>
-                        <?php else: ?>
-                            <a href="<?php echo esc_url($login_url); ?>" class="jfm-btn-play jfm-btn-locked">
-                                🔒 CONNEXION REQUISE POUR JOUER
-                            </a>
-                        <?php endif; ?>
-                    </div>
-                </div>
+            <!-- Sélecteur de Jeu -->
+            <div class="jfm-game-tabs" style="display:flex;justify-content:center;gap:1rem;margin:1.5rem 0 2rem;flex-wrap:wrap;">
+                <button type="button" class="jfm-game-tab-btn active" data-game="arcade">
+                    🎯 CATAPULTE ARCADE
+                </button>
+                <button type="button" id="jfm-tab-tcg" class="jfm-game-tab-btn" data-game="tcg">
+                    🃏 JOYSTICK TCG (CARTES & BOOSTERS)
+                </button>
+            </div>
 
-                <!-- JEU 2 : JOYSTICK TCG -->
-                <div class="jfm-game-card jfm-card-tcg">
-                    <div class="jfm-game-badge jfm-badge-soon">BÊTA PROCHAINEMENT · LOT 2</div>
-                    <div class="jfm-game-icon">🃏</div>
-                    <h2 class="jfm-game-name">JOYSTICK TCG</h2>
-                    <p class="jfm-game-pitch">
-                        Le jeu de cartes à collectionner virtuel aux couleurs de JoyStick FM et de la culture geek. Ouvrez des boosters, découvrez des cartes holographiques et échangez avec vos amis !
-                    </p>
-                    <ul class="jfm-game-features">
-                        <li>📦 10 boosters gratuits offerts à l'inscription</li>
-                        <li>✨ 40 cartes, 4 raretés & finitions holographiques</li>
-                        <li>🤝 Marché d'échanges en JoyCoins entre joueurs</li>
-                    </ul>
-                    <div class="jfm-game-action">
-                        <button type="button" class="jfm-btn-play jfm-btn-disabled" disabled>
-                            ⏳ EN COURS DE DÉVELOPPEMENT (LOT 2)
-                        </button>
+            <!-- VUE 1 : CATAPULTE ARCADE -->
+            <div id="jfm-game-view-arcade" class="jfm-game-view active">
+                <div class="jfm-games-grid">
+                    <!-- JEU 1 : CATAPULTE ARCADE -->
+                    <div class="jfm-game-card">
+                        <div class="jfm-game-badge jfm-badge-live">DISPONIBLE</div>
+                        <div class="jfm-game-icon">🎯</div>
+                        <h2 class="jfm-game-name">CATAPULTE ARCADE</h2>
+                        <p class="jfm-game-pitch">
+                            Projetez votre héros le plus loin possible dans les airs à l'aide du trébuchet rétro ! Récupérez des bonus en vol et battez les records de la radio.
+                        </p>
+                        <ul class="jfm-game-features">
+                            <li>🎮 Physique aérienne dynamique & piqué</li>
+                            <li>🏆 Classement des meilleurs tirs</li>
+                            <li>⭐ 100% jouable PC (ZQSD) & Tactile</li>
+                        </ul>
+                        <div class="jfm-game-action">
+                            <?php if ($is_logged): ?>
+                                <button type="button" class="jfm-btn-play" onclick="if(window.JFM_GAME && window.JFM_GAME.openGameOverlay){ window.JFM_GAME.openGameOverlay(); } else { alert('Erreur chargement moteur jeu.'); }">
+                                    ▶ LANCER LA PARTIE
+                                </button>
+                            <?php else: ?>
+                                <a href="<?php echo esc_url($login_url); ?>" class="jfm-btn-play jfm-btn-locked">
+                                    🔒 CONNEXION REQUISE POUR JOUER
+                                </a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+
+                    <!-- JEU 2 : JOYSTICK TCG (CARTE DE PRÉSENTATION) -->
+                    <div class="jfm-game-card jfm-card-tcg">
+                        <div class="jfm-game-badge jfm-badge-live" style="border-color:var(--jfm-violet-neon);color:var(--jfm-violet-neon);background:rgba(180,79,255,0.15);">DISPONIBLE · NOUVEAU</div>
+                        <div class="jfm-game-icon">🃏</div>
+                        <h2 class="jfm-game-name">JOYSTICK TCG</h2>
+                        <p class="jfm-game-pitch">
+                            Le jeu de cartes à collectionner virtuel aux couleurs de JoyStick FM. Ouvrez des boosters, collectionnez des cartes holographiques rares et échangez vos doublons !
+                        </p>
+                        <ul class="jfm-game-features">
+                            <li>📦 10 boosters gratuits offerts à l'inscription</li>
+                            <li>✨ 40 cartes, 4 raretés & variantes holographiques</li>
+                            <li>🎁 1 booster gratuit toutes les 10 minutes</li>
+                        </ul>
+                        <div class="jfm-game-action">
+                            <?php if ($is_logged): ?>
+                                <button type="button" class="jfm-btn-play" style="background:linear-gradient(135deg,var(--jfm-violet-neon),var(--jfm-bleu-neon));" onclick="document.getElementById('jfm-tab-tcg')?.click();">
+                                    🃏 OUVRIR L'ESPACE CARTES & BOOSTERS
+                                </button>
+                            <?php else: ?>
+                                <a href="<?php echo esc_url($login_url); ?>" class="jfm-btn-play jfm-btn-locked">
+                                    🔒 CONNEXION (10 BOOSTERS OFFERTS)
+                                </a>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- VUE 2 : JOYSTICK TCG (ARÈNE COMPLÈTE & CLASSEUR) -->
+            <div id="jfm-game-view-tcg" class="jfm-game-view" style="display:none;">
+                <?php if ($is_logged): ?>
+                    <!-- Tableau de bord TCG -->
+                    <div class="jfm-tcg-dashboard">
+                        <div class="jfm-tcg-stats-bar">
+                            <div class="jfm-tcg-stat-item">
+                                <span class="tcg-stat-label">📦 Boosters en stock</span>
+                                <span class="tcg-stat-value" id="jfm-tcg-boosters-count"><?php echo (int)$player->free_boosters_available; ?></span>
+                            </div>
+                            <div class="jfm-tcg-stat-item">
+                                <span class="tcg-stat-label">🪙 JoyCoins disponibles</span>
+                                <span class="tcg-stat-value" id="jfm-tcg-coins-count"><?php echo (int)$player->joycoins; ?></span>
+                            </div>
+                            <div class="jfm-tcg-stat-item">
+                                <span class="tcg-stat-label">🎯 Album de collection</span>
+                                <span class="tcg-stat-value" id="jfm-tcg-completion-text">Chargement...</span>
+                            </div>
+                        </div>
+
+                        <!-- Actions Booster -->
+                        <div class="jfm-tcg-booster-actions">
+                            <button type="button" id="jfm-btn-open-booster" class="jfm-btn-big-booster">
+                                📦 OUVRIR UN BOOSTER (5 CARTES)
+                            </button>
+                            <div class="jfm-tcg-sub-actions">
+                                <span id="jfm-tcg-timer-wrap" class="jfm-timer-badge">
+                                    ⏳ Prochain booster gratuit dans : <strong id="jfm-tcg-timer-text">--:--</strong>
+                                </span>
+                                <button type="button" id="jfm-btn-claim-free" class="jfm-mini-btn" style="display:none;background:rgba(57,255,20,0.2);color:#39ff14;border-color:#39ff14;">
+                                    🎁 Réclamer mon booster gratuit !
+                                </button>
+                                <button type="button" id="jfm-btn-buy-booster" class="jfm-mini-btn">
+                                    🛒 Acheter 1 booster (50 🪙)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Zone de révélation des cartes du booster -->
+                    <div id="jfm-tcg-reveal-modal" class="jfm-modal" style="display:none;">
+                        <div class="jfm-modal-content jfm-tcg-reveal-box">
+                            <h2 style="font-family:var(--jfm-font-title);color:#fff;margin-bottom:0.5rem;font-size:1.5rem;">🎉 CONTENU DU BOOSTER !</h2>
+                            <p style="color:var(--texte-dim);font-size:0.9rem;margin-bottom:1.5rem;">5 nouvelles cartes ajoutées à votre collection permanente.</p>
+                            <div id="jfm-tcg-revealed-cards" class="jfm-revealed-cards-grid"></div>
+                            <div style="margin-top:2rem;">
+                                <button type="button" id="jfm-tcg-btn-close-reveal" class="jfm-btn-play" style="max-width:280px;margin:0 auto;">
+                                     ranger dans l'album
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Album de collection -->
+                    <div class="jfm-tcg-collection-section">
+                        <div class="jfm-tcg-filters-header">
+                            <h3 style="font-family:var(--jfm-font-title);color:#fff;font-size:1.3rem;margin:0;">
+                                📖 ALBUM DES 40 CARTES LÉGENDAIRES
+                            </h3>
+                            <div class="jfm-tcg-filter-pills">
+                                <button type="button" class="jfm-tcg-filter-btn active" data-filter="all">Toutes (40)</button>
+                                <button type="button" class="jfm-tcg-filter-btn" data-filter="hardware">Hardware (10)</button>
+                                <button type="button" class="jfm-tcg-filter-btn" data-filter="hero">Héros (10)</button>
+                                <button type="button" class="jfm-tcg-filter-btn" data-filter="legend">Studio FM (10)</button>
+                                <button type="button" class="jfm-tcg-filter-btn" data-filter="item">Objets & Sorts (10)</button>
+                                <button type="button" class="jfm-tcg-filter-btn" data-filter="owned">⭐ Possédées</button>
+                                <button type="button" class="jfm-tcg-filter-btn" data-filter="holo">✨ Holo</button>
+                            </div>
+                        </div>
+
+                        <!-- Grille des cartes -->
+                        <div id="jfm-tcg-collection-grid" class="jfm-tcg-cards-grid">
+                            <div style="text-align:center;grid-column:1/-1;padding:3rem;color:var(--texte-dim);">
+                                Chargement de votre classeur de cartes...
+                            </div>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <div class="jfm-guest-warning" style="margin:2rem auto;max-width:700px;text-align:center;">
+                        <div>
+                            <p style="font-size:1.1rem;font-weight:bold;margin-bottom:0.5rem;">🔒 Connexion Joueur Requise</p>
+                            <p style="margin-bottom:1rem;">Inscrivez-vous gratuitement pour recevoir <strong>10 boosters gratuits</strong> (50 cartes), débloquer des cartes holographiques et sauvegarder votre progression !</p>
+                            <a href="<?php echo esc_url($login_url); ?>" class="jfm-btn-neon-small" style="font-size:0.9rem;padding:0.6rem 1.4rem;">Créer un compte / Se connecter</a>
+                        </div>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
         <?php

@@ -141,6 +141,116 @@ img, video, audio, iframe, embed, object, svg { max-width: 100%; height: auto; }
 }
 
 /* ══════════════════════════════════════════════════════════
+   3b. NAVIGATION MOBILE BAS DE PAGE (TAB BAR iOS / ANDROID)
+   ══════════════════════════════════════════════════════════ */
+@media (max-width: 1080px) {
+  body {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  main.fp-visible {
+    padding-bottom: calc(var(--fp-h-tab, 88px) + 64px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  .mobile-bottom-nav {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: calc(60px + env(safe-area-inset-bottom, 0px));
+    padding: 0 0.25rem env(safe-area-inset-bottom, 0px);
+    background: rgba(10, 10, 18, 0.94);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(0, 245, 255, 0.22);
+    box-shadow: 0 -4px 25px rgba(0, 0, 0, 0.75);
+    z-index: 999990;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+
+  .mb-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+    flex: 1;
+    height: 100%;
+    color: #8b92b8;
+    text-decoration: none;
+    font-family: var(--font-tech);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    padding-top: 2px;
+  }
+
+  .mb-nav-icon {
+    font-size: 1.25rem;
+    line-height: 1;
+    position: relative;
+    transition: transform 0.2s ease, filter 0.2s ease;
+  }
+
+  .mb-live-dot {
+    position: absolute;
+    top: -2px;
+    right: -4px;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--rose-neon, #ff2d78);
+    box-shadow: 0 0 6px var(--rose-neon, #ff2d78);
+    animation: livePulse 1.5s infinite;
+  }
+
+  .mb-nav-item:hover,
+  .mb-nav-item.active {
+    color: var(--bleu-neon, #00f5ff);
+    text-shadow: 0 0 10px rgba(0, 245, 255, 0.6);
+  }
+
+  .mb-nav-item.active .mb-nav-icon {
+    transform: scale(1.15) translateY(-2px);
+    filter: drop-shadow(0 0 8px rgba(0, 245, 255, 0.6));
+  }
+
+  .mb-nav-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    width: 20px;
+    height: 2px;
+    background: var(--bleu-neon, #00f5ff);
+    border-radius: 2px;
+    box-shadow: 0 0 8px var(--bleu-neon, #00f5ff);
+  }
+
+  /* Décalage du floating player au-dessus de la tab bar */
+  .floating-player.fp-visible {
+    bottom: calc(60px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  /* Bouton du Chat Live au-dessus de la tab bar */
+  #jfm-chat-toggle {
+    bottom: calc(75px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  /* Si le lecteur audio et la tab bar sont tous les deux affichés */
+  .floating-player.fp-visible ~ #jfm-chat-toggle {
+    bottom: calc(150px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════
    4. HERO SECTION
    ══════════════════════════════════════════════════════════ */
 @media (max-width: 768px) {

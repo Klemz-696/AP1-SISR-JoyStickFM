@@ -172,6 +172,32 @@
     </form>
 </div>
 
+  <!-- Navigation mobile principale en bas d'écran (Tab Bar moderne iOS / Android) -->
+  <nav class="mobile-bottom-nav" aria-label="Navigation mobile principale">
+    <a href="<?php echo home_url('/'); ?>" class="mb-nav-item <?php if (is_front_page()) echo 'active'; ?>" aria-label="Accueil">
+      <span class="mb-nav-icon" aria-hidden="true">🏠</span>
+      <span class="mb-nav-label">Accueil</span>
+    </a>
+    <a href="<?php echo home_url('/radio/'); ?>" class="mb-nav-item <?php if (is_page('radio')) echo 'active'; ?>" aria-label="Direct Radio">
+      <span class="mb-nav-icon" aria-hidden="true">
+        📡<span class="mb-live-dot" aria-hidden="true"></span>
+      </span>
+      <span class="mb-nav-label">Direct</span>
+    </a>
+    <a href="<?php echo home_url('/jeux/'); ?>" class="mb-nav-item <?php if (is_page('jeux')) echo 'active'; ?>" aria-label="Jeux Arcade & TCG">
+      <span class="mb-nav-icon" aria-hidden="true">🎮</span>
+      <span class="mb-nav-label">Jeux</span>
+    </a>
+    <a href="<?php echo home_url('/activites/'); ?>" class="mb-nav-item <?php if (is_page('activites')) echo 'active'; ?>" aria-label="Activités & Communauté">
+      <span class="mb-nav-icon" aria-hidden="true">⚡</span>
+      <span class="mb-nav-label">Activités</span>
+    </a>
+    <a href="<?php echo home_url('/compte/'); ?>" class="mb-nav-item <?php if (is_page('compte')) echo 'active'; ?>" aria-label="Mon Compte">
+      <span class="mb-nav-icon" aria-hidden="true">👤</span>
+      <span class="mb-nav-label">Compte</span>
+    </a>
+  </nav>
+
 <?php wp_footer(); ?>
 </body>
 </html>

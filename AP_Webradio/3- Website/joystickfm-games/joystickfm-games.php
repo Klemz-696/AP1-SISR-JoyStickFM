@@ -27,6 +27,7 @@ require_once JFM_GAMES_PATH . 'includes/class-jfm-games-migrator.php';
 require_once JFM_GAMES_PATH . 'includes/class-jfm-games-utils.php';
 require_once JFM_GAMES_PATH . 'includes/class-jfm-games-auth.php';
 require_once JFM_GAMES_PATH . 'includes/class-jfm-games-pages.php';
+require_once JFM_GAMES_PATH . 'includes/class-jfm-games-tcg.php';
 
 // Activation et désactivation du plugin
 register_activation_hook(__FILE__, function () {
@@ -43,6 +44,7 @@ register_deactivation_hook(__FILE__, function () {
 // Initialisation au chargement de WordPress
 add_action('init', function () {
     JFM_Games_Pages::init();
+    JFM_Games_TCG::init();
 });
 
 // Chargement des feuilles de style et scripts du portail
@@ -67,6 +69,7 @@ add_action('wp_enqueue_scripts', function () {
     wp_localize_script('jfm-games-portal-js', 'JFM_GAMES_CONFIG', [
         'ajax_url'    => admin_url('admin-ajax.php'),
         'nonce'       => wp_create_nonce('jfm_auth_nonce'),
+        'tcg_nonce'   => wp_create_nonce('jfm_tcg_nonce'),
         'logged_in'   => ($player !== null),
         'player'      => $player ? [
             'id'            => (int)$player->id,

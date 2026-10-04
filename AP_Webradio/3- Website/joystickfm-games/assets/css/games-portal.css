@@ -623,3 +623,662 @@
     justify-content: space-between;
     flex-wrap: wrap;
 }
+
+/* ══════════════════════════════════════════════════════════
+   JOYSTICK TCG (LOT 2) — STYLES DES CARTES & BOOSTERS
+   ══════════════════════════════════════════════════════════ */
+
+/* Sélecteur de jeu (Catapulte / TCG) */
+.jfm-game-tab-btn {
+    background: rgba(0, 245, 255, 0.08);
+    border: 1.5px solid var(--jfm-border);
+    border-radius: 8px;
+    padding: 0.75rem 1.6rem;
+    color: var(--texte, #c8c8d4);
+    font-family: var(--jfm-font-title);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.jfm-game-tab-btn:hover {
+    background: rgba(0, 245, 255, 0.15);
+    border-color: var(--jfm-bleu-neon);
+    color: #fff;
+}
+
+.jfm-game-tab-btn.active {
+    background: linear-gradient(135deg, rgba(0, 245, 255, 0.25), rgba(180, 79, 255, 0.25));
+    border-color: var(--jfm-bleu-neon);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.35);
+}
+
+/* Dashboard TCG */
+.jfm-tcg-dashboard {
+    background: var(--jfm-fond-card);
+    border: 1.5px solid var(--jfm-border);
+    border-radius: 14px;
+    padding: 2rem;
+    margin-bottom: 2.5rem;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+}
+
+.jfm-tcg-stats-bar {
+    display: flex;
+    justify-content: space-around;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    padding-bottom: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.jfm-tcg-stat-item {
+    text-align: center;
+}
+
+.tcg-stat-label {
+    display: block;
+    font-family: var(--jfm-font-title);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--texte-dim, #8f96be);
+    margin-bottom: 0.3rem;
+    text-transform: uppercase;
+}
+
+.tcg-stat-value {
+    display: block;
+    font-family: var(--jfm-font-title);
+    font-size: 1.45rem;
+    font-weight: 900;
+    color: #fff;
+    letter-spacing: 0.05em;
+}
+
+/* Bouton principal Booster */
+.jfm-btn-big-booster {
+    display: block;
+    width: 100%;
+    max-width: 460px;
+    margin: 0 auto 1.2rem;
+    padding: 1.1rem 2rem;
+    background: linear-gradient(135deg, #ff007f 0%, #9d00ff 50%, #00f5ff 100%);
+    color: #fff;
+    font-family: var(--jfm-font-title);
+    font-size: 1rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 6px 30px rgba(157, 0, 255, 0.45);
+    transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.jfm-btn-big-booster:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 40px rgba(0, 245, 255, 0.6);
+}
+
+.jfm-btn-big-booster:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.jfm-tcg-sub-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.jfm-timer-badge {
+    font-family: var(--jfm-font-body);
+    font-size: 0.88rem;
+    color: var(--texte-dim, #8b92b8);
+    background: rgba(0, 0, 0, 0.4);
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.jfm-timer-badge strong {
+    color: var(--jfm-jaune-neon, #ffea00);
+}
+
+/* Filtres de l'album */
+.jfm-tcg-filters-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+}
+
+.jfm-tcg-filter-pills {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.jfm-tcg-filter-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 0.35rem 0.85rem;
+    color: var(--texte-dim, #8b92b8);
+    font-family: var(--jfm-font-title);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.jfm-tcg-filter-btn:hover {
+    color: #fff;
+    border-color: var(--jfm-bleu-neon);
+}
+
+.jfm-tcg-filter-btn.active {
+    background: var(--jfm-bleu-neon);
+    color: #000;
+    border-color: var(--jfm-bleu-neon);
+    box-shadow: 0 0 10px rgba(0, 245, 255, 0.35);
+}
+
+/* Grille de cartes */
+.jfm-tcg-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Modale et zone de révélation */
+.jfm-tcg-reveal-box {
+    max-width: 950px;
+    width: 95%;
+    padding: 2.5rem 1.5rem;
+}
+
+.jfm-revealed-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1.2rem;
+    margin-top: 1.5rem;
+}
+
+/* Composant CARTE TCG */
+.jfm-tcg-card {
+    position: relative;
+    border-radius: 12px;
+    padding: 3px;
+    background: rgba(18, 18, 28, 0.95);
+    border: 2px solid transparent;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.jfm-tcg-card.is-owned:hover {
+    transform: translateY(-8px) scale(1.02);
+    z-index: 10;
+}
+
+/* Raretés */
+.jfm-tcg-card.rarity-common {
+    border-color: #4a5568;
+}
+.jfm-tcg-card.rarity-common.is-owned:hover {
+    box-shadow: 0 10px 25px rgba(160, 174, 192, 0.3);
+}
+
+.jfm-tcg-card.rarity-rare {
+    border-color: var(--jfm-bleu-neon);
+}
+.jfm-tcg-card.rarity-rare.is-owned {
+    box-shadow: 0 4px 15px rgba(0, 245, 255, 0.15);
+}
+.jfm-tcg-card.rarity-rare.is-owned:hover {
+    box-shadow: 0 10px 30px rgba(0, 245, 255, 0.45);
+}
+
+.jfm-tcg-card.rarity-epic {
+    border-color: var(--jfm-violet-neon);
+}
+.jfm-tcg-card.rarity-epic.is-owned {
+    box-shadow: 0 4px 18px rgba(180, 79, 255, 0.2);
+}
+.jfm-tcg-card.rarity-epic.is-owned:hover {
+    box-shadow: 0 10px 35px rgba(180, 79, 255, 0.55);
+}
+
+.jfm-tcg-card.rarity-legendary {
+    border-color: var(--jfm-jaune-neon);
+    animation: goldPulse 3s infinite alternate;
+}
+.jfm-tcg-card.rarity-legendary.is-owned {
+    box-shadow: 0 4px 25px rgba(255, 234, 0, 0.3);
+}
+.jfm-tcg-card.rarity-legendary.is-owned:hover {
+    box-shadow: 0 12px 45px rgba(255, 234, 0, 0.65);
+}
+
+@keyframes goldPulse {
+    0%   { border-color: #ffd700; box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); }
+    100% { border-color: #ffaa00; box-shadow: 0 0 25px rgba(255, 170, 0, 0.6); }
+}
+
+/* État Verrouillé / Non découverte */
+.jfm-tcg-card.is-locked {
+    opacity: 0.45;
+    filter: grayscale(1);
+}
+.jfm-tcg-card.is-locked .tcg-card-art {
+    background: #0d0d15 !important;
+}
+
+/* Cadre interne de la carte */
+.jfm-tcg-card-frame {
+    background: rgba(12, 12, 20, 0.98);
+    border-radius: 9px;
+    padding: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+.tcg-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.6rem;
+}
+
+.tcg-rarity-badge {
+    font-family: var(--jfm-font-title);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+.tcg-rarity-badge.rarity-common    { background: rgba(160,174,192,0.15); color: #c8c8d4; }
+.tcg-rarity-badge.rarity-rare      { background: rgba(0,245,255,0.15); color: var(--jfm-bleu-neon); }
+.tcg-rarity-badge.rarity-epic      { background: rgba(180,79,255,0.15); color: var(--jfm-violet-neon); }
+.tcg-rarity-badge.rarity-legendary { background: rgba(255,234,0,0.2); color: var(--jfm-jaune-neon); }
+
+.tcg-power-badge {
+    font-family: var(--jfm-font-title);
+    font-size: 0.72rem;
+    font-weight: 900;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+}
+
+/* Zone Art / Illustration */
+.tcg-card-art {
+    height: 120px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 0.8rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.6);
+}
+
+.tcg-card-icon {
+    font-size: 3.2rem;
+    filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.5));
+}
+
+.tcg-holo-sparkle {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--jfm-jaune-neon);
+    color: var(--jfm-jaune-neon);
+    font-family: var(--jfm-font-title);
+    font-size: 0.55rem;
+    font-weight: 900;
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    letter-spacing: 0.1em;
+}
+
+/* Textes et infos */
+.tcg-card-title {
+    font-family: var(--jfm-font-title);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 0.4rem;
+    line-height: 1.25;
+}
+
+.tcg-card-desc {
+    font-family: var(--jfm-font-body);
+    font-size: 0.76rem;
+    color: var(--texte, #c8c8d4);
+    line-height: 1.45;
+    margin-bottom: 0.4rem;
+    flex: 1;
+}
+
+.tcg-card-lore {
+    font-family: var(--jfm-font-body);
+    font-size: 0.7rem;
+    font-style: italic;
+    color: var(--texte-dim, #718096);
+    margin-bottom: 0.5rem;
+    border-left: 2px solid rgba(0, 245, 255, 0.3);
+    padding-left: 0.4rem;
+}
+
+/* Pied de carte */
+.tcg-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tcg-category-tag {
+    font-family: var(--jfm-font-title);
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: #8b92b8;
+    letter-spacing: 0.05em;
+}
+
+.tcg-quantity-tag {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--jfm-font-body);
+    font-size: 0.75rem;
+    color: var(--jfm-bleu-neon);
+    font-weight: bold;
+}
+
+.tcg-btn-recycle {
+    background: rgba(255, 234, 0, 0.15);
+    border: 1px solid var(--jfm-jaune-neon);
+    color: var(--jfm-jaune-neon);
+    font-family: var(--jfm-font-title);
+    font-size: 0.58rem;
+    font-weight: 700;
+    padding: 0.15rem 0.35rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.tcg-btn-recycle:hover {
+    background: var(--jfm-jaune-neon);
+    color: #000;
+}
+
+.tcg-locked-badge {
+    font-family: var(--jfm-font-title);
+    font-size: 0.6rem;
+    color: #718096;
+}
+
+.tcg-new-badge {
+    font-family: var(--jfm-font-title);
+    font-size: 0.62rem;
+    font-weight: 900;
+    color: var(--jfm-vert-neon);
+    animation: livePulse 1s infinite;
+}
+
+/* EFFET HOLOGRAPHIQUE (FOIL SHIMMER) */
+.jfm-card-holo::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        125deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.3) 25%,
+        rgba(0, 245, 255, 0.45) 45%,
+        rgba(255, 0, 127, 0.45) 60%,
+        rgba(255, 234, 0, 0.45) 75%,
+        transparent 100%
+    );
+    background-size: 250% 250%;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    animation: holoFoil 4s linear infinite;
+    border-radius: inherit;
+    z-index: 5;
+}
+
+@keyframes holoFoil {
+    0%   { background-position: 0% 0%; }
+    50%  { background-position: 100% 100%; }
+    100% { background-position: 0% 0%; }
+}
+
+/* Animation d'apparition des cartes du booster */
+.jfm-card-animate {
+    animation: cardPopIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+@keyframes cardPopIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.85);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ==============================================================================
+   ADAPTATION MOBILE MODERNE (iPhone, Android, Foldables & Tablettes)
+   ============================================================================== */
+
+@media (max-width: 768px) {
+    .jfm-portal-wrap {
+        padding: 1rem 0.75rem 2rem;
+        margin: 0.5rem auto 1.5rem;
+    }
+
+    .jfm-portal-title {
+        font-size: 1.6rem;
+    }
+
+    .jfm-portal-desc {
+        font-size: 0.92rem;
+        margin-bottom: 1rem;
+    }
+
+    .jfm-player-strip {
+        width: 100%;
+        padding: 0.6rem 0.8rem;
+        font-size: 0.85rem;
+        gap: 0.6rem;
+    }
+
+    .jfm-game-tabs {
+        width: 100%;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .jfm-game-tab-btn {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+        padding: 0.75rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    /* Tableau de bord TCG Mobile */
+    .jfm-tcg-stats-bar {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+        padding: 0.75rem;
+    }
+
+    .jfm-tcg-stat-item {
+        padding: 0.5rem 0.25rem;
+        text-align: center;
+    }
+
+    .tcg-stat-label {
+        font-size: 0.65rem;
+        line-height: 1.2;
+    }
+
+    .tcg-stat-value {
+        font-size: 1.15rem;
+    }
+
+    /* Actions Booster Mobile */
+    .jfm-btn-big-booster {
+        width: 100%;
+        font-size: 0.95rem;
+        padding: 1rem 0.75rem;
+    }
+
+    .jfm-tcg-sub-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+    }
+
+    .jfm-tcg-sub-actions .jfm-mini-btn,
+    .jfm-tcg-sub-actions .jfm-timer-badge {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+        font-size: 0.78rem;
+        padding: 0.6rem;
+    }
+
+    /* Filtres à défilement tactile horizontal */
+    .jfm-tcg-filters-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .jfm-tcg-filter-pills {
+        display: flex;
+        overflow-x: auto;
+        width: 100%;
+        padding-bottom: 0.4rem;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 0.4rem;
+        white-space: nowrap;
+    }
+
+    .jfm-tcg-filter-pills::-webkit-scrollbar {
+        display: none;
+    }
+
+    .jfm-tcg-filter-btn {
+        flex-shrink: 0;
+        font-size: 0.68rem;
+        padding: 0.4rem 0.75rem;
+    }
+
+    /* Grille de cartes TCG Mobile (2 colonnes élégantes) */
+    .jfm-tcg-cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 0.65rem !important;
+    }
+
+    .jfm-tcg-card-frame {
+        padding: 0.6rem;
+    }
+
+    .tcg-card-art {
+        height: 85px;
+    }
+
+    .tcg-card-icon {
+        font-size: 2.2rem;
+    }
+
+    .tcg-card-title {
+        font-size: 0.76rem;
+        margin-bottom: 0.2rem;
+    }
+
+    .tcg-card-desc {
+        font-size: 0.68rem;
+        line-height: 1.35;
+        margin-bottom: 0.3rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .tcg-card-lore {
+        display: none; /* Masqué sur petit écran mobile pour garder la carte compacte */
+    }
+
+    .tcg-category-tag {
+        font-size: 0.52rem;
+    }
+
+    .tcg-quantity-tag {
+        font-size: 0.7rem;
+    }
+
+    /* Modale de révélation booster mobile */
+    .jfm-tcg-reveal-box {
+        width: 96%;
+        max-height: 88vh;
+        overflow-y: auto;
+        padding: 1.5rem 0.8rem;
+    }
+
+    .jfm-revealed-cards-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.65rem;
+    }
+}
+
+@media (max-width: 380px) {
+    /* Écrans très étroits (ex: iPhone SE, petits Android) */
+    .jfm-tcg-stats-bar {
+        grid-template-columns: 1fr;
+    }
+
+    .jfm-tcg-cards-grid {
+        grid-template-columns: 1fr !important;
+    }
+
+    .jfm-revealed-cards-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+
