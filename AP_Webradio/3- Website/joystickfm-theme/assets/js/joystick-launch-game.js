@@ -263,6 +263,12 @@ function createOverlay() {
 }
 
 function openGameOverlay() {
+  if (typeof window.JFM_PLAYER_AUTH !== 'undefined' && !window.JFM_PLAYER_AUTH.logged_in) {
+    if (window.JFM_PLAYER_AUTH.login_url) {
+      window.location.href = window.JFM_PLAYER_AUTH.login_url;
+    }
+    return;
+  }
   createOverlay();
   lbNamePending = false;
   const overlay = document.getElementById('jfm-game-overlay');

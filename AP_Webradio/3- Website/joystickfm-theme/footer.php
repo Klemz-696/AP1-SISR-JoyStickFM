@@ -19,6 +19,11 @@
           <ul>
             <li><a href="<?php echo home_url(); ?>">🏠 Accueil</a></li>
             <li><a href="<?php echo home_url('/radio'); ?>">📡 Écouter en direct</a></li>
+            <?php if (function_exists('jfm_games_is_active') && jfm_games_is_active()): ?>
+            <li><a href="<?php echo home_url('/jeux'); ?>">🕹 Jeux</a></li>
+            <li><a href="<?php echo home_url('/activites'); ?>">🏆 Activités</a></li>
+            <li><a href="<?php echo home_url('/compte'); ?>">👤 Compte joueur</a></li>
+            <?php endif; ?>
             <li><a href="<?php echo home_url('/podcasts'); ?>">🎙 Podcasts</a></li>
             <li><a href="<?php echo home_url('/blog'); ?>">📰 Blog</a></li>
             <li><a href="<?php echo home_url('/contact'); ?>">✉ Contact</a></li>

@@ -44,9 +44,11 @@ function jfm_chat_get()
     }
 
     $messages = array_map(function ($r) {
+        $is_verified = strpos((string) $r->username, 'Invité · ') !== 0 && (string) $r->username !== 'Invité';
         return [
             'id'         => (int)$r->id,
             'username'   => esc_html($r->username),
+            'is_verified'=> $is_verified,
             'message'    => esc_html($r->message),
             'type'       => in_array($r->type, jfm_allowed_types(), true) ? $r->type : 'text',
             'file_url'   => $r->file_url ? esc_url($r->file_url) : '',
@@ -83,6 +85,17 @@ function jfm_chat_post()
     $username = preg_replace('/[<>"\';&\\\\\/]/', '', $username);
     if (empty($username)) $username = 'Anonyme';
 
+    $stored_username = $username;
+    if (function_exists('jfm_games_get_current_player')) {
+        $player = jfm_games_get_current_player();
+        if (is_array($player) && !empty($player['username_display'])) {
+            $stored_username = sanitize_text_field((string) $player['username_display']);
+        } else {
+            $guest_name = $username === 'Anonyme' ? 'Invité' : ('Invité · ' . $username);
+            $stored_username = mb_substr($guest_name, 0, 50);
+        }
+    }
+
     $message = sanitize_textarea_field(wp_unslash($_POST['message'] ?? ''));
     $message = mb_substr(trim($message), 0, JFM_CHAT_MAX_LEN);
     // Suppression des balises HTML/script résiduelles
@@ -116,7 +129,7 @@ function jfm_chat_post()
 
     // Utilisation de $wpdb->insert() avec format strings (prepared statement)
     $inserted = $wpdb->insert($table, [
-        'username'   => $username,
+        'username'   => $stored_username,
         'message'    => $message,
         'type'       => $type,
         'file_url'   => $file_url,

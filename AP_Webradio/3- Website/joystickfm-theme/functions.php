@@ -49,6 +49,26 @@ function joystickfm_enqueue()
     // Le JS du Chat (dépend de jquery)
     wp_enqueue_script('jfm-chat-script', get_template_directory_uri() . '/assets/js/chat.js', array('jquery'), $v, true);
 
+    $current_request = isset($_SERVER['REQUEST_URI']) ? wp_unslash($_SERVER['REQUEST_URI']) : '/jeux/';
+    $default_login_url = home_url('/compte/');
+    if (function_exists('jfm_games_get_login_url')) {
+        $default_login_url = jfm_games_get_login_url($current_request);
+    }
+
+    $player_auth = [
+        'logged_in' => false,
+        'login_url' => $default_login_url,
+        'player_name' => '',
+    ];
+
+    if (function_exists('jfm_games_is_player_authenticated') && jfm_games_is_player_authenticated()) {
+        $player = function_exists('jfm_games_get_current_player') ? jfm_games_get_current_player() : null;
+        $player_auth['logged_in'] = true;
+        $player_auth['player_name'] = isset($player['username_display']) ? (string) $player['username_display'] : '';
+    }
+
+    wp_localize_script('jfm-launch-game', 'JFM_PLAYER_AUTH', $player_auth);
+
     // --- 4. LES VARIABLES GLOBALES (Localize) ---
     wp_localize_script('jfm-radio-player', 'JFM_CONFIG', [
         'theme_uri' => get_template_directory_uri(),
@@ -62,6 +82,8 @@ function joystickfm_enqueue()
         'nonce' => wp_create_nonce('jfm_chat_nonce'),
         'upload_size' => 4,
         'is_admin' => current_user_can('manage_options'), // ← Ligne à ajouter
+        'logged_in' => $player_auth['logged_in'],
+        'player_name' => $player_auth['player_name'],
     ]);
 }
 add_action('wp_enqueue_scripts', 'joystickfm_enqueue');

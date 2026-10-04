@@ -56,6 +56,14 @@ endif; ?>
   echo 'class="active"'; ?>>🏠 Accueil</a></li>
           <li><a href="<?php echo home_url('/radio'); ?>"    <?php if (is_page('radio'))
   echo 'class="active"'; ?>>📡 Direct</a></li>
+          <?php if (function_exists('jfm_games_is_active') && jfm_games_is_active()): ?>
+          <li><a href="<?php echo home_url('/jeux'); ?>"    <?php if (is_page('jeux'))
+  echo 'class="active"'; ?>>🕹 Jeux</a></li>
+          <li><a href="<?php echo home_url('/activites'); ?>" <?php if (is_page('activites'))
+  echo 'class="active"'; ?>>🏆 Activités</a></li>
+          <li><a href="<?php echo home_url('/compte'); ?>" <?php if (is_page('compte'))
+  echo 'class="active"'; ?>>👤 Compte</a></li>
+          <?php endif; ?>
           <li><a href="<?php echo home_url('/podcasts'); ?>" <?php if (is_page('podcasts'))
   echo 'class="active"'; ?>>🎙 Podcasts</a></li>
           <li><a href="<?php echo home_url('/blog'); ?>"     <?php if (is_page('blog'))

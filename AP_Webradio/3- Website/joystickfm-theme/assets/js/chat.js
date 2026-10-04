@@ -90,15 +90,22 @@ jQuery(document).ready(function ($) {
     /* -----------------------------------------
        INITIALISATION
     ----------------------------------------- */
-    try {
-        var savedPseudo = localStorage.getItem('jfm_chat_pseudo');
-        if (savedPseudo && usernameEl) usernameEl.value = savedPseudo;
-    } catch (e) { }
+    if (JFM_CHAT.logged_in && usernameEl) {
+        usernameEl.value = JFM_CHAT.player_name || 'Joueur';
+        usernameEl.setAttribute('readonly', 'readonly');
+        usernameEl.setAttribute('aria-readonly', 'true');
+        usernameEl.title = 'Pseudo vérifié par la session serveur';
+    } else {
+        try {
+            var savedPseudo = localStorage.getItem('jfm_chat_pseudo');
+            if (savedPseudo && usernameEl) usernameEl.value = savedPseudo;
+        } catch (e) { }
 
-    if (usernameEl) {
-        usernameEl.addEventListener('blur', function () {
-            try { localStorage.setItem('jfm_chat_pseudo', usernameEl.value); } catch (e) { }
-        });
+        if (usernameEl) {
+            usernameEl.addEventListener('blur', function () {
+                try { localStorage.setItem('jfm_chat_pseudo', usernameEl.value); } catch (e) { }
+            });
+        }
     }
 
     if (chatState.dock) {
@@ -333,7 +340,9 @@ jQuery(document).ready(function ($) {
             if (isSubmitting) return;
 
             var msg = messageEl ? messageEl.value.trim() : '';
-            var name = (usernameEl && usernameEl.value.trim()) ? usernameEl.value.trim() : 'Anonyme';
+            var name = JFM_CHAT.logged_in
+                ? (JFM_CHAT.player_name || 'Joueur')
+                : ((usernameEl && usernameEl.value.trim()) ? usernameEl.value.trim() : 'Anonyme');
             var btn = form.querySelector('button[type="submit"]');
 
             function disableSubmit(b) { isSubmitting = true; if (b) { b.disabled = true; b.textContent = '\u2026'; } }
@@ -478,9 +487,10 @@ jQuery(document).ready(function ($) {
             adminHtml = '<button class="jfm-chat-del-btn" data-id="' + m.id + '" title="Supprimer" style="font-size:0.7rem; opacity:0.5; margin-left:auto;">\uD83D\uDDD1\uFE0F</button>';
         }
 
+        var badgeHtml = m.is_verified ? ' <span title=\"Compte vérifié\">✅</span>' : ' <span title=\"Invité\">👤</span>';
         div.innerHTML =
             '<div class="jfm-chat-meta" style="display:flex; width:100%; align-items:center;">'
-            + '<span class="jfm-chat-name">' + escHtml(m.username) + '</span>'
+            + '<span class="jfm-chat-name">' + escHtml(m.username) + badgeHtml + '</span>'
             + '<span class="jfm-chat-time" style="margin-left:6px;">' + time + '</span>'
             + adminHtml
             + '</div>'
