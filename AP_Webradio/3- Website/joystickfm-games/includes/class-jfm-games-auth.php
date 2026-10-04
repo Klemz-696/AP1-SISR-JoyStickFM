@@ -192,7 +192,7 @@ class JFM_Games_Auth {
         $table_players  = $wpdb->prefix . 'jfm_players';
 
         $row = $wpdb->get_row($wpdb->prepare(
-            "SELECT p.id, p.username_canonical, p.username_display, p.joycoins, p.xp, 
+            "SELECT p.id, p.username_canonical, p.username_display, p.avatar_url, p.joycoins, p.xp, 
                     p.free_boosters_available, p.last_free_booster_at, p.status, s.expires_at
              FROM {$table_sessions} s
              INNER JOIN {$table_players} p ON p.id = s.player_id
@@ -213,6 +213,49 @@ class JFM_Games_Auth {
         }
 
         return self::$current_player;
+    }
+
+    /**
+     * Met à jour l'avatar du joueur (Data URL base64 recadrée ou identifiant de carte)
+     *
+     * @param int $player_id
+     * @param string $avatar_data
+     * @return array [bool $success, mixed $data_or_error]
+     */
+    public static function update_avatar($player_id, $avatar_data) {
+        global $wpdb;
+
+        $player_id = (int)$player_id;
+        if ($player_id <= 0) {
+            return [false, 'Identifiant joueur invalide.'];
+        }
+
+        $clean_avatar = trim((string)$avatar_data);
+
+        // Validation : soit un data URL image valide, soit card:ID, soit null pour reset
+        if (strpos($clean_avatar, 'data:image/') === 0) {
+            if (strlen($clean_avatar) > 600000) {
+                return [false, 'L\'image recadrée est trop volumineuse (max 500 Ko).'];
+            }
+        } elseif (strpos($clean_avatar, 'card:') === 0) {
+            // Format carte de collection valide
+        } elseif (empty($clean_avatar)) {
+            $clean_avatar = null;
+        } else {
+            return [false, 'Format d\'avatar non reconnu.'];
+        }
+
+        $table_players = $wpdb->prefix . 'jfm_players';
+        $updated = $wpdb->update($table_players, [
+            'avatar_url' => $clean_avatar
+        ], ['id' => $player_id], ['%s'], ['%d']);
+
+        if ($updated === false) {
+            return [false, 'Erreur lors de l\'enregistrement de l\'avatar.'];
+        }
+
+        self::$player_checked = false; // Forcer rafraîchissement
+        return [true, $clean_avatar];
     }
 
     /**

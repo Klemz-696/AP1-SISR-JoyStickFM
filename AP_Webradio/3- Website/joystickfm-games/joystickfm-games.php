@@ -74,6 +74,7 @@ add_action('wp_enqueue_scripts', function () {
         'player'      => $player ? [
             'id'            => (int)$player->id,
             'username'      => $player->username_display,
+            'avatar_url'    => !empty($player->avatar_url) ? $player->avatar_url : '',
             'joycoins'      => (int)$player->joycoins,
             'xp'            => (int)$player->xp,
             'free_boosters' => (int)$player->free_boosters_available

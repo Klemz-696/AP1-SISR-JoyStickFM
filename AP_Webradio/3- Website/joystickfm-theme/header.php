@@ -68,9 +68,27 @@ endif; ?>
         <?php 
         $current_player = function_exists('jfm_games_get_current_player') ? jfm_games_get_current_player() : null;
         if ($current_player): 
+          $p_avatar = !empty($current_player->avatar_url) ? $current_player->avatar_url : '';
+          $card_avatar_icon = '🃏';
+          if (!empty($p_avatar) && strpos($p_avatar, 'card:') === 0) {
+              global $wpdb;
+              $card_id = (int)substr($p_avatar, 5);
+              $found_icon = $wpdb->get_var($wpdb->prepare("SELECT icon FROM {$wpdb->prefix}jfm_tcg_cards WHERE id = %d", $card_id));
+              if ($found_icon) {
+                  $card_avatar_icon = $found_icon;
+              }
+          }
         ?>
           <a href="<?php echo home_url('/compte'); ?>" class="jfm-header-account-btn" aria-label="Espace Joueur" title="<?php echo esc_attr($current_player->username_display); ?> (<?php echo (int)$current_player->joycoins; ?> JoyCoins)">
-            <span class="jfm-account-avatar" aria-hidden="true">👤</span>
+            <span class="jfm-account-avatar" aria-hidden="true">
+              <?php if (!empty($p_avatar) && strpos($p_avatar, 'data:image/') === 0): ?>
+                <img src="<?php echo esc_attr($p_avatar); ?>" alt="" class="jfm-header-avatar-img" />
+              <?php elseif (!empty($p_avatar) && strpos($p_avatar, 'card:') === 0): ?>
+                <span class="jfm-header-avatar-card"><?php echo esc_html($card_avatar_icon); ?></span>
+              <?php else: ?>
+                <span class="jfm-header-avatar-default">👤</span>
+              <?php endif; ?>
+            </span>
             <span class="jfm-account-name"><?php echo esc_html($current_player->username_display); ?></span>
             <span class="jfm-header-coins"><span aria-hidden="true">🪙</span> <?php echo (int)$current_player->joycoins; ?></span>
           </a>

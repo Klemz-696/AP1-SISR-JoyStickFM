@@ -254,44 +254,164 @@
     }
 
     // ══════════════════════════════════════════════════════════
-    // GESTION DU JOYSTICK TCG (LOT 2)
+    // GESTION DU JOYSTICK GAMES HUB (UNIVERS DÉDIÉ & TCG LOT 2)
     // ══════════════════════════════════════════════════════════
     let tcgCollectionData = [];
     let tcgActiveFilter = 'all';
     let tcgCountdownTimer = null;
 
+    // État du recadreur d'avatar (Canvas Cropper)
+    let cropImg = null;
+    let cropZoom = 1;
+    let cropOffsetX = 0;
+    let cropOffsetY = 0;
+    let isDraggingCrop = false;
+    let dragStartX = 0;
+    let dragStartY = 0;
+
     function initTCG() {
-        // 1. Sélecteur entre Catapulte et TCG
-        const gameTabBtns = document.querySelectorAll('.jfm-game-tab-btn');
-        if (gameTabBtns.length) {
-            gameTabBtns.forEach(btn => {
-                btn.addEventListener('click', function () {
-                    const game = this.getAttribute('data-game');
-                    gameTabBtns.forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
+        const hub = document.getElementById('jfm-game-universe');
+        if (!hub) return;
 
-                    document.querySelectorAll('.jfm-game-view').forEach(v => {
-                        v.style.display = 'none';
-                        v.classList.remove('active');
+        // 1. Navigation entre sous-pages du jeu (Boosters, Collection, Arcade, Profil)
+        initGameSubpages();
+
+        // 2. Menu déroulant d'accès au reste de la WebRadio
+        initSiteMenuDropdown();
+
+        // 3. Actions d'ouverture de booster et économie
+        initBoosterActions();
+
+        // 4. Filtres de l'album de cartes
+        initCollectionFilters();
+
+        // 5. Studio d'avatar & outil de recadrage photo
+        initAvatarStudio();
+
+        // 6. Déconnexion depuis le hub
+        const hubLogoutBtn = document.getElementById('jfm-btn-hub-logout');
+        if (hubLogoutBtn) {
+            hubLogoutBtn.addEventListener('click', function () {
+                if (confirm('Voulez-vous vraiment vous déconnecter du jeu ?')) {
+                    const formData = new FormData();
+                    formData.append('action', 'jfm_logout');
+                    fetch(config.ajax_url || '/wp-admin/admin-ajax.php', {
+                        method: 'POST',
+                        credentials: 'same-origin',
+                        body: formData
+                    }).then(() => {
+                        window.location.reload();
                     });
-
-                    const targetView = document.getElementById('jfm-game-view-' + game);
-                    if (targetView) {
-                        targetView.style.display = 'block';
-                        targetView.classList.add('active');
-                    }
-
-                    if (game === 'tcg' && !tcgCollectionData.length) {
-                        loadTCGCollection();
-                    }
-                });
+                }
             });
         }
 
-        const arena = document.getElementById('jfm-game-view-tcg');
-        if (!arena) return;
+        // Chargement automatique de la collection
+        loadTCGCollection();
+    }
 
-        // 2. Boutons d'actions TCG
+    // ── Gestion des sous-pages du Hub ──
+    function initGameSubpages() {
+        const navTabs = document.querySelectorAll('.jfm-game-nav-tab');
+        navTabs.forEach(tab => {
+            tab.addEventListener('click', function () {
+                const subpage = this.getAttribute('data-subpage');
+                switchSubpage(subpage);
+            });
+        });
+
+        // Clic sur le badge joueur en haut à droite -> ouvre le profil
+        const topPill = document.getElementById('jfm-gtb-player-pill');
+        if (topPill) {
+            topPill.addEventListener('click', function () {
+                switchSubpage('profil');
+            });
+        }
+
+        // Écoute des changements de hash dans l'URL (#boosters, #collection, etc.)
+        window.addEventListener('hashchange', checkHashRoute);
+        checkHashRoute();
+    }
+
+    function checkHashRoute() {
+        const hash = (window.location.hash || '').replace('#', '');
+        const valid = ['boosters', 'collection', 'arcade', 'profil'];
+        if (valid.includes(hash)) {
+            switchSubpage(hash, false);
+        }
+    }
+
+    function switchSubpage(subpage, updateHash = true) {
+        const valid = ['boosters', 'collection', 'arcade', 'profil'];
+        if (!valid.includes(subpage)) subpage = 'boosters';
+
+        const navTabs = document.querySelectorAll('.jfm-game-nav-tab');
+        const subpages = document.querySelectorAll('.jfm-game-subpage');
+
+        navTabs.forEach(t => {
+            if (t.getAttribute('data-subpage') === subpage) {
+                t.classList.add('active');
+            } else {
+                t.classList.remove('active');
+            }
+        });
+
+        subpages.forEach(p => {
+            if (p.id === 'jfm-subpage-' + subpage) {
+                p.style.display = 'block';
+                p.classList.add('active');
+            } else {
+                p.style.display = 'none';
+                p.classList.remove('active');
+            }
+        });
+
+        if (updateHash) {
+            if (history.replaceState) {
+                history.replaceState(null, '', '#' + subpage);
+            } else {
+                window.location.hash = subpage;
+            }
+        }
+
+        // Si passage à la collection et vide, rafraîchir
+        if (subpage === 'collection' && (!tcgCollectionData || !tcgCollectionData.length)) {
+            loadTCGCollection();
+        }
+
+        // Faire défiler doucement vers le haut du jeu
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    window.JFM_GAMES.switchSubpage = switchSubpage;
+
+    // ── Menu déroulant d'accès au reste du site ──
+    function initSiteMenuDropdown() {
+        const menuBtn = document.getElementById('jfm-btn-site-menu');
+        const dropdown = document.getElementById('jfm-site-dropdown');
+        if (!menuBtn || !dropdown) return;
+
+        menuBtn.addEventListener('click', function (e) {
+            e.stopPropagation();
+            const isOpen = dropdown.classList.contains('active');
+            if (isOpen) {
+                dropdown.classList.remove('active');
+                menuBtn.setAttribute('aria-expanded', 'false');
+            } else {
+                dropdown.classList.add('active');
+                menuBtn.setAttribute('aria-expanded', 'true');
+            }
+        });
+
+        document.addEventListener('click', function (e) {
+            if (!dropdown.contains(e.target) && e.target !== menuBtn) {
+                dropdown.classList.remove('active');
+                menuBtn.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
+    // ── Actions de Booster ──
+    function initBoosterActions() {
         const openBoosterBtn = document.getElementById('jfm-btn-open-booster');
         if (openBoosterBtn) {
             openBoosterBtn.addEventListener('click', handleOpenBooster);
@@ -313,10 +433,13 @@
                 const modal = document.getElementById('jfm-tcg-reveal-modal');
                 if (modal) modal.style.display = 'none';
                 loadTCGCollection();
+                switchSubpage('collection');
             });
         }
+    }
 
-        // 3. Filtres de l'album de cartes
+    // ── Filtres de la Collection ──
+    function initCollectionFilters() {
         const filterBtns = document.querySelectorAll('.jfm-tcg-filter-btn');
         filterBtns.forEach(btn => {
             btn.addEventListener('click', function () {
@@ -326,12 +449,9 @@
                 renderTCGGrid();
             });
         });
-
-        // Chargement immédiat si l'arène est déjà dans le DOM
-        loadTCGCollection();
     }
 
-    // Récupération de la collection de cartes
+    // ── Récupération de la collection de cartes ──
     function loadTCGCollection() {
         if (!config.logged_in) return;
 
@@ -340,9 +460,11 @@
 
         const formData = new FormData();
         formData.append('action', 'jfm_tcg_get_collection');
+        formData.append('security', config.tcg_nonce || '');
 
         fetch(config.ajax_url || '/wp-admin/admin-ajax.php', {
             method: 'POST',
+            credentials: 'same-origin',
             body: formData
         })
         .then(res => res.json())
@@ -352,31 +474,62 @@
                 updateTCGStats(data.data.stats || {});
                 renderTCGGrid();
             } else {
-                grid.innerHTML = '<div style="text-align:center;grid-column:1/-1;padding:2rem;color:#ff4466;">Erreur chargement collection.</div>';
+                const msg = data.data?.message || 'Erreur lors du chargement de la collection.';
+                grid.innerHTML = `<div style="text-align:center;grid-column:1/-1;padding:2.5rem;color:#ff4466;">⚠️ ${escapeHtml(msg)}</div>`;
             }
         })
-        .catch(() => {
-            grid.innerHTML = '<div style="text-align:center;grid-column:1/-1;padding:2rem;color:#ff4466;">Erreur réseau lors du chargement de la collection.</div>';
+        .catch(err => {
+            grid.innerHTML = '<div style="text-align:center;grid-column:1/-1;padding:2.5rem;color:#ff4466;">Erreur réseau lors du chargement de la collection.</div>';
         });
     }
 
     // Mise à jour des compteurs et timer
     function updateTCGStats(stats) {
-        const boosterCountEl = document.getElementById('jfm-tcg-boosters-count');
-        const coinsCountEl   = document.getElementById('jfm-tcg-coins-count');
-        const compTextEl     = document.getElementById('jfm-tcg-completion-text');
-
-        if (boosterCountEl && stats.available_boosters !== undefined) {
-            boosterCountEl.textContent = stats.available_boosters;
-        }
-        if (coinsCountEl && stats.joycoins !== undefined) {
-            coinsCountEl.textContent = stats.joycoins;
-        }
-        if (compTextEl && stats.unique_discovered !== undefined) {
-            compTextEl.textContent = stats.unique_discovered + ' / ' + stats.total_catalog + ' (' + stats.completion_pct + '%)';
+        // Boosters
+        const boosterEls = [
+            document.getElementById('jfm-tcg-boosters-count'),
+            document.getElementById('jfm-top-boosters-val'),
+            document.getElementById('jfm-nav-boosters-badge')
+        ];
+        if (stats.available_boosters !== undefined) {
+            boosterEls.forEach(el => {
+                if (el) el.textContent = stats.available_boosters;
+            });
         }
 
-        // Gestion du timer pour le booster gratuit
+        // JoyCoins
+        const coinEls = [
+            document.getElementById('jfm-tcg-coins-count'),
+            document.getElementById('jfm-top-coins-val'),
+            document.getElementById('jfm-header-coins-val')
+        ];
+        if (stats.joycoins !== undefined) {
+            coinEls.forEach(el => {
+                if (el) el.textContent = stats.joycoins;
+            });
+        }
+
+        // Progression de collection
+        const compTextEl = document.getElementById('jfm-tcg-completion-text');
+        const progDetailsEl = document.getElementById('jfm-album-prog-details');
+        const progBarEl = document.getElementById('jfm-album-prog-bar');
+        const holoDetailsEl = document.getElementById('jfm-album-holo-details');
+        const navProgBadge = document.getElementById('jfm-nav-prog-badge');
+
+        if (stats.unique_discovered !== undefined) {
+            const pct = stats.completion_pct || 0;
+            const str = `${stats.unique_discovered} / ${stats.total_catalog} (${pct}%)`;
+
+            if (compTextEl) compTextEl.textContent = str;
+            if (progDetailsEl) progDetailsEl.textContent = `${stats.unique_discovered} / ${stats.total_catalog} découvertes (${pct}%)`;
+            if (progBarEl) progBarEl.style.width = pct + '%';
+            if (navProgBadge) navProgBadge.textContent = `${stats.unique_discovered}/${stats.total_catalog}`;
+        }
+        if (holoDetailsEl && stats.total_holos !== undefined) {
+            holoDetailsEl.textContent = `✨ ${stats.total_holos} Holo${stats.total_holos > 1 ? 's' : ''}`;
+        }
+
+        // Timer prochain booster gratuit
         const timerWrap = document.getElementById('jfm-tcg-timer-wrap');
         const timerText = document.getElementById('jfm-tcg-timer-text');
         const claimBtn  = document.getElementById('jfm-btn-claim-free');
@@ -416,7 +569,7 @@
         el.textContent = (m < 10 ? '0' : '') + m + ':' + (s < 10 ? '0' : '') + s;
     }
 
-    // Rendu dynamique de la grille des 40 cartes
+    // ── Rendu de la grille des 40 cartes dans le Classeur ──
     function renderTCGGrid() {
         const grid = document.getElementById('jfm-tcg-collection-grid');
         if (!grid) return;
@@ -465,9 +618,14 @@
                         <div class="tcg-card-footer">
                             <span class="tcg-category-tag">${c.category.toUpperCase()}</span>
                             ${isOwned ? `
-                                <div class="tcg-quantity-tag">
-                                    <span>x${totalQty}</span>
-                                    ${totalQty > 1 ? `<button type="button" class="tcg-btn-recycle" onclick="window.JFM_TCG_recycle(${c.id}, ${isHolo ? 1 : 0})" title="Recycler un exemplaire">+20 🪙</button>` : ''}
+                                <div class="tcg-card-actions-row">
+                                    <div class="tcg-quantity-tag">
+                                        <span>x${totalQty}</span>
+                                        ${totalQty > 1 ? `<button type="button" class="tcg-btn-recycle" onclick="window.JFM_TCG_recycle(${c.id}, ${isHolo ? 1 : 0})" title="Recycler un exemplaire doublon">+20 🪙</button>` : ''}
+                                    </div>
+                                    <button type="button" class="tcg-btn-set-avatar" onclick="window.JFM_TCG_setCardAvatar(${c.id})" title="Définir cette carte comme photo de profil">
+                                        ✨ Avatar
+                                    </button>
                                 </div>
                             ` : '<span class="tcg-locked-badge">VERROUILLÉE</span>'}
                         </div>
@@ -479,7 +637,7 @@
         grid.innerHTML = html;
     }
 
-    // Ouverture de booster
+    // ── Ouverture de booster ──
     function handleOpenBooster() {
         const btn = document.getElementById('jfm-btn-open-booster');
         if (btn) btn.disabled = true;
@@ -490,6 +648,7 @@
 
         fetch(config.ajax_url || '/wp-admin/admin-ajax.php', {
             method: 'POST',
+            credentials: 'same-origin',
             body: formData
         })
         .then(res => res.json())
@@ -559,6 +718,7 @@
 
         fetch(config.ajax_url || '/wp-admin/admin-ajax.php', {
             method: 'POST',
+            credentials: 'same-origin',
             body: formData
         })
         .then(res => res.json())
@@ -587,6 +747,7 @@
 
         fetch(config.ajax_url || '/wp-admin/admin-ajax.php', {
             method: 'POST',
+            credentials: 'same-origin',
             body: formData
         })
         .then(res => res.json())
@@ -615,6 +776,7 @@
 
         fetch(config.ajax_url || '/wp-admin/admin-ajax.php', {
             method: 'POST',
+            credentials: 'same-origin',
             body: formData
         })
         .then(res => res.json())
@@ -631,6 +793,299 @@
         });
     };
 
+    // ══════════════════════════════════════════════════════════
+    // STUDIO D'AVATAR & OUTIL DE RECADRAGE DE PHOTO
+    // ══════════════════════════════════════════════════════════
+    function initAvatarStudio() {
+        const fileInput = document.getElementById('jfm-avatar-file-input');
+        const cropModal = document.getElementById('jfm-avatar-crop-modal');
+        const cropCanvas = document.getElementById('jfm-crop-canvas');
+        const zoomSlider = document.getElementById('jfm-crop-zoom');
+        const cancelBtn = document.getElementById('jfm-btn-cancel-crop');
+        const saveBtn = document.getElementById('jfm-btn-save-crop');
+        const resetBtn = document.getElementById('jfm-btn-reset-avatar');
+        const pickCardBtn = document.getElementById('jfm-btn-pick-card-avatar');
+        const cardModal = document.getElementById('jfm-card-avatar-modal');
+        const closeCardModalBtn = document.getElementById('jfm-btn-close-card-avatar');
+
+        // A. Chargement d'une image depuis le fichier
+        if (fileInput) {
+            fileInput.addEventListener('change', function () {
+                const file = this.files[0];
+                if (!file) return;
+
+                if (!file.type.match('image.*')) {
+                    alert('Veuillez sélectionner un fichier image valide (JPG, PNG, WebP).');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    cropImg = new Image();
+                    cropImg.onload = function () {
+                        // Ouverture de la modale de recadrage
+                        cropZoom = 1;
+                        cropOffsetX = 0;
+                        cropOffsetY = 0;
+                        if (zoomSlider) zoomSlider.value = 1;
+                        if (cropModal) cropModal.style.display = 'flex';
+                        drawCropCanvas();
+                    };
+                    cropImg.src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // B. Gestion du glissement tactile & souris sur le Canvas
+        if (cropCanvas) {
+            const startDrag = (x, y) => {
+                isDraggingCrop = true;
+                dragStartX = x - cropOffsetX;
+                dragStartY = y - cropOffsetY;
+            };
+
+            const doDrag = (x, y) => {
+                if (!isDraggingCrop) return;
+                cropOffsetX = x - dragStartX;
+                cropOffsetY = y - dragStartY;
+                drawCropCanvas();
+            };
+
+            const endDrag = () => {
+                isDraggingCrop = false;
+            };
+
+            cropCanvas.addEventListener('mousedown', e => startDrag(e.clientX, e.clientY));
+            window.addEventListener('mousemove', e => doDrag(e.clientX, e.clientY));
+            window.addEventListener('mouseup', endDrag);
+
+            cropCanvas.addEventListener('touchstart', e => {
+                if (e.touches.length === 1) {
+                    startDrag(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: true });
+
+            window.addEventListener('touchmove', e => {
+                if (e.touches.length === 1 && isDraggingCrop) {
+                    doDrag(e.touches[0].clientX, e.touches[0].clientY);
+                }
+            }, { passive: true });
+
+            window.addEventListener('touchend', endDrag);
+        }
+
+        // C. Curseur de Zoom
+        if (zoomSlider) {
+            zoomSlider.addEventListener('input', function () {
+                cropZoom = parseFloat(this.value);
+                drawCropCanvas();
+            });
+        }
+
+        // D. Annuler le recadrage
+        if (cancelBtn && cropModal) {
+            cancelBtn.addEventListener('click', function () {
+                cropModal.style.display = 'none';
+                if (fileInput) fileInput.value = '';
+            });
+        }
+
+        // E. Valider et Enregistrer la photo recadrée
+        if (saveBtn) {
+            saveBtn.addEventListener('click', function () {
+                if (!cropImg || !cropCanvas) return;
+                saveBtn.disabled = true;
+                saveBtn.textContent = 'Enregistrement...';
+
+                // Génération d'une vignette carrée nette 200x200
+                const exportCanvas = document.createElement('canvas');
+                exportCanvas.width = 200;
+                exportCanvas.height = 200;
+                const exportCtx = exportCanvas.getContext('2d');
+
+                // Recréer le dessin centré
+                const w = cropCanvas.width;
+                const h = cropCanvas.height;
+                const baseScale = Math.max(w / cropImg.width, h / cropImg.height);
+                const currentScale = baseScale * cropZoom;
+                const drawW = cropImg.width * currentScale;
+                const drawH = cropImg.height * currentScale;
+                const drawX = (w - drawW) / 2 + cropOffsetX;
+                const drawY = (h - drawH) / 2 + cropOffsetY;
+
+                // Transposition vers le canvas d'export 200x200
+                const ratio = 200 / w;
+                exportCtx.drawImage(cropImg, drawX * ratio, drawY * ratio, drawW * ratio, drawH * ratio);
+
+                const dataUrl = exportCanvas.toDataURL('image/jpeg', 0.85);
+
+                sendAvatarUpdate(dataUrl, function () {
+                    saveBtn.disabled = false;
+                    saveBtn.textContent = '✂ Valider & Enregistrer l\'avatar';
+                    if (cropModal) cropModal.style.display = 'none';
+                    if (fileInput) fileInput.value = '';
+                    updateAllAvatarVisuals(dataUrl);
+                    alert('🎉 Votre photo de profil a été mise à jour avec succès !');
+                }, function (err) {
+                    saveBtn.disabled = false;
+                    saveBtn.textContent = '✂ Valider & Enregistrer l\'avatar';
+                    alert('Erreur : ' + err);
+                });
+            });
+        }
+
+        // F. Choisir une carte comme avatar
+        if (pickCardBtn && cardModal) {
+            pickCardBtn.addEventListener('click', function () {
+                openCardAvatarPicker();
+            });
+        }
+
+        if (closeCardModalBtn && cardModal) {
+            closeCardModalBtn.addEventListener('click', function () {
+                cardModal.style.display = 'none';
+            });
+        }
+
+        // G. Réinitialiser l'avatar
+        if (resetBtn) {
+            resetBtn.addEventListener('click', function () {
+                if (!confirm('Réinitialiser votre photo de profil pour utiliser la silhouette par défaut ?')) return;
+
+                sendAvatarUpdate('', function () {
+                    updateAllAvatarVisuals('');
+                    alert('Avatar réinitialisé par défaut.');
+                }, function (err) {
+                    alert('Erreur : ' + err);
+                });
+            });
+        }
+    }
+
+    // Dessin sur le Canvas de Recadrage
+    function drawCropCanvas() {
+        const canvas = document.getElementById('jfm-crop-canvas');
+        if (!canvas || !cropImg) return;
+        const ctx = canvas.getContext('2d');
+        const w = canvas.width;
+        const h = canvas.height;
+
+        ctx.clearRect(0, 0, w, h);
+
+        const baseScale = Math.max(w / cropImg.width, h / cropImg.height);
+        const currentScale = baseScale * cropZoom;
+        const drawW = cropImg.width * currentScale;
+        const drawH = cropImg.height * currentScale;
+        const drawX = (w - drawW) / 2 + cropOffsetX;
+        const drawY = (h - drawH) / 2 + cropOffsetY;
+
+        ctx.save();
+        ctx.drawImage(cropImg, drawX, drawY, drawW, drawH);
+        ctx.restore();
+    }
+
+    // Ouvrir le sélecteur de cartes pour l'avatar
+    function openCardAvatarPicker() {
+        const modal = document.getElementById('jfm-card-avatar-modal');
+        const grid = document.getElementById('jfm-cards-avatar-grid');
+        if (!modal || !grid) return;
+
+        const ownedCards = tcgCollectionData.filter(c => c.is_owned);
+        if (!ownedCards.length) {
+            grid.innerHTML = '<div style="text-align:center;grid-column:1/-1;padding:2rem;color:var(--texte-dim);">Vous ne possédez pas encore de cartes. Ouvrez des boosters pour débloquer des avatars exclusifs !</div>';
+            modal.style.display = 'flex';
+            return;
+        }
+
+        let html = '';
+        ownedCards.forEach(c => {
+            html += `
+                <div class="jfm-avatar-card-choice" onclick="window.JFM_TCG_setCardAvatar(${c.id})" title="Choisir ${escapeHtml(c.name)}">
+                    <div class="jfm-acc-art" style="background:${c.bg_gradient};">
+                        <span>${c.icon}</span>
+                    </div>
+                    <span class="jfm-acc-name">${escapeHtml(c.name)}</span>
+                </div>
+            `;
+        });
+
+        grid.innerHTML = html;
+        modal.style.display = 'flex';
+    }
+
+    // Définir une carte comme avatar
+    window.JFM_TCG_setCardAvatar = function (cardId) {
+        const card = tcgCollectionData.find(c => c.id === cardId);
+        if (!card) return;
+
+        const avatarValue = 'card:' + cardId;
+        sendAvatarUpdate(avatarValue, function () {
+            const cardModal = document.getElementById('jfm-card-avatar-modal');
+            if (cardModal) cardModal.style.display = 'none';
+
+            updateAllAvatarVisuals(avatarValue, card);
+            alert(`🎉 L'avatar de la carte "${card.name}" est désormais actif !`);
+        }, function (err) {
+            alert('Erreur : ' + err);
+        });
+    };
+
+    // Requête AJAX commune de mise à jour d'avatar
+    function sendAvatarUpdate(avatarData, onSuccess, onError) {
+        const formData = new FormData();
+        formData.append('action', 'jfm_update_avatar');
+        formData.append('avatar_data', avatarData);
+        formData.append('jfm_nonce', config.nonce || '');
+        formData.append('security', config.tcg_nonce || '');
+
+        fetch(config.ajax_url || '/wp-admin/admin-ajax.php', {
+            method: 'POST',
+            credentials: 'same-origin',
+            body: formData
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                if (typeof onSuccess === 'function') onSuccess(data.data);
+            } else {
+                if (typeof onError === 'function') onError(data.data?.message || 'Erreur lors de la mise à jour.');
+            }
+        })
+        .catch(() => {
+            if (typeof onError === 'function') onError('Erreur réseau.');
+        });
+    }
+
+    // Mettre à jour tous les éléments d'affichage de l'avatar dans la page
+    function updateAllAvatarVisuals(avatarData, cardObj) {
+        const bigFrame = document.getElementById('jfm-avatar-big-frame');
+        const gtbAvatarWrap = document.querySelector('.jfm-gtb-avatar-wrap');
+        const headerAvatar = document.querySelector('.jfm-header-account-btn .jfm-account-avatar');
+
+        let innerHtmlBig = '';
+        let innerHtmlSmall = '';
+
+        if (avatarData && avatarData.startsWith('data:image/')) {
+            innerHtmlBig = `<img src="${avatarData}" alt="Mon Avatar" id="jfm-current-avatar-preview" class="jfm-avatar-img-big" />`;
+            innerHtmlSmall = `<img src="${avatarData}" alt="Avatar" class="jfm-gtb-avatar-img" />`;
+        } else if (avatarData && avatarData.startsWith('card:')) {
+            const card = cardObj || tcgCollectionData.find(c => ('card:' + c.id) === avatarData);
+            const icon = card ? card.icon : '🃏';
+            const bg = card ? card.bg_gradient : 'linear-gradient(135deg,#00f5ff,#b44fff)';
+
+            innerHtmlBig = `<div class="jfm-avatar-card-big" style="background:${bg};font-size:3.5rem;">${icon}</div>`;
+            innerHtmlSmall = `<span class="jfm-gtb-avatar-card-icon">${icon}</span>`;
+        } else {
+            innerHtmlBig = `<span class="jfm-avatar-default-big" id="jfm-current-avatar-preview">👤</span>`;
+            innerHtmlSmall = `<span class="jfm-gtb-avatar-default">👤</span>`;
+        }
+
+        if (bigFrame) bigFrame.innerHTML = innerHtmlBig;
+        if (gtbAvatarWrap) gtbAvatarWrap.innerHTML = innerHtmlSmall;
+        if (headerAvatar) headerAvatar.innerHTML = innerHtmlSmall;
+    }
+
     function escapeHtml(str) {
         if (!str) return '';
         return String(str)
@@ -641,3 +1096,4 @@
             .replace(/'/g, '&#039;');
     }
 })();
+

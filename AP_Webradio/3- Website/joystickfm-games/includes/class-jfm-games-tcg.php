@@ -30,7 +30,7 @@ class JFM_Games_TCG {
 
         foreach ($ajax_actions as $action) {
             add_action("wp_ajax_{$action}", [__CLASS__, "handle_{$action}"]);
-            add_action("wp_ajax_nopriv_{$action}", [__CLASS__, "handle_unauthorized"]);
+            add_action("wp_ajax_nopriv_{$action}", [__CLASS__, "handle_{$action}"]);
         }
     }
 

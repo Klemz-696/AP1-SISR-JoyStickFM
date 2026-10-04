@@ -37,6 +37,7 @@ class JFM_Games_Migrator {
             pin_hash VARCHAR(255) NOT NULL,
             recovery_hash VARCHAR(255) DEFAULT NULL,
             recovery_used_at DATETIME DEFAULT NULL,
+            avatar_url MEDIUMTEXT DEFAULT NULL,
             joycoins INT NOT NULL DEFAULT 100,
             xp INT NOT NULL DEFAULT 0,
             free_boosters_available INT NOT NULL DEFAULT 10,
@@ -49,6 +50,12 @@ class JFM_Games_Migrator {
             KEY idx_status (status)
         ) {$charset_collate};";
         dbDelta($sql_players);
+
+        // Ajout rétrocompatible si colonne manquante
+        $col_avatar = $wpdb->get_results("SHOW COLUMNS FROM {$table_players} LIKE 'avatar_url'");
+        if (empty($col_avatar)) {
+            $wpdb->query("ALTER TABLE {$table_players} ADD COLUMN avatar_url MEDIUMTEXT DEFAULT NULL AFTER recovery_used_at");
+        }
 
         // 2. Table des sessions joueurs à jetons opaques
         $table_sessions = "{$prefix}jfm_player_sessions";
