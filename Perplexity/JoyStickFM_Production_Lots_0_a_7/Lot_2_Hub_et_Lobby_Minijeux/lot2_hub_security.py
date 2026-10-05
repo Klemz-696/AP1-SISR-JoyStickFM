@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
-JoyStick FM - Lot 2: Hub Perimeter Security, Anti-Fall & Anti-Damage Fix
+JoyStick FM - Lot 2: Hub Perimeter Security & Guaranteed Anti-Void Teleportation (V3)
 Features:
   - Disables fall_damage (gamerule fall_damage false) -> ZERO fall death
   - Expands perimeter barriers to X,Z = +/-25 (generous 51x51 area, no collision with Parkour)
-  - Clears any barrier blocks in the parkour airspace (X=5..22, Y=64..76)
-  - Horizontal invisible safety net at Y=20
-  - Continuous anti-void catch teleporting smoothly to spawn (0.5, 65, 0.5)
+  - Clears any barrier blocks in the parkour airspace (X=4..30, Y=64..90)
+  - Completely REMOVES the blocking invisible barrier floor at Y=20
+  - Guaranteed Repeating Command Block with a 4000x4000 bounding box (Y=-64..54) catching any falling player
+  - Works on both 'hub' and 'world'
 """
 
 import subprocess
@@ -19,54 +20,64 @@ def rcon(cmd):
     return out
 
 def apply_hub_security():
-    print("=== [LOT 2] Application de la sécurité du Hub (Zéro Dégât de Chute & Périmètre 51x51) ===")
+    print("=== [LOT 2] Application de la sécurité du Hub (Anti-Chute & Re-TP Garanti) ===")
 
-    # 1. Forceload des chunks du Hub
-    rcon("execute in hub run forceload add -2 -2 2 2")
+    worlds = ["hub", "world"]
 
-    # 2. PURGE de TOUTES les anciennes barrières parasites qui bloquaient le parkour
-    print("1. Nettoyage des anciennes barrières parasites...")
-    rcon("execute in hub run fill -20 65 -20 20 75 20 air replace barrier")
+    for w in worlds:
+        # 1. Forceload des chunks du Spawn
+        rcon(f"execute in {w} run forceload add -2 -2 2 2")
 
-    # 3. Consolidation de la dalle du Hub (33x33 blocs à Y=64)
-    print("2. Consolidation de la plateforme centrale...")
-    rcon("execute in hub run fill -16 63 -16 16 63 16 black_concrete")
-    rcon("execute in hub run fill -16 64 -16 16 64 16 smooth_quartz")
-    rcon("execute in hub run fill -16 64 -16 16 64 -16 purple_concrete")
-    rcon("execute in hub run fill -16 64 16 16 64 16 purple_concrete")
-    rcon("execute in hub run fill -16 64 -16 -16 64 16 cyan_concrete")
-    rcon("execute in hub run fill 16 64 -16 16 64 16 cyan_concrete")
+        # 2. Nettoyage des anciennes barrières parasites dans le ciel et l'espace du parkour
+        print(f"1. Nettoyage des barrières parasites dans '{w}'...")
+        rcon(f"execute in {w} run fill -25 65 -25 25 85 25 air replace barrier")
 
-    # 4. Nouveau périmètre de barrières invisibles ÉLARGI à X,Z = +/-25 (Parkour 100% dégagé)
-    print("3. Pose du nouveau périmètre élargi à +/-25...")
-    rcon("execute in hub run fill -25 65 -25 25 72 -25 barrier")
-    rcon("execute in hub run fill -25 65 25 25 72 25 barrier")
-    rcon("execute in hub run fill -25 65 -25 -25 72 25 barrier")
-    rcon("execute in hub run fill 25 65 -25 25 72 25 barrier")
+        # 3. Suppression totale de l'ancien sol invisible à Y=20 qui bloquait les joueurs
+        print(f"2. Suppression du sol invisible à Y=20 dans '{w}'...")
+        rcon(f"execute in {w} run fill -50 15 -50 50 25 50 air replace barrier")
 
-    # 5. Filet de sécurité horizontal invisible à Y=20 sous toute la zone
-    print("4. Filet horizontal invisible à Y=20...")
-    rcon("execute in hub run fill -35 20 -35 35 20 35 barrier")
+        # 4. Consolidation de la plateforme centrale du Hub (33x33 blocs à Y=64)
+        print(f"3. Consolidation de la plateforme centrale dans '{w}'...")
+        rcon(f"execute in {w} run fill -16 63 -16 16 63 16 black_concrete")
+        rcon(f"execute in {w} run fill -16 64 -16 16 64 16 smooth_quartz")
+        rcon(f"execute in {w} run fill -16 64 -16 16 64 -16 purple_concrete")
+        rcon(f"execute in {w} run fill -16 64 16 16 64 16 purple_concrete")
+        rcon(f"execute in {w} run fill -16 64 -16 -16 64 16 cyan_concrete")
+        rcon(f"execute in {w} run fill 16 64 -16 16 64 16 cyan_concrete")
 
-    # 6. DÉSACTIVATION ABSOLUE DES DÉGÂTS DE CHUTE (Fall damage = false)
-    print("5. Désactivation des dégâts de chute sur tous les mondes de lobby...")
-    rcon("execute in hub run gamerule minecraft:fall_damage false")
+        # 5. Périmètre de sécurité invisible ÉLARGI à X,Z = +/-25 (Parkour 100% libre)
+        print(f"4. Pose du périmètre élargi à +/-25 dans '{w}'...")
+        rcon(f"execute in {w} run fill -25 65 -25 25 72 -25 barrier")
+        rcon(f"execute in {w} run fill -25 65 25 25 72 25 barrier")
+        rcon(f"execute in {w} run fill -25 65 -25 -25 72 25 barrier")
+        rcon(f"execute in {w} run fill 25 65 -25 25 72 25 barrier")
+
+        # 6. DÉSACTIVATION DES DÉGÂTS DE CHUTE
+        rcon(f"execute in {w} run gamerule minecraft:fall_damage false")
+
+        # 7. BLOC DE COMMANDE RÉPÉTITIF ANTI-VIDE (Zone 4000x4000, Y=-64 à 54)
+        # Dès qu'un joueur passe sous Y=54 (la plateforme est à Y=64), il est instantanément retéléporté à 0.5 65.0 0.5
+        print(f"5. Mise en place du bloc de commande de rattrapage anti-vide dans '{w}'...")
+        cmd_tp = "execute as @a[x=-2000,dx=4000,z=-2000,dz=4000,y=-64,dy=118] run tp @s 0.5 65.0 0.5 0 0"
+        rcon(f'execute in {w} run setblock 0 63 0 repeating_command_block[facing=up]{{Command:"{cmd_tp}",auto:1b}}')
+
+        # 8. Verrouillage du temps et des monstres
+        rcon(f"execute in {w} run gamerule minecraft:advance_time false")
+        rcon(f"execute in {w} run gamerule minecraft:advance_weather false")
+        rcon(f"execute in {w} run gamerule minecraft:spawn_monsters false")
+        rcon(f"execute in {w} run setworldspawn 0 65 0")
+
+    # Appliquer aussi sur les autres mondes
+    rcon("gamerule fallDamage false")
     rcon("execute in lobby_minijeux run gamerule minecraft:fall_damage false")
     rcon("execute in rush_jfm run gamerule minecraft:fall_damage false")
     rcon("execute in hikabrain_jfm run gamerule minecraft:fall_damage false")
 
-    # 7. Bloc de commande de rattrapage instantané à Y=63
-    print("6. Mise en place du bloc de commande de téléportation anti-vide...")
-    cmd_catch = 'execute as @a[y=-128,dy=180] run tp @s 0.5 65.0 0.5 0 0'
-    rcon(f'execute in hub run setblock 0 63 0 repeating_command_block[facing=up]{{Command:"{cmd_catch}",auto:1b}}')
+    # Anti-vide pour le lobby des mini-jeux (plateforme à Y=64)
+    cmd_tp_lobby = "execute as @a[x=-1000,dx=2000,z=-1000,dz=2000,y=-64,dy=118] run tp @s 0.5 65.0 0.5 0 0"
+    rcon(f'execute in lobby_minijeux run setblock 0 63 0 repeating_command_block[facing=up]{{Command:"{cmd_tp_lobby}",auto:1b}}')
 
-    # 8. Verrouillage du temps et des monstres
-    rcon("execute in hub run gamerule minecraft:advance_time false")
-    rcon("execute in hub run gamerule minecraft:advance_weather false")
-    rcon("execute in hub run gamerule minecraft:spawn_monsters false")
-    rcon("execute in hub run setworldspawn 0 65 0")
-
-    print("=== [LOT 2] Sécurité du Hub 100% opérationnelle (Zéro mort par chute) ! ===")
+    print("=== [LOT 2] Sécurité du Hub 100% opérationnelle (Anti-chute & Re-TP instantané) ! ===")
 
 if __name__ == "__main__":
     apply_hub_security()

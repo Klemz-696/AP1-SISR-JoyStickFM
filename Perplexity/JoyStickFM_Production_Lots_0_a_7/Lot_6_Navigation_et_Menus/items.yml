@@ -15,8 +15,12 @@ items-v4:
         - 'player: menu'
       left-click:
         - 'player: menu'
+    commands-cost: 0
+    commands-cooldown: 0
     enabled-worlds:
       - hub
+      - world
+      - hub_void
       - lobby_minijeux
     triggers:
       - join
@@ -24,8 +28,11 @@ items-v4:
       - world-change
     itemflags:
       - HIDE_ATTRIBUTES
+    permission-node: false
+    always-give: true
+    overwrite: true
     give-on-world-switch: true
-    clear-on-world-switch: true
+    clear-on-world-switch: false
     drop-full: false
     item-movement: false
     modify-item: false
@@ -46,16 +53,22 @@ items-v4:
         - 'player: spawn'
       left-click:
         - 'player: spawn'
+    commands-cost: 0
+    commands-cooldown: 0
     enabled-worlds:
       - lobby_minijeux
       - rush_jfm
       - hikabrain_jfm
+      - bedwars_jfm
     triggers:
       - join
       - respawn
       - world-change
     itemflags:
       - HIDE_ATTRIBUTES
+    permission-node: false
+    always-give: true
+    overwrite: true
     give-on-world-switch: true
     clear-on-world-switch: true
     drop-full: false
