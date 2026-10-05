@@ -92,19 +92,21 @@ def main():
     print("\n--- [LOT 1, 4, 6] Déploiement des Fichiers de Configuration ---")
     configs = [
         (BASE_DIR / "Lot_1_BedWars_BlockHunt" / "jfm_duo.yml", "plugins/BedWars/arenas/jfm_duo.yml"),
-        (BASE_DIR / "Lot_1_BedWars_BlockHunt" / "shop.yml", "plugins/BedWars/shops/shop.yml"),
+        (BASE_DIR / "Lot_1_BedWars_BlockHunt" / "shop.yml", "plugins/BedWars/shop.yml"),
         (BASE_DIR / "Lot_1_BedWars_BlockHunt" / "blockhunt_arenas.yml", "plugins/BlockHunt/arenas.yml"),
         (BASE_DIR / "Lot_1_BedWars_BlockHunt" / "groups.yml", "plugins/Multiverse-Inventories/groups.yml"),
         (BASE_DIR / "Lot_4_Rush_FunCraft" / "rush_1v1.yml", "plugins/BedWars/arenas/rush_1v1.yml"),
         (BASE_DIR / "Lot_4_Rush_FunCraft" / "rush_2v2.yml", "plugins/BedWars/arenas/rush_2v2.yml"),
-        (BASE_DIR / "Lot_4_Rush_FunCraft" / "rush_shop.yml", "plugins/BedWars/shops/rush_shop.yml"),
         (BASE_DIR / "Lot_6_Navigation_et_Menus" / "lot6_games_menu.yml", "plugins/DeluxeMenus/gui_menus/games.yml"),
-        (BASE_DIR / "Lot_7_Finition_Auth_et_Recette" / "lot7_authme_config.yml", "plugins/AuthMe/config.yml"),
     ]
 
     for src_file, dest_rel in configs:
         if src_file.exists():
             cp_to_container(src_file, dest_rel)
+
+    # Initialisation Scoreboards Hikabrain
+    rcon("scoreboard objectives add hika_red dummy")
+    rcon("scoreboard objectives add hika_blue dummy")
 
     # LOT 3 : Application D1 (Survie sans claim)
     print("\n--- [LOT 3] Application D1 : Survie Pure sans Claim ---")
