@@ -1,55 +1,42 @@
+# --{ =-=-=-=-=-=-=-=-=-= ItemJoin's Custom Item Configurations, by RockinChaos =-=-=-=-=-=-=-=-=-= }--
+# Modifying the Version will cause this file to break and regenerate.
+items-Version: 8
+
+# General options that apply to the custom items' functionality.
+items-Delay: 2
+items-Overwrite: true
+items-Spamming: false
+items-RestrictCount: false
+
+# This is the section where the custom items created will be stored.
 items:
   game-selector:
     id: COMPASS
     slot: 4
     name: '&6&l✦ MENU DES JEUX ✦ &7(Clic-Droit)'
     lore:
-      - '&7Clique pour ouvrir la sélection des jeux :'
+      - '&7Cliquez pour ouvrir la sélection des jeux :'
       - '&8▸ &aSurvie Vanilla'
       - '&8▸ &cBedWars &6Rush'
       - '&8▸ &eHikabrain &3Cache-Cache'
       - ''
       - '&e➜ Clic-droit pour ouvrir le menu'
-    commands:
-      - 'menu'
-    commands-type: player
-    triggers: join, respawn, world-change
-    enabled-worlds: hub, world, lobby_minijeux
-    itemflags: HIDE_ATTRIBUTES
-    permission-node: false
-    always-give: true
-    overwrite: true
-    give-on-world-switch: true
-    clear-on-world-switch: false
-    drop-full: false
-    item-movement: false
-    modify-item: false
-    movement-type: false
-    drop-creative: false
-    death-drops: false
+    interact:
+      - 'player: menu'
+    itemflags: inventory-modify, death-drops, self-drops, unbreakable
+    triggers: join, respawn, world-switch
+    enabled-worlds: hub, world, lobby_minijeux, survie, bedwars_jfm, rush_jfm, hikabrain_jfm, blockhunt_jfm
 
   quit-lobby:
     id: RED_BED
     slot: 8
     name: '&c&l✦ RETOUR AU HUB ✦ &7(Clic-Droit)'
     lore:
-      - '&7Clique pour quitter et retourner au Hub central.'
+      - '&7Cliquez pour quitter et retourner au Hub central.'
       - ''
       - '&c➜ Clic-droit pour retourner au Hub'
-    commands:
-      - 'spawn'
-    commands-type: player
-    triggers: join, respawn, world-change
+    interact:
+      - 'player: spawn'
+    itemflags: inventory-modify, death-drops, self-drops, unbreakable
+    triggers: join, respawn, world-switch
     enabled-worlds: lobby_minijeux, rush_jfm, hikabrain_jfm, bedwars_jfm
-    itemflags: HIDE_ATTRIBUTES
-    permission-node: false
-    always-give: true
-    overwrite: true
-    give-on-world-switch: true
-    clear-on-world-switch: true
-    drop-full: false
-    item-movement: false
-    modify-item: false
-    movement-type: false
-    drop-creative: false
-    death-drops: false

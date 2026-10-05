@@ -1,0 +1,255 @@
+{
+  "host": {
+    "hostname": "debian",
+    "os_release": "PRETTY_NAME=\"Debian GNU/Linux 12 (bookworm)\"",
+    "uptime": "23:44:42 up  5:56,  2 users,  load average: 0,79, 0,73, 0,62",
+    "ram_host": "total       utilisé      libre     partagé tamp/cache   disponible\nMem:            21Gi       4,4Gi        15Gi        10Mi       1,8Gi        17Gi\nÉchange:       974Mi          0B       974Mi",
+    "cpu_host": "15"
+  },
+  "docker": {
+    "status": "running",
+    "image": "itzg/minecraft-server:latest",
+    "mounts": [
+      {
+        "Type": "bind",
+        "Source": "/opt/minecraft/data",
+        "Destination": "/data",
+        "Mode": "rw",
+        "RW": true,
+        "Propagation": "rprivate"
+      }
+    ],
+    "env": [
+      "MOTD=§6AP 1 BTS SIO §r- §aServeur Paper 26.2",
+      "MAX_PLAYERS=10",
+      "DIFFICULTY=normal",
+      "MEMORY=2G",
+      "CUSTOM_SERVER=/data/paper.jar",
+      "ONLINE_MODE=FALSE",
+      "SERVER_NAME=SRV-MC-AP1 | BTS SIO",
+      "TYPE=CUSTOM",
+      "EULA=TRUE",
+      "JVM_OPTS=-DbundlerRepoDir=/data",
+      "PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "JAVA_HOME=/opt/java/openjdk",
+      "LANG=en_US.UTF-8",
+      "LANGUAGE=en_US:en",
+      "LC_ALL=en_US.UTF-8",
+      "JAVA_VERSION=jdk-25.0.4.1+1",
+      "VERSION=LATEST",
+      "UID=1000",
+      "GID=1000"
+    ]
+  },
+  "minecraft_runtime": {
+    "version_rcon": "\u001b[37m\u001b[3mChecking version, please wait...\n\u001b[0m",
+    "tps": "\u001b[33mTPS from last 1m, 5m, 15m: \u001b[32m20.0\u001b[0m, \u001b[32m20.0\u001b[0m, \u001b[32m20.0\n\u001b[0m",
+    "memory_rcon": "\u001b[33mUptime:\u001b[31m 33 minutes 51 seconds\n\u001b[0m\u001b[33mCurrent TPS = \u001b[32m20\n\u001b[0m\u001b[33mMaximum memory:\u001b[31m 2,048 MB.\n\u001b[0m\u001b[33mAllocated memory:\u001b[31m 2,048 MB.\n\u001b[0m\u001b[33mFree memory:\u001b[31m 1,194 MB.\n\u001b[0m\u001b[33mWorld \"\u001b[31mworld\u001b[33m\": \u001b[31m0\u001b[33m chunks, \u001b[31m0\u001b[33m entities, \u001b[31m0\u001b[33m tiles.\n\u001b[0m\u001b[33mNether \"\u001b[31mworld_nether\u001b[33m\": \u001b[31m0\u001b[33m chunks, \u001b[31m0\u001b[33m entities, \u001b[31m0\u001b[33m tiles.\n\u001b[0m\u001b[33mThe End \"\u001b[31mworld_the_end\u001b[33m\": \u001b[31m0\u001b[33m chunks, \u001b[31m0\u001b[33m entities, \u001b[31m0\u001b[33m tiles.\n\u001b[0m\u001b[33mWorld \"\u001b[31mbedwars_jfm\u001b[33m\": \u001b[31m36\u001b[33m chunks, \u001b[31m0\u001b[33m entities, \u001b[31m0\u001b[33m tiles.\n\u001b[0m\u001b[33mWorld \"\u001b[31mblockhunt_jfm\u001b[33m\": \u001b[31m0\u001b[33m chunks, \u001b[31m0\u001b[33m entities, \u001b[31m0\u001b[33m tiles.\n\u001b[0m\u001b[33mWorld \"\u001b[31mhikabrain_jfm\u001b[33m\": \u001b[31m0\u001b[33m chunks, \u001b[31m0\u001b[33m entities, \u001b[31m0\u001b[33m tiles.\n\u001b[0m\u001b[33mWorld \"\u001b[31mhub\u001b[33m\": \u001b[31m64\u001b[33m chunks, \u001b[31m4\u001b[33m entities, \u001b[31m9\u001b[33m tiles.\n\u001b[0m\u001b[33mWorld \"\u001b[31mlobby_minijeux\u001b[33m\": \u001b[31m36\u001b[33m chunks, \u001b[31m18\u001b[33m entities, \u001b[31m3\u001b[33m tiles.\n\u001b[0m\u001b[33mWorld \"\u001b[31mminijeux\u001b[33m\": \u001b[31m0\u001b[33m chunks, \u001b[31m0\u001b[33m entities, \u001b[31m0\u001b[33m tiles.\n\u001b[0m\u001b[33mWorld \"\u001b[31mrush_jfm\u001b[33m\": \u001b[31m36\u001b[33m chunks, \u001b[31m0\u001b[33m entities, \u001b[31m0\u001b[33m tiles.\n\u001b[0m\u001b[33mWorld \"\u001b[31msurvie\u001b[33m\": \u001b[31m0\u001b[33m chunks, \u001b[31m0\u001b[33m entities, \u001b[31m0\u001b[33m tiles.\n\u001b[0m",
+    "java_version_container": "openjdk version \"25.0.4.1\" 2026-08-18 LTS\nOpenJDK Runtime Environment Temurin-25.0.4.1+1 (build 25.0.4.1+1-LTS)\nOpenJDK 64-Bit Server VM Temurin-25.0.4.1+1 (build 25.0.4.1+1-LTS, mixed mode, sharing)",
+    "javac_available_container": "",
+    "javac_version_host": "/bin/sh: 1: javac: not found",
+    "server_properties": "enable-command-block=true\nlevel-name=world\nmotd=§6AP 1 BTS SIO §r- §aServeur Paper 26.2\nonline-mode=false"
+  },
+  "players_online": "\u001b[33mThere are \u001b[31m0\u001b[33m out of maximum \u001b[31m10\u001b[33m players online.\n\u001b[0m",
+  "save_all_flush": "ERROR: Command '['docker', 'exec', '-i', 'minecraft_ap1', 'rcon-cli', '--', 'save-all flush']' timed out after 10 seconds",
+  "plugins_jars": [
+    {
+      "filename": "DeluxeMenus-1.14.1-Release.jar",
+      "size": 4075217,
+      "sha256": "ec10a1317152aa57d76eec8cb3e1e7dc7f52e45c7a5d742c0baa1e394496ec20",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "api-version: 1.13\nname: DeluxeMenus\nmain: com.extendedclip.deluxemenus.DeluxeMenus\nversion: 1.14.1-Release\nauthors: [ HelpChat ]\nsoftdepend: [ PlaceholderAPI, Vault, HeadDatabase, ItemsAdder, Nexo, Oraxen, ExecutableItems, ExecutableBlocks, Score, SimpleItemGenerator, MMOItems ]\ndescription: All in one inventory menu system\ncommands:\n  deluxemenus:\n    description: DeluxeMenus main commands\n    aliases: [ dm, deluxemenu, dmenu ]\npermissions:\n  deluxemenus.admin:\n    description: admin commands\n    default: op\n  deluxemenus.open:\n    description: open a menu with /dm open <menu>\n    default: op\n  deluxemenus.open.others:\n    description: open a menu with /dm open <menu> <player>"
+    },
+    {
+      "filename": "EssentialsXSpawn.jar",
+      "size": 18661,
+      "sha256": "dd5377c4c921b9b67814209f4f6646ffbb959729003e721ec5e63c47c7c010b8",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "name: EssentialsSpawn\nmain: com.earth2me.essentials.spawn.EssentialsSpawn\n# Note to developers: This next line cannot change, or the automatic versioning system will break.\nversion: 2.22.0\nwebsite: https://essentialsx.net/\ndescription: Provides spawn control commands, utilizing Essentials.\nauthors: [Zenexer, ementalo, Aelux, Brettflan, KimKandor, snowleo, ceulemans, Xeology, KHobbits, SupaHam, mdcfe, DoNotSpamPls, JRoy]\ndepend: [Essentials]\napi-version: 1.13\ncommands:\n  setspawn:\n    description: Sets the spawn point to your current position.\n    usage: /<command> <group>\n    aliases: [esetspawn]\n  spawn:\n    description: Teleports to the spawn point.\n    usage: /<command> [player]\n    aliases: [espawn]\npermissions:\n  essentials.spawn:"
+    },
+    {
+      "filename": "CoreProtect.jar",
+      "size": 1113283,
+      "sha256": "a2acef7c06ef201355cef07d591a6055dfed358ad768faaaaaf4e276865ecc97",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "name: CoreProtect\nmain: net.coreprotect.CoreProtect\nversion: 24.1\nbranch: master\napi-version: 1.16\nfolia-supported: true\nwebsite: http://coreprotect.net\nauthor: Intelli\nsoftdepend: [WorldEdit]\ndescription: >\n             Provides block protection for your server.\ncommands:\n  co:\n    description: Utilize the plugin\n    permission: coreprotect.co\n    permission-message: §3CoreProtect §f- You do not have permission to do that.\n    usage: /<command> <params>\n  core:\n    description: Utilize the plugin\n    permission: coreprotect.core"
+    },
+    {
+      "filename": "Chunky-Bukkit.jar",
+      "size": 304616,
+      "sha256": "530d2c7430a96a39957391b7088be144daa3108f7665896d1c23aa8dd4af32f3",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "name: Chunky\nversion: 1.5.3\nmain: org.popcraft.chunky.ChunkyBukkit\napi-version: 1.13\nfolia-supported: true\nsoftdepend: [dynmap, BlueMap, squaremap, WorldBorder]\nload: POSTWORLD\nauthors: [pop4959]\ndescription: Pre-generates chunks, quickly, efficiently, and safely\nwebsite: https://www.spigotmc.org/resources/chunky.81534/\ncommands:\n  chunky:\n    description: Generates chunks\n    aliases: [cy]\n    permission: chunky.command\n    usage: /chunky\npermissions:\n  chunky.command:\n    default: op\n  chunky.command.border:"
+    },
+    {
+      "filename": "VoidGen-2.3.8.jar",
+      "size": 457795,
+      "sha256": "fa4d882f0923ad1c2bb25b4bca33920076976bfe08f9be0c02bc8929302d92cc",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "name: 'VoidGen'\nversion: '2.3.8'\nmain: 'de.xtkq.voidgen.VoidGen'\napi-version: 1.13\nload: STARTUP\nloadbefore: [ Multiverse-Core, Multiworld ]\nauthor: 'xtkq'\nwebsite: 'https://github.com/NicoNekoDev/VoidGen'\nfolia-supported: true"
+    },
+    {
+      "filename": "LPC-3.7.2.jar",
+      "size": 12390,
+      "sha256": "1ed82992c2d315392d4ff2a4eb963e056f262359d4f23655aa4bfa8222b2ec6f",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "name: LPC\ndescription: A chat formatting plugin for LuckPerms.\nversion: 3.7.2\nmain: com.infiniteplugins.lpc.LPC\nauthor: PM2\napi-version: 1.13\ndepend: [LuckPerms]\nsoftdepend: [PlaceholderAPI]\ncommands:\n  lpc:\n    description: LPC commands.\n    usage: \"Usage: /lpc <reload|clear|debug>\"\npermissions:\n  lpc.reload:\n    description: Allows use of /lpc reload\n    default: op\n  lpc.clearchat:\n    description: Allows use of /lpc clear\n    default: op\n  lpc.debug:"
+    },
+    {
+      "filename": "Multiverse-Core.jar",
+      "size": 4627993,
+      "sha256": "bc3f34e2d747fdf024f44868747bb016b08fa11d98ccb4ffcac958f083151a83",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "name: Multiverse-Core\nmain: org.mvplugins.multiverse.core.MultiverseCore\nauthors: ['dumptruckman', 'Rigby', 'fernferret', 'lithium3141', 'main--', 'benwoo1110', 'Zax71']\nwebsite: 'https://modrinth.com/plugin/multiverse-core'\ndescription: 'The original Bukkit Multi-World Plugin!'\nsoftdepend: ['Vault', 'PlaceholderAPI']\napi-version: 1.13\nversion: 5.8.1"
+    },
+    {
+      "filename": "WorldEdit.jar",
+      "size": 7872751,
+      "sha256": "166365c44bad4cd916200b288cf391d3770e3197d1eca84ff74f3914d933e289",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "name: WorldEdit\nmain: com.sk89q.worldedit.bukkit.WorldEditPlugin\nversion: \"7.4.6-beta-02+2c90a77a1\"\nload: STARTUP\napi-version: 1.21.4\nfolia-supported: true\nsoftdepend: [Vault]\nauthor: EngineHub\nwebsite: https://enginehub.org/worldedit"
+    },
+    {
+      "filename": "LuckPerms-Bukkit.jar",
+      "size": 1501521,
+      "sha256": "49cecb66fa1fd22a133039a490e9c1e5095a238e7cd66eb9d2a16fe6c897550d",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "name: LuckPerms\nversion: 5.5.71\ndescription: A permissions plugin\nauthor: Luck\nwebsite: https://luckperms.net\nmain: me.lucko.luckperms.bukkit.loader.BukkitLoaderPlugin\nload: STARTUP\n\n# Mark the plugin as 1.13 compatible to avoid CB having to perform quite as much unnecessary\n# remapping when the plugin is loaded. Note that despite what this setting might otherwise imply,\n# LP is still compatible with pre-1.13 releases.\napi-version: 1.13\nfolia-supported: true\n\n# Load LuckPerms before Vault. This means that all plugins that (soft-)depend\n# on Vault depend on LuckPerms too.\n#\n# This fixes issues caused by plugins obtaining the Vault service provider instance\n# only once when they initially enable. (if they haven't depended on LP, our registration\n# won't be there yet)"
+    },
+    {
+      "filename": "Multiverse-Inventories.jar",
+      "size": 1805118,
+      "sha256": "6e58e89009283f4be8658abe2b7e46c482010ceccf3c8e0b0e8ca6a0a114ff92",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "name: Multiverse-Inventories\nmain: org.mvplugins.multiverse.inventories.MultiverseInventories\nversion: 5.3.6\napi-version: 1.13\nauthors: ['dumptruckman', 'benwoo1110']\nwebsite: 'https://modrinth.com/plugin/multiverse-inventories'\ndescription: 'Lets players have separate inventories per world!'\ndepend: ['Multiverse-Core']\nsoftdepend: [LuckPerms, PlaceholderAPI, MultiInv, WorldInventories, PerWorldInventory]"
+    },
+    {
+      "filename": "BlockHunt.jar",
+      "size": 206497,
+      "sha256": "01c8cc3626204b16ea8edd639b7e7660c780188f1153d2a6dcea07a4f55268a5",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "name: BlockHunt\nmain: nl.Steffion.BlockHunt.BlockHunt\nversion: 0.2.1\nauthors:\n  - Steffion\ndescription: An easy to set up, Hide and seek plugin. Hide as blocks from the killer seekers.\ndepend: [LibsDisguises, ProtocolLib]\nsoftdepend: [Multiverse-Core, Vault]\nload: POSTWORLD\ncommands:\n  BlockHunt:\n    usage: /<command>\n    description: N/A\n    aliases:\n        - bh\n        - prophunt\n        - ph\n        - hideandseek\n        - has\n        - hs"
+    },
+    {
+      "filename": "packetevents-spigot.jar",
+      "size": 5723413,
+      "sha256": "060087c58ec268eae7dd0eb1f17ac3bea1eaadda1693414141ff64e506091bd7",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "name: packetevents\nversion: 2.14.0\napi-version: 1.13\nmain: io.github.retrooper.packetevents.PacketEventsPlugin\nauthor: retrooper\nfolia-supported: true\nsoftdepend:\n  - ProtocolLib\n  - ProtocolSupport\n  - ViaVersion\n  - ViaBackwards\n  - ViaRewind\n  - Geyser-Spigot"
+    },
+    {
+      "filename": "EssentialsX.jar",
+      "size": 4861125,
+      "sha256": "bda4685105977fca2e209820a9f0ad24275bd103390a03236f38e59bfdac58e6",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "name: Essentials\nmain: com.earth2me.essentials.Essentials\n# Note to developers: This next line cannot change, or the automatic versioning system will break.\nversion: 2.22.0\nwebsite: https://essentialsx.net/\ndescription: Provides an essential, core set of commands for Bukkit.\nsoftdepend: [Vault, LuckPerms]\nauthors: [Zenexer, ementalo, Aelux, Brettflan, KimKandor, snowleo, ceulemans, Xeology, KHobbits, md_5, Iaccidentally, drtshock, vemacs, SupaHam, mdcfe, JRoy, pop4959]\napi-version: \"1.13\"\ncommands:\n  afk:\n    description: Marks you as away-from-keyboard.\n    usage: /<command> [player/message...]\n    aliases: [eafk,away,eaway]\n  antioch:\n    description: 'A little surprise for operators.'\n    usage: /<command> [message]\n    aliases: [eantioch,grenade,egrenade,tnt,etnt]\n  anvil:\n    description: Opens up an Anvil."
+    },
+    {
+      "filename": "ItemJoin.jar",
+      "size": 889112,
+      "sha256": "9573f2de45bcaff210402973fd42817d8ce2835dc400f7d25151dabb75b83a21",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "main: me.RockinChaos.itemjoin.ItemJoin\nversion: 6.1.8-RELEASE-b1148\nname: ItemJoin\nauthor: RockinChaos\nload: STARTUP\napi-version: 1.13\nnms-version: 26.2-R0.1-SNAPSHOT\nfolia-supported: true\ndescription: Get custom items on join.\nwebsite: https://www.spigotmc.org/resources/itemjoin.12661/\nsoftdepend: [ AuthMe, ExploitFixer, HeadDatabase, Hyperverse, Multiverse-Core, Multiverse-Inventories, MyWorlds, NickAPI, PerWorldInventory, PerWorldPlugins, PlaceholderAPI, SkinsRestorer, Citizens, ChestSort, TokenEnchant, Vault, WorldGuard, xInventories ]\n\npermissions:\n  itemjoin.*:\n    description: Grants access to all aspects of the plugin, including every permission node.\n    default: false\n    children:\n      itemjoin.all: true\n  itemjoin.all:\n    description: Grants access to all aspects of the plugin, including every permission node."
+    },
+    {
+      "filename": "GriefPrevention.jar",
+      "size": 380232,
+      "sha256": "45e9907c61222e559ed2e099ffee0ede706a21243a31d7db549baf678708fdf0",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "name: GriefPrevention\nmain: me.ryanhamshire.GriefPrevention.GriefPrevention\nsoftdepend: [Vault, Multiverse-Core, My_Worlds, MystCraft, Transporter, WorldGuard, WorldEdit, RoyalCommands, MultiWorld, Denizen, CommandHelper, Iris]\ndev-url: https://dev.bukkit.org/projects/grief-prevention\nversion: '16.18.7'\napi-version: '1.21.10'\ncommands:\n    abandonclaim:\n      description: Deletes a claim.\n      usage: /<command>\n      aliases: [unclaim, declaim, removeclaim, disclaim]\n      permission: griefprevention.claims\n    abandontoplevelclaim:\n      description: Deletes a claim and all its subdivisions.\n      usage: /<command>\n      permission: griefprevention.claims\n    abandonallclaims:\n      description: Deletes ALL your claims.\n      usage: /<command>\n      permission: griefprevention.abandonallclaims"
+    },
+    {
+      "filename": "Vault.jar",
+      "size": 272259,
+      "sha256": "a6b5ed97f43a5cf5bbaf00a7c8cd23c5afc9bd003f849875af8b36e6cf77d01d",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "name: Vault\nversion: 1.7.3-b131\ndescription: Vault is a Permissions & Economy API to allow plugins to more easily hook into these systems without needing to hook each individual system themselves.\n\nVault currently supports the following: Permissions 3, PEX, GroupManager, bPerms, bPerms2, SimplyPerms, DroxPerms, zPermissions, rscPermissions, KPerms, Starburst, iConomy (4/5/6) BOSEconomy *6/7), EssentialsEcon, 3Co, MultiConomy, MineConomy, EconXP, eWallet, CurrencyCore, XPBank, CraftConomy, AEco, SDFEconomy, TAEcon, and OverPermissions\nauthors: [cereal, Sleaker, mung3r]\nwebsite: https://dev.bukkit.org/projects/vault\napi-version: 1.13\n\nmain: net.milkbowl.vault.Vault\nload: startup\n\ncommands:\n  vault-info:\n    description: Displays information about Vault \n    usage: |\n           /<command> - Displays Vault information\n    permission: vault.admin\n  vault-convert:\n    description: Converts all data in economy1 and dumps it into economy2"
+    },
+    {
+      "filename": "GrimAC.jar",
+      "size": 13138975,
+      "sha256": "d33eed30bfd5c6eb54176b197c9c51018ba0916d7b056e0530ab183ac1a3d590",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "name: GrimAC\nversion: 2.3.74-abb95b6\nmain: ac.grim.grimac.platform.bukkit.GrimACBukkitLoaderPlugin\ndescription: \"Libre simulation anticheat designed for 26.3 with 1.8–26.3 support,\\\n  \\ powered by PacketEvents 2.0.\"\nauthor: GrimAC\nwebsite: https://grim.ac/\npermissions:\n  grim.alerts:\n    description: Receive alerts for violations\n    default: op\n  grim.alerts.enable-on-join:\n    description: Enable alerts on join\n    default: op\n  grim.brand:\n    description: Show client brands on join\n    default: op\n  grim.brand.enable-on-join:\n    description: Enable showing client brands on join\n    default: op"
+    },
+    {
+      "filename": "LibsDisguises.jar",
+      "size": 2695094,
+      "sha256": "9faebc62a34ca57d704b2f7ecbfb12aa1e7a123b2b920590857d593261d6ec5a",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "name: LibsDisguises\nmain: me.libraryaddict.disguise.LibsDisguises\ndescription: A disguise plugin with various disguises.\nversion: 26.9.26\nbuild-date: 26/09/2026 04:59\nbuild-number: 1830\nbuild-hash: e03c49db~1\nauthor: libraryaddict\nauthors: [ Byteflux, Navid K. ]\nsoftdepend:\n  - packetevents\n  - PlaceholderAPI\n  - Vulcan\napi-version: '1.13'\nfile-count: 1297\nfolia-supported: true\ncommands:\n  libsdisguises:\n    aliases: [ libsdisg, ld ]\n    description: Main command for libsdisguises."
+    },
+    {
+      "filename": "TAB.jar",
+      "size": 3973425,
+      "sha256": "8701c356411fd95102b7f3926be14acb5e3a5cbaaa44d2d7db298e30dfd623d2",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "main: me.neznamy.tab.platforms.bukkit.BukkitTAB\nname: TAB\nversion: 5.4.0\ndescription: An all-in-one solution that works\napi-version: 1.13 # Defining to avoid legacy plugin warn\nload: POSTWORLD\nauthor: NEZNAMY\nwebsite: \"https://github.com/NEZNAMY/TAB\"\nsoftdepend: [PlaceholderAPI, LuckPerms, LibsDisguises, ViaVersion, ViaRewind, floodgate, Vault]\nprefix: TAB\nfolia-supported: true\ncommands:\n  tab:\n    description: Plugin's main command\npermissions:\n  tab.admin:\n    description: Grants all TAB permissions\n    default: op\n  tab.tabcomplete:\n    description: Allows player to complete all TAB commands"
+    },
+    {
+      "filename": "PlaceholderAPI-2.12.3.jar",
+      "size": 1160690,
+      "sha256": "fde03259f5af6938f3c33eeb4d814000a1adabf1d2304ce14970be81f609a437",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "name: PlaceholderAPI\nmain: \"me.clip.placeholderapi.PlaceholderAPIPlugin\"\nfolia-supported: true\n\nversion: 2.12.3\nauthor: HelpChat\n\napi-version: \"1.13\"\ndescription: \"An awesome placeholder provider!\"\n\ncommands:\n  placeholderapi:\n    description: \"PlaceholderAPI Command\"\n    aliases: [\"papi\"]\n\npermissions:\n  placeholderapi.*:\n    description: \"Ability to use all PAPI commands\"\n    children:\n      placeholderapi.admin: true"
+    },
+    {
+      "filename": "ScreamingBedWars.jar",
+      "size": 1719686,
+      "sha256": "510d46d310dff2a426461c5676051bbf19ff37b553ee0b9875597abe4ba40d5c",
+      "descriptor_type": "plugin.yml",
+      "descriptor_snippet": "#\n# Copyright (C) 2023 ScreamingSandals\n#\n# This file is part of Screaming BedWars.\n#\n# Screaming BedWars is free software: you can redistribute it and/or modify it\n# under the terms of the GNU Lesser General Public License as published by\n# the Free Software Foundation, either version 3 of the License, or\n# (at your option) any later version.\n#\n# Screaming BedWars is distributed in the hope that it will be useful,\n# but WITHOUT ANY WARRANTY; without even the implied warranty of\n# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the\n# GNU Lesser General Public License for more details.\n#\n# You should have received a copy of the GNU Lesser General Public License\n# along with Screaming BedWars. If not, see <https://www.gnu.org/licenses/>.\n#\n\nmain: org.screamingsandals.bedwars.Main"
+    },
+    {
+      "filename": "ProtocolLib.jar",
+      "size": 10567071,
+      "sha256": "3242a696fbb55a0622d6148d88206ccc392e1d94c5b78ddd423f43ebb82a768a",
+      "descriptor_type": "paper-plugin.yml",
+      "descriptor_snippet": "name: ProtocolLib\nversion: 5.5.0-SNAPSHOT-1ea47d6\ndescription: Provides read/write access to the Minecraft protocol.\nauthors: [dmulloy2]\n\nmain: com.comphenix.protocol.ProtocolLib\nload: STARTUP\napi-version: \"26.2\"\nfolia-supported: true\n\npermissions:\n  protocol.*:\n    description: Gives access to everything.\n    children:\n      protocol.admin: true\n      protocol.info: true\n  protocol.admin:\n    description: Able to initiate the update process and configure debug mode.\n    default: op\n  protocol.info:"
+    }
+  ],
+  "itemjoin": {
+    "folder_ls": "total 124\ndrwxr-xr-x  2 minecraft minecraft  4096 Oct  5 21:18 .\ndrwxr-xr-x 25 minecraft minecraft  4096 Oct  5 11:58 ..\n-rw-r--r--  1 minecraft minecraft   892 Oct  5 14:24 config.yml\n-rw-rw-r--  1 minecraft minecraft 45056 Oct  5 21:18 database.db\n-rw-rw-r--  1 minecraft minecraft 11529 Oct  5 11:55 en-lang.yml\n-rw-r--r--  1 root      root       1806 Oct  5 20:29 items-old-20205.yml\n-rw-r--r--  1 root      root       1966 Oct  5 20:38 items-old-26568.yml\n-rw-r--r--  1 root      root       1524 Oct  5 20:11 items-old-29622.yml\n-rwxr-xr-x  1 minecraft minecraft   765 Oct  5 11:55 items-old-3312.yml\n-rw-rw-r--  1 minecraft minecraft   842 Oct  5 21:16 items-old-37046.yml\n-rw-r--r--  1 root      root       1180 Oct  5 19:59 items-old-39084.yml\n-rw-r--r--  1 root      root       1966 Oct  5 20:38 items-old-45322.yml\n-rw-r--r--  1 root      root       1490 Oct  5 21:07 items-old-4689.yml\n-rw-r--r--  1 root      root       1490 Oct  5 21:07 items-old-49392.yml\n-rw-rw-r--  1 minecraft minecraft 13220 Oct  5 21:16 items.yml",
+    "config_yml": "config-Version: 8\nLanguage: 'English'\nGeneral:\n  CheckforUpdates: false\n  Metrics-Logging: false\n  Log-Commands: false\n  ignoreErrors: false\n  ignoreDepend: NONE\n  Debugging: false\nDatabase:\n  MySQL: false\nSettings:\n  HeldItem-Slot: 4\n  HeldItem-Triggers: JOIN, WORLD-SWITCH\n  HeldItem-Animations: false\n  Default-Triggers: JOIN\n  DataTags: true\nPermissions:\n  Obtain-Items: false\n  Obtain-Items-OP: false\n  Commands-Get: false\n  Commands-OP: false\n  Movement-Bypass: false\nClear-Items:\n  Type: ALL\n  Delay-Tick: 2\n  Join: false\n  Quit: false\n  World-Switch: false\n  Region-Enter: false\n  Options: PROTECT\n  Blacklist: ''\nActive-Commands:\n  commands: []\n  commands-sequence: SEQUENTIAL\n  triggers: JOIN\n  enabled-worlds: DISABLED\nPrevent:\n  Chat: false\n  Pickups: true\n  itemMovement: true\n  Self-Drops: true\n  Death-Drops: true\n  Bypass: CREATIVE",
+    "items_yml": "# --{ =-=-=-=-=-=-=-=-=-= ItemJoin's Custom Item Configurations, by RockinChaos =-=-=-=-=-=-=-=-=-= }--\n# See the tutorial page for a more in-depth explanation; https://github.com/RockinChaos/ItemJoin/wiki\n# Join the discord for easy plugin support; https://discord.gg/D5FnJ7C\n\n# Modifying the Version will cause this file to break and regenerate.\nitems-Version: 8\n\n# General options that apply to the custom items' functionality.\nitems-Delay: 2\nitems-Overwrite: false\nitems-Spamming: false\nitems-RestrictCount: false\n\n# This is the section where the custom items created will be stored.\n# All created items should be saved under the 'items' section for each 'custom-item' subsection.\nitems:\n  devine-item:\n    id: DIAMOND_SWORD\n    slot: 0\n    name: '&bBlazefury'\n    lore:\n    - '&7A devine sword.'\n    - '&7This sword is many millennium old...'\n    interact:\n    - 'message: &eYou can send yourself custom messages!'\n    - 'console: say You can even execute more than one command!'\n    - 'delay: 10'\n    - 'player: say This is item slot 1.'\n    - 'op: say This command executes as if the player is op.'\n    - say Hello world!\n    commands-sound: BLOCK.NOTE_BLOCK.PLING\n    commands-particle: FIREWORK:BLACK:RED:BURST:10\n    commands-sequence: SEQUENTIAL\n    commands-item: EMERALD\n    commands-cost: 3\n    commands-cooldown: 5\n    cooldown-message: '&7[&eItemJoin&7] &a[%item%&a] &cis on cooldown for &a%timeleft%\n      &cseconds..'\n    attributes: '{ATTACK_DAMAGE:15.2}, {ATTACK_SPEED:19.0}'\n    enchantment: FIRE_ASPECT:3, DAMAGE_ALL:5, DAMAGE_UNDEAD:5, KNOCKBACK:8\n    itemflags: unbreakable, hide-flags, self-drops, death-drops, CreativeBypass\n    triggers: join, respawn, world-switch, region-enter\n    enabled-regions: region1, region2\n    enabled-worlds: world, world_nether, world_the_end\n  map-item:\n    id: FILLED_MAP\n    custom-map-image: default.jpg\n    slot: 2\n    name: '&eMagical Cloth'\n    lore:\n    - '&7Server promotions'\n    - '&7Directions or custom maps.'\n    itemflags: item-store, unbreakable, hide-flags, death-drops, self-drops, CreativeBypass\n    triggers: join, respawn, world-switch\n    enabled-worlds: ALL\n  gamemode-token:\n    id: FIREWORK_STAR\n    charge-color: RED\n    slot: 4\n    count: 6\n    name: '&aGamemode Token'\n    lore:\n    - '&7Right-Click use creative token.'\n    - '&7'\n    - '&7Left-Click use spectator token.'\n    interact-right:\n    - 'player: minecraft:gamemode creative %player%'\n    - 'message: &eYou have been set to creative mode.'\n    interact-left:\n    - 'player: minecraft:gamemode spectator %player%'\n    - 'message: &eYou have been set to spectator mode.'\n    commands-sound: BLOCK.NOTE_BLOCK.PLING\n    commands-cooldown: 2\n    itemflags: item-store, death-drops, self-drops, hide-flags, disposable\n    triggers: join, respawn, world-switch\n    enabled-worlds: world, world_nether, world_the_end\n  book-item:\n    id: WRITTEN_BOOK\n    author: '&bRockinChaos'\n    slot: 6\n    name: '&c&nCreating a Book'\n    lore:\n    - '&7'\n    - '&7Useful for server rules'\n    - '&7and other server information.'\n    pages:\n      '1':\n      - '&aThanks for checking'\n      - '&aout &bItemJoin &aby'\n      - <text:&b@RockinChaos#6746><open_url:https://discord.gg/D5FnJ7C><show_text:Click\n        to visit the discord.>\n      - ''\n      - '&0This is an example of'\n      - '    a &9custom book&0.'\n      - '&0-=-=-=-=-=-=-=-=-=-'\n      - ''\n      - '&0You can set an &cauthor&r'\n      - '&0and you can add text'\n      - '&0components using the'\n      - '&0format <<text:TYPE><show_text:Replace TYPE with the component type. \\nExample:\n        run_command, show_text, open_url.>:<text:VALUE><show_text:Replace VALUE with\n        the text, url or command.>>.'\n      '2':\n      - '&cHow do you specify a'\n      - '&cnew page number?'\n      - ''\n      - '&0As displayed to the'\n      - '&0left in the items.yml.'\n      - '&0Create a number to'\n      - '&0specify the new page.'\n      - '&cMakesure you put'\n      - '&ceach number in order.'\n      - ''\n      - '&aNote:&0 that you can'\n      - '&0only have &b14&0 lines '\n      - '&0per page.'\n      '3':\n      - '&0I still &nneed&r help&r!'\n      - ''\n      - '&0RockinChaos is always'\n      - '&0happy to help so feel'\n      - '&0free to reach out'\n      - '&0on <text:&adiscord.><open_url:https://discord.gg/D5FnJ7C><show_text:Click\n        to visit the discord.>'\n      - ''\n      - '&0You can also visit'\n      - '&0the <text:&9wiki page><open_url:https://github.com/RockinChaos/ItemJoin/wiki><show_text:Click\n        to view the wiki.> &rfor'\n      - '&0additional help on'\n      - '&0the plugin including'\n      - <text:&9custom books.><open_url:https://github.com/RockinChaos/ItemJoin/wiki/Creating-Items#creating-a-custom-book><show_text:Click\n        for additional \\nhelp with creating books.>\n      - ''\n      - 'raw: [\"\",{\"text\":\"Visit Plugin Page!\",\"color\":\"gold\",\"clickEvent\":{\"action\":\"open_url\",\"value\":\"https://www.spigotmc.org/resources/itemjoin.12661/\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"Click\n        to visit the spigot page.\",\"color\":\"green\"}]}}}]'\n    itemflags: death-drops, self-drops\n    triggers: join, respawn\n    enabled-worlds: world\n  profile-item:\n    id: PLAYER_HEAD\n    skull-owner: '%player%'\n    slot: 8\n    name: '&b%player%'\n    lore:\n    - '&7Great for setting a players profile,'\n    - '&7as seen in mini-game servers.'\n    itemflags: death-drops, self-drops\n    triggers: join, respawn, world-switch\n    enabled-worlds: world, world_nether, world_the_end\n  animated-panes:\n    id:\n      '1': <delay:40>BLACK_STAINED_GLASS_PANE\n      '2': <delay:20>BLUE_STAINED_GLASS_PANE\n      '3': <delay:20>GREEN_STAINED_GLASS_PANE\n      '4': <delay:20>MAGENTA_STAINED_GLASS_PANE\n      '5': <delay:20>ORANGE_STAINED_GLASS_PANE\n      '6': <delay:20>RED_STAINED_GLASS_PANE\n    slot: ARBITRARY, ARBITRARY, ARBITRARY, ARBITRARY\n    name: '&f'\n    itemflags: animate, inventory-modify, placement, death-drops, self-drops\n    triggers: join, world-switch\n    enabled-worlds: world, world_nether, world_the_end\n  banner-item:\n    id: WHITE_BANNER\n    banner-meta: BLUE:BASE, WHITE:CREEPER\n    slot: 20\n    name: '&9Mighty Creeper'\n    lore:\n    - '&7The creeper is our leader!'\n    interact:\n    - 'message: &bWhere is Herobrine?'\n    - 'message: &cWhere is your leader now...?'\n    commands-sequence: RANDOM\n    itemflags: inventory-modify, hide-flags, self-drops, CreativeBypass\n    triggers: join, respawn, world-switch, region-enter\n    enabled-worlds: world, world_nether, world_the_end\n  animated-sign:\n    id: OAK_SIGN\n    slot: 22\n    name:\n      '1': <delay:20>&f&lStatistics\n      '2': <delay:40>&e&lS&f&lt&e&la&f&lt&e&li&f&ls&e&lt&f&li&e&lc&f&ls\n      '3': <delay:20>&b&lS&f&lt&b&la&f&lt&b&li&f&ls&b&lt&f&li&b&lc&f&ls\n      '4': <delay:40>&a&lS&f&lt&a&la&f&lt&a&li&f&ls&a&lt&f&li&a&lc&f&ls\n      '5': <delay:20>&d&lS&f&lt&d&la&f&lt&d&li&f&ls&d&lt&f&li&d&lc&f&ls\n      '6': <delay:40>&e&lS&f&lt&e&la&f&lt&e&li&f&ls&e&lt&f&li&e&lc&f&ls\n    lore:\n      '1':\n      - '<delay:60>&cMob Kills: %mob_kills%'\n      - '&cPlayer Kills: %player_kills%'\n      '2':\n      - '<delay:60>&cDeaths: %player_deaths%'\n      - '&cYour Location: %player_location%'\n      '3':\n      - '<delay:60>&cHealth: %player_health%'\n      - '&cFood Level: %player_food%'\n    itemflags: animate, inventory-modify, self-drops, death-drops\n    triggers: join, respawn, world-switch\n    enabled-worlds: world, world_nether, world_the_end\n  bungeecord-item:\n    id: PURPLE_STAINED_GLASS\n    slot: 24\n    name: '&eSurvival Server'\n    lore:\n    - '&7Click to go to the survival server!'\n    interact:\n    - 'server: survival'\n    - 'message: &eSending you to the survival server!'\n    inventory:\n    - 'server: survival'\n    - 'message: &eSending you to the survival server!'\n    commands-sound: BLOCK.NOTE_BLOCK.PLING\n    commands-cost: 10\n    commands-cooldown: 2\n    enchantment: FIRE_ASPECT:3\n    itemflags: inventory-modify, hide-flags, death-drops, self-drops\n    triggers: join, respawn, world-switch\n    enabled-worlds: ALL\n  potion-arrow:\n    id: TIPPED_ARROW\n    potion-effect: WITHER:1:20\n    slot: 27\n    count: 16\n    name: '&fDeath Arrow'\n    itemflags: death-drops, self-drops\n    limit-modes: SURVIVAL, ADVENTURE\n    triggers: join, respawn, world-switch\n    enabled-worlds: world, world_nether, world_the_end\n  firework-item:\n    id: FIREWORK_ROCKET\n    slot: 29\n    name: '&dSparkles'\n    lore:\n    - '&7Right-Click me and watch me fly!'\n    firework:\n      type: CREEPER\n      flicker: true\n      trail: true\n      power: 1\n      colors: GRAY, WHITE, PURPLE, LIGHT_GRAY, GREEN\n    use-cooldown: 3\n    itemflags: count-lock, death-drops, hide-flags, self-drops\n    triggers: join, respawn, world-switch\n    enabled-worlds: world, world_nether, world_the_end\n  potion-item:\n    id: POTION\n    slot: 31\n    name: '&c&nDraught of Madness'\n    potion-effect: JUMP:2:120, INCREASE_DAMAGE:3:150, REGENERATION:1:160\n    triggers: join, respawn, world-switch\n    enabled-worlds: world, world_nether, world_the_end\n  potion-apple:\n    id: GOLDEN_APPLE\n    slot: 33\n    name: '&dAn Apple'\n    lore:\n    - '&7This is not any ordinary apple.'\n    potion-effect: JUMP:2:120, NIGHT_VISION:2:400, GLOWING:1:410, REGENERATION:1:160\n    itemflags: death-drops, self-drops\n    triggers: join, respawn, world-switch\n    enabled-worlds: world, world_nether, world_the_end\n  skull-item:\n    id: PLAYER_HEAD\n    slot: 35\n    name: '&fCyclone'\n    skull-texture:\n      '1': <delay:100>eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMGZlMzFlYWE4YThhZDhkZDhkN2FiOTZhODQyMzI5MDUzOWQzODdkODJkNDI2ODcwMWVjNjlkNDFhMWZjIn19fQ==\n      '2': <delay:100>eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvOTYxZGZkZGE3MTAyMmJmYWQ3OWVhYmJmYTU2YTE1MTE2NDdiMjAyYWQxMTM2ZmY5N2UzMWEwNmRiYWMxMGVjYiJ9fX0=\n      '3': <delay:100>eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvZGFmNjJkNjJkMGE5MzZmMDdmZGZjMWM2MDcyMTY4NzVjOTkzZTViZWViY2U5NTNlOWM4NzI0YTI1ZmNiYTBiYyJ9fX0=\n    lore:\n    - '&7This is a custom textured skull.'\n    - '&7'\n    - '&7You can create your own skull texture'\n    - '&7and apply it to a skull item!'\n    itemflags: inventory-modify, animate, death-drops, self-drops\n    triggers: join, respawn, world-switch\n    enabled-worlds: world, world_nether, world_the_end\n  random-pane-1:\n    id: YELLOW_STAINED_GLASS_PANE\n    slot: 28, 30, 32, 34, 18, 19, 21, 23, 25, 26\n    name: '&f'\n    probability: 50\n    itemflags: inventory-modify, placement, death-drops, self-drops\n    triggers: join, world-switch\n    enabled-worlds: world, world_nether, world_the_end\n  random-pane-2:\n    id: BLUE_STAINED_GLASS_PANE\n    slot: 28, 30, 32, 34, 18, 19, 21, 23, 25, 26\n    name: '&f'\n    probability: 80\n    itemflags: inventory-modify, placement, death-drops, self-drops\n    triggers: join, world-switch\n    enabled-worlds: world, world_nether, world_the_end\n  random-pane-3:\n    id: PINK_STAINED_GLASS_PANE\n    slot: 28, 30, 32, 34, 18, 19, 21, 23, 25, 26\n    name: '&f'\n    probability: 10\n    itemflags: inventory-modify, placement, death-drops, self-drops\n    triggers: join, world-switch\n    enabled-worlds: world, world_nether, world_the_end\n  helmet-item:\n    id: DIAMOND_HELMET\n    slot: helmet\n    name: '&aSolace'\n    enchantment: PROTECTION_ENVIRONMENTAL:5\n    itemflags: inventory-modify, death-drops, self-drops, hide-attributes\n    triggers: join\n    enabled-worlds: world, world_nether, world_the_end\n  chestplate-item:\n    id: IRON_CHESTPLATE\n    slot: chestplate\n    name: '&aProtection Shell'\n    enchantment: PROTECTION_ENVIRONMENTAL:5\n    itemflags: inventory-modify, death-drops, self-drops\n    triggers: join\n    enabled-worlds: world, world_nether, world_the_end\n  leggings-item:\n    id: IRON_LEGGINGS\n    slot: leggings\n    name: '&aChains of Desire'\n    enchantment: PROTECTION_ENVIRONMENTAL:3\n    itemflags: inventory-modify, death-drops, self-drops, hide-attributes\n    triggers: join\n    enabled-worlds: world, world_nether, world_the_end\n  boots-item:\n    id: IRON_BOOTS\n    slot: boots\n    name: '&aSafety Slippers'\n    enchantment: PROTECTION_ENVIRONMENTAL:3, PROTECTION_FALL:5\n    itemflags: inventory-modify, death-drops, self-drops\n    triggers: join\n    enabled-worlds: world, world_nether, world_the_end\n  offhand-item:\n    id: SHIELD\n    slot: offhand\n    name: '&b&nThe Protector'\n    itemflags: inventory-modify, death-drops, self-drops, unbreakable\n    triggers: join\n    enabled-worlds: world, world_nether, world_the_end\n  drop-item:\n    id: IRON_SWORD\n    slot: ARBITRARY\n    name: '&cStolen Sword'\n    lore:\n    - '&7Pulled from the ashes of chaos.'\n    mobs-drop:\n    - ZOMBIE:0.001\n    - PIG:0.3\n    blocks-drop:\n    - DIAMOND_ORE:0.5\n    - GOLD_ORE:0.19\n    triggers: DISABLED\n    permission-node: itemjoin.drop.sword\n    enabled-worlds: world, world_the_end\n  recipe-item:\n    id: BEDROCK\n    slot: ARBITRARY\n    name: '&6Essence'\n    lore:\n    - '&7Shhhh don''t tell anyone...'\n    recipe:\n    - XGX\n    - IDI\n    - XGX\n    ingredients:\n    - G:GOLD_INGOT\n    - I:IRON_INGOT:#3\n    - D:DIAMOND\n    triggers: DISABLED\n    permission-node: itemjoin.recipe",
+    "latest_log_errors": "[21:11:52] [Craft Scheduler Thread - 9 - GrimAC/ERROR]: [GrimAC] Failed to check latest GrimAC version.: javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake\n--\n[21:11:52] [Paper Async Task Handler Thread - 1/ERROR]: *** Error obtaining version information! Cannot fetch version info ***\n[21:11:52] [User Authenticator #0/INFO]: UUID of player Klemz_696 is 6790a3cc-637a-311a-a2e5-e9ae40ea0459\n[21:11:52] [User Authenticator #1/INFO]: UUID of player Klemz_696 is 6790a3cc-637a-311a-a2e5-e9ae40ea0459\n[21:11:52] [Server thread/INFO]: [HorriblePlayerLoginEventHack] You have plugins listening to the PlayerLoginEvent, this will cause re-configuration APIs to be unavailable: [LuckPerms, ItemJoin, GriefPrevention, DeluxeMenus]\n[21:11:54] [Server thread/INFO]: Klemz_696 joined the game\n[21:11:54] [Server thread/INFO]: Klemz_696[/192.168.200.4:11742] logged in with entity id 188 at ([minecraft:hub]-3.2815044763461123, 65.0, 0.6046325603481812)\n[21:12:00] [Server thread/INFO]: Environment: Environment[sessionHost=https://sessionserver.mojang.com, servicesHost=https://api.minecraftservices.com, profilesHost=https://api.mojang.com, name=PROD]\n--\n[21:16:09] [Server thread/INFO]: [Essentials] ServerListPingEvent: Spigot iterator API\n[21:16:09] [RCON Client /0:0:0:0:0:0:0:1 #2/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down\n[21:16:09] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started\n[21:16:09] [Server thread/WARN]: [ItemJoin_WARN] Your items.yml is out of date and new options are available, generating a new one!\n[21:16:09] [RCON Client /0:0:0:0:0:0:0:1 #3/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down\n[21:16:09] [Server thread/INFO]: [ItemJoin] 24/24 Custom item(s) loaded!\n[21:16:09] [Craft Scheduler Thread - 23 - ItemJoin/INFO]: [ItemJoin] Hooked into { Multiverse-Core, Multiverse-Inventories, PlaceholderAPI, Vault }\n[21:16:09] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started\n[21:16:09] [RCON Client /0:0:0:0:0:0:0:1 #4/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down\n[21:16:09] [Server thread/INFO]: [ItemJoin] 24/24 Custom item(s) loaded!\n[21:16:09] [Craft Scheduler Thread - 24 - ItemJoin/INFO]: [ItemJoin] Hooked into { Multiverse-Core, Multiverse-Inventories, PlaceholderAPI, Vault }\n[21:16:09] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started\n[21:16:09] [Server thread/INFO]: [Rcon: Successfully filled 5041 block(s)]\n[21:16:09] [RCON Client /0:0:0:0:0:0:0:1 #5/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down\n--\n[21:18:40] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started\n[21:18:40] [RCON Client /0:0:0:0:0:0:0:1 #35/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down\n[21:18:40] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started\n[21:18:41] [Server thread/INFO]: [ItemJoin] 24/24 Custom item(s) loaded!\n[21:18:41] [Server thread/WARN]: [DeluxeMenus] Option 'hide_attributes' of item 'filler' in menu 'games' is deprecated and will be removed in the future. Replace it with item_flags: [HIDE_ATTRIBUTES].\n[21:18:41] [Server thread/WARN]: [DeluxeMenus] Option 'hide_attributes' of item 'hub' in menu 'games' is deprecated and will be removed in the future. Replace it with item_flags: [HIDE_ATTRIBUTES].\n[21:18:41] [Server thread/WARN]: [DeluxeMenus] Option 'hide_attributes' of item 'quit_lobby' in menu 'games' is deprecated and will be removed in the future. Replace it with item_flags: [HIDE_ATTRIBUTES].\n--\n[21:18:41] [Server thread/WARN]: [DeluxeMenus] Option 'hide_attributes' of item 'stats' in menu 'games' is deprecated and will be removed in the future. Replace it with item_flags: [HIDE_ATTRIBUTES].\n[21:18:41] [Server thread/WARN]: [DeluxeMenus] Option 'hide_attributes' of item 'parkour' in menu 'games' is deprecated and will be removed in the future. Replace it with item_flags: [HIDE_ATTRIBUTES].\n[21:18:41] [RCON Client /0:0:0:0:0:0:0:1 #36/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down\n[21:18:41] [Craft Scheduler Thread - 30 - ItemJoin/INFO]: [ItemJoin] Hooked into { Multiverse-Core, Multiverse-Inventories, PlaceholderAPI, Vault }\n[21:18:41] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started\n[21:18:41] [RCON Client /0:0:0:0:0:0:0:1 #37/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 shutting down\n[21:18:41] [RCON Listener #1/INFO]: Thread RCON Client /0:0:0:0:0:0:0:1 started",
+    "jar_namelist": [
+      "plugin.yml",
+      "files/configs/config.yml",
+      "files/configs/items.yml",
+      "files/locales/nl-lang.yml",
+      "files/locales/fr-lang.yml",
+      "files/locales/pl-lang.yml",
+      "files/locales/tw-lang.yml",
+      "files/locales/cn-lang.yml",
+      "files/locales/en-lang.yml",
+      "files/locales/es-lang.yml",
+      "files/locales/it-lang.yml",
+      "files/locales/pt-lang.yml",
+      "files/locales/ru-lang.yml"
+    ]
+  },
+  "essentials": {
+    "compass_config_grep": "- chat.question\n  - clearinventory\n  - compass\n  - depth\n  - delhome\n--\n  staff: 10\n\n# Controls whether players need the permission 'essentials.home.compass' in order to point\n# the player's compass toward their first home.\n# Leaving this as false will retain Essentials' original behavior, which is to always\n# change the compass' direction to point toward the player's first home.\ncompass-towards-home-perm: false\n\n# If no home is set, would you like to send the player to spawn?",
+    "disabled_commands": "# You should not need to disable commands used by other plugins, as they will automatically get priority.\n# See https://breezewiki.com/bukkit/wiki/Commands.yml#aliases to map commands to other plugins.\ndisabled-commands:\n  #- nick\n  #- clear",
+    "luckperms_klemz_perms": "",
+    "luckperms_default_perms": ""
+  },
+  "hub_geometry": {
+    "text_display_entities": "Text Display has the following entity data: {line_width: 200, teleport_duration: 0, Bukkit.updateLevel: 2, default_background: 0b, transformation: {translation...",
+    "armor_stand_entities": "No entity was found",
+    "block_0_63_0": "0, 63, 0 has the following block data: {z: 0, UpdateLastExecution: 1b, y: 63, id: \"minecraft:command_block\",...",
+    "block_6_64_0": "6, 64, 0 has the following block data: {z: 0, UpdateLastExecution: 1b, y: 64, id: \"minecraft:command_block\",...",
+    "block_6_65_0": "The target block is not a block entity",
+    "block_6_66_0": "The target block is not a block entity",
+    "block_7_71_2": "The target block is not a block entity",
+    "block_7_72_2": "The target block is not a block entity",
+    "block_7_73_2": "The target block is not a block entity",
+    "block_8_73_2": "8, 73, 2 has the following block data: {Paper.Range: -1.0d, z: 2, id: \"minecraft:beacon\", y: 73,...",
+    "gamerules": {
+      "fall_damage": "Gamerule fall_damage is currently set to: false",
+      "command_block_output": "Gamerule command_block_output is currently set to: false",
+      "send_command_feedback": "Gamerule send_command_feedback is currently set to: false"
+    }
+  }
+}

@@ -11,13 +11,15 @@ items:
     material: BLACK_STAINED_GLASS_PANE
     slots: [0, 1, 2, 3, 5, 6, 7, 9, 11, 13, 15, 17, 18, 19, 21, 23, 25]
     display_name: ' '
-    hide_attributes: true
+    item_flags:
+      - HIDE_ATTRIBUTES
 
   hub:
     material: COMPASS
     slot: 4
     display_name: '&f&l✦ RETOUR AU HUB PRINCIPAL ✦'
-    hide_attributes: true
+    item_flags:
+      - HIDE_ATTRIBUTES
     lore:
       - '&7Retourne immédiatement au spawn central du vide.'
       - ''
@@ -30,7 +32,8 @@ items:
     material: IRON_DOOR
     slot: 8
     display_name: '&c&l✦ QUITTER LE LOBBY ✦'
-    hide_attributes: true
+    item_flags:
+      - HIDE_ATTRIBUTES
     lore:
       - '&7Quitte la file d''attente ou le mini-jeu en cours'
       - '&7et retourne en sécurité au Hub.'
@@ -44,7 +47,8 @@ items:
     material: GRASS_BLOCK
     slot: 10
     display_name: '&a&lSurvie Simple Vanilla'
-    hide_attributes: true
+    item_flags:
+      - HIDE_ATTRIBUTES
     lore:
       - '&7Exploration, récolte et construction libres.'
       - '&eMode 100% Vanilla sans claims (D1).'
@@ -59,7 +63,8 @@ items:
     material: NETHER_STAR
     slot: 12
     display_name: '&d&lLobby des Mini-Jeux'
-    hide_attributes: true
+    item_flags:
+      - HIDE_ATTRIBUTES
     lore:
       - '&7Plateforme néon futuriste JoyStick FM.'
       - '&7Bornes interactives & PNJ de lancement.'
@@ -73,7 +78,8 @@ items:
     material: RED_BED
     slot: 14
     display_name: '&c&lBedWars — 4 équipes de 2'
-    hide_attributes: true
+    item_flags:
+      - HIDE_ATTRIBUTES
     lore:
       - '&7Protège ton lit et détruis celui des autres.'
       - '&7Arène spatiale JoyStick FM (Red, Blue, Green, Yellow).'
@@ -88,7 +94,8 @@ items:
     material: GOLDEN_PICKAXE
     slot: 16
     display_name: '&6&lRush FunCraft (1v1 & 2v2)'
-    hide_attributes: true
+    item_flags:
+      - HIDE_ATTRIBUTES
     lore:
       - '&7Ponts en grès express, bâton knockback,'
       - '&7lits explosifs et TNTFly calibré.'
@@ -107,7 +114,8 @@ items:
     material: SANDSTONE
     slot: 20
     display_name: '&e&lHikabrain FunCraft (1v1)'
-    hide_attributes: true
+    item_flags:
+      - HIDE_ATTRIBUTES
     lore:
       - '&7Passerelle suspendue de 1 bloc de large.'
       - '&7Touche le lit adverse pour marquer !'
@@ -122,7 +130,8 @@ items:
     material: BOOKSHELF
     slot: 22
     display_name: '&3&lCache-cache (BlockHunt)'
-    hide_attributes: true
+    item_flags:
+      - HIDE_ATTRIBUTES
     lore:
       - '&7Village rétro 81x81 — Déguisements en blocs.'
       - '&7Élimination = spectateur permanent (D3).'
@@ -136,7 +145,8 @@ items:
     material: PLAYER_HEAD
     slot: 24
     display_name: '&b&l✦ Mes Statistiques ✦'
-    hide_attributes: true
+    item_flags:
+      - HIDE_ATTRIBUTES
     lore:
       - '&7Consulte ton profil et tes records personnels.'
       - ''
@@ -159,7 +169,8 @@ items:
     material: GOLDEN_BOOTS
     slot: 26
     display_name: '&e&l✦ Rejoindre le Top Parkour ✦'
-    hide_attributes: true
+    item_flags:
+      - HIDE_ATTRIBUTES
     lore:
       - '&7Se téléporter directement au départ du Parkour'
       - '&7sur la plateforme du Hub.'
