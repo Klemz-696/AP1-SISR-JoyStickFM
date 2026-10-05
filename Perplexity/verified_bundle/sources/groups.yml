@@ -1,0 +1,37 @@
+# Candidate schema: verify against the installed Multiverse-Inventories version.
+# Each world belongs to one group. Do not load this over existing profiles without a backup.
+groups:
+  hub:
+    worlds:
+      - hub
+    shares:
+      - all
+  survie:
+    worlds:
+      - survie
+      - survie_nether
+      - survie_the_end
+    shares:
+      - all
+  bedwars:
+    worlds:
+      - bedwars_jfm
+    shares:
+      - all
+  blockhunt:
+    worlds:
+      - blockhunt_jfm
+    shares:
+      - all
+  legacy_world:
+    worlds:
+      - world
+      - world_nether
+      - world_the_end
+    shares:
+      - all
+  legacy_minijeux:
+    worlds:
+      - minijeux
+    shares:
+      - all

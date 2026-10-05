@@ -1,0 +1,44 @@
+config-Version: 8
+Language: 'English'
+General:
+  CheckforUpdates: false
+  Metrics-Logging: false
+  Log-Commands: false
+  ignoreErrors: false
+  ignoreDepend: NONE
+  Debugging: false
+Database:
+  MySQL: false
+Settings:
+  HeldItem-Slot: 4
+  HeldItem-Triggers: JOIN, WORLD-SWITCH
+  HeldItem-Animations: false
+  Default-Triggers: JOIN
+  DataTags: true
+Permissions:
+  Obtain-Items: false
+  Obtain-Items-OP: false
+  Commands-Get: false
+  Commands-OP: false
+  Movement-Bypass: false
+Clear-Items:
+  Type: ALL
+  Delay-Tick: 2
+  Join: false
+  Quit: false
+  World-Switch: false
+  Region-Enter: false
+  Options: PROTECT
+  Blacklist: ''
+Active-Commands:
+  commands: []
+  commands-sequence: SEQUENTIAL
+  triggers: JOIN
+  enabled-worlds: DISABLED
+Prevent:
+  Chat: false
+  Pickups: true
+  itemMovement: true
+  Self-Drops: true
+  Death-Drops: true
+  Bypass: CREATIVE

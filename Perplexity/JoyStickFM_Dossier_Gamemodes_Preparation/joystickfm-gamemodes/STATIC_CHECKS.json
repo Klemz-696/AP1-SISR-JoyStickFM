@@ -1,0 +1,20 @@
+{
+  "audit_gamemodes.sh": {
+    "bash_syntax_exit_code": 0,
+    "stderr": ""
+  },
+  "deploy_gamemodes.sh": {
+    "bash_syntax_exit_code": 0,
+    "stderr": ""
+  },
+  "templates/groups.candidate.yml": {
+    "yaml_parse": "ok"
+  },
+  "templates/games.template.yml": {
+    "yaml_parse": "ok"
+  },
+  "templates/TAB.scoreboard.fragment.yml": {
+    "yaml_parse": "ok"
+  },
+  "note": "Static syntax/format validation only. No Docker, RCON, plugin or gameplay test performed."
+}

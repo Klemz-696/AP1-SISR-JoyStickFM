@@ -1,0 +1,48 @@
+# TEMPLATE ONLY: replace every __CMD_*__ from the identified plugins.
+# Do not deploy this unresolved file. Confirm permissions and arena availability first.
+menu_title: '&8✦ &d&lJoyStick FM &8— &bJeux'
+open_command:
+  - menu
+  - games
+size: 27
+items:
+  filler:
+    material: BLACK_STAINED_GLASS_PANE
+    slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 17, 18, 19, 20, 21, 23, 24, 25, 26]
+    display_name: ' '
+  survie:
+    material: GRASS_BLOCK
+    slot: 11
+    display_name: '&a&lSurvie naturelle'
+    lore:
+      - '&7Biomes, exploration et terrains protégés.'
+    left_click_commands:
+      - '[close]'
+      - '[player] __CMD_ENTER_SURVIE__'
+  bedwars:
+    material: RED_BED
+    slot: 13
+    display_name: '&c&lBedWars — 4 équipes de 2'
+    lore:
+      - '&7Rejoins la file de l’arène JoyStick.'
+    left_click_commands:
+      - '[close]'
+      - '[player] __CMD_JOIN_BEDWARS__'
+  blockhunt:
+    material: BOOKSHELF
+    slot: 15
+    display_name: '&e&lCache-cache — Village rétro'
+    lore:
+      - '&7Rejoins une partie de BlockHunt.'
+    left_click_commands:
+      - '[close]'
+      - '[player] __CMD_JOIN_BLOCKHUNT__'
+  hub:
+    material: NETHER_STAR
+    slot: 22
+    display_name: '&b&lRetour au hub'
+    lore:
+      - '&7Sortie propre du jeu puis retour au lobby.'
+    left_click_commands:
+      - '[close]'
+      - '[player] __CMD_RETURN_HUB__'

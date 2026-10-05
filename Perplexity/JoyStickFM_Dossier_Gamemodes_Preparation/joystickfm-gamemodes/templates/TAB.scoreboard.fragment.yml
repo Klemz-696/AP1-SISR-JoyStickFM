@@ -1,0 +1,22 @@
+# FRAGMENT: merge with the generated TAB config, do not replace the whole file.
+# Check the TAB version and LuckPerms placeholder resolution before deployment.
+scoreboard:
+  enabled: true
+  toggle-command: /sb
+  remember-toggle-choice: false
+  hidden-by-default: false
+  use-numbers: false
+  static-number: 0
+  delay-on-join-milliseconds: 1000
+  scoreboards:
+    joystick:
+      title: '&d&lJOYSTICK &b&lFM'
+      lines:
+        - '&8&m--------------------'
+        - '&fJoueur &8» &b%player_name%'
+        - '&fRang &8» &d%luckperms_prefix%'
+        - '&fPing &8» &a%ping% &7ms'
+        - '&fEn ligne &8» &b%online%'
+        - '&fMode/monde &8» &e%world%'
+        - '&8&m--------------------'
+        - '&dAP 1 &8• &bBTS SIO SISR'

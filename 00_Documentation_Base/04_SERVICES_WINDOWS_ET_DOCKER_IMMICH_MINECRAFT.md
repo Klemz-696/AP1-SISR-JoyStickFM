@@ -253,12 +253,20 @@ Pour garantir un accueil professionnel digne des grands serveurs communautaires 
    - Tout ancien objet résiduel ou bloc parasite est automatiquement purgé à la connexion (`Clear-Items: Join: true`).
 2. **Menu Graphique Interactif (`DeluxeMenus`)** :
    - Un simple clic-droit sur la boussole ou la saisie de `/menu` ouvre une interface GUI coffre (27 slots) :
-     - **🌍 MONDE SURVIE** (Slot 11) : Téléporte vers le monde survie libre (`/mv tp world`).
-     - **🛏️ MINI-JEU BEDWARS** (Slot 13) : Téléporte vers l'arène BedWars (`/mv tp minijeux`).
-     - **🎭 CACHE-CACHE / BLOCKHUNT** (Slot 15) : Rejoint la file d'attente BlockHunt (`/bh join`).
-     - **🏛️ RETOUR AU LOBBY** (Slot 22) : Retourne au centre du hub (`/spawn`).
-3. **Hiérarchie LuckPerms (RBAC)** :
-   - Groupe `default` (Joueurs) : Autorisations d'ouverture du menu, de téléportation inter-mondes Multiverse et d'utilisation de la boussole.
+     - **🌍 SURVIE NATURELLE** (Slot 11) : Téléporte vers le monde survie procédural (`/mv tp survie`). Intègre la commande `/rtp` (téléportation aléatoire sécurisée dans la zone générée) et la protection des terrains (`GriefPrevention`).
+     - **🛏️ MINI-JEU BEDWARS** (Slot 13) : Rejoint la file d'attente de l'arène officielle 4 équipes de 2 (`/bw join jfm_duo`) dans le monde `bedwars_jfm`.
+     - **🎭 CACHE-CACHE / BLOCKHUNT** (Slot 15) : Rejoint la partie de BlockHunt (`/bh join jfm_retro`) dans le village rétro 81×81 (`blockhunt_jfm`).
+     - **🏛️ RETOUR AU LOBBY** (Slot 22) : Sortie propre et retour au centre du hub (`/spawn`).
+3. **Cloisonnement Étanche des Inventaires (`Multiverse-Inventories`)** :
+   - 6 groupes d'inventaires indépendants configurés dans `groups.yml` :
+     - `hub` : uniquement la boussole magique.
+     - `survie` : inventaire persistant partagé (`survie`, `survie_nether`, `survie_the_end`).
+     - `bedwars` : inventaire isolé géré par le cycle de match BedWars (`bedwars_jfm`).
+     - `blockhunt` : inventaire temporaire de mini-jeu (`blockhunt_jfm`).
+     - `legacy_world` & `legacy_minijeux` : profils historiques archivés sans risque d'écrasement.
+   - Protection ItemJoin : purge aveugle désactivée (`Clear-Items: Join: false, World-Switch: false`) afin de garantir l'intégrité absolue des inventaires Survie lors des téléportations inter-mondes.
+4. **Hiérarchie LuckPerms (RBAC)** :
+   - Groupe `default` (Joueurs) : Autorisations d'ouverture du menu, de téléportation inter-mondes Multiverse, d'utilisation de la boussole et permission `/rtp` restreinte au monde `survie` (`world=survie`).
    - Groupe `admin` : Administration complète (`luckperms.*`, `multiverse.*`, `deluxemenus.*`, `essentials.*`, `worldedit.*`) avec suppression du wildcard destructeur `'*'` et neutralisation de l'exemption de spawn (`essentials.spawn-on-join.exempt: false`).
 
 ---

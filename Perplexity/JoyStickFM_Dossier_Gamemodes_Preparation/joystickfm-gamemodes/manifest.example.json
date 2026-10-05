@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "verified": false,
+  "evidence": [],
+  "expected_paper_version": "__TODO_VERIFIED_VERSION_REGEX__",
+  "plugin_fingerprints": {},
+  "arena_manifest_sha256": "__TODO_SHA256_OF_FINAL_GEOMETRY__",
+  "allowed_destination_prefixes": [
+    "plugins/DeluxeMenus/",
+    "plugins/TAB/"
+  ],
+  "files": [],
+  "post_start_commands": [],
+  "health_checks": [],
+  "note": "This is deliberately incomplete. Agent must identify plugin variants, generate/build maps, validate configuration, add exact files and hashes, and set verified true only on evidence. The deploy script rejects this example."
+}

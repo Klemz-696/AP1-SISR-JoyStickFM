@@ -1,0 +1,3430 @@
+
+=== SERVER VERSION ===
+[37mThis server is running Paper version 26.2-129-ver/26.2@9240f58 (2026-09-23T18:49:01Z) (Implementing API version 26.2.build.129-stable)[0m
+[0m[33mError obtaining version information
+[0m
+
+=== PLUGINS ===
+§x[36m[31m[34m[37m[35m[32mℹ [37mServer Plugins (22):
+[0m§x[30m[32m[30m[30m[35m[34mPaper Plugins (1):
+[0m [30m- [32mProtocolLib
+[0m§x[33m[35m[30m[34m[30m[33mBukkit Plugins (21):
+[0m [30m- [32mBedWars[0m, §x[37m[37m[35m[31m[32m[32m*[32mBlockHunt[0m, [32mChunky[0m, [32mCoreProtect[0m, [32mDeluxeMenus[0m, [32mEssentials[0m, [32mEssentialsSpawn[0m, [32mGriefPrevention[0m, [32mGrimAC[0m, [32mItemJoin
+[0m [32mLibsDisguises[0m, [32mLPC[0m, [32mLuckPerms[0m, [32mMultiverse-Core[0m, [32mMultiverse-Inventories[0m, [32mpacketevents[0m, [32mPlaceholderAPI[0m, [32mTAB[0m, [32mVault[0m, [32mVoidGen
+[0m [32mWorldEdit
+[0m
+
+=== JAVA ===
+openjdk version "25.0.4.1" 2026-08-18 LTS
+OpenJDK Runtime Environment Temurin-25.0.4.1+1 (build 25.0.4.1+1-LTS)
+OpenJDK 64-Bit Server VM Temurin-25.0.4.1+1 (build 25.0.4.1+1-LTS, mixed mode, sharing)
+
+=== SAFE DOCKER METADATA ===
+Image: itzg/minecraft-server:latest
+Image user: 
+Mounts: [
+  {
+    "Type": "bind",
+    "Source": "/opt/minecraft/data",
+    "Destination": "/data",
+    "Mode": "rw",
+    "RW": true,
+    "Propagation": "rprivate"
+  }
+]
+MEMORY=2G
+CUSTOM_SERVER=/data/paper.jar
+ONLINE_MODE=FALSE
+TYPE=CUSTOM
+UID=1000
+GID=1000
+Port bindings: {
+  "25565/tcp": [
+    {
+      "HostIp": "",
+      "HostPort": "25565"
+    }
+  ]
+}
+
+=== JAR DESCRIPTORS AND HASHES ===
+
+FILE BlockHunt.jar SHA256 01c8cc3626204b16ea8edd639b7e7660c780188f1153d2a6dcea07a4f55268a5
+DESCRIPTOR plugin.yml
+name: BlockHunt
+main: nl.Steffion.BlockHunt.BlockHunt
+version: 0.2.1
+authors:
+  - Steffion
+description: An easy to set up, Hide and seek plugin. Hide as blocks from the killer seekers.
+depend: [LibsDisguises, ProtocolLib]
+softdepend: [Multiverse-Core, Vault]
+load: POSTWORLD
+commands:
+  BlockHunt:
+    usage: /<command>
+    description: N/A
+    aliases:
+        - bh
+        - prophunt
+        - ph
+        - hideandseek
+        - has
+        - hs
+        - seekandfind
+        - saf
+        - sf
+
+
+FILE Chunky-Bukkit.jar SHA256 530d2c7430a96a39957391b7088be144daa3108f7665896d1c23aa8dd4af32f3
+DESCRIPTOR plugin.yml
+name: Chunky
+version: 1.5.3
+main: org.popcraft.chunky.ChunkyBukkit
+api-version: 1.13
+folia-supported: true
+softdepend: [dynmap, BlueMap, squaremap, WorldBorder]
+load: POSTWORLD
+authors: [pop4959]
+description: Pre-generates chunks, quickly, efficiently, and safely
+website: https://www.spigotmc.org/resources/chunky.81534/
+commands:
+  chunky:
+    description: Generates chunks
+    aliases: [cy]
+    permission: chunky.command
+    usage: /chunky
+permissions:
+  chunky.command:
+    default: op
+  chunky.command.border:
+    default: op
+    children: [chunky.command]
+  chunky.command.cancel:
+    default: op
+    children: [chunky.command]
+  chunky.command.center:
+    default: op
+    children: [chunky.command]
+  chunky.command.confirm:
+    default: op
+    children: [chunky.command]
+  chunky.command.continue:
+    default: op
+    children: [chunky.command]
+  chunky.command.corners:
+    default: op
+    children: [chunky.command]
+  chunky.command.help:
+    default: op
+    children: [chunky.command]
+  chunky.command.pattern:
+    default: op
+    children: [chunky.command]
+  chunky.command.pause:
+    default: op
+    children: [chunky.command]
+  chunky.command.progress:
+    default: op
+    children: [chunky.command]
+  chunky.command.quiet:
+    default: op
+    children: [chunky.command]
+  chunky.command.radius:
+    default: op
+    children: [chunky.command]
+  chunky.command.reload:
+    default: op
+    children: [chunky.command]
+  chunky.command.selection:
+    default: op
+    children: [chunky.command]
+  chunky.command.shape:
+    default: op
+    children: [chunky.command]
+  chunky.command.silent:
+    default: op
+    children: [chunky.command]
+  chunky.command.spawn:
+    default: op
+    children: [chunky.command]
+  chunky.command.start:
+    default: op
+    children: [chunky.command]
+  chunky.command.trim:
+    default: op
+    children: [chunky.command]
+  chunky.command.worldborder:
+    default: op
+    children: [chunky.command]
+  chunky.command.world:
+    default: op
+    children: [chunky.command]
+  chunky.chunky:
+    default: false
+    children:
+      - chunky.command
+      - chunky.command.cancel
+      - chunky.command.center
+      - chunky.command.confirm
+      - chunky.command.continue
+      - chunky.command.corners
+      - chunky.command.help
+      - chunky.command.pattern
+      - chunky.command.pause
+      - chunky.command.progress
+      - chunky.command.quiet
+      - chunky.command.radius
+      - chunky.command.reload
+      - chunky.command.selection
+      - chunky.command.shape
+      - chunky.command.silent
+      - chunky.command.spawn
+      - chunky.command.start
+      - chunky.command.worldborder
+      - chunky.command.world
+
+
+FILE CoreProtect.jar SHA256 a2acef7c06ef201355cef07d591a6055dfed358ad768faaaaaf4e276865ecc97
+DESCRIPTOR plugin.yml
+name: CoreProtect
+main: net.coreprotect.CoreProtect
+version: 24.1
+branch: master
+api-version: 1.16
+folia-supported: true
+website: http://coreprotect.net
+author: Intelli
+softdepend: [WorldEdit]
+description: >
+             Provides block protection for your server.
+commands:
+  co:
+    description: Utilize the plugin
+    permission: coreprotect.co
+    permission-message: §3CoreProtect §f- You do not have permission to do that.
+    usage: /<command> <params>
+  core:
+    description: Utilize the plugin
+    permission: coreprotect.core
+    permission-message: §3CoreProtect §f- You do not have permission to do that.
+    usage: /<command> <params>
+  coreprotect:
+    description: Utilize the plugin
+    permission: coreprotect.coreprotect
+    permission-message: §3CoreProtect §f- You do not have permission to do that.
+    usage: /<command> <params>
+permissions:
+    coreprotect.*:
+        description: Gives access to all CoreProtect actions and commands
+        default: op
+        children: 
+            coreprotect.rollback: true
+            coreprotect.restore: true
+            coreprotect.inspect: true
+            coreprotect.help: true
+            coreprotect.purge: true
+            coreprotect.lookup: true
+            coreprotect.lookup.near: true
+            coreprotect.lookup.chat: true
+            coreprotect.lookup.command: true
+            coreprotect.lookup.session: true
+            coreprotect.lookup.username: true
+            coreprotect.lookup.block: true
+            coreprotect.lookup.sign: true
+            coreprotect.lookup.click: true
+            coreprotect.lookup.container: true
+            coreprotect.lookup.inventory: true
+            coreprotect.lookup.item: true
+            coreprotect.lookup.kill: true
+            coreprotect.teleport: true
+            coreprotect.reload: true
+            coreprotect.status: true
+            coreprotect.consumer: true
+            coreprotect.networking: true
+            coreprotect.give: false
+    coreprotect.co:
+        description: Has permission to access the CoreProtect /co command
+        default: true
+    coreprotect.core:
+        description: Has permission to access the CoreProtect /core command
+        default: false
+    coreprotect.coreprotect:
+        description: Has permission to access the CoreProtect /coreprotect command
+        default: false
+    coreprotect.lookup:
+        description: Has permission to use the lookup command
+        default: op
+        children:
+            coreprotect.lookup.near: true
+            coreprotect.lookup.chat: true
+            coreprotect.lookup.command: true
+            coreprotect.lookup.session: true
+            coreprotect.lookup.username: true
+            coreprotect.lookup.block: true
+            coreprotect.lookup.sign: true
+            coreprotect.lookup.click: true
+            coreprotect.lookup.container: true
+            coreprotect.lookup.inventory: true
+            coreprotect.lookup.item: true
+            coreprotect.lookup.kill: true
+    coreprotect.lookup.near:
+        description: Has permission to lookup nearby changes via the near command
+        default: op
+    coreprotect.lookup.chat:
+        description: Has permission to lookup chat messages
+        default: op
+    coreprotect.lookup.command:
+        description: Has permission to lookup player commands
+        default: op
+    coreprotect.lookup.session:
+        description: Has permission to lookup player sessions
+        default: op
+    coreprotect.lookup.username:
+        description: Has permission to lookup player username changes
+        default: op
+    coreprotect.lookup.block:
+        description: Has permission to lookup block data
+        default: op
+    coreprotect.lookup.sign:
+        description: Has permission to lookup sign messages
+        default: op
+    coreprotect.lookup.click:
+        description: Has permission to lookup player interactions
+        default: op
+    coreprotect.lookup.container:
+        description: Has permission to lookup container transactions
+        default: op
+    coreprotect.lookup.inventory:
+        description: Has permission to lookup inventory transactions
+        default: op
+    coreprotect.lookup.item:
+        description: Has permission to lookup item transactions
+        default: op
+    coreprotect.lookup.kill:
+        description: Has permission to lookup entity kills
+        default: op
+    coreprotect.rollback:
+        description: Has permission to perform rollbacks
+        default: op
+    coreprotect.restore:
+        description: Has permission to perform restores
+        default: op
+    coreprotect.inspect:
+        description: Has permission to use the inspector
+        default: op
+    coreprotect.help:
+        description: Has permission to use the help command
+        default: op
+    coreprotect.purge:
+        description: Has permission to use the purge command
+        default: op
+    coreprotect.teleport:
+        description: Has permission to use the teleport command
+        default: op
+    coreprotect.reload:
+        description: Has permission to use the reload command
+        default: op
+    coreprotect.status:
+        description: Has permission to use the status command
+        default: op
+    coreprotect.consumer:
+        description: Has permission to use the consumer command
+        default: op
+    coreprotect.networking:
+        description: Has permission to use the networking API
+        default: op
+    coreprotect.give:
+        description: Has permission to use the give command
+        default: false
+
+
+FILE DeluxeMenus-1.14.1-Release.jar SHA256 ec10a1317152aa57d76eec8cb3e1e7dc7f52e45c7a5d742c0baa1e394496ec20
+DESCRIPTOR plugin.yml
+api-version: 1.13
+name: DeluxeMenus
+main: com.extendedclip.deluxemenus.DeluxeMenus
+version: 1.14.1-Release
+authors: [ HelpChat ]
+softdepend: [ PlaceholderAPI, Vault, HeadDatabase, ItemsAdder, Nexo, Oraxen, ExecutableItems, ExecutableBlocks, Score, SimpleItemGenerator, MMOItems ]
+description: All in one inventory menu system
+commands:
+  deluxemenus:
+    description: DeluxeMenus main commands
+    aliases: [ dm, deluxemenu, dmenu ]
+permissions:
+  deluxemenus.admin:
+    description: admin commands
+    default: op
+  deluxemenus.open:
+    description: open a menu with /dm open <menu>
+    default: op
+  deluxemenus.open.others:
+    description: open a menu with /dm open <menu> <player>
+    default: op
+  deluxemenus.open.bypass:
+    description: attempt to open a menu for a viewer skipping view requirement checking for the player
+    default: op
+  deluxemenus.menu.*:
+    description: permission for all menus
+    default: op
+  deluxemenus.openrequirement.bypass.*:
+    description: Allows the viewer to bypass all menu open requirements
+    default: op
+  deluxemenus.placeholdersfor:
+    description: permission to parse menu placeholders with /dm open <menu> p:<player>
+    default: op
+  deluxemenus.placeholdersfor.exempt:
+    description: exempt from placeholders being parsed when targeted with /dm open <menu p:<player> for players with this permission
+    default: op
+
+
+FILE EssentialsX.jar SHA256 bda4685105977fca2e209820a9f0ad24275bd103390a03236f38e59bfdac58e6
+DESCRIPTOR plugin.yml
+name: Essentials
+main: com.earth2me.essentials.Essentials
+# Note to developers: This next line cannot change, or the automatic versioning system will break.
+version: 2.22.0
+website: https://essentialsx.net/
+description: Provides an essential, core set of commands for Bukkit.
+softdepend: [Vault, LuckPerms]
+authors: [Zenexer, ementalo, Aelux, Brettflan, KimKandor, snowleo, ceulemans, Xeology, KHobbits, md_5, Iaccidentally, drtshock, vemacs, SupaHam, mdcfe, JRoy, pop4959]
+api-version: "1.13"
+commands:
+  afk:
+    description: Marks you as away-from-keyboard.
+    usage: /<command> [player/message...]
+    aliases: [eafk,away,eaway]
+  antioch:
+    description: 'A little surprise for operators.'
+    usage: /<command> [message]
+    aliases: [eantioch,grenade,egrenade,tnt,etnt]
+  anvil:
+    description: Opens up an Anvil.
+    usage: /<command>
+    aliases: [eanvil]
+  back:
+    description: Teleports you to your location prior to tp/spawn/warp.
+    usage: /<command> [player]
+    aliases: [eback,return,ereturn]
+  backup:
+    description: Runs the backup if configured.
+    usage: /<command>
+    aliases: [ebackup]
+  balance:
+    description: States the current balance of a player.
+    usage: /<command> [player]
+    aliases: [bal,ebal,ebalance,money,emoney]
+  balancetop:
+    description: Gets the top balance values.
+    usage: /<command> [page]
+    aliases: [ebalancetop,baltop,ebaltop]
+  ban:
+    description: Bans a player.
+    usage: /<command> <player> [reason]
+    aliases: [eban]
+  banip:
+    description: Bans an IP address.
+    usage: /<command> <address> [reason]
+    aliases: [ebanip]
+  beezooka:
+    description: Throw an exploding bee at your opponent.
+    usage: /<command>
+    aliases: [ebeezooka,beecannon,ebeecannon]
+  book:
+    description: Allows reopening and editing of sealed books.
+    usage: /<command> [title|author [name]]
+    aliases: [ebook]
+  bottom:
+    description: Teleport to the lowest block at your current position.
+    usage: /<command>
+    aliases: [ ebottom ]
+  break:
+    description: Breaks the block you are looking at.
+    usage: /<command>
+    aliases: [ebreak]
+  broadcast:
+    description: Broadcasts a message to the entire server.
+    usage: /<command> <msg>
+    aliases: [bc,ebc,bcast,ebcast,ebroadcast,shout,eshout]
+  broadcastworld:
+    description: Broadcasts a message to a world.
+    usage: /<command> <world> <msg>
+    aliases: [bcw,ebcw,bcastw,ebcastw,ebroadcastworld,shoutworld,eshoutworld]
+  bigtree:
+    description: Spawn a big tree where you are looking.
+    usage: /<command> <tree|redwood|jungle|darkoak>
+    aliases: [ebigtree,largetree,elargetree]
+  burn:
+    description: Set a player on fire.
+    usage: /<command> <player> <seconds>
+    aliases: [eburn]
+  cartographytable:
+    description: Opens up a cartography table.
+    usage: /<command>
+    aliases: [ecartographytable, carttable, ecarttable]
+  clearinventory:
+    description: Clear all items in your inventory.
+    usage: /<command> [player|*] [item[:<data>]|*|**] [amount]
+    aliases: [ci,eci,clean,eclean,clear,eclear,clearinvent,eclearinvent,eclearinventory]
+  clearinventoryconfirmtoggle:
+    description: Toggles whether you are prompted to confirm inventory clears.
+    usage: /<command>
+    aliases: [eclearinventoryconfirmtoggle, clearinventoryconfirmoff, eclearinventoryconfirmoff, clearconfirmoff, eclearconfirmoff, clearconfirmon, eclearconfirmon, clearconfirm, eclearconfirm]
+  condense:
+    description: Condenses items into a more compact blocks.
+    usage: /<command> [itemname]
+    aliases: [econdense,compact,ecompact,blocks,eblocks,toblocks,etoblocks]
+  compass:
+    description: Describes your current bearing.
+    usage: /<command>
+    aliases: [ecompass,direction,edirection]
+  createkit:
+    description: Create a kit in game!
+    usage: /<command> <kitname> <delay>
+    aliases: [kitcreate,createk,kc,ck]
+  customtext:
+    description: Allows you to create custom text commands.
+    usage: /<alias> - Define in bukkit.yml
+  delhome:
+    description: Removes a home.
+    usage: /<command> [player:]<name>
+    aliases: [edelhome,remhome,eremhome,rmhome,ermhome]
+  deljail:
+    description: Removes a jail.
+    usage: /<command> <jailname>
+    aliases: [edeljail,remjail,eremjail,rmjail,ermjail]
+  delkit:
+    description: Deletes the specified kit.
+    usage: /<command> <kit>
+    aliases: [edelkit,remkit,eremkit,rmkit,ermkit,deletekit,edeletekit]
+  delwarp:
+    description: Deletes the specified warp.
+    usage: /<command> <warp>
+    aliases: [edelwarp,remwarp,eremwarp,rmwarp,ermwarp]
+  depth:
+    description: States current depth, relative to sea level.
+    usage: /<command>
+    aliases: [edepth,height,eheight]
+  disposal:
+    description: Opens a portable disposal menu.
+    usage: /<command>
+    aliases: [edisposal,trash,etrash]
+  eco:
+    description: Manages the server economy.
+    usage: /<command> <give|take|set|reset> <player> <amount>
+    aliases: [eeco,economy,eeconomy]
+  enchant:
+    description: Enchants the item the user is holding.
+    usage: /<command> <enchantmentname> [level]
+    aliases: [eenchant,enchantment,eenchantment]
+  enderchest:
+    description: Lets you see inside an enderchest.
+    usage: /<command> [player]
+    aliases: [echest,eechest,eenderchest,endersee,eendersee,ec,eec]
+  essentials:
+    description: Reloads essentials.
+    usage: /<command>
+    aliases: [eessentials, ess, eess, essversion]
+  exp:
+    description: Give, set, reset, or look at a players experience.
+    usage: /<command> [reset|show|set|give] [playername [amount]]
+    aliases: [eexp,xp]
+  ext:
+    description: Extinguish players.
+    usage: /<command> [player]
+    aliases: [eext,extinguish,eextinguish]
+  feed:
+    description: Satisfy the hunger.
+    usage: /<command> [player]
+    aliases: [eat,eeat,efeed]
+  fly:
+    description: Take off, and soar!
+    usage: /<command> [player] [on|off]
+    aliases: [efly]
+  fireball:
+    description: Throw a fireball or other assorted projectiles.
+    usage: /<command> [fireball|small|large|arrow|skull|egg|snowball|expbottle|dragon|splashpotion|lingeringpotion|trident] [speed]
+    aliases: [efireball,fireentity,efireentity,fireskull,efireskull]
+  firework:
+    description: Allows you to modify a stack of fireworks.
+    usage: /<command> <<meta param>|power [amount]|clear|fire [amount]>
+    aliases: [efirework]
+  gamemode:
+    description: Change player gamemode.
+    usage: /<command> <survival|creative|adventure|spectator> [player]
+    aliases: [adventure,eadventure,adventuremode,eadventuremode,creative,ecreative,eecreative,creativemode,ecreativemode,egamemode,gm,egm,gma,egma,gmc,egmc,gms,egms,gmt,egmt,survival,esurvival,survivalmode,esurvivalmode,gmsp,sp,egmsp,spec,spectator]
+  gc:
+    description: Reports memory, uptime and tick info.
+    usage: /<command>
+    aliases: [lag,elag,egc,mem,emem,memory,ememory,uptime,euptime,tps,etps,entities,eentities]
+  getpos:
+    description: Get your current coordinates or those of a player.
+    usage: /<command> [player]
+    aliases: [coords,egetpos,position,eposition,whereami,ewhereami,getlocation,egetlocation,getloc,egetloc]
+  give:
+    description: Give a player an item.
+    usage: /<command> <player> <item|numeric> [amount [itemmeta...]]
+    aliases: [egive]
+  god:
+    description: Enables your godly powers.
+    usage: /<command> [player] [on|off]
+    aliases: [egod,godmode,egodmode,tgm,etgm]
+  grindstone:
+    description: Opens up a grindstone.
+    usage: /<command>
+    aliases: [egrindstone]
+  hat:
+    description: Get some cool new headgear.
+    usage: /<command> [remove]
+    aliases: [ehat,head,ehead]
+  heal:
+    description: Heals you or the given player.
+    usage: /<command> [player]
+    aliases: [eheal]
+  help:
+    description: Views a list of available commands.
+    usage: /<command> [search term] [page]
+    aliases: [ehelp]
+  helpop:
+    description: Message online admins.
+    usage: /<command> <message>
+    aliases: [ac,eac,amsg,eamsg,ehelpop]
+  home:
+    description: Teleport to your home.
+    usage: /<command> [player:][name]
+    aliases: [ehome,homes,ehomes]
+  ice:
+    description: Cools a player off.
+    usage: /<command> [player]
+    aliases: [eice, efreeze]
+  ignore:
+    description: Ignore or unignore other players.
+    usage: /<command> <player>
+    aliases: [eignore,unignore,eunignore,delignore,edelignore,remignore,eremignore,rmignore,ermignore]
+  info:
+    description: Shows information set by the server owner.
+    usage: /<command> [chapter] [page]
+    aliases: [about,eabout,ifo,eifo,einfo,inform,einform,news,enews]
+  invsee:
+    description: See the inventory of other players.
+    usage: /<command> <player>
+    aliases: [einvsee]
+  item:
+    description: Spawn an item.
+    usage: /<command> <item|numeric> [amount [itemmeta...]]
+    aliases: [i,eitem,ei]
+  itemdb:
+    description: Searches for an item.
+    usage: /<command> <item>
+    aliases: [dura,edura,durability,edurability,eitemdb,itemno,eitemno]
+  itemlore:
+    description: Edit the lore of an item.
+    usage: /<command> <add/set/clear> [text/line] [text]
+    aliases: [lore, elore, ilore, eilore, eitemlore]
+  itemname:
+    description: Names an item.
+    usage: /<command> [name]
+    aliases: [iname, einame, eitemname, itemrename, irename, eitemrename, eirename]
+  jailedplayers:
+    description: List all jailed players.
+    usage: /<command>
+    aliases: [ejailedplayers, ejailed, ejp]
+  jails:
+    description: List all jails.
+    usage: /<command>
+    aliases: [ejails]
+  jump:
+    description: Jumps to the nearest block in the line of sight.
+    usage: /<command>
+    aliases: [j,ej,ejump,jumpto,ejumpto]
+  kick:
+    description: Kicks a specified player with a reason.
+    usage: /<command> <player> [reason]
+    aliases: [ekick]
+  kickall:
+    description: Kicks all players off the server except the issuer.
+    usage: /<command> [reason]
+    aliases: [ekickall]
+  kill:
+    description: Kills specified player.
+    usage: /<command> <player>
+    aliases: [ekill]
+  kit:
+    description: Obtains the specified kit or views all available kits.
+    usage: /<command> [kit] [player]
+    aliases: [ekit,kits,ekits]
+  kitreset:
+    description: Resets the cooldown on the specified kit.
+    usage: /<command> <kit> [player]
+    aliases: [ekitreset, kitr, ekitr, resetkit, eresetkit]
+  kittycannon:
+    description: Throw an exploding kitten at your opponent.
+    usage: /<command>
+    aliases: [ekittycannon]
+  lightning:
+    description: The power of Thor. Strike at cursor or player.
+    usage: /<command> [player] [power]
+    aliases: [elightning,shock,eshock,smite,esmite,strike,estrike,thor,ethor]
+  list:
+    description: List all online players.
+    usage: /<command> [group]
+    aliases: [elist,online,eonline,playerlist,eplayerlist,plist,eplist,who,ewho]
+  loom:
+    description: Opens up a loom.
+    usage: /<command>
+    aliases: [eloom]
+  mail:
+    description: Manages inter-player, intra-server mail.
+    usage: /<command> [read|clear|clear [number]|clear <player> [number]|send [to] [message]|sendtemp [to] [expire time] [message]|sendall [message]]
+    aliases: [email,eemail,memo,ememo]
+  me:
+    description: Describes an action in the context of the player.
+    usage: /<command> <description>
+    aliases: [action,eaction,describe,edescribe,eme]
+  more:
+    description: Fills the item stack in hand to specified amount, or to maximum size if none is specified.
+    usage: /<command> [amount]
+    aliases: [emore]
+  motd:
+    description: Views the Message Of The Day.
+    usage: /<command> [chapter] [page]
+    aliases: [emotd]
+  msg:
+    description: Sends a private message to the specified player.
+    usage: /<command> <to> <message>
+    aliases: [w,m,t,pm,emsg,epm,tell,etell,whisper,ewhisper]
+  msgtoggle:
+    description: Blocks receiving all private messages.
+    usage: /<command> [player] [on|off]
+    aliases: [emsgtoggle]
+  mute:
+    description: Mutes or unmutes a player.
+    usage: /<command> <player> [datediff] [reason]
+    aliases: [emute,silence,esilence,unmute,eunmute]
+  near:
+    description: Lists the players near by or around a player.
+    usage: /<command> [playername] [radius]
+    aliases: [enear,nearby,enearby]
+  nick:
+    description: Change your nickname or that of another player.
+    usage: /<command> [player] <nickname|off>
+    aliases: [enick,nickname,enickname]
+  nuke:
+    description: May death rain upon them.
+    usage: /<command> [player]
+    aliases: [enuke]
+  tpoffline:
+    description: Teleport to a player's last known logout location
+    usage: /<command> <player>
+    aliases: [otp, offlinetp, tpoff, tpoffline, etpoffline]
+  pay:
+    description: Pays another player from your balance.
+    usage: /<command> <player> <amount>
+    aliases: [epay]
+  paytoggle:
+    description: Toggles whether you are accepting payments.
+    usage: /<command> [player]
+    aliases: [epaytoggle, payoff, epayoff, payon, epayon]
+  payconfirmtoggle:
+    description: Toggles whether you are prompted to confirm payments.
+    usage: /<command>
+    aliases: [epayconfirmtoggle, payconfirmoff, epayconfirmoff, payconfirmon, epayconfirmon, payconfirm, epayconfirm]
+  ping:
+    description: Pong!
+    usage: /<command>
+    aliases: [echo,eecho,eping,pong,epong]
+  playtime:
+    description: Shows a player's time played in game
+    usage: /<command> [player]
+    aliases: [eplaytime]
+  potion:
+    description: Adds custom potion effects to a potion.
+    usage: /<command> <clear|apply|effect:<effect> power:<power> duration:<duration>>
+    aliases: [epotion,elixer,eelixer]
+  powertool:
+    description: Assigns a command to the item in hand.
+    usage: /<command> [l:|a:|r:|c:|d:][command] [arguments] - {player} can be replaced by name of a clicked player.
+    aliases: [epowertool,pt,ept]
+  powertoollist:
+    description: Lists all current powertools.
+    usage: /<command>
+    aliases: [epowertoollist,ptlist,eptlist]
+  powertooltoggle:
+    description: Enables or disables all current powertools.
+    usage: /<command>
+    aliases: [epowertooltoggle,ptt,eptt,pttoggle,epttoggle]
+  ptime:
+    description: Adjust player's client time. Add @ prefix to fix.
+    usage: /<command> [list|reset|day|night|dawn|17:30|4pm|4000ticks] [player|*]
+    aliases: [playertime,eplayertime,eptime]
+  pweather:
+    description: Adjust a player's weather
+    usage: /<command> [list|reset|storm|sun|clear] [player|*]
+    aliases: [playerweather,eplayerweather,epweather]
+  r:
+    description: Quickly reply to the last player to message you.
+    usage: /<command> <message>
+    aliases: [er,reply,ereply]
+  rtoggle:
+    description: Change whether the recipient of the reply is last recipient or last sender
+    usage: /<command> [player] [on|off]
+    aliases: [ertoggle, replytoggle, ereplytoggle]
+  realname:
+    description: Displays the username of a user based on nick.
+    usage: /<command> <nickname>
+    aliases: [erealname]
+  recipe:
+    description: Displays how to craft items.
+    usage: /<command> <item> [number]
+    aliases: [formula,eformula,method,emethod,erecipe,recipes,erecipes]
+  remove:
+    description: Removes entities in your world.
+    usage: /<command> <all|tamed|named|drops|arrows|boats|minecarts|xp|paintings|itemframes|endercrystals|monsters|animals|ambient|mobs|[mobType]> [radius|world]
+    aliases: [eremove,butcher,ebutcher,killall,ekillall,mobkill,emobkill]
+  renamehome:
+    description: Renames a home.
+    usage: /<command> <[player:]name> <new name>
+    aliases: [erenamehome]
+  repair:
+    description: Repairs the durability of one or all items.
+    usage: /<command> [hand|all]
+    aliases: [fix,efix,erepair]
+  rest:
+    description: Rests you or the given player.
+    usage: /<command> [player]
+    aliases: [erest]
+  rules:
+    description: Views the server rules.
+    usage: /<command> [chapter] [page]
+    aliases: [erules]
+  seen:
+    description: Shows the last logout time of a player.
+    usage: /<command> <playername>
+    aliases: [eseen, ealts, alts]
+  sell:
+    description: Sells the item currently in your hand.
+    usage: /<command> <<itemname>|<id>|hand|inventory|blocks> [amount]
+    aliases: [esell]
+  sethome:
+    description: Set your home to your current location.
+    usage: /<command> [[player:]name]
+    aliases: [esethome,createhome,ecreatehome]
+  setjail:
+    description: Creates a jail where you specified named [jailname].
+    usage: /<command> <jailname>
+    aliases: [esetjail,createjail,ecreatejail]
+  settpr:
+    description: Set the random teleport location and parameters.
+    usage: /<command> [center|minrange|maxrange] [value]
+    aliases: [esettpr, settprandom, esettprandom]
+  setwarp:
+    description: Creates a new warp.
+    usage: /<command> <warp>
+    aliases: [createwarp,ecreatewarp,esetwarp]
+  setworth:
+    description: Set the sell value of an item.
+    usage: /<command> [itemname|id] <price>
+    aliases: [esetworth]
+  showkit:
+    description: Show contents of a kit.
+    usage: /<command> <kitname>
+    aliases: [kitpreview,preview,kitshow]
+  editsign:
+    description: Edits a sign in the world.
+    usage: /<command> <set/clear/copy/paste> [line number] [text]
+    aliases: [sign, esign, eeditsign]
+  skull:
+    description: Set the owner of a player skull
+    usage: /<command> [owner] [player]
+    aliases: [eskull, playerskull, eplayerskull, head, ehead]
+  smithingtable:
+    description: Opens up a smithing table.
+    usage: /<command>
+    aliases: [esmithingtable, smithtable, esmithtable]
+  socialspy:
+    description: Toggles if you can see msg/mail commands in chat.
+    usage: /<command> [player] [on|off]
+    aliases: [esocialspy]
+  spawner:
+    description: Change the mob type of a spawner.
+    usage: /<command> <mob> [delay]
+    aliases: [changems,echangems,espawner,mobspawner,emobspawner]
+  spawnmob:
+    description: Spawns a mob.
+    usage: /<command> <mob>[:data][,<mount>[:data]] [amount] [player]
+    aliases: [mob,emob,spawnentity,espawnentity,espawnmob]
+  speed:
+    description: Change your speed limits.
+    usage: /<command> [type] <speed> [player]
+    aliases: [flyspeed,eflyspeed,fspeed,efspeed,espeed,walkspeed,ewalkspeed,wspeed,ewspeed]
+  stonecutter:
+    description: Opens up a stonecutter.
+    usage: /<command>
+    aliases: [estonecutter]
+  sudo:
+    description: Make another user perform a command.
+    usage: /<command> <player> <command [args]>
+    aliases: [esudo]
+  suicide:
+    description: Causes you to perish.
+    usage: /<command>
+    aliases: [esuicide]
+  tempban:
+    description: Temporary ban a user.
+    usage: /<command> <playername> <datediff> [reason]
+    aliases: [etempban]
+  tempbanip:
+    description: Temporarily ban an IP Address.
+    usage: /<command> <playername> <datediff> [reason]
+    aliases: [etempbanip]
+  thunder:
+    description: Enable/disable thunder.
+    usage: /<command> <true/false> [duration]
+    aliases: [ethunder]
+  time:
+    description: Display/Change the world time. Defaults to current world.
+    usage: /<command> [set|add] [day|night|dawn|17:30|4pm|4000ticks] [worldname|all]
+    aliases: [day,eday,night,enight,etime]
+  togglejail:
+    description: Jails/Unjails a player, TPs them to the jail specified.
+    usage: /<command> <player> <jailname> [datediff]
+    aliases: [jail,ejail,tjail,etjail,etogglejail,unjail,eunjail]
+  top:
+    description: Teleport to the highest block at your current position.
+    usage: /<command>
+    aliases: [etop]
+  tp:
+    description: Teleport to a player.
+    usage: /<command> <player> [otherplayer]
+    aliases: [tele,etele,teleport,eteleport,etp,tp2p,etp2p]
+  tpa:
+    description: Request to teleport to the specified player.
+    usage: /<command> <player>
+    aliases: [call,ecall,etpa,tpask,etpask]
+  tpaall:
+    description: Requests all players online to teleport to you.
+    usage: /<command> <player>
+    aliases: [etpaall]
+  tpaccept:
+    description: Accepts teleport requests.
+    usage: /<command> [player|*]
+    aliases: [etpaccept,tpyes,etpyes]
+  tpahere:
+    description: Request that the specified player teleport to you.
+    usage: /<command> <player>
+    aliases: [etpahere]
+  tpall:
+    description: Teleport all online players to another player.
+    usage: /<command> [player]
+    aliases: [etpall]
+  tpauto:
+    description: Automatically accept teleportation requests.
+    usage: /<command> [player]
+    aliases: [etpauto]
+  tpacancel:
+    description: Cancel all outstanding teleport requests. Specify [player] to cancel requests with them.
+    usage: /<command> [player]
+    aliases: [etpacancel]
+  tpdeny:
+    description: Rejects teleport requests.
+    usage: /<command> [player|*]
+    aliases: [etpdeny,tpno,etpno]
+  tphere:
+    description: Teleport a player to you.
+    usage: /<command> <player>
+    aliases: [s,etphere]
+  tpo:
+    description: Teleport override for tptoggle.
+    usage: /<command> <player> [otherplayer]
+    aliases: [etpo]
+  tpohere:
+    description: Teleport here override for tptoggle.
+    usage: /<command> <player>
+    aliases: [etpohere]
+  tppos:
+    description: Teleport to coordinates.
+    usage: /<command> <x> <y> <z> [yaw] [pitch] [world]
+    aliases: [etppos]
+  tpr:
+    description: Teleport randomly.
+    usage: /<command>
+    aliases: [etpr, tprandom, etprandom]
+  tptoggle:
+    description: Blocks all forms of teleportation.
+    usage: /<command> [player] [on|off]
+    aliases: [etptoggle]
+  tree:
+    description: Spawn a tree where you are looking.
+    usage: /<command> <tree|birch|redwood|redmushroom|brownmushroom|jungle|junglebush|swamp>
+    aliases: [etree]
+  unban:
+    description: Unbans the specified player.
+    usage: /<command> <player>
+    aliases: [pardon,eunban,epardon]
+  unbanip:
+    description: Unbans the specified IP address.
+    usage: /<command> <address>
+    aliases: [eunbanip,pardonip,epardonip]
+  unlimited:
+    description: Allows the unlimited placing of items.
+    usage: /<command> <list|item|clear> [player]
+    aliases: [eunlimited,ul,unl,eul,eunl]
+  vanish:
+    description: Hide yourself from other players.
+    usage: /<command> [player] [on|off]
+    aliases: [v,ev,evanish]
+  warp:
+    description: List all warps or warp to the specified location.
+    usage: /<command> <pagenumber|warp> [player]
+    aliases: [ewarp,warps,ewarps]
+  warpinfo:
+    description: Finds location information for a specified warp.
+    usage: /<command> <warp>
+    aliases: [ewarpinfo]
+  weather:
+    description: Sets the weather.
+    usage: /<command> <storm/sun> [duration]
+    aliases: [rain,erain,sky,esky,storm,estorm,sun,esun,eweather]
+  whois:
+    description: Determine basic information about the specified player.
+    usage: /<command> <nickname>
+    aliases: [ewhois]
+  workbench:
+    description: Opens up a workbench.
+    usage: /<command>
+    aliases: [craft,ecraft,wb,ewb,wbench,ewbench,eworkbench]
+  world:
+    description: Switch between worlds.
+    usage: /<command> [world]
+    aliases: [eworld]
+  worth:
+    description: Calculates the worth of items in hand or as specified.
+    usage: /<command> <<itemname>|<id>|hand|inventory|blocks> [-][amount]
+    aliases: [eprice,price,eworth]
+
+permissions:
+  essentials.*:
+    default: op
+    description: Give players with op everything by default
+    children:
+      essentials.gamemode.*: true
+  essentials.afk:
+    description: Allows access to the /afk command
+  essentials.afk.message:
+    description: Allows the player to set a custom AFK message
+  essentials.afk.others:
+    description: Allows the player to set another player's AFK status
+  essentials.afk.auto:
+    default: false
+    description: Players with this permission will be set to afk after a period of inaction as defined in the config file
+  essentials.afk.kickexempt:
+    description: Players with this permission will not be kicked for being AFK
+  essentials.antioch:
+    description: Allows access to the /antioch command
+  essentials.back:
+    description: Allows access to the /back command
+  essentials.back.others:
+    description: Allows access to the /back command for other players
+  essentials.back.ondeath:
+    default: false
+    description: Players with this permission will have back location stored during death
+  essentials.back.onteleport:
+    default: true
+    description: Players with this permission will have back location stored during any teleportation
+  essentials.back.into.<world>:
+    description: Allows the player to use the /back command to travel to a specific world
+  essentials.backup:
+    description: Allows access to the /backup command
+  essentials.balance:
+    description: Allows access to the /balance command
+  essentials.balance.others:
+    description: Allows view other players balance with the /balance command
+  essentials.balancetop:
+    description: Allows access to the /balancetop command
+  essentials.balancetop.force:
+    description: Allows access to force refresh the balancetop list
+  essentials.balancetop.exclude:
+    default: false
+    description: Players with this permission are excluded from the balancetop
+  essentials.ban:
+    description: Allows access to the /ban command
+  essentials.ban.notify:
+    description: Allows the bearer to be notified when a player is banned
+  essentials.ban.exempt:
+    default: false
+    description: Prevent a specified group or player from being banned
+  essentials.ban.offline:
+    description: Allows access to the /ban command for offline players, which may in turn by used to ban exempt players who are offline
+  essentials.banip:
+    description: Allows access to the /banip command
+  essentials.banip.notify:
+    description: Allows the bearer to be notified when a player is banned
+  essentials.unban:
+    description: Allows access to the /unban command
+  essentials.unbanip:
+    description: Allows access to the /unbanip command
+  essentials.bigtree:
+    description: Allows access to the /bigtree command
+  essentials.book:
+    description: Allows access to the /book command
+  essentials.book.author:
+    description: Allows access to edit book authors with the /book command
+  essentials.book.others:
+    description: Allows access to edit other players books with the /book command
+  essentials.book.title:
+    description: Allows access to edit book titles with the /book command
+  essentials.bottom:
+    description: Allows access to the /bottom command
+  essentials.break:
+    description: Allows access to the /break command
+  essentials.break.bedrock:
+    description: Allows access to the /break command for bedrock
+  essentials.broadcast:
+    description: Allows access to the /broadcast command
+  essentials.broadcastworld:
+    description: Allows access to the /broadcastworld command
+  essentials.burn:
+    description: Allows access to the /burn command
+  essentials.chat.ignoreexempt:
+    default: false
+    description: Someone with this permission will not be ignored, even if they are on another persons ignore list
+  essentials.chat.spy:
+    description: Allows the bearers to see all local chat messages, regardless of their proximity to the sender
+  essentials.chat.spy.exempt:
+    description: Allows the bearer to be exempt from the local chat spy permission
+  essentials.clearinventory:
+    description: Allows access to the /clearinventory command
+  essentials.clearinventory.all:
+    description: Allows access to clear the inventory of all players with the /clearinventory command
+  essentials.clearinventory.others:
+    description: Allows access to clear the inventory of other players with the /clearinventory command
+  essentials.clearinventoryconfirmtoggle:
+    description: Allows access to the /clearinventoryconfirmtoggle command
+  essentials.commandcooldowns.bypass:
+    description: Allows the bypassing of all command cooldowns
+  essentials.commandcooldowns.bypass.<commandname>:
+    description: Allows the bypassing of the cooldown for a specific command
+  essentials.compass:
+    description: Allows access to the /compass command
+  essentials.condense:
+    description: Allows access to the /condense command
+  essentials.createkit:
+    description: Allows access to the /createkit command
+  essentials.delkit:
+    description: Allows access to the /delkit command
+  essentials.kitreset:
+    description: Allows access to the /kitreset command
+  essentials.kitreset.others:
+    description: Allows access to reset other players kits with the /kitreset command
+  essentials.customtext:
+    description: Allows access to the /customtext command and all aliases
+  essentials.delwarp:
+    description: Allows access to the /delwarp command
+  essentials.depth:
+    description: Allows access to the /depth command
+  essentials.disposal:
+    description: Allows access to the /disposal command
+  essentials.eco:
+    description: Allows access to the /eco command
+  essentials.eco.loan:
+    description: Allows the bearer to possess a negative balance
+  essentials.enchant:
+    description: Allows access to the /enchant command
+  essentials.enchantments.allowunsafe:
+    description: Allows the bearer to enchant items with unsafe enchantments
+  essentials.enchantments.<enchantment>:
+    description: Allows the bearer to use a specific enchantment with the /enchant command
+  essentials.enderchest:
+    description: Allows access to the /enderchest command
+  essentials.enderchest.modify:
+    description: Allows the bearer to modify other players enderchests
+  essentials.enderchest.others:
+    description: Allows access to the /enderchest command for other players
+  essentials.essentials:
+    description: Allows access to the /essentials command
+  essentials.updatecheck:
+    description: The bearer will be notified of updates to EssentialsX
+  essentials.exp:
+    description: Allows access to the /exp command
+  essentials.exp.give:
+    description: Allows the bearer to give experience to themselves
+  essentials.exp.give.others:
+    description: Allows the bearer to give experience to other players
+  essentials.exp.others:
+    description: Allows the bearer to view other players experience
+  essentials.exp.set:
+    description: Allows the bearer to set experience for themselves
+  essentials.exp.set.others:
+    description: Allows the bearer to set experience for other players
+  essentials.ext:
+    description: Allows access to the /ext command
+  essentials.ext.others:
+    description: Allows access to the /ext command for other players
+  essentials.feed:
+    description: Allows access to the /feed command
+  essentials.feed.others:
+    description: Allows access to the /feed command for other players
+  essentials.fireball:
+    description: Allows access to the /fireball command. Additional permissions are required for each type of fireball.
+  essentials.fireball.fireball:
+    description: Allows access to use the fireball in the /fireball command
+  essentials.fireball.small:
+    description: Allows access to use the small fireball in the /fireball command
+  essentials.fireball.large:
+    description: Allows access to use the large fireball in the /fireball command
+  essentials.fireball.arrow:
+    description: Allows access to use the arrows in the /fireball command
+  essentials.fireball.dragon:
+    description: Allows access to use the dragon in the /fireball command
+  essentials.fireball.splashpotion:
+    description: Allows access to use the splash potion in the /fireball command
+  essentials.fireball.lingeringpotion:
+    description: Allows access to use the lingering potion in the /fireball command
+  essentials.fireball.trident:
+    description: Allows access to use the trident in the /fireball command
+  essentials.fireball.skull:
+    description: Allows access to use the skull in the /fireball command
+  essentials.fireball.egg:
+    description: Allows access to use the egg in the /fireball command
+  essentials.fireball.snowball:
+    description: Allows access to use the snowball in the /fireball command
+  essentials.firework:
+    description: Allows access to the /firework command
+  essentials.firework.fire:
+    description: Allows the bearer to use the firework command to launch a copy of the firework in hand
+  essentials.firework.multiple:
+    description: Allows the bearer to use the firework command to launch multiple fireworks
+  essentials.fly:
+    description: Allows access to the /fly command
+  essentials.fly.safelogin:
+    description: Bearers of this permission will be put into fly mode if they log in while in the air
+  essentials.fly.others:
+    description: Allows access to the /fly command for other players
+  essentials.gamemode:
+    description: Allows access to the /gamemode command
+  essentials.gamemode.all:
+    description: Allows access to all gamemodes with the /gamemode command
+  essentials.gamemode.others:
+    description: Allows access to the /gamemode command for other players
+  essentials.gamemode.survival:
+    description: Allows access to the survival gamemode with the /gamemode command
+  essentials.gamemode.creative:
+    description: Allows access to the creative gamemode with the /gamemode command
+  essentials.gamemode.adventure:
+    description: Allows access to the adventure gamemode with the /gamemode command
+  essentials.gamemode.spectator:
+    description: Allows access to the spectator gamemode with the /gamemode command
+  essentials.gamemode.*:
+    description: Allows access to all gamemodes with the /gamemode command
+    default: op
+    children:
+      essentials.gamemode: true
+      essentials.gamemode.others: true
+      essentials.gamemode.all: true
+  essentials.gc:
+    description: Allows access to the /gc command
+  essentials.getpos:
+    description: Allows access to the /getpos command
+  essentials.getpos.others:
+    description: Allows access to the /getpos command for other players
+  essentials.give:
+    description: Allows access to the /give command
+  essentials.give.item-all:
+    description: Allows access to the /give command for all items when permission-based-item-spawn is enabled
+  essentials.give.item-<item-name>:
+    description: Allows access to the /give command for a specific item when permission-based-item-spawn is enabled
+  essentials.god:
+    description: Allows access to the /god command
+  essentials.god.others:
+    description: Allows access to the /god command for other players
+  essentials.god.pvp:
+    description: Allows the bearer to attack players while in god mode
+  essentials.hat:
+    description: Allows access to the /hat command
+  essentials.hat.prevent-type.<item-name>:
+    description: Prevents the player from using the /hat command with the specified item
+  essentials.hat.ignore-binding:
+    description: Allows the bearer to use the /hat command when they have equipped an item with curse of binding
+  essentials.heal:
+    description: Allows access to the /heal command
+  essentials.heal.others:
+    description: Allows access to the /heal command for other players
+  essentials.help:
+    description: Allows access to the /help command
+  essentials.help.<plugin-name>:
+    description: Allows access to the /help command for a specific plugin
+  essentials.helpop:
+    description: Allows access to the /helpop command
+  essentials.helpop.receive:
+    description: Allows the bearer to receive helpop messages
+  essentials.kill:
+    description: Allows access to the /kill command
+  essentials.kill.exempt:
+    description: Prevents the player from being killed by /kill
+  essentials.kill.force:
+    description: Allows the bearer to be killed by /kill even if their death is canceled
+  essentials.suicide:
+    description: Allows access to the /suicide command for multiple players
+  essentials.home:
+    description: Allows access to the /home command
+  essentials.home.compass:
+    default: false
+    description: Point the player's compass at their first home. compass-towards-home-perm needs to be enabled in the configuration.
+  essentials.home.others:
+    description: Allows access to teleport to other players homes with the /home command
+  essentials.home.bed:
+    description: Allows access to the /home command for beds
+  essentials.ice:
+    description: Allows access to the /ice command
+  essentials.ice.others:
+    description: Allows access to the /ice command for other players
+  essentials.ignore:
+    description: Allows access to the /ignore command
+  essentials.info:
+    description: Allows access to the /info command
+  essentials.invsee:
+    description: Allows access to the /invsee command
+  essentials.invsee.equip:
+    description: Allows access to view items in armor slots with the /invsee command
+  essentials.invsee.modify:
+    description: Allows access to modify items in other players inventories with the /invsee command
+  essentials.invsee.preventmodify:
+    default: false
+    description: Prevents other players from modifying the players inventory.
+  essentials.item:
+    description: Allows access to the /item command
+  essentials.itemspawn.exempt:
+    description: Allows the bearer to spawn items in the item blacklist
+  essentials.itemspawn.meta-chapter-<chapter>:
+    description: Allows the bearer to spawn specific books only, from book.txt. with the /give command.
+  essentials.itemspawn.meta-author:
+    description: Allows the bearer to spawn items with author metadata
+  essentials.itemspawn.meta-book:
+    description: Allows the bearer to spawn items with pre-filled content from book.txt
+  essentials.itemspawn.meta-firework:
+    description: Allows the bearer to spawn items with firework metadata
+  essentials.itemspawn.meta-head:
+    description: Allows the bearer to spawn items with head metadata
+  essentials.itemspawn.meta-lore:
+    description: Allows the bearer to spawn items with lore metadata
+  essentials.itemspawn.meta-title:
+    description: Allows the bearer to spawn items with title metadata
+  essentials.itemlore:
+    description: Allows access to the /itemlore command
+  essentials.itemdb:
+    description: Allows access to the /itemdb command
+  essentials.itemname:
+    description: Allows access to the /itemname command
+  essentials.itemname.format:
+    description: Allows access to the /itemname command with formatting text
+  essentials.itemname.magic:
+    description: Allows access to the /itemname command with magic text
+  essentials.itemname.color:
+    description: Allows access to the /itemname command with color text
+  essentials.itemname.rgb:
+    description: Allows access to the /itemname command with RGB text
+  essentials.itemname.prevent-type.<item-name>:
+    description: Prevents the player from using the /itemname command with the specified item
+  essentials.jail.exempt:
+    description: Prevent a specified group or player from being jailed
+  essentials.jail.allow.<command>:
+    description: Allows the bearer to use the specified command while jailed
+  essentials.jail.notify:
+    description: Allows the bearer to be notified when other players are jailed
+  essentials.jail.allow-break:
+    description: Allows the bearer to break blocks while jailed
+  essentials.jail.allow-place:
+    description: Allows the bearer to place blocks while jailed
+  essentials.jail.allow-block-damage:
+    description: Allows the bearer to damage blocks while jailed
+  essentials.jail.allow-interact:
+    description: Allows the bearer to interact with blocks while jailed
+  essentials.jailedplayers:
+    description: Allows access to the /jailedplayers command
+  essentials.jails:
+    description: Allows access to the /jails command
+  essentials.deljail:
+    description: Allows access to the /deljail command
+  essentials.jump:
+    description: Allows access to the /jump command
+  essentials.jump.lock:
+    description: Allows access to the /jump lock command
+  essentials.keepxp:
+    default: false
+    description: Allows the user to keep their exp on death, instead of dropping it.
+  essentials.joinfullserver:
+    description: Allows the to join the server even if it is full
+  essentials.whitelist.bypass:
+    description: Allows a player to join the server even if they are not whitelisted.
+  essentials.kick:
+    description: Allows access to the /kick command
+  essentials.kick.exempt:
+    default: false
+    description: Prevents the player from being kicked.
+  essentials.kick.notify:
+    description: Allows the bearer to be notified when other players are kicked
+  essentials.kickall:
+    description: Allows access to the /kickall command
+  essentials.kickall.exempt:
+    description: Prevents the player from being kicked by /kickall
+  essentials.kit:
+    description: Allows access to the /kit command
+  essentials.kit.exemptdelay:
+    default: false
+    description: Exempts you from the kit delay feature, this affects signs as well as command.
+  essentials.kit.others:
+    description: Allows access to the /kit command for other players
+  essentials.kits.*:
+    description: Allows access to all kits
+  essentials.kits.<kit-name>:
+    description: Allows access to a specific kit
+  essentials.kittycannon:
+    description: Allows access to the /kittycannon command
+  essentials.beezooka:
+    description: Allows access to the /beezooka command
+  essentials.lightning:
+    description: Allows access to the /lightning command
+  essentials.lightning.others:
+    description: Allows access to the /lightning command for other players
+  essentials.list:
+    description: Allows access to the /list command
+  essentials.list.hidden:
+    description: Allow access to view hidden players in the /list command
+  essentials.mail:
+    description: Allows access to the /mail command
+  essentials.mail.send:
+    description: Allows access to send mail with the /mail command
+  essentials.mail.sendall:
+    description: Allows access to send mail to all players with the /mail command
+  essentials.mail.sendtemp:
+    description: Allows access to send temporary mail with the /mail command
+  essentials.mail.clear.others:
+    description: Allows access to clear other players mail with the /mail command
+  essentials.mail.clearall:
+    description: Allows access to clear all mail with the /mail command
+  essentials.me:
+    description: Allows access to the /me command
+  essentials.more:
+    description: Allows access to the /more command
+  essentials.motd:
+    description: Allows access to the /motd command
+  essentials.msg:
+    description: Allows access to the /msg command
+  essentials.msg.format:
+    description: Allows access to the /msg command with formatting text
+  essentials.msg.magic:
+    description: Allows access to the /msg command with magic text
+  essentials.msg.color:
+    description: Allows access to the /msg command with color text
+  essentials.msg.rgb:
+    description: Allows access to the /msg command with RGB text
+  essentials.msg.url:
+    description: Allows access to send URLs in the /msg command
+  essentials.msg.multiple:
+    description: Allows access to send messages to multiple players with the /msg command
+  essentials.msgtoggle:
+    description: Allows access to the /msgtoggle command
+  essentials.msgtoggle.others:
+    description: Allows access to the /msgtoggle command for other players
+  essentials.msgtoggle.bypass:
+    description: Allows the bearer to bypass the msgtoggle setting for other players
+  essentials.mute:
+    description: Allows access to the /mute command
+  essentials.mute.notify:
+    description: Allows the bearer to be notified when other players are muted
+  essentials.mute.exempt:
+    default: false
+    description: Prevent a specified group or player from being muted
+  essentials.mute.unlimited:
+    description: Allows the bearer to override the max-mute-time setting
+  essentials.mute.offline:
+    description: Allows access to mute offline players
+  essentials.near:
+    description: Allows access to the /near command
+  essentials.near.maxexempt:
+    description: Allows the bearer to bypass the radius limit for the /near command
+  essentials.near.others:
+    description: Allows access to the /near command for other players
+  essentials.near.exclude:
+    default: false
+    description: If the player should be excluded from near lookups.
+  essentials.nick:
+    description: Allows access to the /nick command
+  essentials.nick.color:
+    description: Allows access to the /nick command with color text
+  essentials.nick.format:
+    description: Allows access to the /nick command with formatting text
+  essentials.nick.magic:
+    description: Allows access to the /nick command with magic text
+  essentials.nick.rgb:
+    description: Allows access to the /nick command with RGB text
+  essentials.nick.others:
+    description: Allows access to the /nick command for other players
+  essentials.nick.blacklist.bypass:
+    description: Allows the bearer to bypass the nickname blacklist
+  essentials.nick.changecolors:
+    description: Allows the bearer to change **only** the color of their nickname
+  essentials.nick.allowunsafe:
+    default: false
+    description: If a player has this, they can set their username to any value. Use with caution, as this has the potential to break userdata files.
+  essentials.nick.hideprefix:
+    default: false
+    description: Players with this permission will not have the nickname prefix applied to them
+  essentials.nocommandcost.all:
+    description: Allows the bearer to use all commands without cost
+  essentials.nocommandcost.<command>:
+    description: Allows the bearer to use the specified command without cost
+  essentials.nuke:
+    description: Allows access to the /nuke command
+  essentials.oversizedstacks:
+    description: Allows the bearer to spawn oversized stacks
+  essentials.pay:
+    description: Allows access to the /pay command
+  essentials.pay.multiple:
+    description: Allows access to pay multiple players with the /pay command
+  essentials.pay.offline:
+    description: Allows access to pay offline players with the /pay command
+  essentials.payconfirmtoggle:
+    description: Allows access to the /payconfirmtoggle command
+  essentials.paytoggle:
+    description: Allows access to the /paytoggle command
+  essentials.ping:
+    description: Allows access to the /ping command
+  essentials.potion:
+    description: Allows access to the /potion command
+  essentials.potion.<potion-type>:
+    description: Allows access to the /potion command for a specific potion type
+  essentials.potion.apply:
+    description: Allows access to the /potion apply command
+  essentials.powertool:
+    description: Allows access to the /powertool command
+  essentials.powertool.append:
+    description: Allows access to add multiple commands to a powertool
+  essentials.powertoollist:
+    description: Allows access to the /powertoollist command
+  essentials.powertooltoggle:
+    description: Allows access to the /powertooltoggle command
+  essentials.ptime:
+    description: Allows access to the /ptime command
+  essentials.ptime.others:
+    description: Allows access to the /ptime command for other players
+  essentials.pvpdelay.exempt:
+    description: Allows the bearer to bypass the pvp delay setting
+  essentials.pweather:
+    description: Allows access to the /pweather command
+  essentials.pweather.others:
+    description: Allows access to the /pweather command for other players
+  essentials.rtoggle:
+    description: Allows access to the /rtoggle command
+  essentials.realname:
+    description: Allows access to the /realname command
+  essentials.recipe:
+    description: Allows access to the /recipe command
+  essentials.remove:
+    description: Allows access to the /remove command
+  essentials.repair:
+    description: Allows access to the /repair command
+  essentials.repair.all:
+    description: Allows access to the /repair all command
+  essentials.repair.armor:
+    description: Allows access to the /repair armor command
+  essentials.repair.enchanted:
+    description: Allows access to use the /repair command on enchanted items
+  essentials.rest:
+    description: Allows access to the /rest command
+  essentials.rest.others:
+    description: Allows access to the /rest command for other players
+  essentials.rules:
+    description: Allows access to the /rules command
+  essentials.seen:
+    description: Allows access to the /seen command
+  essentials.seen.banreason:
+    description: Allows access to the /seen command with ban reason
+  essentials.seen.ip:
+    description: Allows access to the /seen command with IP address
+  essentials.seen.location:
+    description: Allows access to the /seen command with location
+  essentials.seen.uuid:
+    description: Allows access to the /seen command with UUID
+  essentials.seen.firstlogin:
+    description: Allows access to the /seen command with first login time
+  essentials.seen.whitelist:
+    description: Allows access to the /seen command with whitelist status
+  essentials.seen.ipsearch:
+    description: Allows access to use IP addresses with the /seen command
+  essentials.seen.alts:
+    description: Allows access to the /seen command with alts
+  essentials.seen.extra:
+    description: Allows access to the /seen command with extra information
+    children:
+      essentials.seen.ip: true
+      essentials.seen.location: true
+      essentials.seen.uuid: true
+      essentials.seen.firstlogin: true
+      essentials.seen.whitelist: true
+  essentials.sell:
+    description: Allows access to the /sell command
+  essentials.sell.bulk:
+    description: Allows access to bulk sell items with the /sell command
+  essentials.sell.hand:
+    description: Allows access to sell the item in hand with the /sell command
+  essentials.sethome:
+    description: Allows access to the /sethome command
+  essentials.renamehome:
+    description: Allows access to the /renamehome command
+  essentials.renamehome.others:
+    description: Allows access to rename other players homes with the /renamehome command
+  essentials.sethome.bed:
+    default: false
+    description: Allows the player to right click a bed during daytime to update their 'bed' home.
+  essentials.sethome.multiple:
+    description: Allows access to set multiple homes with the /sethome command
+  essentials.sethome.multiple.<set name>:
+    description: Raises the limit of homes to a specific number defined in the config
+  essentials.sethome.multiple.unlimited:
+    description: Allows access to set unlimited homes with the /sethome command
+  essentials.sethome.others:
+    description: Allows access to set other players homes with the /sethome command
+  essentials.delhome:
+    description: Allows access to the /delhome command
+  essentials.delhome.others:
+    description: Allows access to delete other players homes with the /delhome command
+  essentials.setjail:
+    description: Allows access to the /setjail command
+  essentials.setwarp:
+    description: Allows access to the /setwarp command
+  essentials.setworth:
+    description: Allows access to the /setworth command
+  essentials.showkit:
+    description: Allows access to the /showkit command
+  essentials.signs.enchant.allowunsafe:
+    description: Allows the bearer to create and use unsafe enchantment signs
+  essentials.signs.protection.override:
+    description: Allows the bearer to break signs created by other players
+  essentials.signs.trade.override:
+    description: Allows the bearer to break trade signs created by other players
+  essentials.signs.trade.override.collect:
+    description: Allows the bearer to collect items from trade signs created by other players
+  essentials.silentjoin:
+    default: false
+    description: Allow to join silently
+  essentials.silentjoin.vanish:
+    default: false
+    description: Allow to join silently, and get put in vanish mode
+  essentials.silentquit:
+    default: false
+    description: Suppress leave/quit messages for users with this permission.
+  essentials.skull:
+    description: Allows access to the /skull command
+  essentials.skull.modify:
+    description: Allows access to modify other players skulls with the /skull command
+  essentials.skull.others:
+    description: Allows access to creating other players skulls with the /skull command
+  essentials.skull.spawn:
+    description: Allows access to spawn a skull with the /skull command
+  essentials.sleepingignored:
+    description: Allows the bearer to not be required to sleep to skip the night
+  essentials.socialspy:
+    description: Allows access to the /socialspy command
+  essentials.socialspy.others:
+    description: Allows access to the /socialspy command for other players
+  essentials.spawner:
+    description: Allows access to the /spawner command
+  essentials.spawner.delay:
+    description: Allows access to set the delay of a spawner with the /spawner command
+  essentials.spawner.*:
+    description: Allows access to set the type of a spawner with the /spawner command to all types
+  essentials.spawner.<mob-type>:
+    description: Allows access to set the type of a spawner with the /spawner command to a specific type
+  essentials.spawnerconvert.*:
+    description: Allows the bearer to place spawners of any type
+  essentials.spawnerconvert.<mob-type>:
+    description: Allows the bearer to place spawners of a specific type
+  essentials.spawnmob:
+    description: Allows access to the /spawnmob command
+  essentials.spawnmob.stack:
+    description: Allows access to spawn mobs in stacks with the /spawnmob command
+  essentials.spawnmob.*:
+    description: Allows access to spawn all mobs with the /spawnmob command
+  essentials.spawnmob.<mob-type>:
+    description: Allows access to spawn a specific mob with the /spawnmob command
+  essentials.speed:
+    description: Allows access to the /speed command
+  essentials.speed.others:
+    description: Allows access to the /speed command for other players
+  essentials.speed.fly:
+    description: Allows access to the /speed command for fly speed
+  essentials.speed.walk:
+    description: Allows access to the /speed command for walk speed
+  essentials.speed.bypass:
+    description: Allows the bearer to bypass the speed limit set in the config
+  essentials.sudo:
+    description: Allows access to the /sudo command
+  essentials.sudo.exempt:
+    default: false
+    description: Prevents the player from being sudo'ed by another user
+  essentials.sudo.multiple:
+    description: Allows access to the /sudo command for multiple players
+  essentials.teleport.timer.bypass:
+    description: Allows the bearer to bypass the teleport delay
+  essentials.teleport.timer.move:
+    description: Allows the bearer to move while waiting for a teleport
+  essentials.tempban:
+    description: Allows access to the /tempban command
+  essentials.tempban.exempt:
+    default: false
+    description: Prevent a specified group or player from being tempbanned
+  essentials.tempban.offline:
+    description: Allows access to tempban offline players
+  essentials.tempban.unlimited:
+    description: Allows the bearer to override the max-tempban-time setting
+  essentials.tempbanip:
+    description: Allows access to the /tempbanip command
+  essentials.thunder:
+    description: Allows access to the /thunder command
+  essentials.time:
+    description: Allows access to the /time command
+  essentials.time.set:
+    description: Allows access to set the time with the /time command
+  essentials.time.world.all:
+    description: Allows access to set the time for all worlds with the /time command
+  essentials.togglejail:
+    description: Allows access to the /togglejail command
+  essentials.togglejail.offline:
+    description: Allows access to the /togglejail command for offline players
+  essentials.top:
+    description: Allows access to the /top command
+  essentials.tp:
+    description: Allows access to the /tp command
+  essentials.tpauto:
+    description: Allows access to the /tpauto command
+  essentials.tpauto.others:
+    description: Allows access to the /tpauto command for other players
+  essentials.tp.others:
+    description: Allows access to teleporting to other users with the /tp command
+  essentials.tp.position:
+    description: Allows access to teleporting to a position with the /tp command
+  essentials.tpoffline:
+    description: Allows access to the /tpoffline command
+  essentials.tpa:
+    description: Allows access to the /tpa command
+  essentials.tpaall:
+    description: Allows access to the /tpaall command
+  essentials.tpacancel:
+    description: Allows access to the /tpaccept command
+  essentials.tpaccept:
+    description: Allows access to the /tpaccept command
+  essentials.tpahere:
+    description: Allows access to the /tpahere command
+  essentials.tpall:
+    description: Allows access to the /tpall command
+  essentials.tpdeny:
+    description: Allows access to the /tpdeny command
+  essentials.tphere:
+    description: Allows access to the /tphere command
+  essentials.tpo:
+    description: Allows access to the /tpo command
+  essentials.tpohere:
+    description: Allows access to the /tpohere command
+  essentials.tppos:
+    description: Allows access to the /tppos command
+  essentials.tptoggle:
+    description: Allows access to the /tptoggle command
+  essentials.tptoggle.others:
+    description: Allows access to the /tptoggle command for other players
+  essentials.tpr:
+    description: Allows access to the /tpr command
+  essentials.settpr:
+    description: Allows access to the /settpr command
+  essentials.tree:
+    description: Allows access to the /tree command
+  essentials.unlimited:
+    description: Allows access to the /unlimited command
+  essentials.unlimited.item-all:
+    description: Allows access to the /unlimited command for all items when permission-based-item-spawn is enabled
+  essentials.unlimited.item-<item-name>:
+    description: Allows access to the /unlimited command for a specific item when permission-based-item-spawn is enabled
+  essentials.unlimited.item-bucket:
+    description: Allows access to the /unlimited command for buckets of water and lava
+  essentials.unlimited.others:
+    description: Allows access to the /unlimited command for other players
+  essentials.vanish:
+    description: Allows access to the /vanish command
+  essentials.vanish.others:
+    description: Allows access to the /vanish command for other players
+  essentials.vanish.pvp:
+    description: Allows the bearer to attack players while in vanish mode
+  essentials.vanish.see:
+    description: Allows the bearer to see other players in vanish mode
+  essentials.vanish.effect:
+    description: Applies invisibility effects to the player when they are in vanish mode
+  essentials.vanish.interact:
+    description: Allows the bearer to interact with players in vanish mode
+  essentials.vanish.pickup:
+    description: Allows the bearer to pick up items while in vanish mode
+    default: false
+  essentials.version:
+    description: Allows access to the /version command
+  essentials.warp:
+    description: Allows access to the /warp command
+  essentials.warp.overwrite.*:
+    description: Allows the bearer to overwrite all warps
+  essentials.warp.overwrite.<warp-name>:
+    description: Allows the bearer to overwrite a specific warp
+  essentials.warp.list:
+    description: Allows access to the /warp list command
+  essentials.warp.others:
+    description: Allows access to the /warp command for other players
+  essentials.warpinfo:
+    description: Allows access to the /warpinfo command
+  essentials.weather:
+    description: Allows access to the /weather command
+  essentials.whois:
+    description: Allows access to the /whois command
+  essentials.whois.ip:
+    description: Allows access to the /whois command with IP address
+  essentials.workbench:
+    description: Allows access to the /workbench command
+  essentials.anvil:
+    description: Allows access to the /anvil command
+  essentials.cartographytable:
+    description: Allows access to the /cartographytable command
+  essentials.grindstone:
+    description: Allows access to the /grindstone command
+  essentials.loom:
+    description: Allows access to the /loom command
+  essentials.stonecutter:
+    description: Allows access to the /stonecutter command
+  essentials.smithingtable:
+    description: Allows access to the /smithingtable command
+  essentials.world:
+    description: Allows access to the /world command
+  essentials.worlds.<world-name>:
+    description: Allows access to the specific world with various commands
+  essentials.worth:
+    description: Allows access to the /worth command
+  essentials.signs.break.balance:
+    description: Allows the bearer to break balance signs
+  essentials.signs.break.buy:
+    description: Allows the bearer to break buy signs
+  essentials.signs.break.disposal:
+    description: Allows the bearer to break disposal signs
+  essentials.signs.break.enchant:
+    description: Allows the bearer to break enchant signs
+  essentials.signs.break.free:
+    description: Allows the bearer to break free signs
+  essentials.signs.break.gamemode:
+    description: Allows the bearer to break gamemode signs
+  essentials.signs.break.heal:
+    description: Allows the bearer to break heal signs
+  essentials.signs.break.info:
+    description: Allows the bearer to break info signs
+  essentials.signs.break.kit:
+    description: Allows the bearer to break kit signs
+  essentials.signs.break.mail:
+    description: Allows the bearer to break mail signs
+  essentials.signs.break.protection:
+    description: Allows the bearer to break protection signs
+  essentials.signs.break.repair:
+    description: Allows the bearer to break repair signs
+  essentials.signs.break.sell:
+    description: Allows the bearer to break sell signs
+  essentials.signs.break.spawnmob:
+    description: Allows the bearer to break spawnmob signs
+  essentials.signs.break.trade:
+    description: Allows the bearer to break trade signs
+  essentials.signs.break.time:
+    description: Allows the bearer to break time signs
+  essentials.signs.break.warp:
+    description: Allows the bearer to break warp signs
+  essentials.signs.break.weather:
+    description: Allows the bearer to break weather signs
+  essentials.signs.color:
+    description: Allows the bearer to create and use color signs
+  essentials.signs.format:
+    description: Allows the bearer to create and use format signs
+  essentials.signs.magic:
+    description: Allows the bearer to create and use magic signs
+  essentials.signs.rgb:
+    description: Allows the bearer to create and use RGB signs
+  essentials.signs.use.balance:
+    description: Allows the bearer to use balance signs
+  essentials.signs.use.buy:
+    description: Allows the bearer to use buy signs
+  essentials.signs.use.disposal:
+    description: Allows the bearer to use disposal signs
+  essentials.signs.use.enchant:
+    description: Allows the bearer to use enchant signs
+  essentials.signs.use.free:
+    description: Allows the bearer to use free signs
+  essentials.signs.use.gamemode:
+    description: Allows the bearer to use gamemode signs
+  essentials.signs.use.heal:
+    description: Allows the bearer to use heal signs
+  essentials.signs.use.info:
+    description: Allows the bearer to use info signs
+  essentials.signs.use.kit:
+    description: Allows the bearer to use kit signs
+  essentials.signs.use.mail:
+    description: Allows the bearer to use mail signs
+  essentials.signs.use.protection:
+    description: Allows the bearer to use protection signs
+  essentials.signs.use.repair:
+    description: Allows the bearer to use repair signs
+  essentials.signs.use.sell:
+    description: Allows the bearer to use sell signs
+  essentials.signs.use.spawnmob:
+    description: Allows the bearer to use spawnmob signs
+  essentials.signs.use.trade:
+    description: Allows the bearer to use trade signs
+  essentials.signs.use.time:
+    description: Allows the bearer to use time signs
+  essentials.signs.use.warp:
+    description: Allows the bearer to use warp signs
+  essentials.signs.use.weather:
+    description: Allows the bearer to use weather signs
+  essentials.signs.create.balance:
+    description: Allows the bearer to create balance signs
+  essentials.signs.create.buy:
+    description: Allows the bearer to create buy signs
+  essentials.signs.create.disposal:
+    description: Allows the bearer to create disposal signs
+  essentials.signs.create.enchant:
+    description: Allows the bearer to create enchant signs
+  essentials.signs.create.free:
+    description: Allows the bearer to create free signs
+  essentials.signs.create.gamemode:
+    description: Allows the bearer to create gamemode signs
+  essentials.signs.create.heal:
+    description: Allows the bearer to create heal signs
+  essentials.signs.create.info:
+    description: Allows the bearer to create info signs
+  essentials.signs.create.kit:
+    description: Allows the bearer to create kit signs
+  essentials.signs.create.mail:
+    description: Allows the bearer to create mail signs
+  essentials.signs.create.protection:
+    description: Allows the bearer to create protection signs
+  essentials.signs.create.repair:
+    description: Allows the bearer to create repair signs
+  essentials.signs.create.sell:
+    description: Allows the bearer to create sell signs
+  essentials.signs.create.spawnmob:
+    description: Allows the bearer to create spawnmob signs
+  essentials.signs.create.trade:
+    description: Allows the bearer to create trade signs
+  essentials.signs.create.time:
+    description: Allows the bearer to create time signs
+  essentials.signs.create.warp:
+    description: Allows the bearer to create warp signs
+  essentials.signs.create.weather:
+    description: Allows the bearer to create weather signs
+  essentials.editsign:
+    description: Allows access to the /editsign command
+  essentials.editsign.unlimited:
+    description: Allows the bearer to exceed the 15 character limit on signs
+  essentials.editsign.color:
+    description: Allows the bearer to use color codes on signs
+  essentials.editsign.format:
+    description: Allows the bearer to use formatting codes on signs
+  essentials.editsign.magic:
+    description: Allows the bearer to use magic codes on signs
+  essentials.editsign.rgb:
+    description: Allows the bearer to use RGB codes on signs
+  essentials.editsign.waxed.exempt:
+    description: Allows the bearer to edit waxed signs
+  essentials.keepinv:
+    default: false
+    description: Controls whether players keep their inventory on death.
+  essentials.playtime:
+    description: Allows access to the /playtime command
+  essentials.playtime.others:
+    description: Allows access to the /playtime command for other players
+  # These permissions can't be assigned from player-commands for compatibility reasons
+  essentials.teleport.cooldown.bypass.tpa:
+    default: true
+    description: If the player does not have this permission, /tpa will have cooldown even with the parent bypass perm
+  essentials.teleport.cooldown.bypass.back:
+    default: true
+    description: If the player does not have this permission, /back will have cooldown even with the parent bypass perm
+  essentials.exempt:
+    default: false
+    description: Parent permission to be exempt from many moderator actions
+    children:
+      essentials.invsee.preventmodify: true
+      essentials.ban.exempt: true
+      essentials.kick.exempt: true
+      essentials.mute.exempt: true
+      essentials.chat.ignoreexempt: true
+      essentials.sudo.exempt: true
+      essentials.tempban.exempt: true
+      essentials.exempt.protect: true
+      essentials.editsign.waxed.exempt: true
+
+
+FILE EssentialsXSpawn.jar SHA256 dd5377c4c921b9b67814209f4f6646ffbb959729003e721ec5e63c47c7c010b8
+DESCRIPTOR plugin.yml
+name: EssentialsSpawn
+main: com.earth2me.essentials.spawn.EssentialsSpawn
+# Note to developers: This next line cannot change, or the automatic versioning system will break.
+version: 2.22.0
+website: https://essentialsx.net/
+description: Provides spawn control commands, utilizing Essentials.
+authors: [Zenexer, ementalo, Aelux, Brettflan, KimKandor, snowleo, ceulemans, Xeology, KHobbits, SupaHam, mdcfe, DoNotSpamPls, JRoy]
+depend: [Essentials]
+api-version: 1.13
+commands:
+  setspawn:
+    description: Sets the spawn point to your current position.
+    usage: /<command> <group>
+    aliases: [esetspawn]
+  spawn:
+    description: Teleports to the spawn point.
+    usage: /<command> [player]
+    aliases: [espawn]
+permissions:
+  essentials.spawn:
+    description: Allows access to the /spawn command
+  essentials.spawn.others:
+    description: Allows access to the /spawn command for other players
+  essentials.setspawn:
+    description: Allows access to the /setspawn command
+  essentials.spawn-on-join.exempt:
+    default: false
+    description: Bypass spawn teleportation on join when spawn-on-join is true
+
+
+FILE GriefPrevention.jar SHA256 45e9907c61222e559ed2e099ffee0ede706a21243a31d7db549baf678708fdf0
+DESCRIPTOR plugin.yml
+name: GriefPrevention
+main: me.ryanhamshire.GriefPrevention.GriefPrevention
+softdepend: [Vault, Multiverse-Core, My_Worlds, MystCraft, Transporter, WorldGuard, WorldEdit, RoyalCommands, MultiWorld, Denizen, CommandHelper, Iris]
+dev-url: https://dev.bukkit.org/projects/grief-prevention
+version: '16.18.7'
+api-version: '1.21.10'
+commands:
+    abandonclaim:
+      description: Deletes a claim.
+      usage: /<command>
+      aliases: [unclaim, declaim, removeclaim, disclaim]
+      permission: griefprevention.claims
+    abandontoplevelclaim:
+      description: Deletes a claim and all its subdivisions.
+      usage: /<command>
+      permission: griefprevention.claims
+    abandonallclaims:
+      description: Deletes ALL your claims.
+      usage: /<command>
+      permission: griefprevention.abandonallclaims
+    trust:
+      description: Grants a player full access to your claim(s).
+      usage: /<command> <player>  Grants a player permission to build.  See also /untrust, /containertrust, /accesstrust, and /permissiontrust.
+      aliases: tr
+      permission: griefprevention.claims
+    untrust:
+      description: Revokes a player's access to your claim(s).
+      usage: /<command> <player>
+      aliases: ut
+      permission: griefprevention.claims
+    containertrust:
+      description: Grants a player access to your claim's containers, crops, animals, bed, buttons, and levers.
+      usage: /<command> <player>.  Grants a player access to your inventory, crops, animals, bed, and buttons/levers.
+      aliases: ct
+      permission: griefprevention.claims
+    accesstrust:
+      description: Grants a player entry to your claim(s) and use of your bed, buttons, and levers.
+      usage: /<command> <player>.  Grants a player access to your bed, buttons, and levers.
+      aliases: at
+      permission: griefprevention.claims
+    permissiontrust:
+      description: Grants a player permission to grant his level of permission to others.
+      usage: /<command> <player>.  Permits a player to share his permission level with others.
+      aliases: pt
+      permission: griefprevention.claims
+    subdivideclaims:
+      description: Switches the shovel tool to subdivision mode, used to subdivide your claims.
+      usage: /<command>
+      aliases: [sc, subdivideclaim]
+      permission: griefprevention.claims
+    restrictsubclaim:
+      description: Restricts a subclaim, so that it inherits no permissions from the parent claim
+      usage: /<command>
+      aliases: rsc
+      permission: griefprevention.claims
+    adjustbonusclaimblocks:
+      description: Adds or subtracts bonus claim blocks for a player.
+      usage: /<command> <player> <amount>
+      permission: griefprevention.adjustclaimblocks
+      aliases: acb
+    adjustbonusclaimblocksall:
+      description: Adds or subtracts bonus claim blocks for all online players.
+      usage: /<command> <amount>
+      permission: griefprevention.adjustclaimblocks
+      aliases: acball
+    setaccruedclaimblocks:
+      description: Updates a player's accrued claim block total.
+      usage: /<command> <player> <amount>
+      permission: griefprevention.adjustclaimblocks
+      aliases: scb
+    deleteclaim:
+      description: Deletes the claim you're standing in, even if it's not your claim.
+      usage: /<command>
+      permission: griefprevention.deleteclaims
+    deleteallclaims:
+      description: Deletes all of another player's claims.
+      usage: /<command> <player>
+      permission: griefprevention.deleteclaims
+    deleteclaimsinworld:
+      description: Deletes all the claims in a world.  Only usable at the server console.
+      usage: /<command> <world>
+      aliases: [deleteallclaimsinworld, clearclaimsinworld, clearallclaimsinworld]
+      permission: griefprevention.deleteclaimsinworld
+    deleteuserclaimsinworld:
+      description: Deletes all the non-admin claims in a world.  Only usable at the server console.
+      usage: /<command> <world>
+      aliases: [deletealluserclaimsinworld, clearuserclaimsinworld, clearalluserclaimsinworld]
+      permission: griefprevention.deleteclaimsinworld
+    adminclaims:
+      description: Switches the shovel tool to administrative claims mode.
+      usage: /<command>
+      permission: griefprevention.adminclaims
+      aliases: ac
+    restorenature:
+      description: Switches the shovel tool to restoration mode.
+      usage: /<command>
+      permission: griefprevention.restorenature
+      aliases: rn
+    restorenatureaggressive:
+      description: Switches the shovel tool to aggressive restoration mode.
+      usage: /<command>
+      permission: griefprevention.restorenatureaggressive
+      aliases: rna
+    restorenaturefill:
+      description: Switches the shovel tool to fill mode.
+      usage: /<command> <radius>
+      permission: griefprevention.restorenatureaggressive
+      aliases: rnf
+    basicclaims:
+      description: Switches the shovel tool back to basic claims mode.
+      usage: /<command>
+      aliases: bc
+      permission: griefprevention.claims
+    extendclaim:
+      description: Resizes the land claim you're standing in by pushing or pulling its boundary in the direction you're facing.
+      usage: /<command> <numberOfBlocks>
+      aliases: [expandclaim, resizeclaim]
+      permission: griefprevention.claims
+    claim:
+      description: Creates a land claim centered at your current location with the given radius.
+      usage: /<command> <radius>
+      aliases: [createclaim, makeclaim, newclaim]
+      permission: griefprevention.claims
+    buyclaimblocks:
+      description: Purchases additional claim blocks with server money.  Doesn't work on servers without a Vault-compatible economy plugin.
+      usage: /<command> <numberOfBlocks>
+      aliases: buyclaim
+      permission: griefprevention.buysellclaimblocks
+    sellclaimblocks:
+      description: Sells your claim blocks for server money.  Doesn't work on servers without a Vault-compatible economy plugin.
+      usage: /<command> <numberOfBlocks>
+      aliases: sellclaim
+      permission: griefprevention.buysellclaimblocks
+    trapped:
+      description: Ejects you to nearby unclaimed land.  Has a substantial cooldown period.
+      usage: /<command>
+      permission: griefprevention.trapped
+    trustlist:
+      description: Lists permissions for the claim you're standing in.
+      usage: /<command>
+      permission: griefprevention.claims
+    siege:
+      description: Initiates a siege versus another player.
+      usage: /<command> <playerName>
+      permission: griefprevention.siege
+    ignoreclaims:
+      description: Toggles ignore claims mode.
+      usage: /<command>
+      permission: griefprevention.ignoreclaims
+      aliases: ic
+    deletealladminclaims:
+      description: Deletes all administrative claims.
+      usage: /<command>
+      permission: griefprevention.adminclaims
+    adminclaimslist:
+      description: Lists all administrative claims.
+      usage: /<command>
+      permission: griefprevention.adminclaims
+    transferclaim:
+      description: Converts an administrative claim to a private claim.
+      usage: /<command> <player>
+      aliases: giveclaim
+      permission: griefprevention.transferclaim
+    unlockdrops:
+      description: Allows other players to pick up the items you dropped when you died.
+      usage: /<command>
+      permission: griefprevention.unlockdrops
+    claimslist:
+      description: Lists information about a player's claim blocks and claims.
+      usage: /<command> or /<command> <player>
+      aliases: [claimlist, listclaims]
+      permission: griefprevention.claims
+    claimexplosions:
+      description: Toggles whether explosives may be used in a specific land claim.
+      usage: /<command>
+      permission: griefprevention.claims
+      aliases: claimexplosion
+    softmute:
+      description: Toggles whether a player's messages will only reach other soft-muted players.
+      usage: /<command> <player>
+      permission: griefprevention.softmute
+    gpreload:
+      description: Reloads Grief Prevention's configuration settings.  Does NOT totally reload the entire plugin.
+      usage: /<command>
+      permission: griefprevention.reload
+    givepet:
+      description: Allows a player to give away a pet he or she tamed.
+      usage: /<command> <player>
+      permission: griefprevention.givepet
+    gpblockinfo:
+      description: Allows an administrator to get technical information about blocks in the world and items in hand.
+      usage: /<command>
+      permission: griefprevention.gpblockinfo
+    ignoreplayer:
+      description: Ignores another player's chat messages.
+      usage: /<command> <player name>
+      aliases: [ignore]
+      permission: griefprevention.ignore
+    unignoreplayer:
+      description: Unignores another player's chat messages.
+      usage: /<command> <player name>
+      aliases: [unignore]
+      permission: griefprevention.ignore
+    ignoredplayerlist:
+      description: Lists the players you're ignoring in chat.
+      usage: /<command>
+      aliases: [ignores, ignored, ignorelist, ignoredlist, listignores, listignored, ignoring]
+      permission: griefprevention.ignore
+    separate:
+      description: Forces two players to ignore each other in chat.
+      usage: /<command> <player1> <player2>
+      permission: griefprevention.separate
+    unseparate:
+      description: Reverses /separate.
+      usage: /<command> <player1> <player2>
+      permission: griefprevention.separate
+    claimbook:
+      description: Gives a player a manual about claiming land.
+      usage: /<command> <player>
+      permission: griefprevention.claimbook
+permissions:
+    griefprevention.createclaims:
+        description: Grants permission to create claims.
+        default: true
+    griefprevention.admin.*:
+        description: Grants all administrative functionality.
+        children:
+            griefprevention.restorenature: true
+            griefprevention.restorenatureaggressive: true
+            griefprevention.ignoreclaims: true
+            griefprevention.adminclaims: true
+            griefprevention.adjustclaimblocks: true
+            griefprevention.deleteclaims: true
+            griefprevention.spam: true
+            griefprevention.lava: true
+            griefprevention.eavesdrop: true
+            griefprevention.deathblow: true
+            griefprevention.softmute: true
+            griefprevention.reload: true
+            griefprevention.visualizenearbyclaims: true
+            griefprevention.overrideclaimcountlimit: true
+            griefprevention.transferclaim: true
+            griefprevention.claimslistother: true
+            griefprevention.siegeimmune: true
+            griefprevention.separate: true
+            griefprevention.eavesdropsigns: true
+            griefprevention.claimbook: true
+            griefprevention.notignorable: true
+            griefprevention.seeinactivity: true
+            griefprevention.eavesdropimmune: true
+            griefprevention.deleteclaimsinworld: true
+            griefprevention.siegeteleport: true
+            griefprevention.unlockothersdrops: true
+            griefprevention.seeclaimsize: true
+    griefprevention.siegeimmune:
+        description: Makes a player immune to /siege.
+        default: op
+    griefprevention.givepet:
+        description: Grants permission to use /givepet.
+        default: true
+    griefprevention.siege:
+        description: Grants permission to use /siege.
+        default: true
+    griefprevention.unlockdrops:
+        description: Grants permission to use /unlockdrops.
+        default: true
+    griefprevention.unlockothersdrops:
+        description: Grants permission to use /unlockdrops for other players.
+        default: op
+    griefprevention.trapped:
+        description: Grants permission to use /trapped.
+        default: true
+    griefprevention.claimslistother:
+        description: Grants permission to use /claimslist to get another player's information.
+        default: op
+    griefprevention.restorenature:
+        description: Grants permission to use /restorenature.
+        default: op
+    griefprevention.transferclaim:
+        description: Grants permission to use /transferclaim.
+        default: op
+    griefprevention.ignoreclaims:
+        description: Grants permission to use /ignoreclaims.
+        default: op
+    griefprevention.adminclaims:
+        description: Grants permission to create administrative claims.
+        default: op
+    griefprevention.deleteclaims:
+        description: Grants permission to delete other players' claims.
+        default: op
+    griefprevention.adjustclaimblocks:
+        description: Grants permission to add or remove bonus blocks from a player's account.
+        default: op
+    griefprevention.spam:
+        description: Grants permission to log in, send messages, and send commands rapidly.
+        default: op
+    griefprevention.lava:
+        description: Grants permission to place lava near the surface and outside of claims.
+        default: op
+    griefprevention.eavesdrop:
+        description: Allows a player to see whispered chat messages (/tell) and softmuted messages.
+        default: op
+    griefprevention.eavesdropsigns:
+        description: Allows a player to see sign placements as chat messages.
+        default: op
+    griefprevention.restorenatureaggressive:
+        description: Grants access to /restorenatureaggressive and /restorenaturefill.
+        default: op
+    griefprevention.reload:
+        description: Grants access to /gpreload.
+        default: op
+    griefprevention.softmute:
+        description: Grants access to /softmute.
+        default: op
+    griefprevention.claims:
+        description: Grants access to claim-related slash commands.
+        default: true
+    griefprevention.abandonallclaims:
+        description: Grants access to /abandonallclaims.
+        default: true
+    griefprevention.buysellclaimblocks:
+        description: Grants access to claim block buy/sell commands.
+        default: true
+    griefprevention.visualizenearbyclaims:
+        description: Allows a player to see all nearby claims at once.
+        default: op
+    griefprevention.seeclaimsize:
+        description: Allows a player to see claim size for other players claims when right clicking with investigation tool
+        default: op
+    griefprevention.gpblockinfo:
+        description: Grants access to /gpblockinfo.
+        default: op
+    griefprevention.overrideclaimcountlimit:
+        description: Allows players to create more claims than the limit specified by the config.
+        default: op
+    griefprevention.separate:
+        description: Grants access to /separate and /unseparate.
+        default: op
+    griefprevention.ignore:
+        description: Grants access to /ignore, /unignore, and /ignorelist
+        default: true
+    griefprevention.claimbook:
+        description: Grants access to /claimbook.
+        default: op
+    griefprevention.notignorable:
+        description: Players with this permission can't be ignored.
+        default: op
+    griefprevention.seeinactivity:
+        description: Players with this permission can see how long a claim owner has been offline.
+        default: op
+    griefprevention.eavesdropimmune:
+        description: Players with this permission can't have their private messages eavesdropped.
+        default: op
+    griefprevention.siegeteleport:
+        description: Players with this permission can teleport into and out of besieged areas.
+        default: op
+    griefprevention.premovementchat:
+        description: Players with this permission can chat before moving.
+        default: false
+
+
+FILE GrimAC.jar SHA256 d33eed30bfd5c6eb54176b197c9c51018ba0916d7b056e0530ab183ac1a3d590
+DESCRIPTOR plugin.yml
+name: GrimAC
+version: 2.3.74-abb95b6
+main: ac.grim.grimac.platform.bukkit.GrimACBukkitLoaderPlugin
+description: "Libre simulation anticheat designed for 26.3 with 1.8–26.3 support,\
+  \ powered by PacketEvents 2.0."
+author: GrimAC
+website: https://grim.ac/
+permissions:
+  grim.alerts:
+    description: Receive alerts for violations
+    default: op
+  grim.alerts.enable-on-join:
+    description: Enable alerts on join
+    default: op
+  grim.brand:
+    description: Show client brands on join
+    default: op
+  grim.brand.enable-on-join:
+    description: Enable showing client brands on join
+    default: op
+  grim.disabled:
+    description: Disable Grim checks while keeping player state tracked
+    default: "false"
+  grim.exempt:
+    description: Exempt from all checks
+    default: "false"
+  grim.list:
+    description: Shows lists of specific data
+    default: "false"
+  grim.nomodifypacket:
+    description: Disable modifying packets
+    default: "false"
+  grim.nosetback:
+    description: Disable setback
+    default: "false"
+  grim.performance:
+    description: Check performance metrics
+    default: op
+  grim.profile:
+    description: Check user profile
+    default: op
+  grim.sendalert:
+    description: Send cheater alert
+    default: op
+  grim.verbose:
+    description: Receive verbose alerts for violations
+    default: op
+  grim.verbose.enable-on-join:
+    description: Enable verbose alerts on join
+    default: "false"
+api-version: "1.13"
+softdepend:
+  - ProtocolLib
+  - ProtocolSupport
+  - Essentials
+  - ViaVersion
+  - ViaBackwards
+  - ViaRewind
+  - Geyser-Spigot
+  - floodgate
+  - FastLogin
+  - PlaceholderAPI
+  - LuckPerms
+  - sqlite-jdbc
+  - mysql-jdbc
+  - postgresql-jdbc
+  - mongodb-driver
+  - jedis
+folia-supported: true
+
+
+FILE ItemJoin.jar SHA256 9573f2de45bcaff210402973fd42817d8ce2835dc400f7d25151dabb75b83a21
+DESCRIPTOR plugin.yml
+main: me.RockinChaos.itemjoin.ItemJoin
+version: 6.1.8-RELEASE-b1148
+name: ItemJoin
+author: RockinChaos
+load: STARTUP
+api-version: 1.13
+nms-version: 26.2-R0.1-SNAPSHOT
+folia-supported: true
+description: Get custom items on join.
+website: https://www.spigotmc.org/resources/itemjoin.12661/
+softdepend: [ AuthMe, ExploitFixer, HeadDatabase, Hyperverse, Multiverse-Core, Multiverse-Inventories, MyWorlds, NickAPI, PerWorldInventory, PerWorldPlugins, PlaceholderAPI, SkinsRestorer, Citizens, ChestSort, TokenEnchant, Vault, WorldGuard, xInventories ]
+
+permissions:
+  itemjoin.*:
+    description: Grants access to all aspects of the plugin, including every permission node.
+    default: false
+    children:
+      itemjoin.all: true
+  itemjoin.all:
+    description: Grants access to all aspects of the plugin, including every permission node.
+    default: false
+    children:
+      itemjoin.use: true
+      itemjoin.dump: true
+      itemjoin.reload: true
+      itemjoin.menu: true
+      itemjoin.updates: true
+      itemjoin.upgrade: true
+      itemjoin.permissions: true
+      itemjoin.query: true
+      itemjoin.list: true
+      itemjoin.purge: true
+      itemjoin.get: true
+      itemjoin.get.others: true
+      itemjoin.remove: true
+      itemjoin.remove.others: true
+      itemjoin.enable: true
+      itemjoin.enable.others: true
+      itemjoin.disable: true
+      itemjoin.disable.others: true
+      itemjoin.bypass.inventorymodify: false
+  itemjoin.use:
+    description: Grants access to basic plugin commands.
+    default: true
+  itemjoin.menu:
+    description: Grants access to the menu command.
+    default: false
+  itemjoin.dump:
+    description: Grants access to the dump command.
+    default: false
+  itemjoin.reload:
+    description: Grants access to the reload command.
+    default: false
+  itemjoin.updates:
+    description: Grants access to the updates command.
+    default: false
+  itemjoin.upgrade:
+    description: Grants access to the upgrade command.
+    default: false
+  itemjoin.permissions:
+    description: Grants access to the permissions command
+    default: true
+  itemjoin.query:
+    description: Grants access to the query command.
+    default: false
+  itemjoin.list:
+    description: Grants access to the list command.
+    default: false
+  itemjoin.purge:
+    description: Grants access to the purge command.
+    default: false
+  itemjoin.get:
+    description: Grants access to the basic get commands.
+    default: false
+  itemjoin.get.others:
+    description: Grants access to all get commands that could affect other players.
+    default: false
+  itemjoin.remove:
+    description: Grants access to the basic remove commands.
+    default: false
+  itemjoin.remove.others:
+    description: Grants access to all remove commands that could affect other players.
+    default: false
+  itemjoin.enable:
+    description: Grants access to the basic enable command.
+    default: false
+  itemjoin.enable.others:
+    description: Grants access to all enable commands that could affect other players individually.
+    default: false
+  itemjoin.disable:
+    description: Grants access to the basic disable command.
+    default: false
+  itemjoin.disable.others:
+    description: Grants access to all disable commands that could affect other players individually.
+    default: false
+  itemjoin.bypass.inventorymodify:
+    description: Players with this permission will bypass any item movement restrictions.
+    default: false
+
+commands:
+  itemjoin:
+    description: Displays a menu giving credit to the author and the help menu command.
+    aliases: [ ij ]
+    usage: |
+      /itemjoin
+      Example: /itemjoin
+
+FILE LPC-3.7.2.jar SHA256 1ed82992c2d315392d4ff2a4eb963e056f262359d4f23655aa4bfa8222b2ec6f
+DESCRIPTOR plugin.yml
+name: LPC
+description: A chat formatting plugin for LuckPerms.
+version: 3.7.2
+main: com.infiniteplugins.lpc.LPC
+author: PM2
+api-version: 1.13
+depend: [LuckPerms]
+softdepend: [PlaceholderAPI]
+commands:
+  lpc:
+    description: LPC commands.
+    usage: "Usage: /lpc <reload|clear|debug>"
+permissions:
+  lpc.reload:
+    description: Allows use of /lpc reload
+    default: op
+  lpc.clearchat:
+    description: Allows use of /lpc clear
+    default: op
+  lpc.debug:
+    description: Allows use of /lpc debug
+    default: op
+  lpc.colorcodes:
+    description: Allows color codes in chat messages
+    default: false
+  lpc.rgbcodes:
+    description: Allows RGB/hex color codes in chat messages
+    default: false
+
+
+FILE LibsDisguises.jar SHA256 9faebc62a34ca57d704b2f7ecbfb12aa1e7a123b2b920590857d593261d6ec5a
+DESCRIPTOR plugin.yml
+name: LibsDisguises
+main: me.libraryaddict.disguise.LibsDisguises
+description: A disguise plugin with various disguises.
+version: 26.9.26
+build-date: 26/09/2026 04:59
+build-number: 1830
+build-hash: e03c49db~1
+author: libraryaddict
+authors: [ Byteflux, Navid K. ]
+softdepend:
+  - packetevents
+  - PlaceholderAPI
+  - Vulcan
+api-version: '1.13'
+file-count: 1297
+folia-supported: true
+commands:
+  libsdisguises:
+    aliases: [ libsdisg, ld ]
+    description: Main command for libsdisguises.
+  disguise:
+    aliases: [ d, dis, disg ]
+    permission: libsdisguises.seecmd.disguise
+    description: Disguise yourself as an entity.
+  disguiseentity:
+    aliases: [ dentity, disentity, disgentity ]
+    permission: libsdisguises.seecmd.disguiseentity
+    description: Disguise an entity as another entity.
+  disguisehelp:
+    aliases: [ dhelp, dishelp, disghelp ]
+    permission: libsdisguises.seecmd.disguisehelp
+    description: Help command for LibsDisguises.
+  disguiseplayer:
+    aliases: [ dplayer, displayer, disgplayer, disguiseuuid, disguuid, duuid ]
+    permission: libsdisguises.seecmd.disguiseplayer
+    description: Disguise another player as an entity.
+  disguiseradius:
+    aliases: [ disradius, dradius, disgradius ]
+    permission: libsdisguises.seecmd.disguiseradius
+    description: Disguise all entities within a radius as an entity.
+  disguiseselector:
+    aliases: [ dselector, disselector, disgselector ]
+    permission: libsdisguises.seecmd.disguiseselector
+    description: Disguise entities via entity selector.
+  undisguise:
+    aliases: [ und, undis, undisg ]
+    permission: libsdisguises.seecmd.undisguise
+    description: Undisguise yourself.
+  undisguiseentity:
+    aliases: [ undisentity, undentity, undisgentity ]
+    permission: libsdisguises.seecmd.undisguiseentity
+    description: Undisguise an entity.
+  undisguiseplayer:
+    aliases: [ undisplayer, undplayer, undisgplayer, undisguiseuuid, unduuid, undisguuid ]
+    permission: libsdisguises.seecmd.undisguiseplayer
+    description: Undisguise a player.
+  undisguiseradius:
+    aliases: [ undisradius, undradius, undisgradius ]
+    permission: libsdisguises.seecmd.undisguiseradius
+    description: Undisguise all entities within a radius.
+  undisguiseselector:
+    aliases: [ undisselector, undselector, undisgselector ]
+    permission: libsdisguises.seecmd.undisguiseselector
+    description: Undisguise all entities in an entity selector.
+  disguiseclone:
+    aliases: [ disguisec, disc, disclone, dclone, clonedisguise, clonedis, cdisguise, cdis, clonedisg, disgclone ]
+    permission: libsdisguises.seecmd.disguiseclone
+    description: Copy a disguise (or entity) and use it later.
+  disguiseviewself:
+    aliases: [ dviewself, dvs, disguisevs, disvs, vsd, viewselfdisguise, viewselfd, selfdisguise, selfdisg, selfd, toggleselfdisguise, seeselfdisguise ]
+    permission: libsdisguises.seecmd.disguiseviewself
+    description: Toggle seeing your own disguise on or off.
+  disguiseviewbar:
+    aliases: [ dviewbar, dvb, disguisevb, disvb, viewdisguisebar, viewbardisguise, bardisguise, bardisg, bard,
+               notifybar, viewnotifybar, disguisenotifybar, disgnotifybar, dnotifybar ]
+    permission: libsdisguises.seecmd.disguiseviewbar
+    description: Toggle seeing your own disguise on or off.
+  disguisemodify:
+    aliases: [ dmodify, dmod, disgmodify, modifydisguise, moddisguise, mdisguise ]
+    permission: libsdisguises.seecmd.disguisemodify
+    description: Modify your own disguise
+  disguisemodifyplayer:
+    aliases: [ dmodifyplayer, dmodplayer, disgmodifyplayer, dismodplayer, disgmodplayer, modifydisguiseplayer,
+               moddisguiseplayer, mdisguiseplayer, mdisgplayer, dmodifyuuid, dmoduuid, disgmodifyuuid, dismoduuid, disgmoduuid, modifydisguiseuuid,
+               moddisguiseuuid, mdisguiseuuid, mdisguuid ]
+    permission: libsdisguises.seecmd.disguisemodifyplayer
+    description: Modify the disguise of a player
+  disguisemodifyradius:
+    aliases: [ dmodifyradius, dmodradius, disgmodradius, dismodradius, modifydisguiseradius, modifydisgradius,
+               moddisguiseradius, mdisguiseradius, moddisgradius ]
+    permission: libsdisguises.seecmd.disguisemodifyradius
+    description: Modify disguises in a radius
+  disguisemodifyselector:
+    aliases: [ dmodifyselector, dmodselector, disgmodselector, dismodselector, modifydisguiseselector, modifydisgselector,
+               moddisguiseselector, mdisguiseselector, moddisgselector ]
+    permission: libsdisguises.seecmd.disguisemodifyselector
+    description: Modify entity disguises via entity selector
+  disguisemodifyentity:
+    aliases: [ dmodifyentity, dmodentity, disgmodentity, dismodentity, modifydisguiseentity, modifydisgentity,
+               modifydentity, moddisguiseentity, moddisgentity, mdisguiseentity, mdisgentity ]
+    permission: libsdisguises.seecmd.disguisemodifyentity
+    description: Modify a disguise by right clicking them
+  disguiseanimation:
+    permission: libsdisguises.disguiseanimation
+    description: Play a supported animation on your own disguise
+  disguiseplayeranimation:
+    aliases: [ disguiseuuidanimation ]
+    permission: libsdisguises.disguiseplayeranimation
+    description: Play a supported animation on a player/uuid's disguise
+  disguiseradiusanimation:
+    permission: libsdisguises.disguiseradiusanimation
+    description: Play a supported animation on all supported disguises in a radius
+  disguiseselectoranimation:
+    permission: libsdisguises.disguiseselectoranimation
+    description: Play a supported animation on all supported disguises via entity selector.
+  disguiseentityanimation:
+    permission: libsdisguises.disguiseentityanimation
+    description: Play a supported animation on a right clicked entity's disguise
+  copydisguise:
+    aliases: [ disguisecopy, disgcopy, dcopy, copydisg, copyd, parsedisguise, disguiseparse ]
+    permission: libsdisguises.seecmd.copydisguise
+    description: Output a disguise to a usable string
+  grabskin:
+    aliases: [ uploadskin, skin, saveskin, cacheskin, downloadskin, skincache ]
+    permission: libsdisguises.seecmd.grabskin
+    description: Grab a skin from file, url or player name/uuid
+  savedisguise:
+    aliases: [ customdisguise, savedisg, customdisg, createdisguise, createdisg ]
+    permission: libsdisguises.seecmd.savedisguise
+    description: Save a custom disguise to disguises.yml
+  grabhead:
+    aliases: [ grabskull, playerhead, savehead, gethead ]
+    permission: libsdisguises.seecmd.grabhead
+    description: Grab the head item of a skin, url or player
+
+permissions:
+  libsdisguises.reload:
+    description: Allows the user to reload LibsDisguises.
+  libsdisguises.update:
+    description: Allows the user to update Libs Disguises
+  libsdisguises.count:
+    description: Allows the user to see how many disguises are active
+  libsdisguises.mods:
+    description: Allows the user to see mods in use.
+  libsdisguises.seethrough:
+    description: Allows player to see through disguises.
+    default: false
+  libsdisguises.hidename:
+    description: Allows player to ignore name being forced above disguise
+    default: false
+  libsdisguises.pve:
+    description: Allows player to ignore pve restrictions.
+    default: false
+  libsdisguises.pvp:
+    description: Allows player to ignore pvp restrictions.
+    default: false
+  libsdisguises.permtest:
+    description: Allows player to test permissions
+  libsdisguises.metainfo:
+    description: Allows player to get meta info
+  libsdisguises.json:
+    description: Allows player to parse held item to json
+  libsdisguises.scoreboardtest:
+    description: Test if the scoreboard is valid, this is a simple test.
+  libsdisguises.config:
+    description: Allows player to check Lib's Disguises config for values
+  libsdisguises.debug:
+    description: Allows a server admin to test a player disguise for scoreboard issues
+  libsdisguises.noactionbar:
+    description: Hides the action bar even if enabled in config
+    default: false
+  libsdisguises.multiname:
+    description: Allows the command user to set names on different heights
+  libsdisguises.grabhead:
+    description: Allows the command user to use /grabhead
+  libsdisguises.ratelimitbypass:
+    description: Allows a living player to bypass the 500ms rate limit on disguise commands, used to prevent crashes
+  libsdisguises.selfdisguises:
+    description: Controls if the player can view a self disguise, defaults to true. Only checked when disguise starts and toggling self disguises command. If the player has access to /disguisemodify they can turn it back on.
+    default: true
+  libsdisguises.disguiseanimation:
+    description: Play a supported animation on your own disguise
+    default: op
+  libsdisguises.disguiseplayeranimation:
+    description: Play a supported animation on a player/uuid's disguise
+    default: op
+  libsdisguises.disguiseradiusanimation:
+    description: Play a supported animation on all supported disguises in a radius
+    default: op
+  libsdisguises.disguiseselectoranimation:
+    description: Play a supported animation on all supported disguises via entity selector
+    default: op
+  libsdisguises.disguiseentityanimation:
+    description: Play a supported animation on a right clicked entity's disguise
+    default: op
+  libsdisguises.seecmd:
+    description: See all commands in tab-completion
+    default: true
+    children:
+      libsdisguises.seecmd.disguise: true
+      libsdisguises.seecmd.disguiseentity: true
+      libsdisguises.seecmd.disguisehelp: true
+      libsdisguises.seecmd.disguiseplayer: true
+      libsdisguises.seecmd.disguiseradius: true
+      libsdisguises.seecmd.disguiseselector: true
+      libsdisguises.seecmd.undisguise: true
+      libsdisguises.seecmd.undisguiseentity: true
+      libsdisguises.seecmd.undisguiseplayer: true
+      libsdisguises.seecmd.undisguiseradius: true
+      libsdisguises.seecmd.undisguiseselector: true
+      libsdisguises.seecmd.disguiseclone: true
+      libsdisguises.seecmd.disguiseviewself: true
+      libsdisguises.seecmd.disguiseviewbar: true
+      libsdisguises.seecmd.disguisemodify: true
+      libsdisguises.seecmd.disguisemodifyplayer: true
+      libsdisguises.seecmd.disguisemodifyradius: true
+      libsdisguises.seecmd.disguisemodifyselector: true
+      libsdisguises.seecmd.disguisemodifyentity: true
+      libsdisguises.seecmd.copydisguise: true
+      libsdisguises.seecmd.grabskin: true
+      libsdisguises.seecmd.savedisguise: true
+      libsdisguises.seecmd.grabhead: true
+      libsdisguises.seecmd.disguiseanimation: true
+      libsdisguises.seecmd.disguiseplayeranimation: true
+      libsdisguises.seecmd.disguiseradiusanimation: true
+      libsdisguises.seecmd.disguiseselectoranimation: true
+      libsdisguises.seecmd.disguiseentityanimation: true
+  libsdisguises.seecmd.disguiseviewself:
+    description: See the /disguiseviewself command in tab-completion
+  libsdisguises.seecmd.disguiseviewbar:
+    description: See the /disguiseviewbar command in tab-completion
+  libsdisguises.seecmd.disguise:
+    description: See the /disguise command in tab-completion
+  libsdisguises.seecmd.disguiseentity:
+    description: See the /disguiseentity command in tab-completion
+  libsdisguises.seecmd.disguisehelp:
+    description: See the /disguisehelp command in tab-completion
+  libsdisguises.seecmd.disguiseplayer:
+    description: See the /disguiseplayer command in tab-completion
+  libsdisguises.seecmd.disguiseradius:
+    description: See the /disguiseradius command in tab-completion
+  libsdisguises.seecmd.disguiseselector:
+    description: See the /disguiseselector command in tab-completion
+  libsdisguises.seecmd.undisguise:
+    description: See the /undisguise command in tab-completion
+  libsdisguises.seecmd.undisguiseentity:
+    description: See the /undisguiseentity command in tab-completion
+  libsdisguises.seecmd.undisguiseplayer:
+    description: See the /undisguiseplayer command in tab-completion
+  libsdisguises.seecmd.undisguiseradius:
+    description: See the /undisguiseradius command in tab-completion
+  libsdisguises.seecmd.undisguiseselector:
+    description: See the /undisguiseselector command in tab-completion
+  libsdisguises.seecmd.disguiseclone:
+    description: See the /disguiseclone command in tab-completion
+  libsdisguises.seecmd.disguisemodify:
+    description: See the /disguisemodify command in tab-completion
+  libsdisguises.seecmd.disguisemodifyplayer:
+    description: See the /disguisemodifyplayer command in tab-completion
+  libsdisguises.seecmd.disguisemodifyradius:
+    description: See the /disguisemodifyradius command in tab-completion
+  libsdisguises.seecmd.disguisemodifyselector:
+    description: See the /disguisemodifyselector command in tab-completion
+  libsdisguises.seecmd.disguisemodifyentity:
+    description: See the /disguisemodifyentity command in tab-completion
+  libsdisguises.seecmd.copydisguise:
+    description: See the /copydisguise command in tab-completion
+  libsdisguises.seecmd.grabskin:
+    description: See the /grabskin command in tab-completion
+  libsdisguises.seecmd.savedisguise:
+    description: See the /savedisguise command in tab-completion
+  libsdisguises.seecmd.grabhead:
+    description: See the /grabhead command in tab-completion
+  libsdisguises.seecmd.disguiseanimation:
+    description: See the /disguiseanimation command in tab-completion
+  libsdisguises.seecmd.disguiseplayeranimation:
+    description: See the /disguiseplayeranimation command in tab-completion
+  libsdisguises.seecmd.disguiseradiusanimation:
+    description: See the /disguiseradiusanimation command in tab-completion
+  libsdisguises.seecmd.disguiseselectoranimation:
+    description: See the /disguiseselectoranimation command in tab-completion
+  libsdisguises.seecmd.disguiseentityanimation:
+    description: See the /disguiseentityanimation command in tab-completion
+
+FILE LuckPerms-Bukkit.jar SHA256 49cecb66fa1fd22a133039a490e9c1e5095a238e7cd66eb9d2a16fe6c897550d
+DESCRIPTOR plugin.yml
+name: LuckPerms
+version: 5.5.71
+description: A permissions plugin
+author: Luck
+website: https://luckperms.net
+main: me.lucko.luckperms.bukkit.loader.BukkitLoaderPlugin
+load: STARTUP
+
+# Mark the plugin as 1.13 compatible to avoid CB having to perform quite as much unnecessary
+# remapping when the plugin is loaded. Note that despite what this setting might otherwise imply,
+# LP is still compatible with pre-1.13 releases.
+api-version: 1.13
+folia-supported: true
+
+# Load LuckPerms before Vault. This means that all plugins that (soft-)depend
+# on Vault depend on LuckPerms too.
+#
+# This fixes issues caused by plugins obtaining the Vault service provider instance
+# only once when they initially enable. (if they haven't depended on LP, our registration
+# won't be there yet)
+loadbefore: [Vault]
+
+# Soft depend on LilyPad for messaging service impl
+# Soft depend on ViaVersion for adventure protocol facet
+softdepend: [LilyPad-Connect, ViaVersion]
+
+commands:
+  luckperms:
+    description: Manage permissions
+    aliases: [lp, perm, perms, permission, permissions]
+
+
+FILE Multiverse-Core.jar SHA256 bc3f34e2d747fdf024f44868747bb016b08fa11d98ccb4ffcac958f083151a83
+DESCRIPTOR plugin.yml
+name: Multiverse-Core
+main: org.mvplugins.multiverse.core.MultiverseCore
+authors: ['dumptruckman', 'Rigby', 'fernferret', 'lithium3141', 'main--', 'benwoo1110', 'Zax71']
+website: 'https://modrinth.com/plugin/multiverse-core'
+description: 'The original Bukkit Multi-World Plugin!'
+softdepend: ['Vault', 'PlaceholderAPI']
+api-version: 1.13
+version: 5.8.1
+
+
+FILE Multiverse-Inventories.jar SHA256 6e58e89009283f4be8658abe2b7e46c482010ceccf3c8e0b0e8ca6a0a114ff92
+DESCRIPTOR plugin.yml
+name: Multiverse-Inventories
+main: org.mvplugins.multiverse.inventories.MultiverseInventories
+version: 5.3.6
+api-version: 1.13
+authors: ['dumptruckman', 'benwoo1110']
+website: 'https://modrinth.com/plugin/multiverse-inventories'
+description: 'Lets players have separate inventories per world!'
+depend: ['Multiverse-Core']
+softdepend: [LuckPerms, PlaceholderAPI, MultiInv, WorldInventories, PerWorldInventory]
+
+
+FILE PlaceholderAPI-2.12.3.jar SHA256 fde03259f5af6938f3c33eeb4d814000a1adabf1d2304ce14970be81f609a437
+DESCRIPTOR plugin.yml
+name: PlaceholderAPI
+main: "me.clip.placeholderapi.PlaceholderAPIPlugin"
+folia-supported: true
+
+version: 2.12.3
+author: HelpChat
+
+api-version: "1.13"
+description: "An awesome placeholder provider!"
+
+commands:
+  placeholderapi:
+    description: "PlaceholderAPI Command"
+    aliases: ["papi"]
+
+permissions:
+  placeholderapi.*:
+    description: "Ability to use all PAPI commands"
+    children:
+      placeholderapi.admin: true
+      placeholderapi.ecloud.*: true
+  placeholderapi.admin:
+    description: "Ability to use all PAPI commands"
+    children:
+      placeholderapi.help: true
+      placeholderapi.info: true
+      placeholderapi.list: true
+      placeholderapi.parse: true
+      placeholderapi.reload: true
+      placeholderapi.version: true
+      placeholderapi.register: true
+      placeholderapi.unregister: true
+      placeholderapi.updatenotify: true
+  placeholderapi.ecloud.*:
+    description: "Ability to use all PAPI ecloud commands"
+    children:
+      placeholderapi.ecloud: true
+      placeholderapi.ecloud.info: true
+      placeholderapi.ecloud.list: true
+      placeholderapi.ecloud.clear: true
+      placeholderapi.ecloud.status: true
+      placeholderapi.ecloud.update: true
+      placeholderapi.ecloud.refresh: true
+      placeholderapi.ecloud.download: true
+      placeholderapi.ecloud.placeholders: true
+  placeholderapi.help:
+    default: "op"
+    description: "Allows you to view the list of PAPI commands"
+  placeholderapi.info:
+    default: "op"
+    description: "Allows you to view expansion information"
+  placeholderapi.list:
+    default: "op"
+    description: "Allows you to list active expansions"
+  placeholderapi.ecloud:
+    default: "op"
+    description: "Allows you to access PAPI eCloud"
+  placeholderapi.parse:
+    default: "op"
+    description: "Allows you to parse placeholders"
+  placeholderapi.reload:
+    default: "op"
+    description: "Allows you to reload PAPI and its configuration"
+  placeholderapi.version:
+    default: "op"
+    description: "Allows you to view the version of PAPI installed"
+  placeholderapi.register:
+    default: "op"
+    description: "Allows you to register expansions"
+  placeholderapi.unregister:
+    default: "op"
+    description: "Allows you to unregister expansions"
+  placeholderapi.updatenotify:
+    default: "op"
+    description: "Notifies you when there is a PAPI update"
+  placeholderapi.ecloud.info:
+    default: "op"
+    description: "Allows you to view cloud expansion information"
+  placeholderapi.ecloud.list:
+    default: "op"
+    description: "Allows you to list eCloud expansions"
+  placeholderapi.ecloud.clear:
+    default: "op"
+    description: "Allows you to clear the local eCloud expansion cache"
+  placeholderapi.ecloud.status:
+    default: "op"
+    description: "Allows you to view the status of eCloud expansions"
+  placeholderapi.ecloud.update:
+    default: "op"
+    description: "Allows you to update registered eCloud expansions"
+  placeholderapi.ecloud.refresh:
+    default: "op"
+    description: "Allows you to refresh the local eCloud expansion cache"
+  placeholderapi.ecloud.download:
+    default: "op"
+    description: "Allows you to download an expansion from the eCloud"
+  placeholderapi.ecloud.placeholders:
+    default: "op"
+    description: "Allows you to view the placeholders of a eCloud expansion"
+
+
+FILE ProtocolLib.jar SHA256 3242a696fbb55a0622d6148d88206ccc392e1d94c5b78ddd423f43ebb82a768a
+DESCRIPTOR paper-plugin.yml
+name: ProtocolLib
+version: 5.5.0-SNAPSHOT-1ea47d6
+description: Provides read/write access to the Minecraft protocol.
+authors: [dmulloy2]
+
+main: com.comphenix.protocol.ProtocolLib
+load: STARTUP
+api-version: "26.2"
+folia-supported: true
+
+permissions:
+  protocol.*:
+    description: Gives access to everything.
+    children:
+      protocol.admin: true
+      protocol.info: true
+  protocol.admin:
+    description: Able to initiate the update process and configure debug mode.
+    default: op
+  protocol.info:
+    description: Can read update notifications and error reports.
+    default: op
+
+
+FILE ScreamingBedWars.jar SHA256 510d46d310dff2a426461c5676051bbf19ff37b553ee0b9875597abe4ba40d5c
+DESCRIPTOR plugin.yml
+#
+# Copyright (C) 2023 ScreamingSandals
+#
+# This file is part of Screaming BedWars.
+#
+# Screaming BedWars is free software: you can redistribute it and/or modify it
+# under the terms of the GNU Lesser General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# Screaming BedWars is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+# GNU Lesser General Public License for more details.
+#
+# You should have received a copy of the GNU Lesser General Public License
+# along with Screaming BedWars. If not, see <https://www.gnu.org/licenses/>.
+#
+
+main: org.screamingsandals.bedwars.Main
+name: BedWars
+version: "0.2.44"
+authors:
+  - "ScreamingSandals <Misat11, Iamceph, Pronze, ZlataOvce>"
+api-version: 1.13
+load: POSTWORLD
+softdepend:
+  - Vault
+  - Multiverse-Core
+  - Multiworld
+  - MultiWorld
+  - UltimateCore
+  - PlaceholderAPI
+  - PerWorldInventory
+  - SlimeWorldManager
+  - My_Worlds
+  - Citizens
+  - Parties
+  - ViaVersion
+  - ASPaperPlugin
+commands:
+  bw:
+    description: Command of BW plugin
+    usage: "/bw [subcommand]"
+    aliases:
+      - bedwars
+
+FILE TAB.jar SHA256 8701c356411fd95102b7f3926be14acb5e3a5cbaaa44d2d7db298e30dfd623d2
+DESCRIPTOR plugin.yml
+main: me.neznamy.tab.platforms.bukkit.BukkitTAB
+name: TAB
+version: 5.4.0
+description: An all-in-one solution that works
+api-version: 1.13 # Defining to avoid legacy plugin warn
+load: POSTWORLD
+author: NEZNAMY
+website: "https://github.com/NEZNAMY/TAB"
+softdepend: [PlaceholderAPI, LuckPerms, LibsDisguises, ViaVersion, ViaRewind, floodgate, Vault]
+prefix: TAB
+folia-supported: true
+commands:
+  tab:
+    description: Plugin's main command
+permissions:
+  tab.admin:
+    description: Grants all TAB permissions
+    default: op
+  tab.tabcomplete:
+    description: Allows player to complete all TAB commands
+    default: op
+  tab.reload:
+    description: Allows player to run /tab reload
+    default: op
+  tab.cpu:
+    description: Allows player to run /tab cpu
+    default: op
+  tab.debug:
+    description: Allows player to run /tab debug [player]
+    default: op
+  tab.groupinfo:
+    description: Allows player to run /tab group <group>
+    default: op
+  tab.grouplist:
+    description: Allows player to run /tab groups
+    default: op
+  tab.parse:
+    description: Allows player to run /tab parse <player> <placeholder>
+    default: op
+  tab.setcollision:
+    description: Allows player to run /tab setcollision <player> <true/false>
+    default: op
+  tab.remove:
+    description: Allows player to remove group/user using commands
+    default: op
+  tab.change.*:
+    description: Allows player to change property using command
+    default: op
+  tab.announce.bar:
+    description: Allows player to run /tab bossbar announce
+    default: op
+  tab.bossbar.toggle:
+    description: Allows player to run /tab bossbar
+    default: op
+  tab.send.bar:
+    description: Allows player to run /tab bossbar send
+    default: op
+  tab.mysql.download:
+    description: Allows player to run /tab mysql download
+    default: op
+  tab.mysql.upload:
+    description: Allows player to run /tab mysql upload
+    default: op
+  tab.nametag.toggle:
+    description: Allows player to run /tab nametag toggle
+    default: op
+  tab.nametag.toggle.other:
+    description: Allows player to run /tab nametag toggle [other player]
+    default: op
+  tab.announce.scoreboard:
+    description: Allows player to run /tab scoreboard announce
+    default: op
+  tab.scoreboard.toggle:
+    description: Allows player to run /tab scoreboard
+    default: op
+  tab.scoreboard.toggle.other:
+    description: Allows player to run /tab scoreboard for other players
+    default: op
+  tab.scoreboard.show:
+    description: Allows player to run /tab scoreboard show
+    default: op
+  tab.scoreboard.show.other:
+    description: Allows player to run /tab scoreboard show for other players
+    default: op
+  tab.staff:
+    description: Makes player counted in %staffonline% placeholder
+    default: op
+  tab.group.*:
+    description: Considers player in group if assigning by permissions
+    default: op
+  tab.bypass:
+    description: Makes player bypass per world playerlist if bypass permission is enabled
+    default: op
+  tab.seevanished:
+    description: Marks player as able to see vanished players for features hooking into vanish plugins
+    default: op
+  tab.spectatorbypass:
+    description: Makes player bypass spectator fix
+    default: op
+
+FILE Vault.jar SHA256 a6b5ed97f43a5cf5bbaf00a7c8cd23c5afc9bd003f849875af8b36e6cf77d01d
+DESCRIPTOR plugin.yml
+name: Vault
+version: 1.7.3-b131
+description: Vault is a Permissions & Economy API to allow plugins to more easily hook into these systems without needing to hook each individual system themselves.
+
+Vault currently supports the following: Permissions 3, PEX, GroupManager, bPerms, bPerms2, SimplyPerms, DroxPerms, zPermissions, rscPermissions, KPerms, Starburst, iConomy (4/5/6) BOSEconomy *6/7), EssentialsEcon, 3Co, MultiConomy, MineConomy, EconXP, eWallet, CurrencyCore, XPBank, CraftConomy, AEco, SDFEconomy, TAEcon, and OverPermissions
+authors: [cereal, Sleaker, mung3r]
+website: https://dev.bukkit.org/projects/vault
+api-version: 1.13
+
+main: net.milkbowl.vault.Vault
+load: startup
+
+commands:
+  vault-info:
+    description: Displays information about Vault 
+    usage: |
+           /<command> - Displays Vault information
+    permission: vault.admin
+  vault-convert:
+    description: Converts all data in economy1 and dumps it into economy2
+    usage: |
+           /<command> [economy1] [economy2]
+    permission: vault.admin
+permissions:
+  vault.admin:
+    description: Notifies the player when vault is in need of an update.
+    default: op
+
+FILE VoidGen-2.3.8.jar SHA256 fa4d882f0923ad1c2bb25b4bca33920076976bfe08f9be0c02bc8929302d92cc
+DESCRIPTOR plugin.yml
+name: 'VoidGen'
+version: '2.3.8'
+main: 'de.xtkq.voidgen.VoidGen'
+api-version: 1.13
+load: STARTUP
+loadbefore: [ Multiverse-Core, Multiworld ]
+author: 'xtkq'
+website: 'https://github.com/NicoNekoDev/VoidGen'
+folia-supported: true
+
+FILE WorldEdit.jar SHA256 166365c44bad4cd916200b288cf391d3770e3197d1eca84ff74f3914d933e289
+DESCRIPTOR plugin.yml
+name: WorldEdit
+main: com.sk89q.worldedit.bukkit.WorldEditPlugin
+version: "7.4.6-beta-02+2c90a77a1"
+load: STARTUP
+api-version: 1.21.4
+folia-supported: true
+softdepend: [Vault]
+author: EngineHub
+website: https://enginehub.org/worldedit
+
+
+FILE packetevents-spigot.jar SHA256 060087c58ec268eae7dd0eb1f17ac3bea1eaadda1693414141ff64e506091bd7
+DESCRIPTOR plugin.yml
+name: packetevents
+version: 2.14.0
+api-version: 1.13
+main: io.github.retrooper.packetevents.PacketEventsPlugin
+author: retrooper
+folia-supported: true
+softdepend:
+  - ProtocolLib
+  - ProtocolSupport
+  - ViaVersion
+  - ViaBackwards
+  - ViaRewind
+  - Geyser-Spigot
+CONFIG plugins/Multiverse-Core/worlds.yml EXISTS True
+SHA256 1cd74b279c62b7074a6f8ec661189dd1d7bb4a0e55561425ccb0aa6e7242c8ca
+CONFIG plugins/Multiverse-Inventories/config.yml EXISTS True
+SHA256 c6b180e34bf82faa85d95204c931f1e9f8967003061baf192218d8e51c937876
+CONFIG plugins/Multiverse-Inventories/groups.yml EXISTS True
+SHA256 4e52a8be96afa77b691300658fb4b8166c24ea5ccaa59333c56204fa0742d01b
+CONFIG plugins/GriefPreventionData/config.yml EXISTS True
+SHA256 0fea798ac2a27a4ede6c6f5bf58335e72bb8500c5e9b55257e7a075d9f155467
+CONFIG plugins/DeluxeMenus/config.yml EXISTS True
+SHA256 66c719490cfd4f54119ca6d8894e3d9f986d11ce092b667c6c4d6866838534b5
+CONFIG plugins/DeluxeMenus/gui_menus/games.yml EXISTS True
+SHA256 702240f8727228c1fc1e39305fe865ff39eea9983506a38814bff901c73c1d67
+CONFIG plugins/ItemJoin/config.yml EXISTS True
+SHA256 de1310a24bc7a66fa90ddd0c173d4ab3951946da9a4e96f984c14ae74ea2c2a3
+CONFIG plugins/ItemJoin/items.yml EXISTS True
+SHA256 b8bdc2052aba9b0a5c4eed03bb33379ebed791aafefb9e9d8a59382af8060b6f
+CONFIG plugins/TAB/config.yml EXISTS True
+SHA256 8f286f994634f455503cf843c0cfb7ca28266ecbd4caaa26eb30e944c99910e2
+WORLD METADATA FILES (paths relative to data)
+world/level.dat
+world_26_backup/level.dat
+
+=== READ-ONLY RCON DETAILS ===
+
+>>> version Multiverse-Core
+Multiverse-Core version [32m5.8.1[0m
+[0mThe original Bukkit Multi-World Plugin!
+[0mWebsite: [32mhttps://modrinth.com/plugin/multiverse-core[0m
+[0mAuthors: [32mdumptruckman[37m, [32mRigby[37m, [32mfernferret[37m, [32mlithium3141[37m, [32mmain--[37m, [32mbenwoo1110[37m, and [32mZax71
+[0m
+
+>>> version Multiverse-Inventories
+Multiverse-Inventories version [32m5.3.6[0m
+[0mLets players have separate inventories per world!
+[0mWebsite: [32mhttps://modrinth.com/plugin/multiverse-inventories[0m
+[0mAuthors: [32mdumptruckman[37m, and [32mbenwoo1110
+[0m
+
+>>> version BedWars
+BedWars version [32m0.2.44[0m
+[0mAuthor: [32mScreamingSandals <Misat11, Iamceph, Pronze, ZlataOvce>
+[0m
+
+>>> version BlockHunt
+BlockHunt version [32m0.2.1[0m
+[0mAn easy to set up, Hide and seek plugin. Hide as blocks from the killer seekers.
+[0mAuthor: [32mSteffion
+[0m
+
+>>> version TAB
+TAB version [32m5.4.0[0m
+[0mAn all-in-one solution that works
+[0mWebsite: [32mhttps://github.com/NEZNAMY/TAB[0m
+[0mAuthor: [32mNEZNAMY
+[0m
+
+>>> version ItemJoin
+ItemJoin version [32m6.1.8-RELEASE-b1148[0m
+[0mGet custom items on join.
+[0mWebsite: [32mhttps://www.spigotmc.org/resources/itemjoin.12661/[0m
+[0mAuthor: [32mRockinChaos
+[0m
+
+>>> version GriefPrevention
+GriefPrevention version [32m16.18.7
+[0m
+
+>>> version DeluxeMenus
+DeluxeMenus version [32m1.14.1-Release[0m
+[0mAll in one inventory menu system
+[0mAuthor: [32mHelpChat
+[0m
+
+>>> mv list
+[31m[33m====[ Multiverse World List ]====
+[0m[31m[37m[Page 1 of 1]
+[0m[34mhub - [32mNORMAL
+[0m[34mminijeux - [32mNORMAL
+[0m[34mworld - [32mNORMAL
+[0m[34mworld_nether - [31mNETHER
+[0m[34mworld_the_end - [32mTHE_END
+[0m[34m
+[0m[34m
+[0m[34m
+[0m
+
+>>> mv info hub
+[31m[32m[1m---- World Info: [37m[1mhub[32m[1m ----
+[0m[31m[37m[Page 1 of 4]
+[0m[34m[32mWorld Key: [37mminecraft:hub
+[0m[34m[32mWorld Name: [37mhub
+[0m[34m[32mWorld Alias: [37m[37m[3mempty
+[0m[34m[32mWorld UID: [37me2a89552-86bc-4431-8db2-177051833dde
+[0m[34m[32mGame Mode: [37mADVENTURE
+[0m[34m[32mDifficulty: [37mPEACEFUL
+[0m[34m[32mSpawn Location: [37m[37mX: [32m0 [37mY: [32m65 [37mZ: [32m0 [37mP: [33m0 [37mY: [33m0
+[0m[34m[32mRespawn World: [37m[37m[3mempty
+[0m
+
+>>> mv info world
+[31m[32m[1m---- World Info: [37m[1mworld[32m[1m ----
+[0m[31m[37m[Page 1 of 4]
+[0m[34m[32mWorld Key: [37mminecraft:overworld
+[0m[34m[32mWorld Name: [37mworld
+[0m[34m[32mWorld Alias: [37m[37m[3mempty
+[0m[34m[32mWorld UID: [37mdf232ae8-2105-4088-9c76-407b819cb7c9
+[0m[34m[32mGame Mode: [37mSURVIVAL
+[0m[34m[32mDifficulty: [37mNORMAL
+[0m[34m[32mSpawn Location: [37m[37mX: [32m0 [37mY: [32m55 [37mZ: [32m0 [37mP: [33m0 [37mY: [33m0
+[0m[34m[32mRespawn World: [37m[37m[3mempty
+[0m
+
+>>> mv info survie
+[31mError: World survie is not a loaded multiverse world.
+[0m[33mUsage: [32mmv info[33m [37m[world] [--page <page>] [--filter <filter>][33m
+[0m
+
+>>> mv info minijeux
+[31m[32m[1m---- World Info: [37m[1mminijeux[32m[1m ----
+[0m[31m[37m[Page 1 of 4]
+[0m[34m[32mWorld Key: [37mminecraft:minijeux
+[0m[34m[32mWorld Name: [37mminijeux
+[0m[34m[32mWorld Alias: [37m[37m[3mempty
+[0m[34m[32mWorld UID: [37mfa8c0ad5-661c-46a6-9780-997727af8035
+[0m[34m[32mGame Mode: [37mSURVIVAL
+[0m[34m[32mDifficulty: [37mNORMAL
+[0m[34m[32mSpawn Location: [37m[37mX: [32m0 [37mY: [32m-60 [37mZ: [32m0 [37mP: [33m0 [37mY: [33m0
+[0m[34m[32mRespawn World: [37m[37m[3mempty
+[0m
+
+>>> mv generators
+[34m[32mMultiverse-Core version 5.8.1
+[0m[34m[32mSee [37m/mv help[32m for commands available.
+[0m
+
+>>> mv help create
+[32m[33m=== [32m[32mShowing detailed help for [32m[32mmv create[32m[33m ===[32m
+[0m[32m[32mmv create[32m [32m<name> <environment> [--seed <seed> --generator <generator[:id]> --world-type <worldtype> --no-adjust-spawn --no-structures --generate-bonus-chest --force-spawn-position <x,y,z:pitch:yaw> --biome <biome> --generator-settings <json-settings> --properties <prop1=value1,prop2=value2,...>][32m [33m- Creates a new world and loads it.[32m
+[0m[32m[32m<name>[32m: [33mNew world name.[32m
+[0m[32m[32m<environment>[32m: [33mThe world's environment. See: /mv environments[32m
+[0m[32m[32m[--seed <seed> --generator <generator[:id]> --world-type <worldtype> --no-adjust-spawn --no-structures --generate-bonus-chest --force-spawn-position <x,y,z:pitch:yaw> --biome <biome> --generator-settings <json-settings> --properties <prop1=value1,prop2=value2,...>][32m: [33mAdditional world settings. See https://gg.gg/nn8bl for all possible flags.[32m
+[0m
+
+>>> mv help modify
+[32m[33m=== [32m[32mShowing detailed help for [32m[32mmv meta modify[32m[33m ===[32m
+[0m[32m[32mmv meta modify[32m [32m[world] <set|remove> <key> [value][32m [33m [32m
+[0m[32m[32mmv modify[32m [32m[world] <set|add|remove|reset> <property> [value][32m [33m- Modifies a world property of a given world.[32m
+[0m[32m[32m[world][32m: [33mName of world you want to modify.[32m
+[0m[32m[32m<property>[32m: [33mProperty you want to modify.[32m
+[0m[32m[32m[value][32m: [33mValue of property.[32m
+[0m[32m[32mmv entity-spawn-config modify[32m [32m[world] <spawn-category> <set|add|reset|remove> <property> [value][32m [33m [32m
+[0m
+
+>>> bw help
+
+
+>>> bh help
+
+
+Audit finished. This script did not install, delete, restart or reload anything.
+Review this report privately before sharing; plugin descriptors may contain project URLs.

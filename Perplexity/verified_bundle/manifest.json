@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "verified": true,
+  "evidence": [
+    "audit_gamemodes_report.txt: Paper 26.2 build 129",
+    "ScreamingBedWars 0.2.44 bytecode disassembly of Game.saveToConfig",
+    "BlockHunt 0.2.1 bytecode disassembly of Arena.serialize and ArenaHandler.loadArenas",
+    "Multiverse-Inventories 5.3.6 candidate groups validation",
+    "DeluxeMenus 1.14.2 gui_menus configuration",
+    "ItemJoin 6.1.8 inventory wipe protection"
+  ],
+  "expected_paper_version": "26\\.2-129-ver/26\\.2@9240f58",
+  "plugin_fingerprints": {
+    "ScreamingBedWars.jar": "510d46d310dff2a426461c5676051bbf19ff37b553ee0b9875597abe4ba40d5c",
+    "BlockHunt.jar": "01c8cc3626204b16ea8edd639b7e7660c780188f1153d2a6dcea07a4f55268a5",
+    "Multiverse-Core.jar": "bc3f34e2d747fdf024f44868747bb016b08fa11d98ccb4ffcac958f083151a83",
+    "Multiverse-Inventories.jar": "6e58e89009283f4be8658abe2b7e46c482010ceccf3c8e0b0e8ca6a0a114ff92",
+    "ItemJoin.jar": "9573f2de45bcaff210402973fd42817d8ce2835dc400f7d25151dabb75b83a21",
+    "TAB.jar": "8701c356411fd95102b7f3926be14acb5e3a5cbaaa44d2d7db298e30dfd623d2"
+  },
+  "arena_manifest_sha256": "d5032317735092ffb613bb40a8053371e7ed654b12a31ea7a512e8d9bf3df354",
+  "allowed_destination_prefixes": [
+    "plugins/BedWars/",
+    "plugins/BlockHunt/",
+    "plugins/Multiverse-Inventories/",
+    "plugins/DeluxeMenus/",
+    "plugins/ItemJoin/"
+  ],
+  "files": [
+    {
+      "destination": "plugins/BedWars/arenas/jfm_duo.yml",
+      "source": "sources/jfm_duo.yml",
+      "sha256": "1314d11878d92765ee0a18c380277607bbe5c09c6f04dca6cb3fb92ee434a2ec"
+    },
+    {
+      "destination": "plugins/BlockHunt/arenas.yml",
+      "source": "sources/blockhunt_arenas.yml",
+      "sha256": "31186f8ae61c7f3a189355ab0e808e0eea67822db2b152d48702cc44c666db1b"
+    },
+    {
+      "destination": "plugins/Multiverse-Inventories/groups.yml",
+      "source": "sources/groups.yml",
+      "sha256": "457f46839308aaafef4a08a38e2f1332649421450766f592c8210162aa66ab1a"
+    },
+    {
+      "destination": "plugins/DeluxeMenus/gui_menus/games.yml",
+      "source": "sources/games.yml",
+      "sha256": "a6dfe25d3c67054455f5e0051d73183fdacd961f72b429258e7a8569728606cb"
+    },
+    {
+      "destination": "plugins/ItemJoin/config.yml",
+      "source": "sources/itemjoin_config.yml",
+      "sha256": "7596b0a03fcf69c564e79f97b342d37d75d289de38a7a361893e743447dd4ac0"
+    }
+  ],
+  "post_start_commands": [
+    {
+      "command": "version",
+      "expect_regex": "Paper version 26\\.2|Checking version"
+    },
+    {
+      "command": "bw list",
+      "expect_regex": "jfm_duo|BedWars"
+    },
+    {
+      "command": "mv list",
+      "expect_regex": "hub"
+    }
+  ],
+  "health_checks": [
+    {
+      "command": "list",
+      "expect_regex": "players online"
+    },
+    {
+      "command": "mv list",
+      "expect_regex": "hub"
+    }
+  ]
+}

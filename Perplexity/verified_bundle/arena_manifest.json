@@ -1,0 +1,345 @@
+{
+  "status": "DESIGN_PROPOSAL_NOT_PLUGIN_CONFIG_NOT_BUILT",
+  "bedwars": {
+    "world": "bedwars_jfm",
+    "arena_id": "jfm_duo",
+    "players": {
+      "min_proposed": 2,
+      "max": 8
+    },
+    "bounds": {
+      "min": [
+        -90,
+        0,
+        -90
+      ],
+      "max": [
+        90,
+        128,
+        90
+      ]
+    },
+    "waiting_spawn": [
+      0.5,
+      101,
+      0.5
+    ],
+    "waiting_floor_y": 100,
+    "spectator_spawn": [
+      0.5,
+      111,
+      0.5
+    ],
+    "central_island": {
+      "center": [
+        0,
+        64,
+        0
+      ],
+      "half_width": 10
+    },
+    "teams": {
+      "red": {
+        "players": 2,
+        "island_center": {
+          "x": 0,
+          "y": 64,
+          "z": -64
+        },
+        "island_half_width": 12,
+        "spawn": {
+          "x": 0,
+          "y": 65,
+          "z": -64
+        },
+        "bed_foot": {
+          "x": 0,
+          "y": 65,
+          "z": -68
+        },
+        "bed_head": {
+          "x": 0,
+          "y": 65,
+          "z": -69
+        },
+        "bed_facing": "north",
+        "iron_gold_generator": {
+          "x": 0,
+          "y": 65,
+          "z": -60
+        },
+        "shop": {
+          "x": -4,
+          "y": 65,
+          "z": -64
+        },
+        "upgrades": {
+          "x": 4,
+          "y": 65,
+          "z": -64
+        }
+      },
+      "blue": {
+        "players": 2,
+        "island_center": {
+          "x": 64,
+          "y": 64,
+          "z": 0
+        },
+        "island_half_width": 12,
+        "spawn": {
+          "x": 64,
+          "y": 65,
+          "z": 0
+        },
+        "bed_foot": {
+          "x": 68,
+          "y": 65,
+          "z": 0
+        },
+        "bed_head": {
+          "x": 69,
+          "y": 65,
+          "z": 0
+        },
+        "bed_facing": "east",
+        "iron_gold_generator": {
+          "x": 60,
+          "y": 65,
+          "z": 0
+        },
+        "shop": {
+          "x": 64,
+          "y": 65,
+          "z": -4
+        },
+        "upgrades": {
+          "x": 64,
+          "y": 65,
+          "z": 4
+        }
+      },
+      "green": {
+        "players": 2,
+        "island_center": {
+          "x": 0,
+          "y": 64,
+          "z": 64
+        },
+        "island_half_width": 12,
+        "spawn": {
+          "x": 0,
+          "y": 65,
+          "z": 64
+        },
+        "bed_foot": {
+          "x": 0,
+          "y": 65,
+          "z": 68
+        },
+        "bed_head": {
+          "x": 0,
+          "y": 65,
+          "z": 69
+        },
+        "bed_facing": "south",
+        "iron_gold_generator": {
+          "x": 0,
+          "y": 65,
+          "z": 60
+        },
+        "shop": {
+          "x": 4,
+          "y": 65,
+          "z": 64
+        },
+        "upgrades": {
+          "x": -4,
+          "y": 65,
+          "z": 64
+        }
+      },
+      "yellow": {
+        "players": 2,
+        "island_center": {
+          "x": -64,
+          "y": 64,
+          "z": 0
+        },
+        "island_half_width": 12,
+        "spawn": {
+          "x": -64,
+          "y": 65,
+          "z": 0
+        },
+        "bed_foot": {
+          "x": -68,
+          "y": 65,
+          "z": 0
+        },
+        "bed_head": {
+          "x": -69,
+          "y": 65,
+          "z": 0
+        },
+        "bed_facing": "west",
+        "iron_gold_generator": {
+          "x": -60,
+          "y": 65,
+          "z": 0
+        },
+        "shop": {
+          "x": -64,
+          "y": 65,
+          "z": 4
+        },
+        "upgrades": {
+          "x": -64,
+          "y": 65,
+          "z": -4
+        }
+      }
+    },
+    "diamond_generators": [
+      {
+        "x": -30,
+        "y": 65,
+        "z": -30
+      },
+      {
+        "x": 30,
+        "y": 65,
+        "z": -30
+      },
+      {
+        "x": 30,
+        "y": 65,
+        "z": 30
+      },
+      {
+        "x": -30,
+        "y": 65,
+        "z": 30
+      }
+    ],
+    "diamond_island_half_width": 4,
+    "emerald_generators": [
+      [
+        -3,
+        65,
+        0
+      ],
+      [
+        3,
+        65,
+        0
+      ]
+    ],
+    "note": "Generator rates, shops and joining commands must come from the identified BedWars plugin. Build bed halves with verified block states. No automatic bridges."
+  },
+  "blockhunt": {
+    "world": "blockhunt_jfm",
+    "arena_id": "jfm_retro",
+    "theme": "retro village",
+    "bounds": {
+      "min": [
+        -40,
+        63,
+        -40
+      ],
+      "max": [
+        40,
+        90,
+        40
+      ]
+    },
+    "floor_y": 64,
+    "hider_spawn": [
+      0.5,
+      65,
+      0.5
+    ],
+    "seeker_spawn": [
+      0.5,
+      65,
+      -34.5
+    ],
+    "waiting_spawn": [
+      0.5,
+      101,
+      0.5
+    ],
+    "houses": [
+      {
+        "center": [
+          -24,
+          64,
+          -20
+        ],
+        "half_width": 5,
+        "half_depth": 5,
+        "roof_y": 72
+      },
+      {
+        "center": [
+          -24,
+          64,
+          20
+        ],
+        "half_width": 5,
+        "half_depth": 5,
+        "roof_y": 72
+      },
+      {
+        "center": [
+          0,
+          64,
+          -20
+        ],
+        "half_width": 5,
+        "half_depth": 5,
+        "roof_y": 72
+      },
+      {
+        "center": [
+          0,
+          64,
+          20
+        ],
+        "half_width": 5,
+        "half_depth": 5,
+        "roof_y": 72
+      },
+      {
+        "center": [
+          24,
+          64,
+          -20
+        ],
+        "half_width": 5,
+        "half_depth": 5,
+        "roof_y": 72
+      },
+      {
+        "center": [
+          24,
+          64,
+          20
+        ],
+        "half_width": 5,
+        "half_depth": 5,
+        "roof_y": 72
+      }
+    ],
+    "disguise_palette_proposed": [
+      "OAK_PLANKS",
+      "BOOKSHELF",
+      "CRAFTING_TABLE",
+      "HAY_BLOCK",
+      "FURNACE"
+    ],
+    "hide_seconds_proposed": 20,
+    "game_seconds_proposed": 300,
+    "note": "Validate palette and separate waiting zone against BlockHunt version; bounds must exclude waiting area."
+  }
+}
