@@ -80,21 +80,75 @@ Malgré les avancées techniques majeures, les tests en conditions réelles rév
 
 ---
 
-## 4. Plan d'Action Correctif & Feuille de Route
+## 4. Cadre des Six Décisions Techniques Validées (D1 à D6)
 
-Pour répondre point par point à ces constats, les actions correctives suivantes sont définies :
+Suite aux arbitrages soumis à l'équipe projet, les six choix techniques fondamentaux ont été formellement validés et verrouillés pour régir la suite du déploiement :
 
-| Problème identifié | Action technique corrective | Composants / Commandes impliqués | Priorité |
+| Réf. | Domaine | Décision retenue | Justification & Implémentation PaperMC 26.2 |
 | :--- | :--- | :--- | :--- |
-| **Bordures invisibles Spawn** | 1. Pose d'un garde-corps invisible de 3 blocs de haut (`barrier`) autour du spawn immédiat.<br>2. Configuration d'un rattrapage automatique anti-vide : téléportation au spawn dès `Y < 50`. | Script procedural `fill` barriers + Déclencheur / gamerule Multiverse ou commande d'écoute. | **P1 (Immédiate)** |
-| **Lobby des Mini-Jeux** | Création d'un monde Void thématique `lobby_minijeux` (`VoidGen`) avec une plateforme néon stylisée JoyStick FM, reliant les portails/PNJ vers BedWars, Rush, Hikabrain et BlockHunt. | `mv create lobby_minijeux normal -g VoidGen`<br>Génération procédurale de la structure<br>Bouton dans `games.yml`. | **P2 (Court terme)** |
-| **Ajout du Mode Rush** | Configuration d'une arène compacte Rush 1v1 et 2v2 (`rush_1v1`) dans ScreamingBedWars avec boutiques de grès, générateurs accélérés et lits à 30 blocs. | Template d'arène YAML BedWars (`plugins/BedWars/arenas/rush_jfm.yml`) + Arène symétrique générée. | **P2 (Court terme)** |
-| **Ajout du Mode Hikabrain** | Installation et configuration d'un module de duel Hikabrain ou d'une passerelle 1v1 avec détection de passage de ligne et attribution de kit instantané (KB stick, blocks, gapple). | Module Bukkit léger dédié ou arène automatisée par commande. | **P3 (Moyen terme)** |
+| **D1** | **Barème des claims (Survie)** | **Pas de claim (Survie 100% simple & vanilla pure)** | Suppression totale des restrictions de parcelles dans `plugins/GriefPreventionData/config.yml` (`Claims.Mode.survie: Disabled`). Les joueurs profitent d'une expérience de survie coopérative classique sans contrainte de pelle en or. |
+| **D2** | **Politique des comptes & Auth** | **Option A (online-mode=false + Authentification locale)** | Maintien de l'accessibilité aux élèves sans compte payant officiel, tout en installant un module d'authentification robuste (`AuthMeReloaded` / chiffrement SHA256 avec `/register` et `/login`). Protection absolue des comptes OP/administrateurs et des inventaires contre l'usurpation de pseudo. |
+| **D3** | **BlockHunt : Rôle à l'élimination** | **Option C (Spectateur permanent jusqu'à la fin du match)** | Lorsqu'un joueur caché est découvert et éliminé, il passe instantanément en mode spectateur jusqu'à l'issue de la partie. Il ne réapparaît pas en chercheur/chasseur secondaire, garantissant une fin de manche claire et équilibrée. |
+| **D4** | **Référence FunCraft : Rush & Hikabrain** | **Option A (Fidèle à l'esprit historique FunCraft 2016–2018)** | **Rush (1v1 & 2v2) :** Lits destructibles (pioche/TNT), ponts en grès à faible coût, bâtons knockback, générateurs accélérés bronze/or/fer, propulsions TNTFly autorisées et tolérées par l'anticheat `GrimAC`.<br>**Hikabrain (1v1) :** Pont suspendu en grès de 1 bloc de large (Y=64, 40 blocs), objectif = franchir la ligne pour cliquer/toucher le lit adverse et marquer 1 point, victoire au premier à **5 points**, réinitialisation instantanée du pont et du kit à chaque point marqué. |
+| **D5** | **Survie : Gestion des Tombes** | **Option B (Tombe verrouillée 30 min puis déverrouillée au public)** | À la mort en Survie, une tombe physique sécurise le stuff et les coordonnées sont envoyées au joueur dans le chat. Le joueur dispose d'une période de grâce de **30 minutes** exclusive ; au-delà, la tombe devient pillable par n'importe quel joueur (mécanique de récupération équitable). |
+| **D6** | **Classements & Affichage Lobby** | **Option A (Stats personnelles au menu & Top Parkour physique)** | Les statistiques personnelles (victoires, temps, morts) sont consultables en privé dans le menu graphique `/menu`. Le **seul classement public affiché physiquement au Lobby** est le **Top Parkour** (hologramme chronométré), évitant la toxicité des classements PvP compétitifs. |
 
 ---
 
-## 5. Conclusion & Prochaines Étapes
+## 5. Plan d'Action Opérationnel par Lots (Lots 0 à 7)
 
-L'infrastructure du serveur Minecraft `srv-minecraft` a franchi une étape décisive : les fondations système (Docker, Paper 26.2, NAT OPNsense, mémoire, RBAC, isolation d'inventaires) sont robustes, documentées et totalement reproductibles par scripts.
+```mermaid
+graph TD
+    Lot0["Lot 0 : Audit, Staging & Sécurisation"] --> Lot2["Lot 2 : Sécurisation Hub & Création Lobby Mini-Jeux"]
+    Lot2 --> Lot1["Lot 1 : Stabilisation BedWars & BlockHunt Spectateur"]
+    Lot1 --> Lot3["Lot 3 : Survie Pure & Module de Tombes 30 min"]
+    Lot3 --> Lot4["Lot 4 : Mode Rush FunCraft 1v1 & 2v2"]
+    Lot4 --> Lot5["Lot 5 : Mode Hikabrain au Lit (5 points)"]
+    Lot5 --> Lot6["Lot 6 : Menus, PNJ, Portails & Navigation"]
+    Lot6 --> Lot7["Lot 7 : Tests Solo/Duo, Recette & Documentation"]
+```
 
-La résolution des trois points soulevés (sécurisation anti-vide du spawn, édification d'un lobby mini-jeux fédérateur et enrichissement du catalogue PvP avec le Rush et l'Hikabrain) permettra de transformer cette base technique solide en un service de divertissement complet et plébiscité par les utilisateurs du réseau de l'établissement.
+### Lot 0 — Staging, Intégrité & Sauvegardes
+- Sauvegarde à froid par archive tar horodatée dans `/opt/minecraft/gamemodes-backups/`.
+- Maintien du port forwarding OPNsense WAN `192.168.101.37:25565` vers `10.30.0.22:25565`.
+- Heap JVM dimensionné à 3 Go RAM avec headroom système.
+
+### Lot 1 — Stabilisation BedWars & BlockHunt
+- Validation de l'arène BedWars `jfm_duo` (4 équipes de 2).
+- Blocage du repop chasseur dans BlockHunt (Option C) : joueur éliminé bascule immédiatement en spectateur permanent.
+
+### Lot 2 — Sécurisation Hub & Création du Lobby Mini-Jeux
+- **Sécurisation Hub (`hub`)** :
+  - Garde-corps de bordures invisibles (`barrier`) de 3 blocs de haut sur le périmètre de la plateforme Y=64.
+  - Système de rattrapage anti-chute automatique : tout joueur franchissant `Y < 50` est retéléporté au spawn `(0.5, 65, 0.5)` sans vélocité résiduelle ni dégât.
+- **Monde `lobby_minijeux`** :
+  - Création du monde Void dédié via `VoidGen` (`mv create lobby_minijeux normal -g VoidGen`).
+  - Plateforme circulaire néon stylisée JoyStick FM (quartz, béton violet/cyan, balise centrale).
+  - 4 stations d'accueil thématisées : BedWars (Nord), Hikabrain (Sud), BlockHunt (Est), Portail Hub (Ouest).
+
+### Lot 3 — Survie Pure & Système de Tombes
+- Application de **D1** : `Claims.Mode.survie: Disabled` dans `GriefPreventionData/config.yml`.
+- Application de **D5** : Configuration de la protection exclusive de 30 minutes sur les tombes mortuaires, avant ouverture au pillage libre.
+
+### Lot 4 — Mode Rush FunCraft (1v1 & 2v2)
+- Monde `rush_jfm` avec deux bases flottantes séparées par 30 blocs de vide.
+- Arènes `rush_1v1` et `rush_2v2` injectées dans ScreamingBedWars : grès pas cher, marchands PNJ dédiés, bâton de recul, TNT et tolérance TNTFly anticheat.
+
+### Lot 5 — Mode Hikabrain au Lit Adverse (1v1)
+- Monde `hikabrain_jfm` : passerelle de 1 bloc de large en grès suspendue à Y=64 entre deux bases distantes de 40 blocs.
+- Mécanique FunCraft : toucher le lit ennemi rapporte 1 point. Premier à 5 points remporte le duel.
+- Réinitialisation instantanée du pont et attribution du kit (épée fer, bâton KB, grès, 2 pommes d'or).
+
+### Lot 6 — Menus Graphiques, PNJ & Routage
+- Mise à jour du menu DeluxeMenus (`/menu`) avec 8 entrées optimisées (Survie pure sans claim, Lobby Mini-Jeux, BedWars 4x2, Rush 1v1/2v2, Hikabrain 1v1, BlockHunt, Statistiques privées, Retour Hub).
+- Cloisonnement d'inventaires `Multiverse-Inventories` étendu à `lobby_minijeux`, `rush_jfm` et `hikabrain_jfm`.
+
+### Lot 7 — Authentification Locale, Recette & Finition
+- Application de **D2** : Module `AuthMeReloaded` / mot de passe chiffré SHA256 pour sécuriser les comptes tout en conservant `ONLINE_MODE=FALSE`.
+- Application de **D6** : Mise en place du parcours Top Parkour au Hub avec affichage chronométré.
+
+---
+
+## 6. Conclusion & État d'Avancement
+
+Avec la validation des décisions D1 à D6 et la préparation complète des scripts procéduraux (`generate_minigames_lobby.py`, `generate_rush_arena.py`, `generate_hikabrain_arena.py`, `apply_decisions_d1_d6.py`) et du bundle de configuration (`verified_bundle`), le serveur Minecraft JoyStick FM dispose d'un plan d'exécution sans faille, prêt à être déployé pour offrir une expérience multijoueur complète et fidèle aux attentes des élèves et de l'établissement.

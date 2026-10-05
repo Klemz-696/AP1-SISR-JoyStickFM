@@ -334,4 +334,25 @@ Pour permettre aux élèves du lycée d'accéder au serveur Minecraft sans insta
    ```
 6. **Vérification en jeu** : Le joueur arrive directement au centre de la plateforme suspendue dans le vide sous un soleil radieux permanent, reçoit sa boussole interactive au slot 4, ouvre le menu des jeux d'un clic-droit et ne peut casser aucun bloc du lobby.
 
+---
+
+### 4.8. Décisions Techniques Fermes (D1 à D6) & Nouveaux Modes de Jeu
+
+Dans le prolongement des retours d'expérience et des tests en séance, six décisions d'arbitrage ont été formellement validées pour enrichir le serveur et calibrer ses règles de jeu :
+
+| Décision | Domaine | Arbitrage Validé | Implémentation Système & Configuration |
+| :--- | :--- | :--- | :--- |
+| **D1** | **Survie Simple** | **Pas de claim (Vanilla pure)** | `Claims.Mode.survie: Disabled` dans GriefPrevention. Liberté totale de construction et d'exploration, zéro contrainte de parcelles. |
+| **D2** | **Comptes & Auth** | **Option A (online-mode=false + AuthMe)** | Maintien de `ONLINE_MODE=FALSE` pour accessibilité scolaire, avec protection par mot de passe chiffré SHA256 (`/register`, `/login`) pour sécuriser les comptes staff et inventaires. |
+| **D3** | **BlockHunt** | **Option C (Spectateur permanent)** | Dès qu'un caché est éliminé, il passe instantanément en mode spectateur jusqu'à la fin de la partie (aucun repop en chercheur). |
+| **D4** | **Modes FunCraft** | **Option A (Rush & Hikabrain historiques)** | **Rush (1v1 & 2v2) :** Lits destructibles (pioche/TNT), ponts grès économiques, bâton KB, spawners accélérés et TNTFly compatible GrimAC.<br>**Hikabrain (1v1) :** Passerelle de 1 bloc de large à Y=64, objectif toucher le lit adverse pour marquer, premier à 5 points gagne, reset automatique après point. |
+| **D5** | **Tombes Survie** | **Option B (30 min de protection puis libre)** | À la mort en Survie, une tombe sécurise l'équipement. Protégée 30 minutes exclusivement pour la victime, puis pillable par tous les joueurs si abandonnée. |
+| **D6** | **Classements** | **Option A (Stats privées & Top Parkour)** | Statistiques personnelles privées consultables dans le menu (`/menu`). Seul affichage public physique au Lobby : le **Top Parkour** chronométré. |
+
+#### Nouveaux Mondes et Arènes Déployés :
+1. **Lobby des Mini-Jeux (`lobby_minijeux`)** : Monde Void dédié avec une plateforme néon stylisée JoyStick FM (quartz, béton violet/cyan) abritant 4 portails et PNJ d'accès direct vers BedWars, Rush, Hikabrain et BlockHunt.
+2. **Arènes Rush (`rush_jfm`)** : Deux bases symétriques suspendues au-dessus du vide (Rouge vs Bleu) distantes de 30 blocs, supportant les formats `rush_1v1` et `rush_2v2`.
+3. **Arène Hikabrain (`hikabrain_jfm`)** : Passerelle suspendue de 1 bloc de grès à Y=64 reliant deux plateformes équipées de lits pour le duel au clic en 5 points.
+4. **Sécurisation Anti-Chute Hub** : Barrières invisibles périmétriques sur 3 blocs de haut et rattrapage automatique sous `Y=50` retéléportant instantanément au spawn `(0.5, 65, 0.5)` sans vélocité ni dégâts de chute.
+
 

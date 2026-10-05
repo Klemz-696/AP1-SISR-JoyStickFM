@@ -8,8 +8,11 @@ sources_dir.mkdir(parents=True, exist_ok=True)
 # 1. Copy arena_manifest.json
 manifest_design = base_dir / 'JoyStickFM_Dossier_Gamemodes_Preparation' / 'joystickfm-gamemodes' / 'arena_manifest.design.json'
 arena_manifest_target = bundle_dir / 'arena_manifest.json'
-shutil.copyfile(manifest_design, arena_manifest_target)
-arena_manifest_sha = hashlib.sha256(arena_manifest_target.read_bytes()).hexdigest()
+if manifest_design.exists():
+    shutil.copyfile(manifest_design, arena_manifest_target)
+    arena_manifest_sha = hashlib.sha256(arena_manifest_target.read_bytes()).hexdigest()
+else:
+    arena_manifest_sha = ""
 
 # 2. BedWars Arena: jfm_duo.yml
 bedwars_arena_content = """name: jfm_duo
@@ -190,7 +193,178 @@ stores:
 """
 (sources_dir / 'jfm_duo.yml').write_text(bedwars_arena_content, encoding='utf-8')
 
-# 3. BlockHunt Arena: blockhunt_arenas.yml
+# 3. Rush Arenas: rush_1v1.yml & rush_2v2.yml (FunCraft Style per D4)
+rush_1v1_content = """name: rush_1v1
+pauseCountdown: 15
+gameTime: 1200
+world: rush_jfm
+pos1: "-30.0;40.0;-40.0;0.0;0.0"
+pos2: "30.0;110.0;40.0;0.0;0.0"
+lobbyPos1: "-10.0;95.0;-10.0;0.0;0.0"
+lobbyPos2: "10.0;110.0;10.0;0.0;0.0"
+specSpawn: "0.5;85.0;0.5;0.0;0.0"
+lobbySpawn: "0.5;101.0;0.5;0.0;0.0"
+lobbySpawnWorld: rush_jfm
+minPlayers: 2
+postGameWaiting: 5
+customPrefix: "[Rush 1v1]"
+teams:
+  Red:
+    isNewColor: true
+    color: RED
+    maxPlayers: 1
+    bed: "0.0;65.0;-30.0;0.0;0.0"
+    spawn: "0.5;65.0;-25.5;180.0;0.0"
+    actualName: Red
+  Blue:
+    isNewColor: true
+    color: BLUE
+    maxPlayers: 1
+    bed: "0.0;65.0;30.0;0.0;0.0"
+    spawn: "0.5;65.0;25.5;0.0;0.0"
+    actualName: Blue
+spawners:
+  - location: "0.5;65.0;-22.5;0.0;0.0"
+    type: iron
+    customName: ""
+    startLevel: 1
+    hologramEnabled: true
+    team: Red
+    maxSpawnedResources: -1
+  - location: "3.5;65.0;-25.5;0.0;0.0"
+    type: gold
+    customName: ""
+    startLevel: 1
+    hologramEnabled: true
+    team: Red
+    maxSpawnedResources: -1
+  - location: "0.5;65.0;22.5;0.0;0.0"
+    type: iron
+    customName: ""
+    startLevel: 1
+    hologramEnabled: true
+    team: Blue
+    maxSpawnedResources: -1
+  - location: "-3.5;65.0;25.5;0.0;0.0"
+    type: gold
+    customName: ""
+    startLevel: 1
+    hologramEnabled: true
+    team: Blue
+    maxSpawnedResources: -1
+  - location: "0.5;65.0;0.5;0.0;0.0"
+    type: emerald
+    customName: ""
+    startLevel: 1
+    hologramEnabled: true
+    team: ""
+    maxSpawnedResources: 2
+stores:
+  - loc: "-3.5;65.0;-25.5;90.0;0.0"
+    shop: shop.yml
+    parent: false
+    type: VILLAGER
+    name: "&cMarchand Rush"
+    isBaby: false
+    skin: ""
+    team: Red
+  - loc: "3.5;65.0;25.5;270.0;0.0"
+    shop: shop.yml
+    parent: false
+    type: VILLAGER
+    name: "&9Marchand Rush"
+    isBaby: false
+    skin: ""
+    team: Blue
+"""
+(sources_dir / 'rush_1v1.yml').write_text(rush_1v1_content, encoding='utf-8')
+
+rush_2v2_content = """name: rush_2v2
+pauseCountdown: 15
+gameTime: 1800
+world: rush_jfm
+pos1: "-30.0;40.0;-40.0;0.0;0.0"
+pos2: "30.0;110.0;40.0;0.0;0.0"
+lobbyPos1: "-10.0;95.0;-10.0;0.0;0.0"
+lobbyPos2: "10.0;110.0;10.0;0.0;0.0"
+specSpawn: "0.5;85.0;0.5;0.0;0.0"
+lobbySpawn: "0.5;101.0;0.5;0.0;0.0"
+lobbySpawnWorld: rush_jfm
+minPlayers: 2
+postGameWaiting: 5
+customPrefix: "[Rush 2v2]"
+teams:
+  Red:
+    isNewColor: true
+    color: RED
+    maxPlayers: 2
+    bed: "0.0;65.0;-30.0;0.0;0.0"
+    spawn: "0.5;65.0;-25.5;180.0;0.0"
+    actualName: Red
+  Blue:
+    isNewColor: true
+    color: BLUE
+    maxPlayers: 2
+    bed: "0.0;65.0;30.0;0.0;0.0"
+    spawn: "0.5;65.0;25.5;0.0;0.0"
+    actualName: Blue
+spawners:
+  - location: "0.5;65.0;-22.5;0.0;0.0"
+    type: iron
+    customName: ""
+    startLevel: 1
+    hologramEnabled: true
+    team: Red
+    maxSpawnedResources: -1
+  - location: "3.5;65.0;-25.5;0.0;0.0"
+    type: gold
+    customName: ""
+    startLevel: 1
+    hologramEnabled: true
+    team: Red
+    maxSpawnedResources: -1
+  - location: "0.5;65.0;22.5;0.0;0.0"
+    type: iron
+    customName: ""
+    startLevel: 1
+    hologramEnabled: true
+    team: Blue
+    maxSpawnedResources: -1
+  - location: "-3.5;65.0;25.5;0.0;0.0"
+    type: gold
+    customName: ""
+    startLevel: 1
+    hologramEnabled: true
+    team: Blue
+    maxSpawnedResources: -1
+  - location: "0.5;65.0;0.5;0.0;0.0"
+    type: emerald
+    customName: ""
+    startLevel: 1
+    hologramEnabled: true
+    team: ""
+    maxSpawnedResources: 2
+stores:
+  - loc: "-3.5;65.0;-25.5;90.0;0.0"
+    shop: shop.yml
+    parent: false
+    type: VILLAGER
+    name: "&cMarchand Rush"
+    isBaby: false
+    skin: ""
+    team: Red
+  - loc: "3.5;65.0;25.5;270.0;0.0"
+    shop: shop.yml
+    parent: false
+    type: VILLAGER
+    name: "&9Marchand Rush"
+    isBaby: false
+    skin: ""
+    team: Blue
+"""
+(sources_dir / 'rush_2v2.yml').write_text(rush_2v2_content, encoding='utf-8')
+
+# 4. BlockHunt Arena: blockhunt_arenas.yml (Option C: Spectator on elimination)
 blockhunt_arena_content = """jfm_retro:
   ==: nl.Steffion.BlockHunt.Arena
   arenaName: jfm_retro
@@ -279,12 +453,54 @@ blockhunt_arena_content = """jfm_retro:
 """
 (sources_dir / 'blockhunt_arenas.yml').write_text(blockhunt_arena_content, encoding='utf-8')
 
-# 4. Multiverse-Inventories: groups.yml
-groups_template = base_dir / 'JoyStickFM_Dossier_Gamemodes_Preparation' / 'joystickfm-gamemodes' / 'templates' / 'groups.candidate.yml'
-(sources_dir / 'groups.yml').write_text(groups_template.read_text(encoding='utf-8'), encoding='utf-8')
+# 5. Multiverse-Inventories: groups.yml
+groups_content = """groups:
+  hub:
+    worlds:
+      - hub
+      - lobby_minijeux
+    shares:
+      - all
+  survie:
+    worlds:
+      - survie
+      - survie_nether
+      - survie_the_end
+    shares:
+      - all
+  bedwars:
+    worlds:
+      - bedwars_jfm
+      - rush_jfm
+    shares:
+      - all
+  hikabrain:
+    worlds:
+      - hikabrain_jfm
+    shares:
+      - all
+  blockhunt:
+    worlds:
+      - blockhunt_jfm
+    shares:
+      - all
+  legacy_world:
+    worlds:
+      - world
+      - world_nether
+      - world_the_end
+    shares:
+      - all
+  legacy_minijeux:
+    worlds:
+      - minijeux
+    shares:
+      - all
+"""
+(sources_dir / 'groups.yml').write_text(groups_content, encoding='utf-8')
 
-# 5. DeluxeMenus: games.yml
-games_content = """menu_title: '&8✦ &d&lJoyStick FM &8— &bJeux'
+# 6. DeluxeMenus: games.yml (Updated with D1, D3, D4, D6)
+games_content = """menu_title: '&8✦ &d&lJoyStick FM &8— &bMenu des Jeux'
 open_command:
   - menu
   - games
@@ -292,48 +508,113 @@ size: 27
 items:
   filler:
     material: BLACK_STAINED_GLASS_PANE
-    slots: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 14, 16, 17, 18, 19, 20, 21, 23, 24, 25, 26]
+    slots: [0, 1, 2, 3, 5, 6, 7, 8, 9, 11, 13, 15, 17, 18, 19, 21, 23, 25, 26]
     display_name: ' '
-  survie:
-    material: GRASS_BLOCK
-    slot: 11
-    display_name: '&a&lSurvie naturelle'
-    lore:
-      - '&7Biomes, exploration et terrains protégés.'
-    left_click_commands:
-      - '[close]'
-      - '[player] mv tp survie'
-  bedwars:
-    material: RED_BED
-    slot: 13
-    display_name: '&c&lBedWars — 4 équipes de 2'
-    lore:
-      - '&7Rejoins la file de l’arène JoyStick.'
-    left_click_commands:
-      - '[close]'
-      - '[player] bw join jfm_duo'
-  blockhunt:
-    material: BOOKSHELF
-    slot: 15
-    display_name: '&e&lCache-cache — Village rétro'
-    lore:
-      - '&7Rejoins une partie de BlockHunt.'
-    left_click_commands:
-      - '[close]'
-      - '[player] bh join jfm_retro'
   hub:
-    material: NETHER_STAR
-    slot: 22
-    display_name: '&b&lRetour au hub'
+    material: COMPASS
+    slot: 4
+    display_name: '&f&l✦ RETOUR AU HUB PRINCIPAL ✦'
     lore:
-      - '&7Sortie propre du jeu puis retour au lobby.'
+      - '&7Retourne immédiatement au spawn central du vide.'
+      - ''
+      - '&f▶ Clic-gauche pour revenir'
     left_click_commands:
       - '[close]'
       - '[player] spawn'
+  survie:
+    material: GRASS_BLOCK
+    slot: 10
+    display_name: '&a&lSurvie Simple Vanilla'
+    lore:
+      - '&7Exploration, récolte et construction libres.'
+      - '&eMode 100% Vanilla sans claims (D1).'
+      - '&7Tombes protégées 30 min après la mort (D5).'
+      - ''
+      - '&a▶ Clic-gauche pour rejoindre la Survie'
+    left_click_commands:
+      - '[close]'
+      - '[player] mv tp survie'
+  minigames_lobby:
+    material: NETHER_STAR
+    slot: 12
+    display_name: '&d&lLobby des Mini-Jeux'
+    lore:
+      - '&7Plateforme néon JoyStick FM.'
+      - '&7Portails thématiques & PNJ des jeux.'
+      - ''
+      - '&d▶ Clic-gauche pour aller au Lobby'
+    left_click_commands:
+      - '[close]'
+      - '[player] mv tp lobby_minijeux'
+  bedwars:
+    material: RED_BED
+    slot: 14
+    display_name: '&c&lBedWars — 4 équipes de 2'
+    lore:
+      - '&7Protège ton lit et détruis celui des autres.'
+      - '&7Arène spatiale JoyStick FM (Red, Blue, Green, Yellow).'
+      - ''
+      - '&c▶ Clic-gauche pour rejoindre la file'
+    left_click_commands:
+      - '[close]'
+      - '[player] bw join jfm_duo'
+  rush:
+    material: GOLDEN_PICKAXE
+    slot: 16
+    display_name: '&6&lRush FunCraft (1v1 & 2v2)'
+    lore:
+      - '&7Ponts en grès express, bâton knockback,'
+      - '&7lits explosifs et TNTFly calibré.'
+      - ''
+      - '&6▶ Clic-gauche : Rush 1v1'
+      - '&e▶ Clic-droit : Rush 2v2'
+    left_click_commands:
+      - '[close]'
+      - '[player] bw join rush_1v1'
+    right_click_commands:
+      - '[close]'
+      - '[player] bw join rush_2v2'
+  hikabrain:
+    material: SANDSTONE
+    slot: 20
+    display_name: '&e&lHikabrain FunCraft (1v1)'
+    lore:
+      - '&7Passerelle suspendue de 1 bloc de large.'
+      - '&7Touche le lit adverse pour marquer !'
+      - '&bPremier à 5 points remporte la victoire.'
+      - ''
+      - '&e▶ Clic-gauche pour défier en Hikabrain'
+    left_click_commands:
+      - '[close]'
+      - '[player] mv tp hikabrain_jfm'
+  blockhunt:
+    material: BOOKSHELF
+    slot: 22
+    display_name: '&3&lCache-cache (BlockHunt)'
+    lore:
+      - '&7Village rétro 81x81 — Déguisements en blocs.'
+      - '&7Élimination = spectateur permanent (D3).'
+      - ''
+      - '&3▶ Clic-gauche pour rejoindre la partie'
+    left_click_commands:
+      - '[close]'
+      - '[player] bh join jfm_retro'
+  stats:
+    material: PLAYER_HEAD
+    slot: 24
+    display_name: '&b&lMes Statistiques'
+    lore:
+      - '&7Consulte tes statistiques privées en jeu.'
+      - '&7(Classements publics réservés au Top Parkour)'
+      - ''
+      - '&b▶ Clic-gauche pour afficher'
+    left_click_commands:
+      - '[close]'
+      - '[player] stats'
 """
 (sources_dir / 'games.yml').write_text(games_content, encoding='utf-8')
 
-# 6. ItemJoin: config.yml (safe inventory retention)
+# 7. ItemJoin: config.yml (safe inventory retention)
 itemjoin_content = """config-Version: 8
 Language: 'English'
 General:
@@ -389,6 +670,16 @@ files = [
         'sha256': hashlib.sha256((sources_dir / 'jfm_duo.yml').read_bytes()).hexdigest()
     },
     {
+        'destination': 'plugins/BedWars/arenas/rush_1v1.yml',
+        'source': 'sources/rush_1v1.yml',
+        'sha256': hashlib.sha256((sources_dir / 'rush_1v1.yml').read_bytes()).hexdigest()
+    },
+    {
+        'destination': 'plugins/BedWars/arenas/rush_2v2.yml',
+        'source': 'sources/rush_2v2.yml',
+        'sha256': hashlib.sha256((sources_dir / 'rush_2v2.yml').read_bytes()).hexdigest()
+    },
+    {
         'destination': 'plugins/BlockHunt/arenas.yml',
         'source': 'sources/blockhunt_arenas.yml',
         'sha256': hashlib.sha256((sources_dir / 'blockhunt_arenas.yml').read_bytes()).hexdigest()
@@ -411,8 +702,16 @@ files = [
 ]
 
 manifest = {
-    'schema_version': 1,
+    'schema_version': 2,
     'verified': True,
+    'decisions': {
+        'D1': 'Survie simple sans claim (GriefPrevention désactivé sur survie)',
+        'D2': 'ONLINE_MODE=FALSE avec authentification locale (AuthMe / mot de passe chiffré)',
+        'D3': 'BlockHunt spectateur permanent lors de élimination',
+        'D4': 'Rush et Hikabrain FunCraft historiques (lits, bâton KB, 5 points)',
+        'D5': 'Tombes de survie protégées 30 minutes puis pillables publiquement',
+        'D6': 'Statistiques personnelles au menu et Top Parkour seul classement physique au Lobby'
+    },
     'evidence': [
         'audit_gamemodes_report.txt: Paper 26.2 build 129',
         'ScreamingBedWars 0.2.44 bytecode disassembly of Game.saveToConfig',
@@ -436,12 +735,13 @@ manifest = {
         'plugins/BlockHunt/',
         'plugins/Multiverse-Inventories/',
         'plugins/DeluxeMenus/',
-        'plugins/ItemJoin/'
+        'plugins/ItemJoin/',
+        'plugins/GriefPreventionData/'
     ],
     'files': files,
     'post_start_commands': [
         {'command': 'version', 'expect_regex': r'Paper version 26\.2|Checking version'},
-        {'command': 'bw list', 'expect_regex': r'jfm_duo|BedWars'},
+        {'command': 'bw list', 'expect_regex': r'jfm_duo|rush_1v1|rush_2v2|BedWars'},
         {'command': 'mv list', 'expect_regex': r'hub'}
     ],
     'health_checks': [
@@ -451,4 +751,4 @@ manifest = {
 }
 
 (bundle_dir / 'manifest.json').write_text(json.dumps(manifest, indent=2), encoding='utf-8')
-print('Verified bundle updated successfully!')
+print('Verified bundle v2 successfully generated with all 6 decisions (D1 to D6)!')

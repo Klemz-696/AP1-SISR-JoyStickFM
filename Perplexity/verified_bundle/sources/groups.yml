@@ -1,9 +1,8 @@
-# Candidate schema: verify against the installed Multiverse-Inventories version.
-# Each world belongs to one group. Do not load this over existing profiles without a backup.
 groups:
   hub:
     worlds:
       - hub
+      - lobby_minijeux
     shares:
       - all
   survie:
@@ -16,6 +15,12 @@ groups:
   bedwars:
     worlds:
       - bedwars_jfm
+      - rush_jfm
+    shares:
+      - all
+  hikabrain:
+    worlds:
+      - hikabrain_jfm
     shares:
       - all
   blockhunt:

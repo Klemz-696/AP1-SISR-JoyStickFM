@@ -1,0 +1,82 @@
+name: rush_2v2
+pauseCountdown: 15
+gameTime: 1800
+world: rush_jfm
+pos1: "-30.0;40.0;-40.0;0.0;0.0"
+pos2: "30.0;110.0;40.0;0.0;0.0"
+lobbyPos1: "-10.0;95.0;-10.0;0.0;0.0"
+lobbyPos2: "10.0;110.0;10.0;0.0;0.0"
+specSpawn: "0.5;85.0;0.5;0.0;0.0"
+lobbySpawn: "0.5;101.0;0.5;0.0;0.0"
+lobbySpawnWorld: rush_jfm
+minPlayers: 2
+postGameWaiting: 5
+customPrefix: "[Rush 2v2]"
+teams:
+  Red:
+    isNewColor: true
+    color: RED
+    maxPlayers: 2
+    bed: "0.0;65.0;-30.0;0.0;0.0"
+    spawn: "0.5;65.0;-25.5;180.0;0.0"
+    actualName: Red
+  Blue:
+    isNewColor: true
+    color: BLUE
+    maxPlayers: 2
+    bed: "0.0;65.0;30.0;0.0;0.0"
+    spawn: "0.5;65.0;25.5;0.0;0.0"
+    actualName: Blue
+spawners:
+  - location: "0.5;65.0;-22.5;0.0;0.0"
+    type: iron
+    customName: ""
+    startLevel: 1
+    hologramEnabled: true
+    team: Red
+    maxSpawnedResources: -1
+  - location: "3.5;65.0;-25.5;0.0;0.0"
+    type: gold
+    customName: ""
+    startLevel: 1
+    hologramEnabled: true
+    team: Red
+    maxSpawnedResources: -1
+  - location: "0.5;65.0;22.5;0.0;0.0"
+    type: iron
+    customName: ""
+    startLevel: 1
+    hologramEnabled: true
+    team: Blue
+    maxSpawnedResources: -1
+  - location: "-3.5;65.0;25.5;0.0;0.0"
+    type: gold
+    customName: ""
+    startLevel: 1
+    hologramEnabled: true
+    team: Blue
+    maxSpawnedResources: -1
+  - location: "0.5;65.0;0.5;0.0;0.0"
+    type: emerald
+    customName: ""
+    startLevel: 1
+    hologramEnabled: true
+    team: ""
+    maxSpawnedResources: 2
+stores:
+  - loc: "-3.5;65.0;-25.5;90.0;0.0"
+    shop: shop.yml
+    parent: false
+    type: VILLAGER
+    name: "&cMarchand Rush"
+    isBaby: false
+    skin: ""
+    team: Red
+  - loc: "3.5;65.0;25.5;270.0;0.0"
+    shop: shop.yml
+    parent: false
+    type: VILLAGER
+    name: "&9Marchand Rush"
+    isBaby: false
+    skin: ""
+    team: Blue

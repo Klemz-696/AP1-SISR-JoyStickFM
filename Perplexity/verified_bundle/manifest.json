@@ -1,6 +1,14 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "verified": true,
+  "decisions": {
+    "D1": "Survie simple sans claim (GriefPrevention d\u00e9sactiv\u00e9 sur survie)",
+    "D2": "ONLINE_MODE=FALSE avec authentification locale (AuthMe / mot de passe chiffr\u00e9)",
+    "D3": "BlockHunt spectateur permanent lors de \u00e9limination",
+    "D4": "Rush et Hikabrain FunCraft historiques (lits, b\u00e2ton KB, 5 points)",
+    "D5": "Tombes de survie prot\u00e9g\u00e9es 30 minutes puis pillables publiquement",
+    "D6": "Statistiques personnelles au menu et Top Parkour seul classement physique au Lobby"
+  },
   "evidence": [
     "audit_gamemodes_report.txt: Paper 26.2 build 129",
     "ScreamingBedWars 0.2.44 bytecode disassembly of Game.saveToConfig",
@@ -24,13 +32,24 @@
     "plugins/BlockHunt/",
     "plugins/Multiverse-Inventories/",
     "plugins/DeluxeMenus/",
-    "plugins/ItemJoin/"
+    "plugins/ItemJoin/",
+    "plugins/GriefPreventionData/"
   ],
   "files": [
     {
       "destination": "plugins/BedWars/arenas/jfm_duo.yml",
       "source": "sources/jfm_duo.yml",
       "sha256": "1314d11878d92765ee0a18c380277607bbe5c09c6f04dca6cb3fb92ee434a2ec"
+    },
+    {
+      "destination": "plugins/BedWars/arenas/rush_1v1.yml",
+      "source": "sources/rush_1v1.yml",
+      "sha256": "8e5c0e54016f673e0e69003931f1aaf62cd3d064a5ef0fd68dd64e1a69ad6768"
+    },
+    {
+      "destination": "plugins/BedWars/arenas/rush_2v2.yml",
+      "source": "sources/rush_2v2.yml",
+      "sha256": "edacee8bca92014fa193eccd3c2157ec390686c432101d4e7cc46b1afc3d90bc"
     },
     {
       "destination": "plugins/BlockHunt/arenas.yml",
@@ -40,12 +59,12 @@
     {
       "destination": "plugins/Multiverse-Inventories/groups.yml",
       "source": "sources/groups.yml",
-      "sha256": "457f46839308aaafef4a08a38e2f1332649421450766f592c8210162aa66ab1a"
+      "sha256": "bd7b15e82572bde63e9fd293155c384e75432dd20f959d8f86ca7ec54c12144a"
     },
     {
       "destination": "plugins/DeluxeMenus/gui_menus/games.yml",
       "source": "sources/games.yml",
-      "sha256": "a6dfe25d3c67054455f5e0051d73183fdacd961f72b429258e7a8569728606cb"
+      "sha256": "01b0b550e8e794810c5d694f9ae3a76134dc8de2bb90e31d00769bb639a4f63b"
     },
     {
       "destination": "plugins/ItemJoin/config.yml",
@@ -60,7 +79,7 @@
     },
     {
       "command": "bw list",
-      "expect_regex": "jfm_duo|BedWars"
+      "expect_regex": "jfm_duo|rush_1v1|rush_2v2|BedWars"
     },
     {
       "command": "mv list",
