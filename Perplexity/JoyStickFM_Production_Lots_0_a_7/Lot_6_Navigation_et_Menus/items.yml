@@ -11,23 +11,11 @@ items:
       - ''
       - '&e➜ Clic-droit pour ouvrir le menu'
     commands:
-      right-click:
-        - 'player: menu'
-      left-click:
-        - 'player: menu'
-    commands-action: RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK, LEFT_CLICK_AIR, LEFT_CLICK_BLOCK
-    commands-cost: 0
-    commands-cooldown: 0
-    enabled-worlds:
-      - hub
-      - world
-      - lobby_minijeux
-    triggers:
-      - join
-      - respawn
-      - world-change
-    itemflags:
-      - HIDE_ATTRIBUTES
+      - 'menu'
+    commands-type: player
+    triggers: join, respawn, world-change
+    enabled-worlds: hub, world, lobby_minijeux
+    itemflags: HIDE_ATTRIBUTES
     permission-node: false
     always-give: true
     overwrite: true
@@ -49,24 +37,11 @@ items:
       - ''
       - '&c➜ Clic-droit pour retourner au Hub'
     commands:
-      right-click:
-        - 'player: spawn'
-      left-click:
-        - 'player: spawn'
-    commands-action: RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK, LEFT_CLICK_AIR, LEFT_CLICK_BLOCK
-    commands-cost: 0
-    commands-cooldown: 0
-    enabled-worlds:
-      - lobby_minijeux
-      - rush_jfm
-      - hikabrain_jfm
-      - bedwars_jfm
-    triggers:
-      - join
-      - respawn
-      - world-change
-    itemflags:
-      - HIDE_ATTRIBUTES
+      - 'spawn'
+    commands-type: player
+    triggers: join, respawn, world-change
+    enabled-worlds: lobby_minijeux, rush_jfm, hikabrain_jfm, bedwars_jfm
+    itemflags: HIDE_ATTRIBUTES
     permission-node: false
     always-give: true
     overwrite: true
