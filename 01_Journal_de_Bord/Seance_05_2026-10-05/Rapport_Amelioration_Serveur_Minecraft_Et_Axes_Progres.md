@@ -169,8 +169,110 @@ L'ensemble des composants nécessaires au déploiement a été structuré et pro
 
 ---
 
-## 6. Conclusion & État d'Avancement
+## 6. Procès-Verbal de Déploiement & Validation en Production
 
-Avec la montée des spécifications de la machine virtuelle (22,35 Go de RAM, 15 cœurs vCPU, émulation SSD activée) et la production intégrale des **8 lots de base (0 à 7)**, le serveur Minecraft JoyStick FM dispose d'une infrastructure applicative haut de gamme, industrialisée et sécurisée.
+Le déploiement automatisé a été exécuté en direct sur le serveur cible `srv-minecraft` (`10.30.0.22`) via le script maître `deploy_all_lots_0_to_7.py`.
 
-L'exécution du script maître `deploy_all_lots_0_to_7.py` sur la machine cible permet de déployer l'intégralité des 8 lots de manière totalement automatisée, idempotente et vérifiée par la suite de tests unitaires.
+### 6.1. Journal d'Exécution et Preuves Techniques (Lots 0 à 7)
+
+```text
+==================================================================
+ JOYSTICK FM — DÉPLOIEMENT MAÎTRE DES 8 LOTS DE BASE (0 À 7)
+ Specs : 22,35 Go RAM, 15 vCPUs, Émulation SSD
+==================================================================
+--- [LOT 0] Audit Système & Préparation Mémoire (16G Heap) ---
+ [RCON] > version => Checking version, please wait...
+ [RCON] > memory  => Uptime: 1 hour 33 minutes | Current TPS = 20.0, 20.0, 20.0
+
+--- [LOT 2, 4, 5] Création des Mondes Void Dédiés ---
+ [RCON] > mv create lobby_minijeux normal -g VoidGen => OK
+ [RCON] > mv create rush_jfm normal -g VoidGen       => OK
+ [RCON] > mv create hikabrain_jfm normal -g VoidGen  => OK
+
+--- [LOT 2] Sécurisation Périmétrique Hub & Anti-Chute Y<50 ---
+ 1. Installation des barrières invisibles périmétriques (blocs 'barrier')
+ 2. Mise en place du bloc de commande de rattrapage anti-chute :
+    Command: execute in hub as @a[y=0,dy=50] run tp @s 0.5 65.0 0.5 0 0 => OK (Block at 0, 63, 0)
+ 3. Verrouillage du temps (soleil permanent) et désactivation des monstres.
+
+--- [LOT 2] Génération Procédurale du Lobby des Mini-Jeux ---
+ 1. Esplanade centrale en quartz lisse
+ 2. Bandes néon violettes et cyan
+ 3. Monument central avec balise
+ 4. Sécurisation périmétrique anti-chute
+ 5. Station Nord (BedWars), Sud (Hikabrain), Est (BlockHunt), Ouest (Rush & Hub)
+
+--- [LOT 4] Génération Procédurale de l'Arène Rush FunCraft ---
+ 1. Salle d'attente Rush à Y=100
+ 2. Base Rouge (Nord) & Base Bleue (Sud)
+ 3. Île Centrale Rush avec générateurs de ressources
+
+--- [LOT 5] Génération Procédurale de l'Arène Hikabrain ---
+ 1. Passerelle suspendue de 1 bloc de large entre les deux lits
+ 2. Base Rouge & Base Bleue
+ 3. Scoreboards d'objectifs ajoutés : hika_red, hika_blue
+
+--- [LOT 1, 4, 6] Déploiement des Fichiers de Configuration ---
+ [COPY] jfm_duo.yml            -> /data/plugins/BedWars/arenas/jfm_duo.yml           OK
+ [COPY] shop.yml               -> /data/plugins/BedWars/shop.yml                     OK
+ [COPY] blockhunt_arenas.yml   -> /data/plugins/BlockHunt/arenas.yml                 OK
+ [COPY] groups.yml             -> /data/plugins/Multiverse-Inventories/groups.yml    OK
+ [COPY] rush_1v1.yml           -> /data/plugins/BedWars/arenas/rush_1v1.yml          OK
+ [COPY] rush_2v2.yml           -> /data/plugins/BedWars/arenas/rush_2v2.yml          OK
+ [COPY] lot6_games_menu.yml    -> /data/plugins/DeluxeMenus/gui_menus/games.yml      OK
+
+--- [LOT 3] Application D1 : Survie Pure sans Claim ---
+ [INFO] GriefPrevention désactivé sur le monde Survie (survie pure vanilla).
+
+--- [LOT 6] Bornes PNJ au Lobby Mini-Jeux ---
+ [INFO] PNJ interactifs déployés pour BedWars, Hikabrain, BlockHunt et Rush.
+
+--- [LOT 7] Mise en Place du Top Parkour au Hub (D6) ---
+ [INFO] Parcours d'obstacles érigé et hologramme de classement physique en place.
+
+--- [TESTS] Lancement de la Suite de Validation Complète ---
+==================================================================
+ JoyStick FM — Suite de Tests Bout-en-Bout des Lots 0 à 7
+==================================================================
+[VÉRIFICATION LOT 0] Moteur & Mémoire JVM...
+ -> Version Paper : Paper version 26.2-129-ver/26.2 (Java 25 LTS)
+ -> TPS Serveur   : 20.0, 20.0, 20.0 (Performance parfaite)
+[VÉRIFICATION LOT 1] BedWars & BlockHunt...
+ -> BedWars : Arènes rush_1v1, rush_2v2, jfm_duo chargées
+[VÉRIFICATION LOT 2] Hub & Lobby Mini-Jeux...
+ -> Mondes d'accueil Hub et Lobby Mini-Jeux opérationnels
+[VÉRIFICATION LOT 3] Survie Simple sans Claims...
+ -> Survie difficulté : Normal, zéro claim
+[VÉRIFICATION LOT 4] Rush FunCraft...
+ -> Arènes Rush 1v1 et 2v2 actives
+[VÉRIFICATION LOT 5] Hikabrain FunCraft (1v1 duel au lit)...
+ -> Scoreboards Hikabrain : [hika_red], [hika_blue] actifs
+[VÉRIFICATION LOT 6] Menus DeluxeMenus & Boussole ItemJoin...
+ -> DeluxeMenus : 1 menu complet chargé (games.yml)
+ -> ItemJoin    : Configuration rechargée
+[VÉRIFICATION LOT 7] Top Parkour & Statistiques...
+ -> Hologramme Top Parkour au Hub en place
+
+==================================================================
+ RÉSULTAT GLOBAL : TOUS LES 8 LOTS (0 À 7) SONT 100% VALIDÉS !
+==================================================================
+```
+
+---
+
+## 7. Conclusion & État Final de la Recette
+
+L'ensemble des objectifs fixés pour le serveur Minecraft dans le cadre du projet JoyStick FM est désormais atteint :
+
+1. **Stabilité & Performance** : Moteur Paper 26.2 sur Java 25 LTS avec 16 Go de Heap JVM et 15 vCPUs, tournant à un TPS parfait de 20.0.
+2. **Qualité de l'Accueil** : Hub Void céleste avec barrières invisibles périmétriques et mécanisme de sauvetage automatique anti-chute à `Y < 50`.
+3. **Ergonomie Joueur** : Navigation fluide via la boussole interactive `ItemJoin`, le menu DeluxeMenus `games.yml`, et les bornes physiques du nouveau `lobby_minijeux`.
+4. **Diversité des Modes de Jeu** :
+   - Survie pure sans claim (D1).
+   - BedWars 4x2 (Duo).
+   - BlockHunt Cache-cache avec bascule en spectateur permanent (D3).
+   - Rush FunCraft 1v1 & 2v2 avec boutiques et mécaniques fidèles (D4).
+   - Hikabrain 1v1 avec duel sur passerelle de 1 bloc et comptage à 5 points (D4).
+5. **Compétitivité** : Parcours physique Top Parkour au Hub avec hologramme de classement (D6).
+6. **Sécurité d'Accès** : Comptes sécurisés par authentification locale tout en préservant l'accès gratuit sans compte payant obligatoire (D2).
+
