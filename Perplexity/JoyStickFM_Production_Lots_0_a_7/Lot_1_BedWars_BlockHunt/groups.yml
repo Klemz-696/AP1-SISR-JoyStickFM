@@ -1,0 +1,45 @@
+# Multiverse-Inventories Configuration for JoyStick FM
+# Strict inventory partitioning across all worlds
+
+groups:
+  hub:
+    worlds:
+      - hub
+      - lobby_minijeux
+    shares:
+      - all
+  survie:
+    worlds:
+      - survie
+      - survie_nether
+      - survie_the_end
+    shares:
+      - all
+  bedwars:
+    worlds:
+      - bedwars_jfm
+      - rush_jfm
+    shares:
+      - all
+  hikabrain:
+    worlds:
+      - hikabrain_jfm
+    shares:
+      - all
+  blockhunt:
+    worlds:
+      - blockhunt_jfm
+    shares:
+      - all
+  legacy_world:
+    worlds:
+      - world
+      - world_nether
+      - world_the_end
+    shares:
+      - all
+  legacy_minijeux:
+    worlds:
+      - minijeux
+    shares:
+      - all

@@ -1,0 +1,114 @@
+# DeluxeMenus Configuration for JoyStick FM (Lot 6)
+# Central navigation GUI covering all gamemodes and decisions D1-D6
+
+menu_title: '&8✦ &d&lJoyStick FM &8— &bMenu des Jeux'
+open_command:
+  - menu
+  - games
+size: 27
+items:
+  filler:
+    material: BLACK_STAINED_GLASS_PANE
+    slots: [0, 1, 2, 3, 5, 6, 7, 8, 9, 11, 13, 15, 17, 18, 19, 21, 23, 25, 26]
+    display_name: ' '
+  hub:
+    material: COMPASS
+    slot: 4
+    display_name: '&f&l✦ RETOUR AU HUB PRINCIPAL ✦'
+    lore:
+      - '&7Retourne immédiatement au spawn central du vide.'
+      - ''
+      - '&f▶ Clic-gauche pour revenir'
+    left_click_commands:
+      - '[close]'
+      - '[player] spawn'
+  survie:
+    material: GRASS_BLOCK
+    slot: 10
+    display_name: '&a&lSurvie Simple Vanilla'
+    lore:
+      - '&7Exploration, récolte et construction libres.'
+      - '&eMode 100% Vanilla sans claims (D1).'
+      - '&7Tombes protégées 30 min après la mort (D5).'
+      - ''
+      - '&a▶ Clic-gauche pour rejoindre la Survie'
+    left_click_commands:
+      - '[close]'
+      - '[player] mv tp survie'
+  minigames_lobby:
+    material: NETHER_STAR
+    slot: 12
+    display_name: '&d&lLobby des Mini-Jeux'
+    lore:
+      - '&7Plateforme néon JoyStick FM.'
+      - '&7Portails thématiques & PNJ des jeux.'
+      - ''
+      - '&d▶ Clic-gauche pour aller au Lobby'
+    left_click_commands:
+      - '[close]'
+      - '[player] mv tp lobby_minijeux'
+  bedwars:
+    material: RED_BED
+    slot: 14
+    display_name: '&c&lBedWars — 4 équipes de 2'
+    lore:
+      - '&7Protège ton lit et détruis celui des autres.'
+      - '&7Arène spatiale JoyStick FM (Red, Blue, Green, Yellow).'
+      - ''
+      - '&c▶ Clic-gauche pour rejoindre la file'
+    left_click_commands:
+      - '[close]'
+      - '[player] bw join jfm_duo'
+  rush:
+    material: GOLDEN_PICKAXE
+    slot: 16
+    display_name: '&6&lRush FunCraft (1v1 & 2v2)'
+    lore:
+      - '&7Ponts en grès express, bâton knockback,'
+      - '&7lits explosifs et TNTFly calibré.'
+      - ''
+      - '&6▶ Clic-gauche : Rush 1v1'
+      - '&e▶ Clic-droit : Rush 2v2'
+    left_click_commands:
+      - '[close]'
+      - '[player] bw join rush_1v1'
+    right_click_commands:
+      - '[close]'
+      - '[player] bw join rush_2v2'
+  hikabrain:
+    material: SANDSTONE
+    slot: 20
+    display_name: '&e&lHikabrain FunCraft (1v1)'
+    lore:
+      - '&7Passerelle suspendue de 1 bloc de large.'
+      - '&7Touche le lit adverse pour marquer !'
+      - '&bPremier à 5 points remporte la victoire.'
+      - ''
+      - '&e▶ Clic-gauche pour défier en Hikabrain'
+    left_click_commands:
+      - '[close]'
+      - '[player] mv tp hikabrain_jfm'
+  blockhunt:
+    material: BOOKSHELF
+    slot: 22
+    display_name: '&3&lCache-cache (BlockHunt)'
+    lore:
+      - '&7Village rétro 81x81 — Déguisements en blocs.'
+      - '&7Élimination = spectateur permanent (D3).'
+      - ''
+      - '&3▶ Clic-gauche pour rejoindre la partie'
+    left_click_commands:
+      - '[close]'
+      - '[player] bh join jfm_retro'
+  stats:
+    material: PLAYER_HEAD
+    slot: 24
+    display_name: '&b&lMes Statistiques'
+    lore:
+      - '&7Consulte tes statistiques privées en jeu.'
+      - '&7(Classements publics réservés au Top Parkour)'
+      - ''
+      - '&b▶ Clic-gauche pour afficher'
+    left_click_commands:
+      - '[close]'
+      - '[player] stats'

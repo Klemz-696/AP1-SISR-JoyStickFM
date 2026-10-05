@@ -1,0 +1,27 @@
+# AuthMeReloaded Configuration for JoyStick FM (Decision D2 - Option A)
+# Allows offline-mode player logins with SHA256 hashed passwords
+# Protects OP/staff and player accounts against identity spoofing
+
+settings:
+  security:
+    passwordHash: SHA256
+    minPasswordLength: 4
+    maxPasswordLength: 32
+  restrictions:
+    allowChat: false
+    allowCommands:
+      - /login
+      - /register
+      - /l
+      - /reg
+    maxLoginTry: 5
+    timeout: 60
+    teleportUnAuthedToSpawn: true
+  registration:
+    enabled: true
+    maxRegPerIp: 3
+    force: true
+  messages:
+    loginPrompt: "&d[JoyStick FM] &eBienvenue ! Connecte-toi avec &b/login <mot_de_passe>"
+    registerPrompt: "&d[JoyStick FM] &eBienvenue ! Crée ton compte avec &a/register <mot_de_passe> <confirmer>"
+    loginSuccess: "&a[JoyStick FM] &2Connexion réussie ! Bon jeu sur nos mini-jeux."

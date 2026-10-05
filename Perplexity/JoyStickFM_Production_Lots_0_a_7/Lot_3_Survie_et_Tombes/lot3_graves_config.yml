@@ -1,0 +1,33 @@
+# JoyStick FM - Grave System Configuration (Decision D5 - Option B)
+# Features:
+#   - Physical grave spawned at death location in 'survie'
+#   - Exclusive protection timer: 30 minutes (1800 seconds)
+#   - Public looting allowed after 30 minutes expiration
+#   - Coordinates sent directly to player in chat
+
+graves:
+  enabled-worlds:
+    - survie
+    - survie_nether
+    - survie_the_end
+  disabled-worlds:
+    - hub
+    - lobby_minijeux
+    - bedwars_jfm
+    - rush_jfm
+    - hikabrain_jfm
+    - blockhunt_jfm
+
+  protection:
+    # 30 minutes in seconds (Option B)
+    timer-seconds: 1800
+    allow-public-looting-after-expire: true
+    break-on-owner-click: true
+    prevent-creeper-explosion: true
+    prevent-lava-burn: true
+
+  messages:
+    death-coords: "&c[Tombe] &7Tu as péri ! Ta tombe a été créée en &eX: {X}, Y: {Y}, Z: {Z}&7."
+    protection-notice: "&6[Tombe] &aTon équipement est protégé exclusivement pour toi pendant &e30 minutes&a."
+    unlock-notice: "&c[Tombe] &cAttention : ta tombe n'est plus protégée et peut être pillée !"
+    reclaim-success: "&a[Tombe] &2Tu as récupéré l'intégralité de tes possessions !"

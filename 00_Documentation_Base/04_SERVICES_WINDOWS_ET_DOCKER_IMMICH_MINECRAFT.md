@@ -355,4 +355,24 @@ Dans le prolongement des retours d'expérience et des tests en séance, six déc
 3. **Arène Hikabrain (`hikabrain_jfm`)** : Passerelle suspendue de 1 bloc de grès à Y=64 reliant deux plateformes équipées de lits pour le duel au clic en 5 points.
 4. **Sécurisation Anti-Chute Hub** : Barrières invisibles périmétriques sur 3 blocs de haut et rattrapage automatique sous `Y=50` retéléportant instantanément au spawn `(0.5, 65, 0.5)` sans vélocité ni dégâts de chute.
 
+---
+
+### 4.9. Montée en Puissance Matérielle (22,35 Go RAM, 15 vCPUs, SSD) & Déploiement des 8 Lots (0 à 7)
+
+Pour accompagner l'ouverture multi-jeux simultanée (BedWars, Rush, Hikabrain, BlockHunt, Survie procédurale), les spécifications de la machine virtuelle `srv-minecraft` ont été augmentées au niveau de l'hyperviseur :
+- **Mémoire RAM allouée :** **22,35 Go** (Tas JVM calibré à **16 Go** avec G1GC optimisé pour 15 threads).
+- **Processeur :** **15 cœurs vCPU** alloués, assurant une parallélisation complète de la génération Chunky et du ticking asynchrone PaperMC.
+- **Stockage :** **Émulation SSD activée** (élimination des temps d'attente d'I/O disque lors des sauvegardes de chunks).
+
+#### Organisation des 8 Lots de Base Produits (`Perplexity/JoyStickFM_Production_Lots_0_a_7/`) :
+* **Lot 0 (Staging & Specs) :** `docker-compose.optimized.yml` (16G heap, Aikar G1GC flags), script d'audit matériel et backup tar immuable.
+* **Lot 1 (BedWars & BlockHunt) :** Configuration `jfm_duo.yml`, `shop.yml`, `blockhunt_arenas.yml` (D3 spectateur permanent) et isolation Multiverse-Inventories.
+* **Lot 2 (Hub & Lobby Mini-Jeux) :** Sécurisation anti-vide du Hub (`lot2_hub_security.py`) et générateur procédural du monde néon `lobby_minijeux` (`lot2_generate_minigames_lobby.py`).
+* **Lot 3 (Survie Vanilla & Tombes) :** Désactivation des claims sur `survie` (D1) et module de tombes physiques protégées 30 minutes avant pillage public (D5).
+* **Lot 4 (Rush FunCraft) :** Arènes `rush_1v1.yml`, `rush_2v2.yml`, générateur `rush_jfm` et boutique grès/stick KB/TNT.
+* **Lot 5 (Hikabrain 1v1) :** Générateur de passerelle suspendue 1 bloc et moteur autonome de scoring au lit adverse en 5 points (`lot5_hikabrain_engine.py`).
+* **Lot 6 (Navigation DeluxeMenus) :** Menu 27 slots mis à jour avec boussole ItemJoin et PNJ interactifs d'accès aux files de jeux.
+* **Lot 7 (AuthMe & Recette) :** Module d'authentification locale SHA256 (D2), Top Parkour physique au Hub (D6), suite de tests globale (`lot7_full_test_suite.py`) et matrice de recette (`RECETTE_EXPLOITATION_LOTS_0_A_7.md`).
+* **Déploiement Maître 1-Clic :** `deploy_all_lots_0_to_7.py` orchestrant l'ensemble de manière totalement automatisée.
+
 

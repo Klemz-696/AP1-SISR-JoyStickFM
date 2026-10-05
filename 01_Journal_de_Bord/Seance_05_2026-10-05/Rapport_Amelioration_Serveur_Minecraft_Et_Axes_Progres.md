@@ -1,7 +1,9 @@
 # JoyStick FM — Rapport d'Amélioration du Serveur Minecraft
 **Date :** 5 octobre 2026  
 **Auteurs :** Équipe Projet AP 1 (BTS SIO SISR) — JoyStick FM  
-**Cible d'infrastructure :** Machine virtuelle `srv-minecraft` (`10.30.0.22`), conteneur Docker `minecraft_ap1` (PaperMC 26.2, Java 25 LTS)
+**Cible d'infrastructure :** Machine virtuelle `srv-minecraft` (`10.30.0.22`), conteneur Docker `minecraft_ap1` (PaperMC 26.2, Java 25 LTS)  
+**Spécifications matérielles allouées :** 22,35 Go RAM, 15 cœurs vCPU, Stockage avec émulation SSD  
+**Dimensionnement JVM :** Tas alloué de 16 Go RAM (`-Xms16G -Xmx16G`, G1GC Aikar optimisé 15 threads)
 
 ---
 
@@ -17,16 +19,16 @@ Le présent rapport dresse le bilan exhaustif des améliorations techniques dép
 
 ```mermaid
 graph TD
-    A["Infrastructure PaperMC 26.2 / Java 25"] --> B["Réseau : Destination NAT OPNsense (25565)"]
+    A["Infrastructure PaperMC 26.2 / Java 25 (16G RAM, 15 vCPU)"] --> B["Réseau : Destination NAT OPNsense (25565)"]
     A --> C["Hub Céleste Void (Y=64, Midi permanent)"]
     A --> D["Navigation : Boussole ItemJoin + GUI DeluxeMenus"]
-    A --> E["Survie Procédurale (Chunky 16k chunks + Claims)"]
-    A --> F["Mini-Jeux : BedWars & BlockHunt"]
+    A --> E["Survie Procédurale (Chunky 16k chunks, Zéro claim)"]
+    A --> F["Mini-Jeux : BedWars, Rush & BlockHunt"]
     A --> G["Cloisonnement des Inventaires (Multiverse-Inventories)"]
 ```
 
 ### 2.1. Moteur, Performance & Sécurité
-- **Migration sous PaperMC 26.2 (build 129)** : Abandon du serveur vanilla au profit d'un moteur asynchrone hautement optimisé, compilé sous **Java 25 LTS (Temurin)** avec 3 Go de mémoire RAM allouée.
+- **Migration sous PaperMC 26.2 (build 129)** : Abandon du serveur vanilla au profit d'un moteur asynchrone hautement optimisé, compilé sous **Java 25 LTS (Temurin)** avec **16 Go de mémoire RAM allouée au conteneur** (sur 22,35 Go physiques disponibles) et 15 cœurs vCPU.
 - **Redirection de port OPNsense (Destination NAT)** : Création d'une règle de transfert de port WAN (`192.168.101.37:25565` vers DMZ Int `10.30.0.22:25565`) avec règle de filtrage automatique, garantissant l'accès des élèves du lycée sans exposition du port d'administration RCON (25575).
 - **Gouvernance des accès (LuckPerms)** : Suppression du wildcard destructeur `'*'` pour les administrateurs, mise en place de permissions granulaires par monde (`luckperms.*`, `multiverse.*`, `deluxemenus.*`, `essentials.*`).
 - **Sauvegardes à froid automatisées** : Intégration dans le script d'orchestration `deploy_gamemodes.sh` d'une archive `tar` immuable stockée dans `/opt/minecraft/gamemodes-backups/` avant toute écriture en production.
@@ -149,6 +151,26 @@ graph TD
 
 ---
 
+### 5.1. Inventaire Exhaustif des Livrables Produits (Lots 0 à 7)
+
+L'ensemble des composants nécessaires au déploiement a été structuré et produit dans le dossier `Perplexity/JoyStickFM_Production_Lots_0_a_7/` :
+
+| Lot | Rôle & Contenu | Fichiers Livrés |
+| :--- | :--- | :--- |
+| **Lot 0** | **Audit, Staging & Specs 22G RAM** | `docker-compose.optimized.yml` (Heap 16G, G1GC 15 vCPU), `lot0_audit_hardware_and_staging.sh` |
+| **Lot 1** | **BedWars, BlockHunt & Inventaires** | `jfm_duo.yml` (4x2), `shop.yml` (Boutique officielle), `blockhunt_arenas.yml` (D3 spectateur), `groups.yml`, `test_lot1_arenas_and_inventories.py` |
+| **Lot 2** | **Sécurisation Hub & Lobby Mini-Jeux** | `lot2_hub_security.py` (Barrières + anti-chute Y<50), `lot2_generate_minigames_lobby.py` (Monde néon), `test_lot2_hub_and_lobby.py` |
+| **Lot 3** | **Survie Simple & Tombes 30 min** | `lot3_survie_config.sh` (Zéro claim D1), `lot3_graves_config.yml` (D5 30 min), `test_lot3_survie_graves.py` |
+| **Lot 4** | **Mode Rush FunCraft (1v1 & 2v2)** | `lot4_generate_rush_arena.py`, `rush_1v1.yml`, `rush_2v2.yml`, `rush_shop.yml` (Grès pas cher, stick KB, TNT), `test_lot4_rush_mechanics.py` |
+| **Lot 5** | **Mode Hikabrain (Duel lit 5 pts)** | `lot5_generate_hikabrain_arena.py` (Pont 1 bloc), `lot5_hikabrain_engine.py` (Moteur de duel autonome), `test_lot5_hikabrain_scoring.py` |
+| **Lot 6** | **Navigation & Menus Graphiques** | `lot6_games_menu.yml` (DeluxeMenus 27 slots), `lot6_setup_lobby_npcs.py` (PNJ cliquables), `test_lot6_navigation_menus.py` |
+| **Lot 7** | **AuthMe, Top Parkour & Recette** | `lot7_authme_config.yml` (D2 SHA256), `lot7_setup_parkour.py` (D6), `lot7_full_test_suite.py`, `RECETTE_EXPLOITATION_LOTS_0_A_7.md` |
+| **Master** | **Déploiement Automatisé 1-Clic** | `deploy_all_lots_0_to_7.py` (Orchestrateur global des 8 lots) |
+
+---
+
 ## 6. Conclusion & État d'Avancement
 
-Avec la validation des décisions D1 à D6 et la préparation complète des scripts procéduraux (`generate_minigames_lobby.py`, `generate_rush_arena.py`, `generate_hikabrain_arena.py`, `apply_decisions_d1_d6.py`) et du bundle de configuration (`verified_bundle`), le serveur Minecraft JoyStick FM dispose d'un plan d'exécution sans faille, prêt à être déployé pour offrir une expérience multijoueur complète et fidèle aux attentes des élèves et de l'établissement.
+Avec la montée des spécifications de la machine virtuelle (22,35 Go de RAM, 15 cœurs vCPU, émulation SSD activée) et la production intégrale des **8 lots de base (0 à 7)**, le serveur Minecraft JoyStick FM dispose d'une infrastructure applicative haut de gamme, industrialisée et sécurisée.
+
+L'exécution du script maître `deploy_all_lots_0_to_7.py` sur la machine cible permet de déployer l'intégralité des 8 lots de manière totalement automatisée, idempotente et vérifiée par la suite de tests unitaires.

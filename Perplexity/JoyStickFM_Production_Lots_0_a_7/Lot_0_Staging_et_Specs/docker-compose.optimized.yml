@@ -1,0 +1,56 @@
+# JoyStick FM - Docker Compose Optimisé Haute Performance
+# Calibré pour : 22,35 Go RAM, 15 vCPU, Émulation SSD
+# Machine Virtuelle : srv-minecraft (10.30.0.22, Debian 12)
+
+services:
+  minecraft-server:
+    image: itzg/minecraft-server:latest
+    container_name: minecraft_ap1
+    ports:
+      - "25565:25565"
+      - "25575:25575"
+    environment:
+      EULA: "TRUE"
+      TYPE: "CUSTOM"
+      CUSTOM_SERVER: "paper.jar"
+      ONLINE_MODE: "FALSE" # Compatible tous comptes + AuthMe (D2)
+      MOTD: "§d✦ JOYSTICK FM ✦ §bServeur Multi-Jeux & Survie §7- §eAP1 SISR"
+      MEMORY: "16G" # 16 Go alloués au tas JVM (marge de 6.35 Go pour l'OS et cache disque)
+      INIT_MEMORY: "16G"
+      JVM_XX_OPTS: >-
+        -XX:+UseG1GC
+        -XX:+ParallelRefProcEnabled
+        -XX:MaxGCPauseMillis=200
+        -XX:+UnlockExperimentalVMOptions
+        -XX:+DisableExplicitGC
+        -XX:+AlwaysPreTouch
+        -XX:G1NewSizePercent=30
+        -XX:G1MaxNewSizePercent=40
+        -XX:G1ReservePercent=20
+        -XX:G1HeapWastePercent=5
+        -XX:G1MixedGCCountTarget=4
+        -XX:InitiatingHeapOccupancyPercent=15
+        -XX:G1MixedGCLiveThresholdPercent=90
+        -XX:G1RSetUpdatingPauseTimePercent=5
+        -XX:SurvivorRatio=32
+        -XX:+PerfDisableSharedMem
+        -XX:MaxTenuringThreshold=1
+        -XX:ParallelGCThreads=10
+        -XX:ConcGCThreads=4
+      JVM_OPTS: "-DbundlerRepoDir=/data"
+      FORCE_GAMEMODE: "TRUE"
+      GAMEMODE: "adventure"
+      DIFFICULTY: "peaceful"
+      ENABLE_RCON: "TRUE"
+      RCON_PASSWORD: "adminpassword"
+      MAX_PLAYERS: "30"
+      VIEW_DISTANCE: "10"
+      SIMULATION_DISTANCE: "6"
+      TZ: "Europe/Paris"
+    volumes:
+      - ./data:/data
+    restart: unless-stopped
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
