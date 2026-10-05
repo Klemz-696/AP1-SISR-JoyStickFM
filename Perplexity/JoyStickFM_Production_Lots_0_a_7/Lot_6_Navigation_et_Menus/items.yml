@@ -1,4 +1,4 @@
-items-v4:
+items:
   game-selector:
     id: COMPASS
     slot: 4
@@ -15,12 +15,12 @@ items-v4:
         - 'player: menu'
       left-click:
         - 'player: menu'
+    commands-action: RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK, LEFT_CLICK_AIR, LEFT_CLICK_BLOCK
     commands-cost: 0
     commands-cooldown: 0
     enabled-worlds:
       - hub
       - world
-      - hub_void
       - lobby_minijeux
     triggers:
       - join
@@ -53,6 +53,7 @@ items-v4:
         - 'player: spawn'
       left-click:
         - 'player: spawn'
+    commands-action: RIGHT_CLICK_AIR, RIGHT_CLICK_BLOCK, LEFT_CLICK_AIR, LEFT_CLICK_BLOCK
     commands-cost: 0
     commands-cooldown: 0
     enabled-worlds:

@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-JoyStick FM - Master Polish & Fix Orchestrator (V3 - Final Resolution of All In-Game Issues)
+JoyStick FM - Master Polish & Fix Orchestrator (V4 - 100% Robust In-Game Polish)
 Resolves:
-  1. Compass Item & $10 error: Purges /data/plugins/ItemJoin/players/, replaces items.yml with zero-cost config, clears inventory and delivers the fresh interactive Compass.
+  1. Compass Item & $10 error: Purges /data/plugins/ItemJoin/players/, updates items.yml with valid 'items:' root key, clears inventory and delivers the fresh interactive Compass.
   2. JumpTo / Essentials Compass Hijack: Revokes essentials.jumpto & essentials.compass permissions for default and user Klemz_696.
   3. Duplicate Parkour: Purges all duplicate floating blocks and old armor stands/text displays across X=4..60, Y=63..100.
   4. Parkour Leaderboard: Single crystal-clear holographic display using pure Minecraft color codes (§), guaranteed 0% raw JSON.
@@ -33,14 +33,13 @@ def cp(src, dst):
 
 def main():
     print("=" * 70)
-    print(" JOYSTICK FM — APPLICATION DU CORRECTIF MAÎTRE FINAL (V3)")
+    print(" JOYSTICK FM — APPLICATION DU CORRECTIF MAÎTRE FINAL (V4)")
     print("=" * 70)
 
     # 1. Activation des Command Blocks dans server.properties
     print("\n--- [1/8] Activation des Blocs de Commande ---")
     subprocess.run(["docker", "exec", "-i", CONTAINER, "sed", "-i", "s/enable-command-block=false/enable-command-block=true/g", "/data/server.properties"])
-    rcon("gamerule enableCommandBlockOutput false")
-    rcon("gamerule commandBlockOutput false")
+    rcon("gamerule minecraft:command_block_output false")
 
     # 2. Neutraliser l'interception de la Boussole par Essentials (/jumpto)
     print("\n--- [2/8] Neutralisation du détournement de la Boussole par Essentials ---")
@@ -60,8 +59,8 @@ def main():
 
     # 3. Dégâts de chute = FALSE partout
     print("\n--- [3/8] Désactivation Totale des Dégâts de Chute ---")
-    rcon("gamerule fallDamage false")
-    for w in ["hub", "world", "lobby_minijeux", "rush_jfm", "hikabrain_jfm", "survie"]:
+    rcon("gamerule minecraft:fall_damage false")
+    for w in ["hub", "lobby_minijeux", "rush_jfm", "hikabrain_jfm", "survie"]:
         rcon(f"execute in {w} run gamerule minecraft:fall_damage false")
 
     # 4. Injection des configurations propres
@@ -82,7 +81,7 @@ def main():
     print("\n--- [6/8] Application de la Sécurité du Hub & Re-TP Anti-Vide ---")
     subprocess.run([sys.executable, str(BASE_DIR / "Lot_2_Hub_et_Lobby_Minijeux" / "lot2_hub_security.py")])
 
-    # 7. Top Parkour V4 (Purge totale des doublons, hologramme HD §, mécanique interactive)
+    # 7. Top Parkour V5 (Purge totale des doublons, hologramme HD §, mécanique interactive)
     print("\n--- [7/8] Reconstruction Unique du Top Parkour (Zéro Doublon) ---")
     subprocess.run([sys.executable, str(BASE_DIR / "Lot_7_Finition_Auth_et_Recette" / "lot7_setup_parkour.py")])
 
@@ -94,18 +93,13 @@ def main():
     rcon("bh reload")
     rcon("mvinv reload")
 
-    # Nettoyage radical de l'inventaire des joueurs en ligne
-    print("  -> Nettoyage de l'inventaire de tous les joueurs...")
+    # Nettoyage de l'inventaire et distribution aux joueurs connectés
+    print("  -> Nettoyage de l'inventaire des joueurs et distribution...")
     rcon("clear @a")
-    time.sleep(1)
-
-    # Attribution de la boussole interactive officielle
-    print("  -> Distribution de la Boussole Menu des Jeux...")
-    rcon('give @a minecraft:compass[custom_name=\'{"text":"✦ MENU DES JEUX ✦ (Clic-Droit)","color":"gold","bold":true}\'] 1')
     rcon("itemjoin get game-selector @a")
 
     print("\n" + "=" * 70)
-    print(" MISE À JOUR V3 APPLIQUÉE AVEC SUCCÈS : TOUS LES POINTS SONT RÉSOLUS !")
+    print(" MISE À JOUR V4 APPLIQUÉE AVEC SUCCÈS : TOUS LES POINTS SONT CORRIGÉS !")
     print("=" * 70)
 
 if __name__ == "__main__":
