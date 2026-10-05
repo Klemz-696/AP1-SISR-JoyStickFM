@@ -1,0 +1,66 @@
+items-v4:
+  game-selector:
+    id: COMPASS
+    slot: 4
+    name: '&6&l✦ MENU DES JEUX ✦ &7(Clic-Droit)'
+    lore:
+      - '&7Clique pour ouvrir la sélection des jeux :'
+      - '&8▸ &aSurvie Vanilla'
+      - '&8▸ &cBedWars &6Rush'
+      - '&8▸ &eHikabrain &3Cache-Cache'
+      - ''
+      - '&e➜ Clic-droit pour ouvrir le menu'
+    commands:
+      right-click:
+        - 'player: menu'
+      left-click:
+        - 'player: menu'
+    enabled-worlds:
+      - hub
+      - lobby_minijeux
+    triggers:
+      - join
+      - respawn
+      - world-change
+    itemflags:
+      - HIDE_ATTRIBUTES
+    give-on-world-switch: true
+    clear-on-world-switch: true
+    drop-full: false
+    item-movement: false
+    modify-item: false
+    movement-type: false
+    drop-creative: false
+    death-drops: false
+
+  quit-lobby:
+    id: RED_BED
+    slot: 8
+    name: '&c&l✦ RETOUR AU HUB ✦ &7(Clic-Droit)'
+    lore:
+      - '&7Clique pour quitter et retourner au Hub central.'
+      - ''
+      - '&c➜ Clic-droit pour retourner au Hub'
+    commands:
+      right-click:
+        - 'player: spawn'
+      left-click:
+        - 'player: spawn'
+    enabled-worlds:
+      - lobby_minijeux
+      - rush_jfm
+      - hikabrain_jfm
+    triggers:
+      - join
+      - respawn
+      - world-change
+    itemflags:
+      - HIDE_ATTRIBUTES
+    give-on-world-switch: true
+    clear-on-world-switch: true
+    drop-full: false
+    item-movement: false
+    modify-item: false
+    movement-type: false
+    drop-creative: false
+    death-drops: false
