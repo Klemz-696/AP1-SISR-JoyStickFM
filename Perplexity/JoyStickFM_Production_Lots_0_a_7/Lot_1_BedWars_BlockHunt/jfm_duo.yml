@@ -1,5 +1,5 @@
 name: jfm_duo
-pauseCountdown: 30
+pauseCountdown: 5
 gameTime: 3600
 world: bedwars_jfm
 pos1: "-90.0;0.0;-90.0;0.0;0.0"
@@ -9,7 +9,7 @@ lobbyPos2: "15.0;110.0;15.0;0.0;0.0"
 specSpawn: "0.5;111.0;0.5;0.0;0.0"
 lobbySpawn: "0.5;101.0;0.5;0.0;0.0"
 lobbySpawnWorld: bedwars_jfm
-minPlayers: 2
+minPlayers: 1
 postGameWaiting: 10
 customPrefix: "[BedWars]"
 teams:

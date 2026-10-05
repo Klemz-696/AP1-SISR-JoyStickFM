@@ -1,5 +1,5 @@
 name: rush_2v2
-pauseCountdown: 15
+pauseCountdown: 5
 gameTime: 1800
 world: rush_jfm
 pos1: "-30.0;40.0;-40.0;0.0;0.0"
@@ -9,7 +9,7 @@ lobbyPos2: "10.0;110.0;10.0;0.0;0.0"
 specSpawn: "0.5;85.0;0.5;0.0;0.0"
 lobbySpawn: "0.5;101.0;0.5;0.0;0.0"
 lobbySpawnWorld: rush_jfm
-minPlayers: 2
+minPlayers: 1
 postGameWaiting: 5
 customPrefix: "[Rush 2v2]"
 teams:

@@ -20,9 +20,9 @@ jfm_retro:
     a: 0.0
     p: 0.0
   maxPlayers: 12
-  minPlayers: 2
+  minPlayers: 1
   amountSeekersOnStart: 1
-  timeInLobbyUntilStart: 30
+  timeInLobbyUntilStart: 5
   waitingTimeSeeker: 20
   gameTime: 300
   timeUntilHidersSword: 30
