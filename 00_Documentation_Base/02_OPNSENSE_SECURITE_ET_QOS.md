@@ -48,41 +48,37 @@ Nmap détermine le système d'exploitation cible en analysant la taille des fen�
 
 ---
 
-### Étape 3 : Exposition stricte des ports VPN
-Dans **Firewall > Rules > WAN**, seules les règles suivantes doivent être créées :
-* **Règle 1 (IPsec IKE) :**
-  * Action : `Pass`
-  * Protocol : `UDP`
-  * Source : `any` (ou IP du partenaire pour le site-à-site)
-  * Destination : `WAN address`
-  * Port destination : `500` (IKE) et `4500` (IPsec NAT-Traversal)
-* **Règle 2 (IPsec ESP) :**
-  * Action : `Pass`
-  * Protocol : `ESP` (Encapsulating Security Payload)
-  * Destination : `WAN address`
-* **Exceptions Mission 2 (WebRadio JoyStick FM en DMZ Externe) :**
-  * **Règle 3 (Streaming Icecast) :** `Pass` | Protocol `TCP` | Destination `WAN address` | Port `8000` ➔ Redirigé vers `10.100.0.50:8000`
-  * **Règle 4 (Portail Web & Player) :** `Pass` | Protocol `TCP` | Destination `WAN address` | Port `80` ➔ Redirigé vers `10.100.0.51:80`
-* *Toutes les autres requêtes sont bloquées silencieusement par la règle implicite de fin.*
+### Étape 3 : Exposition stricte des ports (VPN & Services Publics)
+Dans **Firewall > Rules > WAN**, seules les règles suivantes sont autorisées (les règles NAT génèrent automatiquement leur règle de filtrage associée) :
+* **Règle 1 (VPN Nomade WireGuard) :**
+  * Action : `Pass` | Protocol : `UDP` | Destination : `WAN address` | Port : `51820`
+* **Règle 2 (VPN IPsec IKE / ESP - Intersite B2B) :**
+  * Action : `Pass` | Protocol : `UDP` | Port destination : `500` (IKE) et `4500` (NAT-T) | Protocol `ESP`
+* **Règles 3 & 4 (Destination NAT - Mission 2) :**
+  * **Portail WebRadio HTTP (80) :** `Pass` | Protocol `TCP` | Destination `WAN address:80` ➔ Redirigé par NAT vers `10.100.0.51:80` (`Debian_Web`)
+  * **Serveur Minecraft Communautaire (25565) :** `Pass` | Protocol `TCP` | Destination `WAN address:25565` ➔ Redirigé par NAT vers `10.30.0.22:25565` (`srv-minecraft`)
+  * *(Optionnel) Flux brut Icecast (8000) :* `Pass` | Protocol `TCP` | Destination `WAN address:8000` ➔ Redirigé vers `10.100.0.50:8000`
+* *Toutes les autres requêtes entrantes sont bloquées silencieusement par la règle implicite de fin (Default Drop).*
 
 ---
 
 ## 3. Preuves de Sécurité attendues pour le Dossier de Recette
 
-Pour valider cette partie dans le dossier de recette, l'**Étudiant 04** exécute les commandes suivantes depuis un poste situé sur le VLAN partagé (WAN) ciblant l'IP du pare-feu (`192.168.101.41`) :
+Pour valider cette partie dans le dossier de recette, l'**Étudiant 04** exécute les commandes suivantes depuis un poste situé sur le VLAN partagé (WAN) ciblant l'IP du pare-feu (`192.168.101.37`) :
 
 ```bash
 # 1. Test ICMP (doit renvoyer 100% de perte de paquets)
-ping 192.168.101.41
+ping 192.168.101.37
 
-# 2. Scan de ports rapide (seuls 500/udp, 4500/udp et ultérieurement 8000/80 tcp doivent être accessibles)
-nmap -Pn -p 1-65535 192.168.101.41
-nmap -Pn -sU -p 500,4500 192.168.101.41
+# 2. Scan de ports rapide (seuls 51820/udp, 80/tcp et 25565/tcp doivent être accessibles)
+nmap -Pn -p 80,25565,8000,51820 192.168.101.37
+nmap -Pn -sU -p 51820,500,4500 192.168.101.37
 
 # 3. Test de détection du Système d'Exploitation (doit échouer ou indiquer OS inconnu)
-nmap -Pn -O 192.168.101.41
+nmap -Pn -O 192.168.101.37
 ```
-> **Résultat attendu dans le rapport :** Capture d'écran démontrant `100% packet loss` au ping, `Too many fingerprints match this host` ou `OS detection failed` sur Nmap, et seuls les ports déclarés (VPN puis WebRadio) ouverts.
+> **Résultat attendu dans le rapport :** Capture d'écran démontrant `100% packet loss` au ping, `Too many fingerprints match this host` ou `OS detection failed` sur Nmap, et seuls les ports déclarés (WireGuard, WebRadio HTTP et Minecraft) ouverts.
+
 
 ---
 

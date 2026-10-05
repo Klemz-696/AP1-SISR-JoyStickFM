@@ -16,12 +16,12 @@
 > Résumé rapide :
 > - Mission 1 (VPN Nomade WireGuard, Samba \\10.30.0.20\Partage, backup rsync/CIFS) est 100% VALIDÉE.
 > - Mission 3 (Honeypot 10.100.0.99, alerting, anti-rebond Zero-Trust) est 100% VALIDÉE.
-> - Mission 2 (Serveur Minecraft 10.30.0.22:25565) est 100% VALIDÉ et testé en jeu par Klemz_696.
+> - Mission 2 (Serveur Minecraft Paper 26.2 sur 10.30.0.22:25565) est 100% VALIDÉ et testé en jeu par Klemz_696 (WireGuard 10.200.100.2:29036).
 > 
-> Nous nous étions arrêtés aux 3 plans d'action suivants :
+> Nous nous étions arrêtés aux plans d'action suivants :
 > 1. Préparation du VPN IPsec Intergroupes B2B sur OPNsense.
-> 2. Évolution du serveur Minecraft (Panel Web Crafty / BlueMap / Plugins).
-> 3. Supervision globale de tout le projet (Uptime Kuma, Netdata).
+> 2. Supervision globale de tout le projet (Uptime Kuma, Netdata).
+> 3. Gestion simplifiée des plugins du serveur Minecraft.
 > Confirme-moi que tu as tout en mémoire et dis-moi par quoi nous commençons !
 > ```
 
@@ -96,7 +96,7 @@ PersistentKeepalive = 25
    - Alerting en direct dans les logs.
    - Règle de blocage anti-rebond Zero-Trust validée (100% packet loss vers le réseau interne).
 3. **Mission 2 (Partiellement validée)** :
-   - **Minecraft : 100% VALIDÉ ✅** (Docker Vanilla 1.20.4, contournement du blocage SNI académique par `server.jar` local, joueur `Klemz_696` connecté en jeu avec permissions OP).
+   - **Minecraft : 100% VALIDÉ ✅** (Docker Paper 26.2-129 sous Java 25, contournement du blocage SNI académique par bundler Mojang/Paperclip local, BlueMap épuré pour optimiser la RAM/CPU, joueur `Klemz_696` connecté et authentifié avec succès via WireGuard `10.200.100.2:29036` sur `10.30.0.22:25565`).
    - **Tunnel IPsec B2B Intergroupes :** Fiche prête, règles Zero-Trust planifiées.
    - **WebRadio JoyStick FM :** Mise de côté temporairement sur demande de Clément.
    - **Supervision :** Plan d'architecture rédigé (Uptime Kuma, Netdata, Insight).
@@ -104,7 +104,7 @@ PersistentKeepalive = 25
 ---
 
 ## 📋 5. PROCHAINES ACTIONS DÈS LA REPRISE SUR LE GROS PC
-1. **Activer le VPN WireGuard sur le gros PC** (import du fichier `.conf` ci-dessus pour joindre `10.30.0.22`, `10.30.0.20`, etc.).
-2. **Configurer la phase 1 et 2 du VPN IPsec B2B sur OPNsense** pour être prêts à s'interconnecter avec l'autre groupe.
-3. **Faire évoluer le serveur Minecraft** (déploiement de Crafty Controller ou BlueMap + LuckPerms).
+1. **Activer le VPN WireGuard sur le gros PC : VALIDÉ ✅** (Tunnel opérationnel, utilisé pour administrer et jouer sur `10.30.0.22`).
+2. **Gestion simplifiée des plugins Minecraft** : Utilisation du script de déploiement automatique `Deploy-Plugin.ps1` ou panel Crafty.
+3. **Configurer la phase 1 et 2 du VPN IPsec B2B sur OPNsense** pour être prêts à s'interconnecter avec l'autre groupe partenaire.
 4. **Déployer Uptime Kuma** pour monitorer l'ensemble des 7 VM du projet sur un dashboard unique.

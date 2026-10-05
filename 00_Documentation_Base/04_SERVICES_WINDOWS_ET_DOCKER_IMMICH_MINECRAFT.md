@@ -153,14 +153,36 @@ L'interface est immédiatement accessible sur `http://10.4.1.21:2283`.
 
 ## 4. Déploiement et Recette du Serveur Minecraft (Mission 2 - `10.30.0.22`) [100% VALIDÉ ✅]
 
-Dans le cadre de la Mission 2, un serveur Minecraft a été déployé dans le VLAN 300 (DMZ Interne) sur la VM dédiée `srv-minecraft` (VM 11017, Debian 12 Bookworm, IP `10.30.0.22/24`). Le serveur est accessible de manière sécurisée par l'employé nomade via le tunnel **VPN WireGuard** (`10.200.100.0/24`).
+Dans le cadre de la Mission 2, un serveur Minecraft haute performance a été déployé dans le VLAN 300 (DMZ Interne) sur la VM dédiée `srv-minecraft` (VM 11017, Debian 12 Bookworm, IP `10.30.0.22/24`). Le serveur répond à un double objectif :
+1. **Accès privé et sécurisé pour l'administrateur nomade** via le tunnel **VPN WireGuard** (`10.200.100.0/24`) et le réseau de gestion **Tailscale** (`100.88.228.38`).
+2. **Accès public pour les élèves et auditeurs du lycée** via une redirection de port (**Destination NAT**) sur le pare-feu **OPNsense** (`192.168.101.37:25565`).
 
-### 4.1. Analyse Technique : Contournement du Filtrage DPI Académique
-Lors du déploiement initial sous Docker, le téléchargement automatique de PaperMC/Mojang a échoué avec l'erreur `recvAddress(..) failed with error(-104): Connection reset by peer`.
-- **Cause identifiée par audit réseau (`curl -Iv`)** : Le pare-feu académique du lycée (Stormshield/Fortinet) réalise du *Deep Packet Inspection* (DPI) sur le champ SNI TLS (`api.papermc.io`, `piston-meta.mojang.com`) et bloque la catégorie "Gaming" en injectant des paquets TCP RST.
-- **Solution d'ingénierie appliquée** : Injection directe du binaire autonome `server.jar` (Mojang Vanilla 1.20.4) dans le volume persistant `/opt/minecraft/data/server.jar`, permettant un démarrage 100% autonome et hors-ligne via le mode `CUSTOM`.
+---
 
-### 4.2. Configuration `docker-compose.yml` en Production (`/opt/minecraft/`)
+### 4.1. Architecture Moteur & Évolution PaperMC 26.2 (Java 25 LTS)
+
+Pour offrir une expérience de jeu fluide, supporter les mini-jeux JoyStick FM et éliminer la triche, le serveur a migré de Vanilla vers **PaperMC 26.2 (build 129)** sous **Java 25 LTS**. 
+
+Le serveur intègre une pile de **22 plugins Bukkit/Paper** interconnectés :
+* **Gouvernance & Sécurité :** `LuckPerms` (RBAC), `EssentialsX` + `EssentialsSpawn`, `CoreProtect` (traçabilité/rollback SQLite), `GrimAC` (anticheat asynchrone), `GriefPrevention`.
+* **Multi-Mondes & Génération :** `Multiverse-Core`, `Multiverse-Inventories`, `VoidGen` (générateur de vide absolu), `Chunky` (prégénération de chunks), `WorldEdit`.
+* **Gameplay & Menus Interactifs :** `ItemJoin` (distribution automatisée d'objets d'inventaire), `DeluxeMenus` (GUI interactive à base d'inventaires coffres), `BedWars`, `BlockHunt` (Cache-cache).
+* **Interface & Réseau :** `TAB` (Scoreboard latéral et tablist néon), `LPC` (formatage chat par rang), `PlaceholderAPI`, `Vault`, `ProtocolLib`, `packetevents`.
+
+---
+
+### 4.2. Contournement Technique du Filtrage DPI Académique
+
+Lors du déploiement sous Docker, le téléchargement automatique de PaperMC/Mojang a été bloqué par le pare-feu académique du lycée (Stormshield/Fortinet) via inspection DPI sur le SNI TLS (`api.papermc.io`, `piston-meta.mojang.com`) injectant des paquets `TCP RST`.
+* **Solution d'ingénierie appliquée :** 
+  - Pré-chargement du binaire Mojang dans le cache local `/opt/minecraft/data/cache/mojang_26.2.jar`.
+  - Configuration du paramètre JVM `-DbundlerRepoDir=/data` dans `docker-compose.yml`.
+  - Paperclip assemble ainsi le serveur Paper 26.2 de manière 100% autonome et hors-ligne via le mode `CUSTOM`.
+
+---
+
+### 4.3. Configuration `docker-compose.yml` en Production (`/opt/minecraft/`)
+
 ```yaml
 services:
   minecraft-server:
@@ -168,15 +190,21 @@ services:
     container_name: minecraft_ap1
     ports:
       - "25565:25565"
+      - "25575:25575"
     environment:
       EULA: "TRUE"
       TYPE: "CUSTOM"
-      CUSTOM_SERVER: "server.jar"
-      ONLINE_MODE: "FALSE" # Autorise les comptes de test et clients scolaires
-      MOTD: "§6[AP1 SIO] §aServeur JoyStick & Co §7- §bMission 2"
-      MEMORY: "2G"
-      DIFFICULTY: "normal"
-      MAX_PLAYERS: "20"
+      CUSTOM_SERVER: "paper.jar"
+      ONLINE_MODE: "FALSE" # Autorise les comptes scolaires et tests locaux
+      MOTD: "§6✦ JOYSTICK FM ✦ §eServeur Communautaire §7- §bAP1 SISR"
+      MEMORY: "3G"
+      JVM_OPTS: "-DbundlerRepoDir=/data"
+      FORCE_GAMEMODE: "TRUE"
+      GAMEMODE: "adventure"
+      DIFFICULTY: "peaceful"
+      ENABLE_RCON: "TRUE"
+      RCON_PASSWORD: "adminpassword"
+      MAX_PLAYERS: "25"
       VIEW_DISTANCE: "8"
       TZ: "Europe/Paris"
     volumes:
@@ -184,32 +212,118 @@ services:
     restart: unless-stopped
 ```
 
-### 4.3. Administration via RCON
-Élévation de privilèges administrateur (Opérateur) via la console Docker sans arrêt de service :
-```bash
-docker exec -i minecraft_ap1 rcon-cli op Klemz_696
-# Résultat : Made Klemz_696 a server operator
-```
+---
 
-### 4.4. Preuves de Recette Validées en Séance (03/10/2026) :
-1. **Écoute locale sur la VM** :
-   ```text
-   root@debian:~# ss -tlnp | grep 25565
+### 4.4. Hub Flottant dans le Vide (Void Lobby) & Sécurisation Périmétrique
+
+Pour garantir un accueil professionnel digne des grands serveurs communautaires :
+1. **Monde flottant en plein vide (`hub`)** :
+   - Généré via `VoidGen` pour éliminer tout terrain plat, herbe ou structures résiduelles.
+   - La plateforme d'accueil (13 448 blocs) flotte à Y=64 au-dessus du vide intersidéral.
+2. **Barrières invisibles anti-chute** :
+   - 640 blocs de barrière (`barrier`) disposés sur 4 blocs de hauteur (Y=64 à Y=68) ceinturent rigoureusement le périmètre de la plateforme.
+   - Les joueurs ne peuvent pas tomber dans le vide ni quitter la zone d'accueil sans passer par le menu des jeux.
+3. **Gel permanent du temps et de la météo** :
+   - Maintien du midi solaire permanent (6 000 ticks) :
+     ```bash
+     docker exec -i minecraft_ap1 rcon-cli -- mv gamerule set advance_time false hub
+     docker exec -i minecraft_ap1 rcon-cli -- time set 6000 hub
+     ```
+   - Désactivation permanente de la pluie/orage :
+     ```bash
+     docker exec -i minecraft_ap1 rcon-cli -- mv gamerule set advance_weather false hub
+     docker exec -i minecraft_ap1 rcon-cli -- weather hub sun
+     ```
+   - Désactivation de l'apparition des monstres :
+     ```bash
+     docker exec -i minecraft_ap1 rcon-cli -- mv gamerule set spawn_monsters false hub
+     ```
+4. **Protection anti-grief et anti-casse absolue** :
+   - Mode `ADVENTURE` forcé pour tous les joueurs à la connexion (`force-gamemode=true`).
+   - Impossibilité physique de poser, déplacer ou casser le moindre bloc de la plateforme.
+
+---
+
+### 4.5. Automatisation du Gameplay : Boussole Magique & GUI DeluxeMenus
+
+1. **Boussole de Sélection des Jeux (`ItemJoin`)** :
+   - Tout joueur entrant sur le serveur reçoit automatiquement une boussole légendaire au **slot 4** (centre de la barre d'action) :
+     - Nom : `&6&l✦ MENU DES JEUX ✦ &7(Clic-Droit)`
+     - Propriétés : Incassable, inamovible de l'inventaire, protégée contre le drop et le vol.
+   - Tout ancien objet résiduel ou bloc parasite est automatiquement purgé à la connexion (`Clear-Items: Join: true`).
+2. **Menu Graphique Interactif (`DeluxeMenus`)** :
+   - Un simple clic-droit sur la boussole ou la saisie de `/menu` ouvre une interface GUI coffre (27 slots) :
+     - **🌍 MONDE SURVIE** (Slot 11) : Téléporte vers le monde survie libre (`/mv tp world`).
+     - **🛏️ MINI-JEU BEDWARS** (Slot 13) : Téléporte vers l'arène BedWars (`/mv tp minijeux`).
+     - **🎭 CACHE-CACHE / BLOCKHUNT** (Slot 15) : Rejoint la file d'attente BlockHunt (`/bh join`).
+     - **🏛️ RETOUR AU LOBBY** (Slot 22) : Retourne au centre du hub (`/spawn`).
+3. **Hiérarchie LuckPerms (RBAC)** :
+   - Groupe `default` (Joueurs) : Autorisations d'ouverture du menu, de téléportation inter-mondes Multiverse et d'utilisation de la boussole.
+   - Groupe `admin` : Administration complète (`luckperms.*`, `multiverse.*`, `deluxemenus.*`, `essentials.*`, `worldedit.*`) avec suppression du wildcard destructeur `'*'` et neutralisation de l'exemption de spawn (`essentials.spawn-on-join.exempt: false`).
+
+---
+
+### 4.6. Règles de Redirection OPNsense (Destination NAT / Port Forwarding)
+
+Pour permettre aux élèves du lycée d'accéder au serveur Minecraft sans installer de client VPN, une règle de redirection de port a été configurée dans **Firewall > NAT > Destination NAT** sur OPNsense :
+
+| Champ OPNsense | Valeur Minecraft (25565) | Valeur WebRadio HTTP (80) |
+| :--- | :--- | :--- |
+| **Interface** | `WAN` | `WAN` |
+| **TCP/IP Version** | `IPv4` | `IPv4` |
+| **Protocol** | `TCP` | `TCP` |
+| **Destination** | `WAN address` (`192.168.101.37`) | `WAN address` (`192.168.101.37`) |
+| **Destination port range** | `25565` to `25565` | `HTTP (80)` to `HTTP (80)` |
+| **Redirect target IP** | `10.30.0.22` *(srv-minecraft)* | `10.100.0.51` *(Debian_Web)* |
+| **Redirect target port** | `25565` | `80` |
+| **Filter rule association** | `Add associated filter rule` | `Add associated filter rule` |
+| **Description** | `NAT WAN vers Serveur Minecraft DMZ Int` | `NAT WAN vers Portail WebRadio DMZ Ext` |
+
+> 🛡️ **Sécurité appliquée :** L'option `Filter rule association: Add associated filter rule` génère automatiquement la règle d'ouverture dans **Firewall > Rules > WAN** ciblant uniquement l'IP interne et le port spécifié, sans exposer la console d'administration RCON (25575) ni l'accès SSH (22).
+
+---
+
+### 4.7. Preuves de Recette Validées en Séance (05/10/2026) :
+
+1. **Écoute locale sur la VM `srv-minecraft`** :
+   ```bash
+   root@srv-minecraft:~# ss -tlnp | grep 25565
    LISTEN 0      4096         0.0.0.0:25565      0.0.0.0:*    users:(("docker-proxy",pid=103384,fd=8))
    ```
-2. **Test de socket TCP depuis le poste Nomade Windows via WireGuard** :
+2. **Validation des modules applicatifs en console RCON** :
+   ```text
+   > plugins
+   ℹ Server Plugins (22):
+   - ProtocolLib, BedWars, BlockHunt, Chunky, CoreProtect, DeluxeMenus, Essentials, EssentialsSpawn,
+     GriefPrevention, GrimAC, ItemJoin, LibsDisguises, LPC, LuckPerms, Multiverse-Core,
+     Multiverse-Inventories, packetevents, PlaceholderAPI, TAB, Vault, VoidGen, WorldEdit
+   
+   > dm reload
+   DeluxeMenus successfully reloaded! 1 menu loaded...
+   
+   > ij reload
+   [ItemJoin] 1/1 Custom item(s) loaded!
+   ```
+3. **Persistance des gamerules du Hub dans le vide** :
+   ```text
+   minecraft:advance_time: false (Heure figée à 6000 ticks / midi)
+   minecraft:advance_weather: false (Météo figée sur sun)
+   minecraft:spawn_monsters: false (Zéro monstre)
+   gamemode: adventure (Anti-casse actif)
+   ```
+4. **Test de socket TCP depuis le réseau d'administration** :
    ```powershell
    PS C:\Users\sauze> Test-NetConnection -ComputerName 10.30.0.22 -Port 25565
    ComputerName     : 10.30.0.22
    RemotePort       : 25565
-   InterfaceAlias   : WG-Tunnel-VPN-AP1
-   SourceAddress    : 10.200.100.2
    TcpTestSucceeded : True
    ```
-3. **Journal de connexion joueur en direct** :
+5. **Connexion joueur validée en conditions réelles** :
    ```text
-   [Server thread/INFO]: Klemz_696[/10.200.100.2:57200] logged in with entity id 351 at (-15.5, 74.0, -57.5)
-   [Server thread/INFO]: Klemz_696 joined the game
+   [12:50:53 INFO]: UUID of player Klemz_696 is 6790a3cc-637a-311a-a2e5-e9ae40ea0459
+   [12:50:54 INFO]: Klemz_696 joined the game
+   [12:50:54 INFO]: Klemz_696 logged in at ([minecraft:hub]0.5, 65.0, 0.5)
    ```
-4. **Vérification en jeu** : MOTD affiché `[AP1 SIO] Serveur JoyStick & Co - Mission 2`, latence verte (5 barres), connexion multijoueur fluide sous Minecraft 1.20.4.
+6. **Vérification en jeu** : Le joueur arrive directement au centre de la plateforme suspendue dans le vide sous un soleil radieux permanent, reçoit sa boussole interactive au slot 4, ouvre le menu des jeux d'un clic-droit et ne peut casser aucun bloc du lobby.
+
 

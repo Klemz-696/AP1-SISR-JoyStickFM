@@ -38,3 +38,10 @@ ehthumbs.db
 .DS_Store
 *.tmp
 *.log
+
+# --- Dossiers lourds & environnement local ---
+_archives_binaires/
+_archives_donnees/
+_contexte_ia/
+AP_Webradio/4- VMs/
+.vscode/

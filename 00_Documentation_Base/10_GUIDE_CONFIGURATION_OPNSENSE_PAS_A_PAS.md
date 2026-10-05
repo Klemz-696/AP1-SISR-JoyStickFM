@@ -165,6 +165,37 @@ Par défaut, `OPT1` et `OPT2` sont désactivées. Il faut les activer et les nom
 
 ---
 
+### Étape 2.6 : Redirections de Ports Publiques (Firewall > NAT > Destination NAT)
+Pour permettre aux élèves et auditeurs du lycée d'accéder au serveur Minecraft (`10.30.0.22`) et au portail WebRadio (`10.100.0.51`) directement via l'IP WAN (`192.168.101.37`) sans avoir besoin de client VPN :
+
+Dans **Firewall > NAT > Destination NAT**, cliquez sur **+ Add** pour créer chacune des 2 règles suivantes :
+
+#### A. Règle NAT 1 : Accès Public Serveur Minecraft (Port 25565)
+* **Interface :** `WAN`
+* **TCP/IP Version :** `IPv4`
+* **Protocol :** `TCP`
+* **Destination :** `WAN address`
+* **Destination port range :** `from: 25565` `to: 25565`
+* **Redirect target IP :** `Single host or Network` ➔ `10.30.0.22` *(VM srv-minecraft)*
+* **Redirect target port :** `25565`
+* **Filter rule association :** `Add associated filter rule` *(Génère automatiquement la règle d'ouverture dans Firewall > Rules > WAN)*
+* **Description :** `NAT WAN vers Serveur Minecraft DMZ Int`
+* Cliquez sur **Save**.
+
+#### B. Règle NAT 2 : Accès Public WebRadio JoyStick FM (Port 80)
+* **Interface :** `WAN`
+* **TCP/IP Version :** `IPv4`
+* **Protocol :** `TCP`
+* **Destination :** `WAN address`
+* **Destination port range :** `from: HTTP (80)` `to: HTTP (80)`
+* **Redirect target IP :** `Single host or Network` ➔ `10.100.0.51` *(VM Debian_Web)*
+* **Redirect target port :** `HTTP (80)`
+* **Filter rule association :** `Add associated filter rule`
+* **Description :** `NAT WAN vers Portail WebRadio DMZ Ext`
+* Cliquez sur **Save** puis sur **Apply changes**.
+
+---
+
 ## 4. Phase 3 : Furtivité, Sécurité & Sauvegarde XML
 
 Une fois le réseau opérationnel :
