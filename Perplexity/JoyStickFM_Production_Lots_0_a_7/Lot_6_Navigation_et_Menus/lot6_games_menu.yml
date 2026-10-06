@@ -27,6 +27,7 @@ items:
     left_click_commands:
       - '[close]'
       - '[player] spawn'
+      - '[console] gamemode adventure %player_name%'
 
   quit_lobby:
     material: IRON_DOOR
@@ -42,6 +43,7 @@ items:
     left_click_commands:
       - '[close]'
       - '[player] spawn'
+      - '[console] gamemode adventure %player_name%'
 
   survie:
     material: GRASS_BLOCK
@@ -58,6 +60,7 @@ items:
     left_click_commands:
       - '[close]'
       - '[player] mv tp survie'
+      - '[console] gamemode survival %player_name%'
 
   minigames_lobby:
     material: NETHER_STAR

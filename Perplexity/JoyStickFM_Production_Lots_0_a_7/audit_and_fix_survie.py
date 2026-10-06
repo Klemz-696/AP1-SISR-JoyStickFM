@@ -100,11 +100,12 @@ def apply_mode():
     rcon("mv modify survie set allowflight false")
     print("  -> Multiverse configuré : survie = SURVIVAL.")
 
-    # 3. Désactiver la spawn-protection de server.properties (permet de miner dès le spawn)
-    print("\n[3/5] Désactivation de spawn-protection dans server.properties...")
+    # 3. Désactiver la spawn-protection et force-gamemode dans server.properties
+    print("\n[3/5] Désactivation de spawn-protection et force-gamemode dans server.properties...")
     d_exec("sed -i 's/^spawn-protection=.*/spawn-protection=0/' /data/server.properties")
-    d_exec("grep '^spawn-protection' /data/server.properties")
-    print("  -> spawn-protection=0 configuré (minage immédiat permis).")
+    d_exec("sed -i 's/^force-gamemode=.*/force-gamemode=false/' /data/server.properties")
+    props = d_exec("grep -E '^(spawn-protection|force-gamemode)' /data/server.properties")
+    print(f"  -> Propriétés mises à jour :\n{props}")
 
     # 4. Désactiver les claims GriefPrevention sur 'survie' (D1 : 100% Vanilla sans claim)
     print("\n[4/5] Neutralisation des restrictions GriefPrevention sur 'survie'...")
@@ -114,8 +115,25 @@ def apply_mode():
     rcon("gp reload")
     print("  -> GriefPrevention rechargé en mode 'Disabled' sur le monde survie.")
 
-    # 5. Mettre à jour le gamemode des joueurs actuellement dans survie
-    print("\n[5/5] Actualisation du mode de jeu des joueurs connectés...")
+    # 5. Synchronisation de DeluxeMenus & JoyStickHub
+    print("\n[5/6] Déploiement des menus DeluxeMenus et du plugin JoyStickHub...")
+    menu_src = Path(__file__).resolve().parent / "Lot_6_Navigation_et_Menus" / "lot6_games_menu.yml"
+    dest_menu = DATA_HOST / "plugins" / "DeluxeMenus" / "gui_menus" / "games.yml"
+    if menu_src.exists() and dest_menu.parent.exists():
+        import shutil
+        shutil.copy2(menu_src, dest_menu)
+        rcon("dm reload")
+        print("  -> DeluxeMenus games.yml mis à jour et rechargé (gamemode survival automatique).")
+
+    jar_src = Path(__file__).resolve().parent / "JoyStickHub.jar"
+    dest_jar = DATA_HOST / "plugins" / "JoyStickHub.jar"
+    if jar_src.exists() and dest_jar.parent.exists():
+        import shutil
+        shutil.copy2(jar_src, dest_jar)
+        print("  -> JoyStickHub.jar mis à jour (détection automatique de monde).")
+
+    # 6. Mettre à jour le gamemode des joueurs actuellement dans survie
+    print("\n[6/6] Actualisation du mode de jeu des joueurs connectés...")
     rcon("execute in survie as @a run gamemode survival @s")
     print("  -> Gamemode des joueurs dans survie réaligné sur SURVIVAL.")
 
