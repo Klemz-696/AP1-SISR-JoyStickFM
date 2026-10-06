@@ -1,0 +1,189 @@
+# DeluxeMenus Configuration for JoyStick FM (Lot 6 - Polished Version)
+# Central navigation GUI covering all gamemodes and decisions D1-D6
+
+menu_title: '&8✦ &d&lJoyStick FM &8| &b&lMenu des Jeux &8✦'
+open_command:
+  - menu
+  - games
+register_command: true
+size: 27
+items:
+  filler:
+    material: BLACK_STAINED_GLASS_PANE
+    slots: [0, 1, 2, 3, 5, 6, 7, 9, 11, 13, 15, 17, 18, 19, 21, 23, 25]
+    display_name: ' '
+    item_flags:
+      - HIDE_ATTRIBUTES
+
+  hub:
+    material: COMPASS
+    slot: 4
+    display_name: '&f&l✦ RETOUR AU HUB PRINCIPAL ✦'
+    item_flags:
+      - HIDE_ATTRIBUTES
+    lore:
+      - '&7Retourne immédiatement au spawn central du vide.'
+      - ''
+      - '&f▶ Clic-gauche pour revenir au Hub'
+    left_click_commands:
+      - '[close]'
+      - '[player] bh leave'
+      - '[player] bw leave'
+      - '[player] spawn'
+      - '[console] gamemode adventure %player_name%'
+
+  quit_lobby:
+    material: IRON_DOOR
+    slot: 8
+    display_name: '&c&l✦ QUITTER LE LOBBY ✦'
+    item_flags:
+      - HIDE_ATTRIBUTES
+    lore:
+      - '&7Quitte la file d''attente ou le mini-jeu en cours'
+      - '&7et retourne en sécurité au Hub.'
+      - ''
+      - '&c▶ Clic-gauche pour quitter'
+    left_click_commands:
+      - '[close]'
+      - '[player] bh leave'
+      - '[player] bw leave'
+      - '[player] spawn'
+      - '[console] gamemode adventure %player_name%'
+
+  survie:
+    material: GRASS_BLOCK
+    slot: 10
+    display_name: '&a&lSurvie Simple Vanilla'
+    item_flags:
+      - HIDE_ATTRIBUTES
+    lore:
+      - '&7Exploration, récolte et construction libres.'
+      - '&eMode 100% Vanilla sans claims (D1).'
+      - '&7Tombes récupérables prévues ultérieurement (D5).'
+      - ''
+      - '&a▶ Clic-gauche pour rejoindre la Survie'
+    left_click_commands:
+      - '[close]'
+      - '[player] mv tp survie'
+      - '[console] gamemode survival %player_name%'
+
+  minigames_lobby:
+    material: NETHER_STAR
+    slot: 12
+    display_name: '&d&lLobby des Mini-Jeux'
+    item_flags:
+      - HIDE_ATTRIBUTES
+    lore:
+      - '&7Plateforme néon futuriste JoyStick FM.'
+      - '&7Bornes interactives & PNJ de lancement.'
+      - ''
+      - '&d▶ Clic-gauche pour aller au Lobby'
+    left_click_commands:
+      - '[close]'
+      - '[player] mv tp lobby_minijeux'
+
+  bedwars:
+    material: RED_BED
+    slot: 14
+    display_name: '&c&lBedWars — 4 équipes de 2'
+    item_flags:
+      - HIDE_ATTRIBUTES
+    lore:
+      - '&7Protège ton lit et détruis celui des autres.'
+      - '&7Arène spatiale JoyStick FM (Red, Blue, Green, Yellow).'
+      - '&aTestable en solo ou en équipe.'
+      - ''
+      - '&c▶ Clic-gauche pour rejoindre la partie'
+    left_click_commands:
+      - '[close]'
+      - '[player] bw join jfm_duo'
+
+  rush:
+    material: GOLDEN_PICKAXE
+    slot: 16
+    display_name: '&6&lRush FunCraft (1v1 & 2v2)'
+    item_flags:
+      - HIDE_ATTRIBUTES
+    lore:
+      - '&7Ponts en grès express, bâton knockback,'
+      - '&7lits explosifs et TNTFly calibré.'
+      - '&aTestable en solo (lancement immédiat).'
+      - ''
+      - '&6▶ Clic-gauche : Rush 1v1'
+      - '&e▶ Clic-droit : Rush 2v2'
+    left_click_commands:
+      - '[close]'
+      - '[player] bw join rush_1v1'
+    right_click_commands:
+      - '[close]'
+      - '[player] bw join rush_2v2'
+
+  hikabrain:
+    material: SANDSTONE
+    slot: 20
+    display_name: '&e&lHikabrain FunCraft (1v1)'
+    item_flags:
+      - HIDE_ATTRIBUTES
+    lore:
+      - '&7Passerelle suspendue de 1 bloc de large.'
+      - '&7Touche le lit adverse pour marquer !'
+      - '&bPremier à 5 points remporte la victoire.'
+      - ''
+      - '&e▶ Clic-gauche pour défier en Hikabrain'
+    left_click_commands:
+      - '[close]'
+      - '[player] mv tp hikabrain_jfm'
+
+  blockhunt:
+    material: BOOKSHELF
+    slot: 22
+    display_name: '&3&lCache-cache (BlockHunt)'
+    item_flags:
+      - HIDE_ATTRIBUTES
+    lore:
+      - '&7Village rétro 81x81 — Déguisements en blocs.'
+      - '&7Élimination = spectateur permanent (D3).'
+      - ''
+      - '&3▶ Clic-gauche pour rejoindre la partie'
+    left_click_commands:
+      - '[close]'
+      - '[player] bh join jfm_retro'
+
+  stats:
+    material: PLAYER_HEAD
+    slot: 24
+    display_name: '&b&l✦ Mes Statistiques ✦'
+    item_flags:
+      - HIDE_ATTRIBUTES
+    lore:
+      - '&7Consulte ton profil et tes records personnels.'
+      - ''
+      - '&fJoueur : &b%player_name%'
+      - '&fPing : &a%player_ping% ms'
+      - '&7(Classements publics réservés au Top Parkour)'
+      - ''
+      - '&b▶ Clic-gauche pour afficher le bilan complet'
+    left_click_commands:
+      - '[close]'
+      - '[message] &8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬'
+      - '[message] &d&l✦ STATISTIQUES JOUEUR — JoyStick FM ✦'
+      - '[message] &7Joueur : &b%player_name%'
+      - '[message] &7Monde actuel : &e%player_world%'
+      - '[message] &7Latence : &a%player_ping% ms'
+      - '[message] &aStatut : Compte authentifié et actif sur le réseau'
+      - '[message] &8▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬'
+
+  parkour:
+    material: GOLDEN_BOOTS
+    slot: 26
+    display_name: '&e&l✦ Rejoindre le Top Parkour ✦'
+    item_flags:
+      - HIDE_ATTRIBUTES
+    lore:
+      - '&7Se téléporter directement au départ du Parkour'
+      - '&7sur la plateforme du Hub.'
+      - ''
+      - '&e▶ Clic-gauche pour aller au Parkour'
+    left_click_commands:
+      - '[close]'
+      - '[player] execute in hub run tp @s -274.5 104.0 452.5 0 0'

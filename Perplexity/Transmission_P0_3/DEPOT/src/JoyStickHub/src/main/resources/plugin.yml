@@ -1,0 +1,9 @@
+name: JoyStickHub
+version: 1.5.3-player-menu-review
+main: fm.joystick.hub.JoyStickHub
+api-version: '1.20'
+description: Inventaires protégés et route menu unique avec contrôle AuthMe — recette requise
+softdepend:
+  - ItemJoin
+  - Multiverse-Inventories
+  - AuthMe

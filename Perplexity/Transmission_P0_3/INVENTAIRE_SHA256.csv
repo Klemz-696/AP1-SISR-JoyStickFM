@@ -1,0 +1,7 @@
+Fichier,Chemin_Relatif,Taille_Octets,SHA256,Source_Provenance
+JoyStickHub.java,DEPOT/src/JoyStickHub/src/main/java/fm/joystick/hub/JoyStickHub.java,21010,3bb089afdb49c4f60ffc9868e5ca63405d87d4759d04f94e7d39e864d8bcacbf,scratch/recette_p0_3/JoyStickFM_P0_3/src/JoyStickHub/src/main/java/fm/joystick/hub/JoyStickHub.java
+plugin.yml,DEPOT/src/JoyStickHub/src/main/resources/plugin.yml,277,9d50ca5b5294d658fef625bddddb19dd7269531d47938f93b8947013c8c82cad,scratch/recette_p0_3/JoyStickFM_P0_3/src/JoyStickHub/src/main/resources/plugin.yml
+build_safe.py,DEPOT/src/JoyStickHub/build_safe.py,3936,3e6125907068e5de5ec5ff0f090173c28194358f1afcdb5ec87d4056c58c09b4,scratch/recette_p0_3/JoyStickFM_P0_3/src/JoyStickHub/build_safe.py
+items.yml,STAGING/data/plugins/ItemJoin/items.yml,1480,84ff59c72cd07b06686264f343fd80c6c5a146fd19e9677e9eb0ac1ee9283b21,scratch/staging_p0_2/data/plugins/ItemJoin/items.yml
+games.yml,STAGING/data/plugins/DeluxeMenus/gui_menus/games.yml,5905,71fb5d29dfc1cc36bdc2fc98ac51a7b8a116657ca6a7128676c40750625674a6,scratch/staging_p0_2/data/plugins/DeluxeMenus/gui_menus/games.yml
+BUILD_MANIFEST.json,PREUVES/BUILD_MANIFEST.json,10150,09f903d5195beda11fa53cab3c93b5b9913c1b78431036fe4b3b54728225631a,scratch/recette_p0_3/JoyStickFM_P0_3/src/JoyStickHub/target/safe-build/BUILD_MANIFEST.json
