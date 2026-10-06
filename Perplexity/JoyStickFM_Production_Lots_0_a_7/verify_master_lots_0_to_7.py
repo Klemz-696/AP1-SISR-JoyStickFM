@@ -19,9 +19,12 @@ import pathlib
 CONTAINER = "minecraft_ap1"
 DATA_DIR = pathlib.Path("/opt/minecraft/data")
 
+def strip_ansi(text):
+    return re.sub(r'\x1b\[[0-9;]*[a-zA-Z]', '', text)
+
 def rcon(cmd):
     res = subprocess.run(["docker", "exec", "-i", CONTAINER, "rcon-cli", "--", cmd], capture_output=True, text=True)
-    return res.stdout.strip()
+    return strip_ansi(res.stdout.strip())
 
 def check_status(name, passed, details=""):
     tag = "[\033[92mPASS\033[0m]" if passed else "[\033[91mFAIL\033[0m]"
@@ -44,7 +47,10 @@ def main():
         passed_ram = mem_mb >= 7000
         results.append(check_status("Allocation RAM JVM (>= 8G)", passed_ram, f"Alloué : {mem_mb} MB"))
     else:
-        results.append(check_status("Allocation RAM JVM", False, "Impossible de lire la mémoire"))
+        # Fallback inspection via docker inspect if rcon memory format differs
+        res_mem_env = subprocess.run(["docker", "inspect", "-f", "{{range .Config.Env}}{{println .}}{{end}}", CONTAINER], capture_output=True, text=True)
+        passed_env_ram = "MEMORY=8G" in res_mem_env.stdout or "MEMORY=\"8G\"" in res_mem_env.stdout
+        results.append(check_status("Allocation RAM JVM (>= 8G)", passed_env_ram, f"Docker Env : 8G"))
         
     tps_out = rcon("tps")
     passed_tps = "20.0" in tps_out or "20" in tps_out

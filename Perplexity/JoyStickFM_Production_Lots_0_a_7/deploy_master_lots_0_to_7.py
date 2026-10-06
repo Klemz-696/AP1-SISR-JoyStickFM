@@ -83,30 +83,13 @@ def step_2_hub_and_lobby():
         log("1. Déplacement préventif de l'ancienne plateforme de spawn vers 'hub_old_void_backup'...")
         shutil.copytree(hub_dir, old_backup)
         
-    # 2. Extraction de la nouvelle map terrestre
-    hub_zip = ASSETS_DIR / "hub_grand_architectural.zip"
-    if hub_zip.exists():
-        log(f"2. Décompression du Grand Hub Architectural Terrestre ({hub_zip.name})...")
-        if hub_dir.exists():
-            shutil.rmtree(hub_dir)
-        hub_dir.mkdir(parents=True, exist_ok=True)
-        with zipfile.ZipFile(hub_zip, 'r') as z:
-            z.extractall(hub_dir)
-        run_cmd(f"chown -R 1000:1000 {hub_dir}")
-        log("   Monde Grand Hub terrestre extrait avec succès !")
+    # 2. Construction native du Grand Hub Architectural Terrestre (Citadelle Royale JoyStick FM)
+    log("2. Matérialisation native du Grand Hub Architectural Terrestre dans 'hub'...")
+    hub_gen_script = SCRIPT_DIR / "resolve_grand_hub_terrestre.py"
+    if hub_gen_script.exists():
+        subprocess.run([sys.executable, str(hub_gen_script)], check=False)
     else:
-        log(f"   [AVERTISSEMENT] {hub_zip} introuvable, génération manuelle...")
-
-    # Importer le monde hub dans Multiverse
-    rcon("mv import hub normal")
-    rcon("mv setspawn hub -274 104 452")
-    rcon("execute in hub run gamerule minecraft:fall_damage false")
-    rcon("execute in hub run gamerule minecraft:pvp false")
-    rcon("execute in hub run gamerule minecraft:advance_time false")
-    rcon("execute in hub run gamerule minecraft:advance_weather false")
-    rcon("execute in hub run time set 6000")
-    rcon("execute in hub run weather clear")
-    rcon("setspawn default")
+        log("   [AVERTISSEMENT] Script resolve_grand_hub_terrestre.py introuvable !")
 
     # 3. Création du Lobby Mini-Jeux Arcade
     log("3. Configuration du monde 'lobby_minijeux'...")
