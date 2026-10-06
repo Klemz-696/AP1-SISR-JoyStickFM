@@ -193,37 +193,25 @@ def main():
     rcon("execute in hub run setblock 25 64 0 sea_lantern")
     rcon("execute in hub run setblock 24 65 0 barrel")
 
-    # 10. Grand Top Parkour Intégré JoyStick FM
-    log("10. Aménagement du Top Parkour (Obstacles & Sommet Tour Sud-Est)...")
-    # Départ à (8, 65, 0)
-    rcon("execute in hub run setblock 8 64 0 gold_block")
-    rcon("execute in hub run setblock 8 65 0 light_weighted_pressure_plate")
-    # Obstacles acrobatiques menant à la courtine et la Tour Sud-Est
-    parkour_steps = [
-        (11, 66, 2, "smooth_quartz"),
-        (14, 67, 4, "smooth_stone_slab"),
-        (16, 68, 7, "sea_lantern"),
-        (18, 70, 10, "polished_andesite"),
-        (20, 72, 13, "prismarine_bricks"),
-        (22, 74, 16, "chiseled_stone_bricks"),
-        (24, 76, 18, "stone_brick_slab"),
-        (25, 79, 20, "smooth_quartz_stairs"),
-        (24, 83, 22, "polished_deepslate_slab"),
-        (22, 87, 24, "sea_lantern")
+    # 10. Blocs de Saut Libres & Ludiques dans le Spawn (Demande Utilisateur)
+    log("10. Pose des blocs et piliers de saut libres dans tout le spawn...")
+    freeform_blocks = [
+        # Ouest
+        (-6, 65, -6, "smooth_quartz"), (-8, 66, -8, "sea_lantern"), (-11, 67, -7, "prismarine_bricks"),
+        (-14, 68, -5, "smooth_stone_slab"), (-17, 69, -7, "cyan_concrete"), (-19, 71, -10, "sea_lantern"),
+        (-6, 65, 6, "smooth_quartz"), (-8, 66, 8, "sea_lantern"), (-11, 67, 7, "prismarine_bricks"),
+        (-14, 68, 5, "smooth_stone_slab"), (-17, 69, 7, "cyan_concrete"), (-19, 71, 10, "sea_lantern"),
+        # Est
+        (6, 65, -6, "smooth_quartz"), (8, 66, -8, "sea_lantern"), (11, 67, -7, "deepslate_brick_slab"),
+        (14, 68, -5, "magenta_concrete"), (17, 69, -7, "sea_lantern"), (19, 71, -10, "smooth_quartz"),
+        (6, 65, 6, "smooth_quartz"), (8, 66, 8, "sea_lantern"), (11, 67, 7, "deepslate_brick_slab"),
+        (14, 68, 5, "magenta_concrete"), (17, 69, 7, "sea_lantern"), (19, 71, 10, "smooth_quartz"),
+        # Passerelles vers les remparts
+        (-4, 66, -15, "smooth_stone_slab"), (0, 67, -17, "sea_lantern"), (4, 68, -15, "smooth_stone_slab"),
+        (-4, 66, 15, "smooth_stone_slab"), (0, 67, 17, "sea_lantern"), (4, 68, 15, "smooth_stone_slab")
     ]
-    for x, y, z, mat in parkour_steps:
+    for x, y, z, mat in freeform_blocks:
         rcon(f"execute in hub run setblock {x} {y} {z} {mat}")
-
-    # Arrivée glorieuse au sommet de la Tour Sud-Est (X=24, Y=92, Z=24)
-    rcon("execute in hub run setblock 24 91 24 iron_block")
-    rcon("execute in hub run setblock 24 92 24 light_weighted_pressure_plate")
-    # Balise de victoire au sommet de la tour
-    rcon("execute in hub run setblock 24 90 24 beacon")
-    # Bloc de commande pour feux d'artifice et félicitations
-    rcon('execute in hub run setblock 24 89 24 command_block{Command:"title @p title {\\"text\\":\\"✦ PARKOUR RÉUSSI ! ✦\\",\\"color\\":\\"gold\\",\\"bold\\":true}",auto:1b}')
-
-    # Hologramme d'accueil Parkour
-    rcon('execute in hub run summon text_display 8.0 67.5 0.0 {text:\'"§6§l✦ TOP DU PARKOUR ✦\\n§eSautez jusqu\'au sommet de la Tour !"§r\',billboard:"vertical",background:1073741824}')
 
     # 11. Périmètre de Barrières Invisibles & Filet de Sécurité
     log("11. Sécurisation périmétrique anti-chute et barrières invisibles...")

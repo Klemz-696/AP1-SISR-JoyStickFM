@@ -26,9 +26,9 @@ items:
       - 'player: menu'
     commands-type: interact
     commands-sound: UI_BUTTON_CLICK
-    itemflags: inventory-modify, death-drops, self-drops, unbreakable
+    itemflags: death-drops, self-drops, unbreakable, auto-remove
     triggers: join, respawn, world-switch
-    enabled-worlds: hub, lobby_minijeux
+    enabled-worlds: hub, lobby_minijeux, bedwars_jfm, blockhunt_jfm, rush_jfm, hikabrain_jfm
 
   quit-lobby:
     id: RED_BED
@@ -42,6 +42,6 @@ items:
       - 'player: spawn'
     commands-type: interact
     commands-sound: ENTITY_ENDERMAN_TELEPORT
-    itemflags: inventory-modify, death-drops, self-drops, unbreakable
+    itemflags: death-drops, self-drops, unbreakable, auto-remove
     triggers: join, respawn, world-switch
     enabled-worlds: lobby_minijeux
