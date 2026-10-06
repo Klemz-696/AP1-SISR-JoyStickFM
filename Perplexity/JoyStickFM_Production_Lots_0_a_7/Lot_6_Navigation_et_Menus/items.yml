@@ -25,7 +25,7 @@ items:
       - 'player: menu'
     itemflags: inventory-modify, death-drops, self-drops, unbreakable
     triggers: join, respawn, world-switch
-    enabled-worlds: hub, world, lobby_minijeux, survie, bedwars_jfm, rush_jfm, hikabrain_jfm, blockhunt_jfm
+    enabled-worlds: hub, lobby_minijeux
 
   quit-lobby:
     id: RED_BED
@@ -39,4 +39,4 @@ items:
       - 'player: spawn'
     itemflags: inventory-modify, death-drops, self-drops, unbreakable
     triggers: join, respawn, world-switch
-    enabled-worlds: lobby_minijeux, rush_jfm, hikabrain_jfm, bedwars_jfm
+    enabled-worlds: lobby_minijeux

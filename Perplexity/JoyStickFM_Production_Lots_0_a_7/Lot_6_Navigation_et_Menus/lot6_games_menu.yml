@@ -181,4 +181,4 @@ items:
       - '&e▶ Clic-gauche pour aller au Parkour'
     left_click_commands:
       - '[close]'
-      - '[player] execute in hub run tp @s 8.5 65.0 0.5 90 0'
+      - '[player] execute in hub run tp @s -274.5 104.0 452.5 0 0'

@@ -14,12 +14,16 @@ credentials*
 
 # --- Binaires lourds (> 10 Mo) ---
 *.jar
+!Perplexity/JoyStickFM_Production_Lots_0_a_7/JoyStickHub.jar
+!Perplexity/JoyStickFM_Production_Lots_0_a_7/downloaded_assets/*.jar
 *.iso
 *.qcow2
 *.vmdk
 *.ova
 *.img
 paper-*.jar
+!Perplexity/JoyStickFM_Production_Lots_0_a_7/JoyStickHub.jar
+!Perplexity/JoyStickFM_Production_Lots_0_a_7/downloaded_assets/*.jar
 server.jar
 
 # --- Logiciels tiers décompressés (JMeter complet, etc.) ---
@@ -47,3 +51,6 @@ AP_Webradio/4- VMs/
 .vscode/
 
 scratch/
+
+__pycache__/
+*.pyc
