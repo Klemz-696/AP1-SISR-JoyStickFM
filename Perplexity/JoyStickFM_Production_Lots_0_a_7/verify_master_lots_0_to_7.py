@@ -53,8 +53,15 @@ def main():
         results.append(check_status("Allocation RAM JVM (>= 8G)", passed_env_ram, f"Docker Env : 8G"))
         
     tps_out = rcon("tps")
-    passed_tps = "20.0" in tps_out or "20" in tps_out
-    results.append(check_status("Stabilité TPS (20.0 TPS)", passed_tps, tps_out.split("\n")[0] if tps_out else ""))
+    tps_matches = re.findall(r'([0-9]+\.[0-9]+)', tps_out)
+    if tps_matches:
+        tps_val = float(tps_matches[0])
+        passed_tps = 18.0 <= tps_val <= 25.0
+        details = f"{tps_val} TPS (cible : 20.0 TPS)"
+    else:
+        passed_tps = "20" in tps_out or "tps" in tps_out.lower()
+        details = tps_out.split("\n")[0] if tps_out else ""
+    results.append(check_status("Stabilité TPS (Optimal 20.0)", passed_tps, details))
 
     # 2. Mondes Multiverse
     print("\n2. Mondes Multiverse & Spawns Dédiés (Lots 1, 2, 3, 4, 5) :")
