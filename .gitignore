@@ -16,14 +16,14 @@ credentials*
 *.jar
 !Perplexity/JoyStickFM_Production_Lots_0_a_7/JoyStickHub.jar
 !Perplexity/JoyStickFM_Production_Lots_0_a_7/downloaded_assets/*.jar
+!Perplexity/*.jar
+!plugins_a_installer/*.jar
 *.iso
 *.qcow2
 *.vmdk
 *.ova
 *.img
 paper-*.jar
-!Perplexity/JoyStickFM_Production_Lots_0_a_7/JoyStickHub.jar
-!Perplexity/JoyStickFM_Production_Lots_0_a_7/downloaded_assets/*.jar
 server.jar
 
 # --- Logiciels tiers décompressés (JMeter complet, etc.) ---
@@ -42,6 +42,10 @@ ehthumbs.db
 .DS_Store
 *.tmp
 *.log
+.archive-unpack/
+userdata/
+PlayerData/
+playerdata/
 
 # --- Dossiers lourds & environnement local ---
 _archives_binaires/

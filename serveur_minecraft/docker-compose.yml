@@ -1,0 +1,24 @@
+services:
+  minecraft:
+    image: itzg/minecraft-server:latest
+    container_name: minecraft_ap1
+    restart: unless-stopped
+    ports:
+      - "25565:25565"   # Port Minecraft
+      # - "8100:8100"     # Port BlueMap Web
+    environment:
+      EULA: "TRUE"
+      TYPE: "CUSTOM"
+      CUSTOM_SERVER: "/data/paper.jar"
+      JVM_OPTS: "-DbundlerRepoDir=/data"
+      MEMORY: "8G"
+      INIT_MEMORY: "4G"
+      ONLINE_MODE: "FALSE"
+      SERVER_NAME: "SRV-MC-AP1 | BTS SIO"
+      MOTD: "§6AP 1 BTS SIO §r- §aServeur Paper 26.2"
+      MAX_PLAYERS: "10"
+      DIFFICULTY: "normal"
+    volumes:
+      - ./data:/data
+    stdin_open: true
+    tty: true

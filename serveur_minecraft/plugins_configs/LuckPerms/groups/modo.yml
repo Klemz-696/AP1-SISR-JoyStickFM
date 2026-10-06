@@ -1,0 +1,22 @@
+displayname: modo
+weight: 30
+nodes:
+  - key: "group.vip"
+    value: true
+  - key: "essentials.kick"
+    value: true
+  - key: "essentials.ban"
+    value: true
+  - key: "essentials.mute"
+    value: true
+  - key: "essentials.vanish"
+    value: true
+  - key: "essentials.gamemode"
+    value: true
+  - key: "coreprotect.lookup"
+    value: true
+  - key: "bw.admin.*"
+    value: true
+  - key: "blockhunt.admin"
+    value: true
+

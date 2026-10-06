@@ -1,0 +1,8 @@
+displayname: admin
+weight: 100
+nodes:
+  - key: "group.modo"
+    value: true
+  - key: "*"
+    value: true
+

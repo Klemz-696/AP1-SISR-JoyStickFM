@@ -1,0 +1,34 @@
+header-footer:
+  enabled: true
+  header:
+    - "&6&l★ JOYSTICK & CO ★ &7- &bServeur Officiel"
+    - "&7Connecté sur le réseau AP1 BTS SIO"
+    - ""
+  footer:
+    - ""
+    - "&7WebRadio & Actualités : &ewww.klemz.live"
+
+scoreboard:
+  enabled: true
+  toggle-command: /sb
+  remember-toggle-choice: false
+  hidden-by-default: false
+  use-numbers: false
+  static-number: 0
+  delay-on-join-milliseconds: 0
+  scoreboards:
+    default:
+      title: "&6&lJOYSTICK & CO"
+      lines:
+        - "&7&m────────────────────"
+        - "&fJoueur : &e%player_name%"
+        - "&fGrade : %luckperms_prefix%"
+        - "&fMonde : &a%world%"
+        - "&fEn ligne : &b%online%/20"
+        - "&7&m────────────────────"
+        - "&ewww.klemz.live"
+
+placeholders:
+  date-format: "dd/MM/yyyy"
+  time-format: "HH:mm:ss"
+  time-offset: 2

@@ -1,0 +1,95 @@
+# Authentic FunCraft Rush Shop Configuration
+# Fast bridges, knockback sticks, explosive TNT, and tools
+
+blocks:
+  name: "&6Blocs Rapides"
+  icon: SANDSTONE
+  items:
+    - price: 1
+      currency: iron
+      item:
+        type: SANDSTONE
+        amount: 8
+        name: "&eGrès Rush"
+    - price: 4
+      currency: iron
+      item:
+        type: OAK_PLANKS
+        amount: 8
+    - price: 2
+      currency: gold
+      item:
+        type: END_STONE
+        amount: 6
+
+weapons:
+  name: "&cArmes & Recul"
+  icon: IRON_SWORD
+  items:
+    - price: 1
+      currency: iron
+      item:
+        type: STICK
+        amount: 1
+        name: "&e✦ Bâton Knockback ✦"
+        lore:
+          - "&7Arme légendaire Rush pour éjecter l'adversaire !"
+        enchants:
+          KNOCKBACK: 2
+    - price: 5
+      currency: iron
+      item:
+        type: IRON_SWORD
+        amount: 1
+        name: "&fÉpée en Fer Rush"
+    - price: 3
+      currency: gold
+      item:
+        type: DIAMOND_SWORD
+        amount: 1
+
+tools:
+  name: "&bOutils Efficacité"
+  icon: GOLDEN_PICKAXE
+  items:
+    - price: 2
+      currency: iron
+      item:
+        type: GOLDEN_PICKAXE
+        amount: 1
+        name: "&6Pioche Rapide"
+        enchants:
+          EFFICIENCY: 2
+    - price: 5
+      currency: iron
+      item:
+        type: IRON_PICKAXE
+        amount: 1
+        enchants:
+          EFFICIENCY: 1
+    - price: 2
+      currency: gold
+      item:
+        type: DIAMOND_PICKAXE
+        amount: 1
+
+explosives:
+  name: "&4Explosifs & TNTFly"
+  icon: TNT
+  items:
+    - price: 3
+      currency: gold
+      item:
+        type: TNT
+        amount: 1
+        name: "&cTNT Destructrice de Lits"
+    - price: 1
+      currency: iron
+      item:
+        type: FLINT_AND_STEEL
+        amount: 1
+    - price: 2
+      currency: gold
+      item:
+        type: GOLDEN_APPLE
+        amount: 1

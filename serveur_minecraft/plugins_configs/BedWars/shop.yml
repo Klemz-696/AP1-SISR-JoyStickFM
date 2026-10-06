@@ -1,0 +1,132 @@
+# ScreamingBedWars Official Shop Configuration for JoyStick FM
+# Categories: Blocks, Armor, Weapons, Tools, Ranged, Potions, Utilities
+
+blocks:
+  name: "&aBlocs"
+  icon: WHITE_WOOL
+  items:
+    - price: 4
+      currency: iron
+      item:
+        type: WHITE_WOOL
+        amount: 16
+    - price: 12
+      currency: iron
+      item:
+        type: OAK_PLANKS
+        amount: 16
+    - price: 24
+      currency: iron
+      item:
+        type: END_STONE
+        amount: 12
+    - price: 4
+      currency: emerald
+      item:
+        type: OBSIDIAN
+        amount: 4
+
+armor:
+  name: "&bArmures"
+  icon: CHAINMAIL_CHESTPLATE
+  items:
+    - price: 20
+      currency: iron
+      item:
+        type: CHAINMAIL_BOOTS
+        amount: 1
+    - price: 8
+      currency: gold
+      item:
+        type: IRON_BOOTS
+        amount: 1
+    - price: 6
+      currency: emerald
+      item:
+        type: DIAMOND_BOOTS
+        amount: 1
+
+weapons:
+  name: "&cArmes"
+  icon: IRON_SWORD
+  items:
+    - price: 10
+      currency: iron
+      item:
+        type: STONE_SWORD
+        amount: 1
+    - price: 7
+      currency: gold
+      item:
+        type: IRON_SWORD
+        amount: 1
+    - price: 4
+      currency: emerald
+      item:
+        type: DIAMOND_SWORD
+        amount: 1
+    - price: 5
+      currency: gold
+      item:
+        type: STICK
+        amount: 1
+        name: "&eBâton de Recul"
+        lore:
+          - "&7Idéal pour éjecter dans le vide."
+        enchants:
+          KNOCKBACK: 1
+
+tools:
+  name: "&6Outils"
+  icon: STONE_PICKAXE
+  items:
+    - price: 10
+      currency: iron
+      item:
+        type: WOODEN_PICKAXE
+        amount: 1
+    - price: 20
+      currency: iron
+      item:
+        type: STONE_PICKAXE
+        amount: 1
+    - price: 5
+      currency: gold
+      item:
+        type: IRON_PICKAXE
+        amount: 1
+    - price: 3
+      currency: emerald
+      item:
+        type: DIAMOND_PICKAXE
+        amount: 1
+    - price: 5
+      currency: gold
+      item:
+        type: SHEARS
+        amount: 1
+
+utilities:
+  name: "&dUtilitaires"
+  icon: GOLDEN_APPLE
+  items:
+    - price: 3
+      currency: gold
+      item:
+        type: GOLDEN_APPLE
+        amount: 1
+    - price: 4
+      currency: emerald
+      item:
+        type: ENDER_PEARL
+        amount: 1
+    - price: 4
+      currency: gold
+      item:
+        type: TNT
+        amount: 1
+    - price: 1
+      currency: emerald
+      item:
+        type: WATER_BUCKET
+        amount: 1

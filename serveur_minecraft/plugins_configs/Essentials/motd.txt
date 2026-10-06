@@ -1,0 +1,7 @@
+&8&m─────────────────────────────────────────────────────────────
+&6&l               ★ JOYSTICK & CO — SERVEUR OFFICIEL ★
+&7       Bienvenue sur l'infrastructure Minecraft de la WebRadio !
+&8▸ &fJoueur : &e{PLAYER}
+&8▸ &fSite & Radio : &bhttps://webradio.klemz.live
+&8▸ &fPour jouer : &aUtilise la Boussole dans ta main &f(Clic-Droit) !
+&8&m─────────────────────────────────────────────────────────────

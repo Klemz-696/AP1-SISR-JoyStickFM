@@ -1,0 +1,6 @@
+name: JoyStickHub
+version: 1.5.0
+main: fm.joystick.hub.JoyStickHub
+api-version: '1.20'
+folia-supported: true
+description: Plugin natif JoyStick FM (PNJ Interactifs, Protection Lobby & Gamemode Strict)

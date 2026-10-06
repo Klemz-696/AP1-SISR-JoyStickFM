@@ -1,0 +1,38 @@
+displayname: joueur
+weight: 10
+nodes:
+  - key: "essentials.home"
+    value: true
+  - key: "essentials.sethome"
+    value: true
+  - key: "essentials.spawn"
+    value: true
+  - key: "essentials.warp"
+    value: true
+  - key: "essentials.warp.hub"
+    value: true
+  - key: "essentials.warp.survie"
+    value: true
+  - key: "essentials.warp.minijeux"
+    value: true
+  - key: "essentials.msg"
+    value: true
+  - key: "essentials.tpa"
+    value: true
+  - key: "essentials.tpaccept"
+    value: true
+  - key: "essentials.tpdeny"
+    value: true
+  - key: "multiverse.core.tp.self"
+    value: true
+  - key: "bw.player.join"
+    value: true
+  - key: "blockhunt.join"
+    value: true
+  - key: "griefprevention.claim"
+    value: true
+  - key: "griefprevention.claimslist"
+    value: true
+  - key: "griefprevention.abandonclaim"
+    value: true
+

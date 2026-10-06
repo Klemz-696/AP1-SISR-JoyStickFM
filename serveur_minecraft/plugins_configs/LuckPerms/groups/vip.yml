@@ -1,0 +1,14 @@
+displayname: vip
+weight: 20
+nodes:
+  - key: "group.joueur"
+    value: true
+  - key: "essentials.fly"
+    value: true
+  - key: "essentials.nick"
+    value: true
+  - key: "essentials.hat"
+    value: true
+  - key: "essentials.sethome.multiple.vip"
+    value: true
+

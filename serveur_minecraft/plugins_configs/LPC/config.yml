@@ -1,0 +1,2 @@
+chat-format: "{prefix}{name}&8: &f{message}"
+group-formats: {}
