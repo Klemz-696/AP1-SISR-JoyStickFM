@@ -1,0 +1,71 @@
+# TABLE DE CORRESPONDANCE DES CHEMINS — DOSSIER DE TRANSMISSION PHASE 0
+# Format : [Fichier publie] | [Source originale] | [Origine VM / Git] | [Statut masquage]
+
+DEPOT/01_Journal_de_Bord/Seance_06_2026-10-06/Rapport_Avancement_Serveur_Et_Recette_Survie.md | 01_Journal_de_Bord/Seance_06_2026-10-06/Rapport_Avancement_Serveur_Et_Recette_Survie.md | Git: 01_Journal_de_Bord/Seance_06_2026-10-06/Rapport_Avancement_Serveur_Et_Recette_Survie.md | non
+DEPOT/01_Journal_de_Bord/Seance_07_2026-10-06/Rapport_Livraison_Finale_Lots_0_a_7.md | 01_Journal_de_Bord/Seance_07_2026-10-06/Rapport_Livraison_Finale_Lots_0_a_7.md | Git: 01_Journal_de_Bord/Seance_07_2026-10-06/Rapport_Livraison_Finale_Lots_0_a_7.md | non
+DEPOT/Perplexity/audit_complet_minecraft_terrain.json | Perplexity/audit_complet_minecraft_terrain.json | Git: Perplexity/audit_complet_minecraft_terrain.json | non
+DEPOT/Perplexity/JoyStickFM_Production_Lots_0_a_7/download_assets.py | Perplexity/JoyStickFM_Production_Lots_0_a_7/download_assets.py | Git: Perplexity/JoyStickFM_Production_Lots_0_a_7/download_assets.py | non
+DEPOT/Perplexity/JoyStickFM_Production_Lots_0_a_7/fix_compass_parkour_blockhunt.py | Perplexity/JoyStickFM_Production_Lots_0_a_7/fix_compass_parkour_blockhunt.py | Git: Perplexity/JoyStickFM_Production_Lots_0_a_7/fix_compass_parkour_blockhunt.py | non
+DEPOT/Perplexity/JoyStickFM_Production_Lots_0_a_7/fix_npcs_and_lobby_protection.py | Perplexity/JoyStickFM_Production_Lots_0_a_7/fix_npcs_and_lobby_protection.py | Git: Perplexity/JoyStickFM_Production_Lots_0_a_7/fix_npcs_and_lobby_protection.py | non
+DEPOT/Perplexity/JoyStickFM_Production_Lots_0_a_7/generate_arena_structures.py | Perplexity/JoyStickFM_Production_Lots_0_a_7/generate_arena_structures.py | Git: Perplexity/JoyStickFM_Production_Lots_0_a_7/generate_arena_structures.py | non
+DEPOT/Perplexity/JoyStickFM_Production_Lots_0_a_7/Lot_6_Navigation_et_Menus/lot6_setup_lobby_npcs.py | Perplexity/JoyStickFM_Production_Lots_0_a_7/Lot_6_Navigation_et_Menus/lot6_setup_lobby_npcs.py | Git: Perplexity/JoyStickFM_Production_Lots_0_a_7/Lot_6_Navigation_et_Menus/lot6_setup_lobby_npcs.py | non
+DEPOT/Perplexity/JoyStickFM_Production_Lots_0_a_7/resolve_grand_hub_terrestre.py | Perplexity/JoyStickFM_Production_Lots_0_a_7/resolve_grand_hub_terrestre.py | Git: Perplexity/JoyStickFM_Production_Lots_0_a_7/resolve_grand_hub_terrestre.py | non
+DEPOT/Perplexity/JoyStickFM_Production_Lots_0_a_7/src/fm/joystick/hub/JoyStickHub.java | Perplexity/JoyStickFM_Production_Lots_0_a_7/src/fm/joystick/hub/JoyStickHub.java | Git: Perplexity/JoyStickFM_Production_Lots_0_a_7/src/fm/joystick/hub/JoyStickHub.java | non
+DEPOT/Perplexity/JoyStickFM_Production_Lots_0_a_7/src/plugin.yml | Perplexity/JoyStickFM_Production_Lots_0_a_7/src/plugin.yml | Git: Perplexity/JoyStickFM_Production_Lots_0_a_7/src/plugin.yml | non
+DEPOT/Perplexity/JoyStickFM_Production_Lots_0_a_7/sync_full_server.py | Perplexity/JoyStickFM_Production_Lots_0_a_7/sync_full_server.py | Git: Perplexity/JoyStickFM_Production_Lots_0_a_7/sync_full_server.py | non
+DEPOT/Perplexity/JoyStickFM_Production_Lots_0_a_7/verify_master_lots_0_to_7.py | Perplexity/JoyStickFM_Production_Lots_0_a_7/verify_master_lots_0_to_7.py | Git: Perplexity/JoyStickFM_Production_Lots_0_a_7/verify_master_lots_0_to_7.py | non
+DEPOT/scratch/build_joystick_hub.py | scratch/build_joystick_hub.py | Git: scratch/build_joystick_hub.py | non
+DEPOT/scripts/sync_server_vm.sh | scripts/sync_server_vm.sh | Git: scripts/sync_server_vm.sh | non
+DEPOT/src/JoyStickHub/build.py | src/JoyStickHub/build.py | Git: src/JoyStickHub/build.py | non
+DEPOT/src/JoyStickHub/pom.xml | src/JoyStickHub/pom.xml | Git: src/JoyStickHub/pom.xml | non
+DEPOT/src/JoyStickHub/README.md | src/JoyStickHub/README.md | Git: src/JoyStickHub/README.md | non
+DEPOT/src/JoyStickHub/src/main/java/fm/joystick/hub/JoyStickHub.java | src/JoyStickHub/src/main/java/fm/joystick/hub/JoyStickHub.java | Git: src/JoyStickHub/src/main/java/fm/joystick/hub/JoyStickHub.java | non
+DEPOT/src/JoyStickHub/src/main/resources/plugin.yml | src/JoyStickHub/src/main/resources/plugin.yml | Git: src/JoyStickHub/src/main/resources/plugin.yml | non
+ETAT_ACTUEL.txt | ETAT_ACTUEL.txt | N/A (Document de cadrage) | non applicable
+MANQUANTS_ET_ANOMALIES.md | MANQUANTS_ET_ANOMALIES.md | N/A (Document de cadrage) | non applicable
+PREUVES/CLASSIFICATION_SCRIPTS.md | phase0/PREUVES/CLASSIFICATION_SCRIPTS.md | N/A (Preuve technique) | non applicable
+PREUVES/COMPARAISON_HASHES_SOURCES_ET_JARS.md | phase0/PREUVES/COMPARAISON_HASHES_SOURCES_ET_JARS.md | N/A (Preuve technique) | non applicable
+PREUVES/CONTRAT_LUCKPERMS_ROLES.md | phase0/PREUVES/CONTRAT_LUCKPERMS_ROLES.md | N/A (Preuve technique) | non applicable
+PREUVES/MANIFESTE_CARTES_COMMUNAUTAIRES.md | phase0/PREUVES/MANIFESTE_CARTES_COMMUNAUTAIRES.md | N/A (Preuve technique) | non applicable
+PREUVES/RELEVE_TELEMETRIE_VM.md | phase0/PREUVES/RELEVE_TELEMETRIE_VM.md | N/A (Preuve technique) | non applicable
+RAPPORT_VERIFICATION_PHASE0.md | RAPPORT_VERIFICATION_PHASE0.md | N/A (Document de cadrage) | non applicable
+README.md | README.md | N/A (Document de cadrage) | non applicable
+VM/data/bukkit.yml | serveur_minecraft/data/bukkit.yml | /opt/minecraft/data/bukkit.yml | non
+VM/data/commands.yml | serveur_minecraft/data/commands.yml | /opt/minecraft/data/commands.yml | non
+VM/data/config/paper-global.yml | serveur_minecraft/data/config/paper-global.yml | /opt/minecraft/data/config/paper-global.yml | non
+VM/data/config/paper-world-defaults.yml | serveur_minecraft/data/config/paper-world-defaults.yml | /opt/minecraft/data/config/paper-world-defaults.yml | non
+VM/data/plugins/AuthMe/config.yml | serveur_minecraft/data/plugins/AuthMe/config.yml | /opt/minecraft/data/plugins/AuthMe/config.yml | oui
+VM/data/plugins/BedWars/arenas/jfm_duo.yml | serveur_minecraft/data/plugins/BedWars/arenas/jfm_duo.yml | /opt/minecraft/data/plugins/BedWars/arenas/jfm_duo.yml | non
+VM/data/plugins/BedWars/arenas/rush_1v1.yml | serveur_minecraft/data/plugins/BedWars/arenas/rush_1v1.yml | /opt/minecraft/data/plugins/BedWars/arenas/rush_1v1.yml | non
+VM/data/plugins/BedWars/arenas/rush_2v2.yml | serveur_minecraft/data/plugins/BedWars/arenas/rush_2v2.yml | /opt/minecraft/data/plugins/BedWars/arenas/rush_2v2.yml | non
+VM/data/plugins/BedWars/config.yml | serveur_minecraft/data/plugins/BedWars/config.yml | /opt/minecraft/data/plugins/BedWars/config.yml | non
+VM/data/plugins/BedWars/rush_shop.yml | serveur_minecraft/data/plugins/BedWars/rush_shop.yml | /opt/minecraft/data/plugins/BedWars/rush_shop.yml | non
+VM/data/plugins/BedWars/shop.yml | serveur_minecraft/data/plugins/BedWars/shop.yml | /opt/minecraft/data/plugins/BedWars/shop.yml | non
+VM/data/plugins/BlockHunt/arenas.yml | serveur_minecraft/data/plugins/BlockHunt/arenas.yml | /opt/minecraft/data/plugins/BlockHunt/arenas.yml | non
+VM/data/plugins/BlockHunt/config.yml | serveur_minecraft/data/plugins/BlockHunt/config.yml | /opt/minecraft/data/plugins/BlockHunt/config.yml | non
+VM/data/plugins/BlockHunt/messages.yml | serveur_minecraft/data/plugins/BlockHunt/messages.yml | /opt/minecraft/data/plugins/BlockHunt/messages.yml | non
+VM/data/plugins/DeluxeMenus/config.yml | serveur_minecraft/data/plugins/DeluxeMenus/config.yml | /opt/minecraft/data/plugins/DeluxeMenus/config.yml | non
+VM/data/plugins/DeluxeMenus/gui_menus/games.yml | serveur_minecraft/data/plugins/DeluxeMenus/gui_menus/games.yml | /opt/minecraft/data/plugins/DeluxeMenus/gui_menus/games.yml | non
+VM/data/plugins/DeluxeMenus/gui_menus/lot6_games_menu.yml | serveur_minecraft/data/plugins/DeluxeMenus/gui_menus/lot6_games_menu.yml | /opt/minecraft/data/plugins/DeluxeMenus/gui_menus/lot6_games_menu.yml | non
+VM/data/plugins/Essentials/config.yml | serveur_minecraft/data/plugins/Essentials/config.yml | /opt/minecraft/data/plugins/Essentials/config.yml | non
+VM/data/plugins/Essentials/spawn.yml | serveur_minecraft/data/plugins/Essentials/spawn.yml | /opt/minecraft/data/plugins/Essentials/spawn.yml | non
+VM/data/plugins/GriefPreventionData/config.yml | serveur_minecraft/data/plugins/GriefPreventionData/config.yml | /opt/minecraft/data/plugins/GriefPreventionData/config.yml | non
+VM/data/plugins/GriefPreventionData/messages.yml | serveur_minecraft/data/plugins/GriefPreventionData/messages.yml | /opt/minecraft/data/plugins/GriefPreventionData/messages.yml | non
+VM/data/plugins/ItemJoin/config.yml | serveur_minecraft/data/plugins/ItemJoin/config.yml | /opt/minecraft/data/plugins/ItemJoin/config.yml | non
+VM/data/plugins/ItemJoin/items.yml | serveur_minecraft/data/plugins/ItemJoin/items.yml | /opt/minecraft/data/plugins/ItemJoin/items.yml | non
+VM/data/plugins/JoyStickHub/config.yml | serveur_minecraft/data/plugins/JoyStickHub/config.yml | /opt/minecraft/data/plugins/JoyStickHub/config.yml | non
+VM/data/plugins/LuckPerms/config.yml | serveur_minecraft/data/plugins/LuckPerms/config.yml | /opt/minecraft/data/plugins/LuckPerms/config.yml | non
+VM/data/plugins/LuckPerms/groups/admin.yml | serveur_minecraft/data/plugins/LuckPerms/groups/admin.yml | /opt/minecraft/data/plugins/LuckPerms/groups/admin.yml | non
+VM/data/plugins/LuckPerms/groups/default.yml | serveur_minecraft/data/plugins/LuckPerms/groups/default.yml | /opt/minecraft/data/plugins/LuckPerms/groups/default.yml | non
+VM/data/plugins/LuckPerms/groups/joueur.yml | serveur_minecraft/data/plugins/LuckPerms/groups/joueur.yml | /opt/minecraft/data/plugins/LuckPerms/groups/joueur.yml | non
+VM/data/plugins/LuckPerms/groups/modo.yml | serveur_minecraft/data/plugins/LuckPerms/groups/modo.yml | /opt/minecraft/data/plugins/LuckPerms/groups/modo.yml | non
+VM/data/plugins/LuckPerms/groups/vip.yml | serveur_minecraft/data/plugins/LuckPerms/groups/vip.yml | /opt/minecraft/data/plugins/LuckPerms/groups/vip.yml | non
+VM/data/plugins/Multiverse-Core/config.yml | serveur_minecraft/data/plugins/Multiverse-Core/config.yml | /opt/minecraft/data/plugins/Multiverse-Core/config.yml | non
+VM/data/plugins/Multiverse-Core/worlds.yml | serveur_minecraft/data/plugins/Multiverse-Core/worlds.yml | /opt/minecraft/data/plugins/Multiverse-Core/worlds.yml | non
+VM/data/plugins/Multiverse-Inventories/config.yml | serveur_minecraft/data/plugins/Multiverse-Inventories/config.yml | /opt/minecraft/data/plugins/Multiverse-Inventories/config.yml | non
+VM/data/plugins/Multiverse-Inventories/groups.yml | serveur_minecraft/data/plugins/Multiverse-Inventories/groups.yml | /opt/minecraft/data/plugins/Multiverse-Inventories/groups.yml | non
+VM/data/plugins/TAB/config.yml | serveur_minecraft/data/plugins/TAB/config.yml | /opt/minecraft/data/plugins/TAB/config.yml | non
+VM/data/plugins/WorldEdit/config.yml | serveur_minecraft/data/plugins/WorldEdit/config.yml | /opt/minecraft/data/plugins/WorldEdit/config.yml | non
+VM/data/server.properties | serveur_minecraft/data/server.properties | /opt/minecraft/data/server.properties | oui
+VM/data/spigot.yml | serveur_minecraft/data/spigot.yml | /opt/minecraft/data/spigot.yml | non
+VM/docker-compose.yml | serveur_minecraft/docker-compose.yml | /opt/minecraft/docker-compose.yml | non

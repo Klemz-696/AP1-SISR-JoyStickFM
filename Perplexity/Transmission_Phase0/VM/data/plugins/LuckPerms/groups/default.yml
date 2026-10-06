@@ -1,0 +1,6 @@
+displayname: default
+weight: 0
+nodes:
+  - key: "group.joueur"
+    value: true
+

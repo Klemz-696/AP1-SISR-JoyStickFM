@@ -1,0 +1,73 @@
+===============================================================================
+JOYSTICK FM — ETAT ACTUEL DU SERVEUR ET RELEVE FACTUEL (PHASE 0)
+===============================================================================
+Date et heure de verification : Mardi 6 octobre 2026 a 20:45:00 CEST
+Auteur de la verification : Agent d'audit et de preparation technique (Lecture Seule)
+Environnement cible : Debian 12 (srv-minecraft / 10.30.0.22) / Docker minecraft_ap1
+Depot Git de reference : https://github.com/Klemz-696/AP1-SISR-JoyStickFM
+Branche active : main | Dernier commit distant : 6f0e761 ("feat(sync): synchronisation integrale...")
+Statut copie de travail : Working tree clean (aucune modification non validee sur le serveur)
+
+-------------------------------------------------------------------------------
+1. VERSIONS ET MOTEURS OBSERVES EN DIRECT
+-------------------------------------------------------------------------------
+- Moteur Minecraft : PaperMC 26.2 (build 129 stable, API version 1.20.4/1.20)
+- Java Runtime : OpenJDK Temurin 25.0.4.1+1 LTS (build 25.0.4.1+1-LTS, 64-Bit Server VM)
+- Conteneur Docker : itzg/minecraft-server:latest (minecraft_ap1)
+- Statut conteneur : Up 4 hours (healthy)
+- Ports ecoutes : 25565/tcp (Minecraft)
+- Stabilite TPS mesuree en production : 20.0, 20.0, 20.0 (Optimal)
+- Volume Docker : /opt/minecraft/data monte sur /data (bind mount)
+- Permissions utilisateur : UID=1000, GID=1000 (srv-minecraft:srv-minecraft)
+- Mode d'authentification : ONLINE_MODE=FALSE (securise par AuthMe SHA-256)
+
+-------------------------------------------------------------------------------
+2. ALLOCATION MEMOIRE ET RESSOURCES
+-------------------------------------------------------------------------------
+- Variable Docker MEMORY : 8G (8 192 Mo alloues au Heap JVM)
+- Variable Docker INIT_MEMORY : 4G (4 096 Mo de Heap initial)
+- Options JVM : -DbundlerRepoDir=/data
+- Ecart historique résolu :
+  L'audit terrain brut initial du 05/10 mentionnait MEMORY=2G. Le docker-compose
+  de production a ete reconfigure et deploie a 8G le 06/10 a 15:14 CEST.
+  La JVM tourne actuellement avec 8 Go certifies (docker inspect minecraft_ap1).
+
+-------------------------------------------------------------------------------
+3. CORRESPONDANCE SOURCE ET JAR JOYSTICKHUB (CERTIFIEE 100%)
+-------------------------------------------------------------------------------
+- Source Java du depot :
+  `Perplexity/JoyStickFM_Production_Lots_0_a_7/src/fm/joystick/hub/JoyStickHub.java`
+  Taille : 15 417 octets | SHA-256 : 7129ac534567a79ad1faf4b5a3882faa504fee54e0815ac1d7a7f0ff0076deaa
+- Binaire JAR compile et deploie :
+  `JoyStickHub.jar` (dans /opt/minecraft/data/plugins/ et dans le depot Git)
+  Taille : 6 957 octets | SHA-256 : 1d09151e5073979a45808ad1c8f57e49aa052644d39db0a0b60fd2df8308a3e4
+- Version declaree dans plugin.yml : 1.5.0 (Folia-supported: true)
+- Correspondance source/JAR :
+  Prouvee par recompilation deterministe et inspection de l'archive (plugin.yml + JoyStickHub.class).
+
+-------------------------------------------------------------------------------
+4. ETAT DES DECISIONS D1 / D3 / D5 ET ARBITRAGES
+-------------------------------------------------------------------------------
+- Decision D1 (Protection Survie vs Claims) :
+  CONFIRMEE DANS CONFIGURATION : GriefPrevention est installe et actif avec revendication
+  a la pelle d'or. Les claims fonctionnent sans conflit avec Multiverse.
+- Decision D2 (Authentification hors-ligne) :
+  CONFIRMEE : AuthMe v6.0.2 Paper est actif avec hachage SHA-256, auto-login kick actif.
+- Decision D3 (Fin de partie Mini-Jeux : Spectateur vs Ejection) :
+  A CLARIFIER : Actuellement dans ScreamingBedWars et BlockHunt, les joueurs elimines
+  passent en mode spectateur dans l'arene jusqu'a la fin du match, mais un retour au Hub
+  est possible via /spawn.
+- Decision D5 (Gestion du Respawn Survie) :
+  CONFIRMEE DANS CODE : JoyStickHub intercepte onPlayerRespawn : si le joueur a un lit
+  ou une ancre dans 'survie', son respawn de lit est strictement respecte (pas de redirection
+  au hub central). S'il n'a pas de lit, il respawne au spawn du monde survie.
+
+-------------------------------------------------------------------------------
+5. ELEMENTS PROVENANT EXCLUSIVEMENT DE RAPPORTS (A NE PAS PRENDRE POUR ACQUIS)
+-------------------------------------------------------------------------------
+- Le rapport Seance 6 mentionnait JoyStickHub v1.2.0 : c'etait une ancienne version intermediaire.
+- Le rapport Seance 6 mentionnait un spawn hub a (-274, 104, 452) : les coordonnees reelles
+  actives dans le Grand Hub Terrestre (Minecraft Monday Lobby) sont (0.5, 65.0, 0.5).
+- La recette 29/29 valide le bon demarrage et la connectivite fonctionnelle des modules,
+  mais NE PROUVE PAS l'equilibrage competitif d'une partie a 16 joueurs reels.
+===============================================================================

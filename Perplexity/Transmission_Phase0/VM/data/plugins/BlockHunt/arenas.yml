@@ -1,0 +1,87 @@
+# BlockHunt Arena Configuration for JoyStick FM
+# Decision D3: Eliminated hiders remain permanent spectators until game ends
+jfm_retro:
+  ==: nl.Steffion.BlockHunt.Arena
+  arenaName: jfm_retro
+  pos1:
+    ==: nl.Steffion.BlockHunt.Serializables.LocationSerializable
+    w: blockhunt_jfm
+    x: -40.0
+    y: 63.0
+    z: -40.0
+    a: 0.0
+    p: 0.0
+  pos2:
+    ==: nl.Steffion.BlockHunt.Serializables.LocationSerializable
+    w: blockhunt_jfm
+    x: 40.0
+    y: 90.0
+    z: 40.0
+    a: 0.0
+    p: 0.0
+  maxPlayers: 12
+  minPlayers: 1
+  amountSeekersOnStart: 1
+  timeInLobbyUntilStart: 5
+  waitingTimeSeeker: 20
+  gameTime: 300
+  timeUntilHidersSword: 30
+  disguiseBlocks:
+    - ==: org.bukkit.inventory.ItemStack
+      v: 3955
+      type: BOOKSHELF
+    - ==: org.bukkit.inventory.ItemStack
+      v: 3955
+      type: HAY_BLOCK
+    - ==: org.bukkit.inventory.ItemStack
+      v: 3955
+      type: CRAFTING_TABLE
+    - ==: org.bukkit.inventory.ItemStack
+      v: 3955
+      type: BARREL
+    - ==: org.bukkit.inventory.ItemStack
+      v: 3955
+      type: OAK_PLANKS
+    - ==: org.bukkit.inventory.ItemStack
+      v: 3955
+      type: CAULDRON
+  lobbyWarp:
+    ==: nl.Steffion.BlockHunt.Serializables.LocationSerializable
+    w: blockhunt_jfm
+    x: 0.5
+    y: 101.0
+    z: 0.5
+    a: 0.0
+    p: 0.0
+  hidersWarp:
+    ==: nl.Steffion.BlockHunt.Serializables.LocationSerializable
+    w: blockhunt_jfm
+    x: 0.5
+    y: 65.0
+    z: 0.5
+    a: 0.0
+    p: 0.0
+  seekersWarp:
+    ==: nl.Steffion.BlockHunt.Serializables.LocationSerializable
+    w: blockhunt_jfm
+    x: 0.5
+    y: 65.0
+    z: -34.5
+    a: 0.0
+    p: 0.0
+  spawnWarp:
+    ==: nl.Steffion.BlockHunt.Serializables.LocationSerializable
+    w: hub
+    x: 0.5
+    y: 65.0
+    z: 0.5
+    a: 0.0
+    p: 0.0
+  seekersWinCommands: []
+  hidersWinCommands: []
+  allowedCommands:
+    - /bh leave
+    - /blockhunt leave
+  seekersTokenWin: 10
+  hidersTokenWin: 50
+  killTokens: 8
