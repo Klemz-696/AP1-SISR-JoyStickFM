@@ -21,8 +21,11 @@ items:
       - '&8▸ &eHikabrain &3Cache-Cache'
       - ''
       - '&e➜ Clic-droit pour ouvrir le menu'
-    interact:
+    commands:
+      - 'player: dm open games'
       - 'player: menu'
+    commands-type: interact
+    commands-sound: UI_BUTTON_CLICK
     itemflags: inventory-modify, death-drops, self-drops, unbreakable
     triggers: join, respawn, world-switch
     enabled-worlds: hub, lobby_minijeux
@@ -35,8 +38,10 @@ items:
       - '&7Cliquez pour quitter et retourner au Hub central.'
       - ''
       - '&c➜ Clic-droit pour retourner au Hub'
-    interact:
+    commands:
       - 'player: spawn'
+    commands-type: interact
+    commands-sound: ENTITY_ENDERMAN_TELEPORT
     itemflags: inventory-modify, death-drops, self-drops, unbreakable
     triggers: join, respawn, world-switch
     enabled-worlds: lobby_minijeux

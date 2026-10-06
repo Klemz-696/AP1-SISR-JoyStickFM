@@ -26,6 +26,8 @@ items:
       - '&f▶ Clic-gauche pour revenir au Hub'
     left_click_commands:
       - '[close]'
+      - '[player] bh leave'
+      - '[player] bw leave'
       - '[player] spawn'
       - '[console] gamemode adventure %player_name%'
 
@@ -42,6 +44,8 @@ items:
       - '&c▶ Clic-gauche pour quitter'
     left_click_commands:
       - '[close]'
+      - '[player] bh leave'
+      - '[player] bw leave'
       - '[player] spawn'
       - '[console] gamemode adventure %player_name%'
 
