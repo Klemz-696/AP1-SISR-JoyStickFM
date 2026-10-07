@@ -1,0 +1,167 @@
+{
+  "version": "P2.3-verified-inspected-mca",
+  "status": "STAGING_VERIFIED_AND_INSPECTED_FROM_MCA",
+  "purpose": "JoyStick FM Phase P2 - Hub, Lobby, Parkour & Zones d'accueil",
+  "staging_scope": "STAGING_ONLY_NO_PRODUCTION",
+  "engine_runtime": {
+    "target_engine": "Paper 26.2 build 129",
+    "target_java": "OpenJDK 25 LTS (Temurin-25.0.2+10)",
+    "verified_jar_sha256": "b1d8f6bfa1b6101fa8e947b53041cb3bdf5540e7b83b6547ca19ba7edefeb083",
+    "status": "CONFIRMED_AND_VERIFIED"
+  },
+  "selected_maps": [
+    {
+      "id": "hub_japanese_lobby",
+      "kind": "hub",
+      "title": "Japanese Lobby",
+      "author": "CedricD0812",
+      "source_page": "https://www.planetminecraft.com/project/japanese-lobby-6691829/",
+      "license": "Creative Commons Attribution 4.0 International (CC BY 4.0)",
+      "server_usage_allowed": true,
+      "attribution_required": true,
+      "attribution_notice": "Carte Japanese Lobby créée par CedricD0812 sous licence CC BY 4.0",
+      "archive_file": "full-japanese-lobby.schem",
+      "archive_path": "depot_ressources_externes/maps/full-japanese-lobby.schem",
+      "format": "Sponge Schematic v3 (.schem)",
+      "data_version": 3953,
+      "minecraft_version": "1.21 / 26.2",
+      "size_bytes_compressed": 11133,
+      "size_bytes_uncompressed": 296214,
+      "sha256": "dc612a7a173869f4893acfbfb0064df74cf12bbea235d90dfdaf17c15ae57dba",
+      "dimensions_schematic": {
+        "width_x": 69,
+        "height_y": 65,
+        "length_z": 60
+      },
+      "nbt_offset": [-68, -2, -29],
+      "world_candidate_name": "hub_p2_candidate",
+      "paste_translation": {
+        "paste_target": [0, 64, 0],
+        "world_bounding_box": {
+          "x": [-80, 15],
+          "y": [48, 127],
+          "z": [-32, 31]
+        }
+      },
+      "inspected_spawn": {
+        "coordinates": {"x": 0.5, "y": 64.0, "z": 0.5, "yaw": 0.0, "pitch": 0.0},
+        "floor_block_y63": "minecraft:green_concrete",
+        "feet_block_y64": "minecraft:air",
+        "head_block_y65": "minecraft:air"
+      },
+      "void_rescue_y": 50.0,
+      "protection": {
+        "gamemode": "ADVENTURE",
+        "block_break": false,
+        "block_place": false,
+        "fall_damage": false,
+        "void_damage": false
+      }
+    },
+    {
+      "id": "lobby_minigame_parkour",
+      "kind": "lobby_and_parkour",
+      "title": "Minigame Lobby with Parkour",
+      "author": "Annonomous Pixel",
+      "source_page": "https://www.planetminecraft.com/project/minigame-lobby-with-parkour/",
+      "license": "Free for server use explicitly granted by author ('You are free to use on your server!')",
+      "server_usage_allowed": true,
+      "attribution_required": true,
+      "attribution_notice": "Lobby Mini-Jeux et Parkour par Annonomous Pixel",
+      "archive_file": "minigamelobby.schematic",
+      "archive_path": "depot_ressources_externes/maps/minigamelobby.schematic",
+      "format": "Classic MCEdit/WorldEdit Schematic (.schematic, Alpha format)",
+      "minecraft_version": "Java (Format Alpha avec conversion de blocs automatique)",
+      "size_bytes_compressed": 6518,
+      "size_bytes_uncompressed": 186120,
+      "sha256": "69125faa6e6c809a235e080743620fab1c6a40e775aede8d20ad95dd9cb24bd2",
+      "dimensions_schematic": {
+        "width_x": 65,
+        "height_y": 22,
+        "length_z": 65
+      },
+      "we_offset": {"x": -32, "y": -2, "z": -5},
+      "we_origin": {"x": -199, "y": 60, "z": -211},
+      "world_candidate_name": "lobby_minijeux_p2_candidate",
+      "paste_translation": {
+        "paste_target": [0, 64, 0],
+        "world_bounding_box": {
+          "x": [-32, 47],
+          "y": [48, 79],
+          "z": [-16, 63]
+        }
+      },
+      "inspected_spawn": {
+        "coordinates": {"x": 0.5, "y": 64.0, "z": 0.5, "yaw": 0.0, "pitch": 0.0},
+        "floor_block_y63": "minecraft:sandstone",
+        "feet_block_y64": "minecraft:air",
+        "head_block_y65": "minecraft:air"
+      },
+      "void_rescue_y": 45.0,
+      "parkour": {
+        "course_inspected": true,
+        "total_parkour_blocks": 62,
+        "start_blocks": ["RED_WOOL", "LIGHT_WEIGHTED_PRESSURE_PLATE"],
+        "start_real_coordinates": [
+          {"x": -12, "y": 64, "z": 9, "block": "minecraft:red_wool"},
+          {"x": 12, "y": 64, "z": 9, "block": "minecraft:red_wool"}
+        ],
+        "checkpoint_blocks": ["LADDER", "YELLOW_WOOL", "HEAVY_WEIGHTED_PRESSURE_PLATE"],
+        "checkpoint_real_ladders": [
+          {"x": -19, "y": 72, "z": 34, "block": "minecraft:ladder"},
+          {"x": 19, "y": 72, "z": 34, "block": "minecraft:ladder"}
+        ],
+        "finish_blocks": ["PURPLE_WOOL", "EMERALD_BLOCK", "SMOOTH_STONE_SLAB"],
+        "finish_min_y": 72,
+        "finish_real_coordinates": [
+          {"x": -5, "y": 73, "z": 33, "block": "minecraft:purple_wool"},
+          {"x": 5, "y": 73, "z": 33, "block": "minecraft:purple_wool"},
+          {"x": -5, "y": 74, "z": 33, "block": "minecraft:smooth_stone_slab"},
+          {"x": 5, "y": 74, "z": 33, "block": "minecraft:smooth_stone_slab"}
+        ],
+        "checkpoint_teleport_on_fall": true
+      }
+    }
+  ],
+  "navigation_and_inventories": {
+    "itemjoin": {
+      "file": "scratch/staging_p0_2/data/plugins/ItemJoin/items.yml",
+      "game_selector_worlds": ["hub", "lobby_minijeux", "hub_p2_candidate", "lobby_minijeux_p2_candidate"],
+      "quit_lobby_worlds": ["lobby_minijeux", "lobby_minijeux_p2_candidate"],
+      "status": "CONFIGURED_AND_VERIFIED"
+    },
+    "multiverse_inventories": {
+      "file": "scratch/staging_p0_2/data/plugins/Multiverse-Inventories/groups.yml",
+      "group": "hub",
+      "shared_worlds": ["hub", "lobby_minijeux", "hub_p2_candidate", "lobby_minijeux_p2_candidate"],
+      "status": "CONFIGURED_AND_VERIFIED"
+    }
+  },
+  "combat_mechanics": {
+    "hikabrain_pvp_spam_cooldown_reduction": true,
+    "method": "Paper API Attribute.ATTACK_SPEED = 100.0 on world hikabrain_jfm",
+    "precision": "Rduction/suppression du dlai de recharge des attaques (cooldown de coup), non mulation complte 1.8 (pas de blocage  l'pe ni knockback custom).",
+    "restoration": "La valeur d'origine du joueur (baseValue) est prserve dans JoyStickHub et fidlement restaure  la sortie du monde.",
+    "status": "IMPLEMENTED_AND_COMPILED_IN_JOYSTICKHUB"
+  },
+  "evaluated_and_blocked_maps": [
+    {
+      "id": "hub_candidate_minecraft_monday",
+      "uploader": "HeathLoganCampbell",
+      "status": "REJET_PAR_UTILISATEUR",
+      "reason": "Rejet formellement par l'utilisateur. Aucune mention ni mlange de crdits HeathLoganCampbell."
+    },
+    {
+      "id": "lobby_arcade_breadbuilds",
+      "author": "BreadBuilds",
+      "status": "STRICTEMENT_BLOQU",
+      "reason": "Produit commercial payant (12.00$ - 14.99$). Licence propritaire ferme. Aucun achat autoris."
+    },
+    {
+      "id": "easy_grid_parkour",
+      "author": "Spatularz",
+      "status": "BLOQU",
+      "reason": "Droits d'auteur rservs par dfaut. Grille 100 niveaux inadapte  un lobby architectural."
+    }
+  ]
+}

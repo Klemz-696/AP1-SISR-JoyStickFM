@@ -1,0 +1,23 @@
+# ==============================================================================
+# Extrait expurgé Essentials - Paramètres de Spawn et Respawn (JoyStick FM)
+# ==============================================================================
+
+# Gestion du respawn joueur
+respawn-listener-priority: high
+spawn-join-listener-priority: high
+respawn-at-home: false
+respawn-at-home-bed: true
+respawn-at-anchor: false
+spawnpoint: newbies
+spawn-if-no-home: true
+spawn-on-join: false
+
+# Téléportation & Sécurité
+teleport-safety: true
+force-disable-teleport-safety: false
+force-safe-teleport-location: false
+teleport-cooldown: 0
+teleport-delay: 0
+teleport-invulnerability: 4
+teleport-to-center: true
+world-teleport-permissions: false

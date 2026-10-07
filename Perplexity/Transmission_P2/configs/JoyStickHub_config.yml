@@ -1,0 +1,93 @@
+# =====================================================================
+# JoyStickHub - Configuration Phase P2 (Centralisation des zones d'accueil)
+# =====================================================================
+
+worlds:
+  hub:
+    spawn:
+      x: 0.5
+      y: 65.0
+      z: 0.5
+      yaw: 0.0
+      pitch: 0.0
+    void_rescue_y: 60.0
+    gamemode: ADVENTURE
+    protect_blocks: true
+    credit_author: "JoyStick FM"
+    credit_license: "Interne"
+
+  lobby_minijeux:
+    spawn:
+      x: 0.5
+      y: 65.0
+      z: 0.5
+      yaw: 0.0
+      pitch: 0.0
+    void_rescue_y: 50.0
+    gamemode: ADVENTURE
+    protect_blocks: true
+    credit_author: "JoyStick FM"
+    credit_license: "Interne"
+
+  hub_p2_candidate:
+    # Sol en green_concrete à Y=63, pieds à Y=64, tête à Y=65
+    spawn:
+      x: 0.5
+      y: 64.0
+      z: 0.5
+      yaw: 0.0
+      pitch: 0.0
+    void_rescue_y: 50.0
+    gamemode: ADVENTURE
+    protect_blocks: true
+    credit_author: "CedricD0812 (Japanese Lobby)"
+    credit_license: "Creative Commons Attribution 4.0 (CC BY 4.0)"
+
+  lobby_minijeux_p2_candidate:
+    # Sol en grès (sandstone) à Y=63, pieds à Y=64, tête à Y=65
+    spawn:
+      x: 0.5
+      y: 64.0
+      z: 0.5
+      yaw: 0.0
+      pitch: 0.0
+    void_rescue_y: 45.0
+    gamemode: ADVENTURE
+    protect_blocks: true
+    credit_author: "Annonomous Pixel (Minigame Lobby with Parkour)"
+    credit_license: "Free for server use granted by author"
+
+parkour:
+  enabled: true
+  world: "lobby_minijeux_p2_candidate"
+  # Blocs de départ : laine rouge native de la carte ou plaque de détection
+  start_blocks:
+    - "RED_WOOL"
+    - "LIGHT_WEIGHTED_PRESSURE_PLATE"
+  # Checkpoints intermédiaires : échelles natives, laine jaune/orange ou plaque
+  checkpoint_blocks:
+    - "LADDER"
+    - "YELLOW_WOOL"
+    - "HEAVY_WEIGHTED_PRESSURE_PLATE"
+  # Blocs d'arrivée : laine violette du sommet, dalles de pierre, ou bloc d'émeraude
+  finish_blocks:
+    - "PURPLE_WOOL"
+    - "EMERALD_BLOCK"
+    - "SMOOTH_STONE_SLAB"
+  finish_min_y: 72
+  teleport_to_checkpoint_on_fall: true
+
+combat:
+  # Réduction maximale du délai de recharge des attaques (cooldown) dans l'arène Hikabrain
+  # Permet le clic rapide (spam-click) sans altérer les autres mécaniques vanilla
+  hikabrain_pvp_spam_cooldown_reduction: true
+  hikabrain_attack_speed: 100.0
+
+messages:
+  prefix: "§6§lJoyStick FM §7» "
+  void_rescue: "§eChute rattrapée ! Vous avez été repositionné au spawn."
+  void_rescue_parkour: "§eChute de parkour ! Retour à votre dernier checkpoint."
+  block_protect: "§cLa modification de blocs est interdite dans cette zone d'accueil !"
+  parkour_start: "§a§lParkour commencé ! Bonne chance !"
+  parkour_checkpoint: "§b✦ Checkpoint validé !"
+  parkour_finish: "§6§l★ FÉLICITATIONS ! Parkour terminé en %time%s !"

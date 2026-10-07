@@ -1,0 +1,44 @@
+# --{ =-=-=-=-=-=-=-=-=-= ItemJoin's Custom Item Configurations, by RockinChaos =-=-=-=-=-=-=-=-=-= }--
+# Modifying the Version will cause this file to break and regenerate.
+items-Version: 8
+
+# General options that apply to the custom items' functionality.
+items-Delay: 2
+items-Overwrite: false
+items-Spamming: false
+items-RestrictCount: false
+
+# This is the section where the custom items created will be stored.
+items:
+  game-selector:
+    id: COMPASS
+    slot: 4
+    name: '&6&l✦ MENU DES JEUX ✦ &7(Clic-Droit)'
+    lore:
+      - '&7Cliquez pour ouvrir la sélection des jeux :'
+      - '&8▸ &aSurvie Vanilla'
+      - '&8▸ &cBedWars &6Rush'
+      - '&8▸ &eHikabrain &3Cache-Cache'
+      - ''
+      - '&e➜ Clic-droit pour ouvrir le menu'
+    # JoyStickHub P0.2 is the only owner of this item's UI action and click sound.
+    commands: []
+    itemflags: death-drops, self-drops, unbreakable, auto-remove
+    triggers: join, respawn, world-switch
+    enabled-worlds: hub, lobby_minijeux, hub_p2_candidate, lobby_minijeux_p2_candidate
+
+  quit-lobby:
+    id: RED_BED
+    slot: 8
+    name: '&c&l✦ RETOUR AU HUB ✦ &7(Clic-Droit)'
+    lore:
+      - '&7Cliquez pour quitter et retourner au Hub central.'
+      - ''
+      - '&c➜ Clic-droit pour retourner au Hub'
+    commands:
+      - 'player: spawn'
+    commands-type: interact
+    commands-sound: ENTITY_ENDERMAN_TELEPORT
+    itemflags: death-drops, self-drops, unbreakable, auto-remove
+    triggers: join, respawn, world-switch
+    enabled-worlds: lobby_minijeux, lobby_minijeux_p2_candidate

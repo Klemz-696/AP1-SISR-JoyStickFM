@@ -1,0 +1,30 @@
+# ==============================================================================
+# Extrait expurgé AuthMe - Paramètres de Spawn & Redirection (JoyStick FM)
+# Note : Aucun hash, mot de passe, sel ou paramètre de base de données inclus.
+# ==============================================================================
+
+settings:
+    restrictions:
+        # Priorité de gestion du spawn : AuthMe applique son spawn avant Essentials et Multiverse
+        spawnPriority: authme,essentials,cmi,multiverse,default
+
+        # Téléportation à la connexion
+        ForceSpawnLocOnJoin:
+            enabled: false
+            worlds:
+            - world
+            - world_nether
+            - world_the_end
+
+        # Sauvegarde de la position de déconnexion
+        SaveQuitLocation: false
+
+        # Téléportation des joueurs non-authentifiés
+        teleportUnAuthedToSpawn: false
+
+        # Empêcher les interactions non authentifiées
+        allowCommands:
+        - /login
+        - /register
+        - /l
+        - /reg

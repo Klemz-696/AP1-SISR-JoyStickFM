@@ -1,0 +1,52 @@
+# Multiverse-Inventories Groups
+  
+# To ADD, DELETE, and EDIT groups use the command /mvinv group.
+# No support will be given for those who manually edit these groups.
+groups:
+  hub:
+    worlds:
+    - hub
+    - lobby_minijeux
+    - hub_p2_candidate
+    - lobby_minijeux_p2_candidate
+    shares:
+    - all
+  survie:
+    worlds:
+    - survie
+    - survie_nether
+    - survie_the_end
+    shares:
+    - all
+  bedwars:
+    worlds:
+    - bedwars_jfm
+    shares:
+    - all
+  hikabrain:
+    worlds:
+    - hikabrain_jfm
+    shares:
+    - all
+  blockhunt:
+    worlds:
+    - blockhunt_jfm
+    shares:
+    - all
+  legacy_world:
+    worlds:
+    - world
+    - world_nether
+    - world_the_end
+    shares:
+    - all
+  legacy_minijeux:
+    worlds:
+    - minijeux
+    shares:
+    - all
+  rush:
+    worlds:
+    - rush_jfm
+    shares:
+    - all
