@@ -1,0 +1,7 @@
+survie:
+  nether: world_nether
+  end: world_the_end
+world_nether:
+  nether: survie
+world_the_end:
+  end: survie
